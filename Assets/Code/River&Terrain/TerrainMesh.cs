@@ -5,7 +5,12 @@ using UnityEngine;
 public class TerrainMesh : MonoBehaviour
 {
     [SerializeField] new MeshCollider collider;
-    [SerializeField] new MeshFilter filter;
+    [SerializeField] MeshFilter filter;
+
+    [Header("Modify Terrain In Update")]
+    public bool modifyCollider = false;
+    [Range(0.0f, 1.0f)] public float modifyFreq = 0.75f;
+    [Range(0.0f, 1.0f)] public float waveheight = 0.25f;
 
     private void Start()
     {
@@ -14,7 +19,37 @@ public class TerrainMesh : MonoBehaviour
         if (filter == null)
             filter = GetComponent<MeshFilter>();
 
-        GenerateTerrain();
+        //GenerateTerrain();
+    }
+
+    private void Update()
+    {
+        ModifyTerrain();
+    }
+
+    private void ModifyTerrain ()
+    {
+        if (Random.value > modifyFreq)
+            return;
+
+        Mesh mesh = filter.mesh;
+
+        Vector3[] verts = mesh.vertices;
+
+        for (int i = 0; i < verts.Length; i++)
+        {
+            verts[i] = new Vector3(verts[i].x, Random.value * waveheight, verts[i].z);
+        }
+
+        mesh.RecalculateNormals();
+
+        mesh.vertices = verts;
+
+        filter.sharedMesh = mesh;
+        if(modifyCollider)
+            collider.sharedMesh = mesh;
+
+        //Debug.Log("Water Mesh Modifyed");
     }
 
     private void GenerateTerrain ()

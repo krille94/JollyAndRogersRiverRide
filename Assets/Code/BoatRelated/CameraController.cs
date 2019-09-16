@@ -8,6 +8,8 @@ public class CameraController : MonoBehaviour
 
     public Vector3 offset;
 
+    public float speed = 0.25f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +19,6 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.Lerp(boat.transform.position + offset, transform.position, Time.deltaTime);
+        transform.position = Vector3.Lerp(boat.transform.position + offset, transform.position, Time.deltaTime * speed);
     }
 }

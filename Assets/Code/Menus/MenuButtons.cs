@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class MenuButtons : MonoBehaviour
     {
         if (isStart)
         {
-            Application.LoadLevel(1);
+            SceneManager.LoadScene(1);
         }
         if (isQuit)
         {

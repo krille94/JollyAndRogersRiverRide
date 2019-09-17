@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoatFloatingController : MonoBehaviour
+public class FloatingController : MonoBehaviour
 {
     public float bouance = 100;
 

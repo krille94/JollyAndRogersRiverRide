@@ -12,10 +12,12 @@ public struct DebugMonitoredObject
 
 public class DebugMonitor : MonoBehaviour
 {
-    public List<DebugMonitoredObject> monitoredObjects = new List<DebugMonitoredObject>();
-
     private bool displayMonitor = false;
+    public GoldChestContainer container;
 
+    [Header("Level Objects")]
+    public List<DebugMonitoredObject> monitoredObjects = new List<DebugMonitoredObject>();
+        
     // Start is called before the first frame update
     void Start()
     {
@@ -41,8 +43,16 @@ public class DebugMonitor : MonoBehaviour
         GUI.BeginGroup(new Rect(Screen.width - 200, 0, 200, 25 + (75 * monitoredObjects.Count)));
         GUI.Box(new Rect(0, 0, 200, 25 + (75 * monitoredObjects.Count)),"Debug Monitor");
         if(GUI.Button(new Rect(0,0,25,25), "X")) { this.enabled = false; }
-
         int heightIndex = 1;
+
+        if(container != null)
+        {
+            GUI.Label(new Rect(0, 25, 200, 25), "Gold Ammount: " + (float)container.gold / (float)container.maxGold + "%");
+
+            heightIndex++;
+        }
+        
+
         for (int i = 0; i < monitoredObjects.Count; i++)
         {
             DebugMonitoredObject monitored = monitoredObjects[i];

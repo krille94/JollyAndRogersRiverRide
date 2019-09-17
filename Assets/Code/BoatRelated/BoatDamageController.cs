@@ -50,7 +50,7 @@ public class BoatDamageController : MonoBehaviour
             onDeath.Invoke();
         }
 
-        Debug.LogWarning(collision.gameObject.name);
+        //Debug.LogWarning(collision.gameObject.name);
     }
 
     private void OnGUI()

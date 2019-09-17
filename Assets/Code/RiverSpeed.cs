@@ -12,6 +12,7 @@ public class RiverSpeed : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(rb == null)
         rb = GetComponent<Rigidbody>();
 
         Vector3 movement = movementDirection;

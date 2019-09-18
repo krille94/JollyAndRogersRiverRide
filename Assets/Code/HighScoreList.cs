@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class HighScoreList : MonoBehaviour
 {
-    public Text countText;
-    public Text HighScoreText;
+    public Text YourScoreText;
+    public Text ScoreListText;
+    public Text NameListText;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,7 @@ public class HighScoreList : MonoBehaviour
 
         SortScores();
         ListScores();
+        ListNames();
     }
 
     void SortScores()
@@ -55,13 +57,28 @@ public class HighScoreList : MonoBehaviour
     {
         string allScores=" ";
         foreach (Highscore g in SaveScore.savedGames)
-            allScores += (g.name + "   " + g.score.ToString()+"\n ");
+            allScores += (g.score.ToString()+"\n ");
 
-        HighScoreText.text = allScores;
+        ScoreListText.text = allScores;
+    }
+
+    void ListNames()
+    {
+        string allScores = " ";
+        int i = 1;
+        foreach (Highscore g in SaveScore.savedGames)
+        {
+            if (i < 10) allScores += "  "+i.ToString()+". ";
+            else allScores += i.ToString() + ". ";
+            allScores += (g.name + "\n ");
+            i++;
+        }
+
+        NameListText.text = allScores;
     }
 
     void CountText()
     {
-        countText.text = "Your score was: " + YourScore.score.ToString();
+        YourScoreText.text = "Your score was: " + YourScore.score.ToString();
     }
 }

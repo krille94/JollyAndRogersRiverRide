@@ -44,7 +44,7 @@ public static class SaveScore
         else
         {
             Highscore nScore = new Highscore();
-            nScore.name = YourScore.name;
+            nScore.name = "Default";
             nScore.score = YourScore.score;
             SaveScore.savedGames.Add(nScore);
             BinaryFormatter bf = new BinaryFormatter();

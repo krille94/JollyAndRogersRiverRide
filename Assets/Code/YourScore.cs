@@ -6,12 +6,12 @@ public class YourScore : MonoBehaviour
 {
 
     //public static Highscore current;
-    public static string name;
-    public static int score;
+    public static string playerName = "";
+    public static int score = 0;
 
     public YourScore()
     {
-        name = "Player";
+        playerName = "";
         score = 0;
     }
 }

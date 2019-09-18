@@ -52,6 +52,11 @@ public class TerrainMesh : MonoBehaviour
         if(modifyCollider)
             collider.sharedMesh = mesh;
 
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mesh;
+        }
+
         //Debug.Log("Water Mesh Modifyed");
     }
 

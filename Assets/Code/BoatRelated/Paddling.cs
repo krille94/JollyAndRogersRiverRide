@@ -65,10 +65,13 @@ public class Oar
 
 public class Paddling : MonoBehaviour
 {
-    [SerializeField] public float paddleForce;
-    [SerializeField] public KeyCode keyLeft, keyRight;
+    public enum PlayerIndexTypes { One, Two }
+    public PlayerIndexTypes playerIndex = 0;
 
-    [SerializeField] private new Rigidbody rigidbody;
+    [SerializeField] public float paddleForce;
+    //[SerializeField] public KeyCode keyLeft, keyRight;
+
+    [SerializeField] private new Rigidbody rigidbody; 
 
     [SerializeField] private Oar oar;
 
@@ -90,7 +93,10 @@ public class Paddling : MonoBehaviour
             return;
         }
 
-        if (Input.GetKey(keyLeft))
+        bool rightKey = Input.GetButton("Player_"+((PlayerIndexTypes)playerIndex).ToString()+"_Paddle_Right");
+        bool leftKey = Input.GetButton("Player_"+ ((PlayerIndexTypes)playerIndex).ToString()+ "_Paddle_Left");
+
+        if (leftKey)
         {
             if (!oar.onLeftSide)
                 oar.SetLeftSide();
@@ -101,7 +107,7 @@ public class Paddling : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(keyRight))
+        if (rightKey)
         {
             if (!oar.onRightSide)
                 oar.SetRightSide();

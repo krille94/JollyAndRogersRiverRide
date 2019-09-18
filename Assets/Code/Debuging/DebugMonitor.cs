@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public struct DebugMonitoredObject
 {
-    public enum DebugTypes { rigidbodyVelocity }
+    public enum DebugTypes { rigidbodyVelocity, rigidbodyVelocityIgnoreY }
     public DebugTypes type;
     public GameObject obj;
 }
@@ -40,8 +40,8 @@ public class DebugMonitor : MonoBehaviour
         if (displayMonitor == false)
             return;
 
-        GUI.BeginGroup(new Rect(Screen.width - 200, 0, 200, 25 + (75 * monitoredObjects.Count)));
-        GUI.Box(new Rect(0, 0, 200, 25 + (75 * monitoredObjects.Count)),"Debug Monitor");
+        GUI.BeginGroup(new Rect(Screen.width - 200, 0, 200, 50 + (75 * monitoredObjects.Count)));
+        GUI.Box(new Rect(0, 0, 200, 50 + (75 * monitoredObjects.Count)),"Debug Monitor");
         if(GUI.Button(new Rect(0,0,25,25), "X")) { this.enabled = false; }
         int heightIndex = 1;
 
@@ -51,7 +51,10 @@ public class DebugMonitor : MonoBehaviour
 
             heightIndex++;
         }
-        
+
+        GUI.Label(new Rect(0, 50, 200, 25), "-------------------------------------------");
+
+        heightIndex++;        
 
         for (int i = 0; i < monitoredObjects.Count; i++)
         {
@@ -63,6 +66,15 @@ public class DebugMonitor : MonoBehaviour
                 GUI.Label(new Rect(0, 25 * heightIndex, 200, 25), "Obj: " + monitored.obj.name);
                 heightIndex++;
                 GUI.Label(new Rect(0, 25 * heightIndex, 200, 25), "Vel: " + monitored.obj.GetComponent<Rigidbody>().velocity.magnitude);
+                heightIndex++;
+            }
+            if (monitored.type == DebugMonitoredObject.DebugTypes.rigidbodyVelocityIgnoreY)
+            {
+                GUI.Label(new Rect(0, 25 * heightIndex, 200, 25), "Obj: " + monitored.obj.name);
+                heightIndex++;
+                monitored.obj.GetComponent<Rigidbody>().velocity = new Vector3(monitored.obj.GetComponent<Rigidbody>().velocity.x, 0, monitored.obj.GetComponent<Rigidbody>().velocity.z);
+                float velocity = monitored.obj.GetComponent<Rigidbody>().velocity.magnitude;
+                GUI.Label(new Rect(0, 25 * heightIndex, 200, 25), "Vel: " + velocity);
                 heightIndex++;
             }
             GUI.Label(new Rect(0, 25 * heightIndex, 200, 25), "---------------------------------------------------------------------");

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuButtons : MonoBehaviour
 {
     public bool isStart;
+    public bool isHighscores;
     public bool isQuit;
     public AudioSource audioSource;
 
@@ -13,8 +14,13 @@ public class MenuButtons : MonoBehaviour
     {
         if (isStart)
         {
-            YourScore.score = 0;
+            YourScore.ResetScore();
             SceneManager.LoadScene(1);
+        }
+        if (isHighscores)
+        {
+            YourScore.ResetScore();
+            SceneManager.LoadScene(3);
         }
         if (isQuit)
         {

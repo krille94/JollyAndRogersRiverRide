@@ -16,8 +16,9 @@ public class EndTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         completed = true;
+        YourScore.distanceTraveled = 1; // Means you traveled 100% of the way
         onCompleted.Invoke();
     }
 }

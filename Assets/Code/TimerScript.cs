@@ -27,6 +27,7 @@ public class TimerScript : MonoBehaviour
 
             while (timerIncrease > 1)
             {
+                YourScore.timeTaken++;
                 seconds += 1;
                 timerIncrease -= 1;
                 if (seconds >= 60)

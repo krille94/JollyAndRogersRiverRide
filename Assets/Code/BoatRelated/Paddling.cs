@@ -16,6 +16,9 @@ public class Oar
     public GameObject modelLeft;
     public GameObject modelRight;
 
+    public bool isPaddling = false;
+    public float paddlingTime = 0;
+
     public void SetRightSide()
     {
         onLeftSide = false;
@@ -38,13 +41,21 @@ public class Oar
     /// <returns></returns>
     public Vector3 Paddle()
     {
-        if(onLeftSide)
+        if (isPaddling)
+            return Vector3.zero;
+        isPaddling = true;
+
+        if (onLeftSide)
         {
+            if (!modelLeft.GetComponent<Animation>().isPlaying)
+                modelLeft.GetComponent<Animation>().Play();
             return leftSideImpactPoint.position;
         }
        
         if(onRightSide)
         {
+            if (!modelRight.GetComponent<Animation>().isPlaying)
+                modelRight.GetComponent<Animation>().Play();
             return rightSideImpactPoint.position;
         }
 
@@ -54,32 +65,30 @@ public class Oar
 
 public class Paddling : MonoBehaviour
 {
-    bool Paddled = false;
-    bool rotateLeft=false;
-    bool rotateRight=false;
-    float rotation;
-    public float rotateDegrees = 25;
+    [SerializeField] public float paddleForce;
+    [SerializeField] public KeyCode keyLeft, keyRight;
 
-    float timer;
-    public float MovementTime = 2;
-    public float speed;
-    [SerializeField] KeyCode keyLeft, keyRight;
+    [SerializeField] private new Rigidbody rigidbody;
 
-    [SerializeField] Rigidbody rigidbody;
-    [SerializeField] Transform boathParentTransform;
+    [SerializeField] private Oar oar;
 
-    [SerializeField] Transform oarTransformLeft;
-    [SerializeField] Transform oarTransformImpactPointLeft;
-
-    [SerializeField] Transform oarTransformRight;
-    [SerializeField] Transform oarTransformImpactPointRight;
-
-    public Oar oar;
+    private Vector3 impactPoint;
     
     void Update()
     {
+        impactPoint = Vector3.zero;
 
-        Vector3 impactPoint = Vector3.zero;
+        if (oar.isPaddling)
+        {
+            oar.paddlingTime += Time.deltaTime;
+            if (oar.paddlingTime >= 1)
+            {
+                oar.paddlingTime = 0;
+                oar.isPaddling = false;
+            }
+
+            return;
+        }
 
         if (Input.GetKey(keyLeft))
         {
@@ -88,6 +97,7 @@ public class Paddling : MonoBehaviour
             else
             {
                 impactPoint = oar.Paddle();
+                rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
             }
         }
 
@@ -98,62 +108,28 @@ public class Paddling : MonoBehaviour
             else
             {
                 impactPoint = oar.Paddle();
+                rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
             }
         }
+    }
 
-        if(impactPoint != Vector3.zero)
+    private void FixedUpdate()
+    {
+        if (impactPoint != Vector3.zero)
         {
-            rigidbody.AddForceAtPosition(rigidbody.transform.forward * speed, impactPoint);
+            //rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
         }
+    }
 
-        /*
-        if (Paddled == false)
-        {
-            if (Input.GetKey(keyLeft))
-            {
-                rotateLeft = true;
-                rotation = rotateDegrees / MovementTime;
-                Paddled = true;
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(oar.leftSideImpactPoint.position, 1);
+        
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(oar.rightSideImpactPoint.position, 1);
 
-                oarTransformLeft.Rotate(Vector3.right * 90);
-            }
-            else if (Input.GetKey(keyRight))
-            {
-                rotateRight = true;
-                rotation = rotateDegrees / MovementTime;
-                rotation = -rotation;
-                Paddled = true;
-
-                oarTransformRight.Rotate(Vector3.left * 90);
-            }
-        }
-
-        if (Paddled == true)
-        {
-            timer += Time.deltaTime;
-            
-            if(timer>=MovementTime)
-            {
-                rotateLeft = false;
-                rotateRight = false;
-                Paddled = false;
-                timer = 0;
-            }
-            
-//            // Slow rotation as the movement gets closer to finishing - tweaking/feel thing for later
-//            else if(timer>=MovementTime*0.75f)
-//            {
-//                rotation -= Time.deltaTime;
-//            }
-
-            float moveForward = 1;
-            Vector3 movement = new Vector3(0.0f, 0.0f, moveForward);
-            
-            if (Paddled)
-                boathParentTransform.Translate(movement * speed * Time.deltaTime);
-
-            boathParentTransform.Rotate(0, rotation*Time.deltaTime, 0);
-        }
-        */
+        Gizmos.color = Color.black;
+        Gizmos.DrawRay(rigidbody.transform.position, rigidbody.transform.forward * 10);
     }
 }

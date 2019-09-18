@@ -23,7 +23,7 @@ public class RiverSpeed : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         UpdateRigidBody(playerRigidbody);
     }

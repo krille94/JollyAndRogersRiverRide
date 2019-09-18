@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        Time.timeScale = 1;
     }
 
     public void OnCompletedLevel()

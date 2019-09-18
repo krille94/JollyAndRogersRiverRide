@@ -13,6 +13,7 @@ public class MenuButtons : MonoBehaviour
     {
         if (isStart)
         {
+            YourScore.score = 0;
             SceneManager.LoadScene(1);
         }
         if (isQuit)

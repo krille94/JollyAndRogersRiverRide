@@ -23,9 +23,15 @@ public class BoatDamageController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Just for debug purposes, remove later
         if (Input.GetKeyDown(KeyCode.S))
         {
             hull -= 1;
+            if (hull <= 0)
+            {
+                Time.timeScale = 0;
+                onDeath.Invoke();
+            }
         }
     }
 
@@ -50,7 +56,7 @@ public class BoatDamageController : MonoBehaviour
             onDeath.Invoke();
         }
 
-        Debug.LogWarning(collision.gameObject.name);
+        //Debug.LogWarning(collision.gameObject.name);
     }
 
     private void OnGUI()

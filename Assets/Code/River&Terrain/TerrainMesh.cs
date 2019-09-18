@@ -10,7 +10,7 @@ public class TerrainMesh : MonoBehaviour
     [Header("Modify Terrain In Update")]
     public bool modifyCollider = false;
     [Range(0.0f, 1.0f)] public float modifyFreq = 0.75f;
-    [Range(0.0f, 1.0f)] public float waveheight = 0.25f;
+    [Range(0.0f, 10.0f)] public float waveheight = 0.25f;
 
     private void Start()
     {
@@ -38,7 +38,10 @@ public class TerrainMesh : MonoBehaviour
 
         for (int i = 0; i < verts.Length; i++)
         {
-            verts[i] = new Vector3(verts[i].x, Random.value * waveheight, verts[i].z);
+            float targetHeight = Random.value * waveheight;
+            float oldHeight = verts[i].y;
+            float newHeight = Mathf.Lerp(oldHeight, targetHeight, 0.5f);
+            verts[i] = new Vector3(verts[i].x, newHeight, verts[i].z);
         }
 
         mesh.RecalculateNormals();

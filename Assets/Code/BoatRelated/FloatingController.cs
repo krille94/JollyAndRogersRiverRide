@@ -16,8 +16,11 @@ public class FloatingController : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         float distance = 1;// collider.bounds.SqrDistance(other.transform.position);
+        distance = Mathf.Abs( other.transform.position.y - transform.position.y );
+
         other.attachedRigidbody.AddForce(Vector3.up * (bouance / other.attachedRigidbody.mass) * distance * Time.fixedDeltaTime);
 
+        Debug.DrawRay(other.transform.position, Vector3.up * ((bouance / other.attachedRigidbody.mass) * distance) / 2500, Color.blue);
         //Debug.Log(other.name + " is colliding with water surface");
     }
 }

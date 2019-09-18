@@ -6,15 +6,29 @@ public class WaterImpactSplash : MonoBehaviour
 {
     [SerializeField] ParticleSystem onImpactEffect;
     [SerializeField] AudioSource onImpactSound;
+
+    private Transform effectsPool;
+
+    private void Start()
+    {
+        effectsPool = GameObject.Find("EffectsPool").transform;
+        if(effectsPool == null)
+        {
+            effectsPool = new GameObject("EffectsPool").transform;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.gameObject.layer == LayerMask.NameToLayer("Boat"))
             return;
 
         ParticleSystem particle = Instantiate(onImpactEffect, other.transform.position, Quaternion.identity) as ParticleSystem;
+        particle.transform.SetParent(effectsPool, true);
         Destroy(particle.gameObject, particle.duration);
 
         AudioSource audio = Instantiate(onImpactSound, other.transform.position, Quaternion.identity) as AudioSource;
+        audio.transform.SetParent(effectsPool, true);
         Destroy(audio.gameObject, audio.clip.length);
     }
 }

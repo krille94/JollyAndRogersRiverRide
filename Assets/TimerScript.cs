@@ -1,0 +1,58 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class TimerScript : MonoBehaviour
+{
+    public Text timerText;
+    float minutes = 0;
+    float seconds = 0;
+    float timerIncrease = 0;
+    // Start is called before the first frame update
+    void Start()
+    {
+        minutes = 0;
+        seconds = 0;
+        timerIncrease = 0;
+        SetTimerText();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (minutes < 99 || seconds < 59)
+        {
+            timerIncrease += Time.deltaTime;
+
+            while (timerIncrease > 1)
+            {
+                seconds += 1;
+                timerIncrease -= 1;
+                if (seconds >= 60)
+                {
+                    minutes += 1;
+                    seconds -= 60;
+                }
+            }
+        }
+        SetTimerText();
+    }
+
+    void SetTimerText()
+    {
+        string newText="";
+        if (minutes < 10)
+            newText += "0" + minutes.ToString();
+        else
+            newText += minutes.ToString();
+
+        if (seconds < 10)
+            newText += ":0" + seconds.ToString();
+        else
+            newText += ":" + seconds.ToString();
+        
+
+        timerText.text = "Timer: " + newText;
+    }
+}

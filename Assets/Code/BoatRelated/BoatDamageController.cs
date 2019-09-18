@@ -47,7 +47,7 @@ public class BoatDamageController : MonoBehaviour
             onDamaged(collision.relativeVelocity.magnitude, contact.point);
 
             ParticleSystem particle = Instantiate(onDamagedParticlePrefab, contact.point, Quaternion.identity) as ParticleSystem;
-            Destroy(particle.gameObject, particle.duration);
+            Destroy(particle.gameObject, particle.main.duration);
         }
 
         if (hull <= 0)

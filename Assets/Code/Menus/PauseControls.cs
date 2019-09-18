@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PauseControls : MonoBehaviour
 {
-    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject pausePanel = null;
 
     // Start is called before the first frame update
     void Start()

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WaterImpactSplash : MonoBehaviour
 {
-    [SerializeField] ParticleSystem onImpactEffect;
-    [SerializeField] AudioSource onImpactSound;
+    [SerializeField] ParticleSystem onImpactEffect = null;
+    [SerializeField] AudioSource onImpactSound = null;
 
     private Transform effectsPool;
 
@@ -25,7 +25,7 @@ public class WaterImpactSplash : MonoBehaviour
 
         ParticleSystem particle = Instantiate(onImpactEffect, other.transform.position, Quaternion.identity) as ParticleSystem;
         particle.transform.SetParent(effectsPool, true);
-        Destroy(particle.gameObject, particle.duration);
+        Destroy(particle.gameObject, particle.main.duration);
 
         AudioSource audio = Instantiate(onImpactSound, other.transform.position, Quaternion.identity) as AudioSource;
         audio.transform.SetParent(effectsPool, true);

@@ -13,7 +13,7 @@ public class AmbientSoundObject : MonoBehaviour
 
     [HideInInspector]public Vector3 triggerRangeHandle;
 
-    [SerializeField] AudioClip audioClip;
+    [SerializeField] AudioClip audioClip = null;
 
     private void Start()
     {

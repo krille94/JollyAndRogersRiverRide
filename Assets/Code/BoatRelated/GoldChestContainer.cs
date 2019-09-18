@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class GoldChestContainer : MonoBehaviour
 {
-    [SerializeField] GameObject Quad_obj;
-    [SerializeField] Transform Quad_maxHeight;
-    [SerializeField] Transform Quad_minHeight;
+    [SerializeField] GameObject Quad_obj = null;
+    [SerializeField] Transform Quad_maxHeight = null;
+    [SerializeField] Transform Quad_minHeight = null;
 
     public int gold;
     public int maxGold = 10;
 
-    [SerializeField] PickUpTrigger trigger;
-    [SerializeField] BoatDamageController controller;
+    [SerializeField] PickUpTrigger trigger = null;
+    [SerializeField] BoatDamageController controller = null;
 
     [Range(0.0f,1.0f)]public float onImpactLostValue = 0.25f;
 

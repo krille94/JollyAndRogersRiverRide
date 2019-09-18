@@ -21,6 +21,6 @@ public class GameController : MonoBehaviour
 
     public void OnCompletedLevel()
     {
-        Application.LoadLevel(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }

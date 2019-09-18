@@ -13,7 +13,7 @@ public class LogoScript : MonoBehaviour
     float timer;
     public float alpha;
     Color color;
-    Component[] renderer;// = gameObjectToFade.GetComponentsInChildren(typeof(MeshRenderer));
+    new Component[] renderer;// = gameObjectToFade.GetComponentsInChildren(typeof(MeshRenderer));
 
     // Start is called before the first frame update
     void Start()

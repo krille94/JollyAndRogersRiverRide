@@ -71,9 +71,9 @@ public class Paddling : MonoBehaviour
     [SerializeField] public float paddleForce;
     //[SerializeField] public KeyCode keyLeft, keyRight;
 
-    [SerializeField] private new Rigidbody rigidbody; 
+    [SerializeField] private new Rigidbody rigidbody = null; 
 
-    [SerializeField] private Oar oar;
+    [SerializeField] private Oar oar = null;
 
     private Vector3 impactPoint;
     

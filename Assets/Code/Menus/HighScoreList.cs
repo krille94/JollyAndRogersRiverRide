@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class HighScoreList : MonoBehaviour
 {
-    [SerializeField] private GameObject listView;
+    [SerializeField] private GameObject listView = null;
     public Text YourScoreText;
     public Text ScoreListText;
     public Text NameListText;

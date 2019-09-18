@@ -9,7 +9,7 @@ public class PauseButtons : MonoBehaviour
     public bool isOptions;
     public bool isQuit;
     public AudioSource audioSource;
-    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject pausePanel = null;
 
     void OnMouseUp()
     {

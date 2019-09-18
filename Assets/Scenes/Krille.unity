@@ -622,8 +622,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60207463295422a40a8f7ac67dabbc07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggerRange: 64.96451
-  triggerRangeHandle: {x: 102.833405, y: -8.67749, z: -29.019882}
+  triggerRange: 64.95669
+  triggerRangeHandle: {x: 114.810394, y: 3.3103027, z: -25.706223}
   audioClip: {fileID: 8300000, guid: 9709a012496445a4bb36195d6a0ae4d4, type: 3}
 --- !u!82 &224295073
 AudioSource:
@@ -7421,12 +7421,12 @@ PrefabInstance:
     - target: {fileID: 4964568628846970014, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
       propertyPath: paddleForce
-      value: 25
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 6573410831377732000, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
       propertyPath: paddleForce
-      value: 25
+      value: 800
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7388af603fd750946bb0602328f3e915, type: 3}

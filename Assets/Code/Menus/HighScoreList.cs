@@ -24,28 +24,36 @@ public class HighScoreList : MonoBehaviour
 
     void SortScores()
     {
-        
-        List<Highscore> oldScores = SaveScore.savedGames;
-        int newScore = YourScore.score;
-        YourPlacement = 0;
-        foreach(Highscore g in SaveScore.savedGames)
+        if (YourScore.score > 0)
         {
-            if (newScore >= g.score)
+            List<Highscore> oldScores = SaveScore.savedGames;
+            int newScore = YourScore.score;
+            YourPlacement = 0;
+            foreach (Highscore g in SaveScore.savedGames)
             {
-                break;
+                if (newScore >= g.score)
+                {
+                    break;
+                }
+                YourPlacement++;
             }
-            YourPlacement++;
+
+            Highscore nScore = new Highscore();
+            nScore.name = YourScore.playerName;
+            nScore.score = YourScore.score;
+            SaveScore.savedGames.Insert(YourPlacement, nScore);
+            while (SaveScore.savedGames.Count > 10)
+                SaveScore.savedGames.RemoveAt(10);
+            SaveScore.Save();
+
+            if (YourPlacement >= 10)
+            {
+                ListScores();
+                ListNames();
+                listView.SetActive(true);
+            }
         }
-
-        Highscore nScore = new Highscore();
-        nScore.name = YourScore.playerName;
-        nScore.score = YourScore.score;
-        SaveScore.savedGames.Insert(YourPlacement, nScore);
-        while (SaveScore.savedGames.Count > 10)
-            SaveScore.savedGames.RemoveAt(10);
-        SaveScore.Save();
-
-        if(YourPlacement == 10)
+        else
         {
             ListScores();
             ListNames();
@@ -111,12 +119,13 @@ public class HighScoreList : MonoBehaviour
 
     void CountText()
     {
-        YourScoreText.text = "Your score was: " + YourScore.score.ToString();
         if (!listView.activeInHierarchy)
         {
+            YourScoreText.text = "Your score was: " + YourScore.score.ToString();
             YourScoreText.text += "\nEnter your name:\n";
-            YourScoreText.text += (YourPlacement+1).ToString()+". " + YourScore.playerName;
+            YourScoreText.text += (YourPlacement + 1).ToString() + ". " + YourScore.playerName;
         }
+        else YourScoreText.text = " ";
     }
 
     void AddLetterToName()

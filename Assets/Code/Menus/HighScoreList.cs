@@ -16,6 +16,7 @@ public class HighScoreList : MonoBehaviour
     void Start()
     {
         SaveScore.Load();
+        YourScore.CalculateScore();
 
         SortScores();
         CountText();

@@ -37,6 +37,8 @@ public class LevelMapScript : MonoBehaviour
     void Update()
     {
         float boatPos = (endZ - boat.transform.position.z) / levelLength;
+
+        YourScore.distanceTraveled=boatPos;
         iconPos.z = mapStartZ + (boatPos * mapLength);
         transform.localPosition = new Vector3(1, 1, iconPos.z);
     }

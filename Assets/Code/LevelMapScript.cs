@@ -11,11 +11,11 @@ public class LevelMapScript : MonoBehaviour
 
     float startZ;
     float endZ;
-    public float mapStartZ;
-    public float mapEndZ;
+    float mapStartZ;
+    float mapEndZ;
 
-    public float levelLength;
-    public float mapLength;
+    float levelLength;
+    float mapLength;
     Vector3 iconPos;
 
     // Start is called before the first frame update

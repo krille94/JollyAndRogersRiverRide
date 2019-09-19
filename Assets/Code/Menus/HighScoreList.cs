@@ -39,7 +39,7 @@ public class HighScoreList : MonoBehaviour
             }
 
             Highscore nScore = new Highscore();
-            nScore.name = YourScore.playerName;
+            nScore.name = "Player";
             nScore.score = YourScore.score;
             SaveScore.savedGames.Insert(YourPlacement, nScore);
             while (SaveScore.savedGames.Count > 10)
@@ -68,7 +68,7 @@ public class HighScoreList : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                SceneManager.LoadScene(0);
+                SceneManager.LoadScene(1);
             }
         }
         else

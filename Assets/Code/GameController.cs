@@ -21,6 +21,12 @@ public class GameController : MonoBehaviour
 
     public void OnCompletedLevel()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+    }
+
+    public void OnDeath()
+    {
+        YourScore.ResetScore();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
     }
 }

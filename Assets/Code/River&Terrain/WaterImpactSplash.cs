@@ -11,11 +11,11 @@ public class WaterImpactSplash : MonoBehaviour
 
     private void Start()
     {
-        effectsPool = GameObject.Find("EffectsPool").transform;
-        if(effectsPool == null)
-        {
+        GameObject pool = GameObject.Find("EffectsPool");
+        if(pool != null)
+            effectsPool = pool.transform;
+        else
             effectsPool = new GameObject("EffectsPool").transform;
-        }
     }
 
     private void OnTriggerEnter(Collider other)

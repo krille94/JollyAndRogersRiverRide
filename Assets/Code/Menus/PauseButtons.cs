@@ -23,6 +23,7 @@ public class PauseButtons : MonoBehaviour
 
         if (isQuit)
         {
+            YourScore.ResetScore();
             SceneManager.LoadScene(1);
         }
     }

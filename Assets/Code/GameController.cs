@@ -23,4 +23,10 @@ public class GameController : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(3);
     }
+
+    public void OnDeath()
+    {
+        YourScore.ResetScore();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+    }
 }

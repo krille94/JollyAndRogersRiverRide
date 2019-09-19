@@ -17,11 +17,10 @@ public class YourScore : MonoBehaviour
 
     public static void CalculateScore()
     {
-        score = 15;
         // How do we fairly calculate the time? Need to re-calculate once we know the median time for a run
 
         if(timeTaken>0)
-        score = 1000 / timeTaken;
+            score = 1000 / timeTaken;
         score += (bonusesPickedUp * 10);
 
         if (distanceTraveled >= 1)

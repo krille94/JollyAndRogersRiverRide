@@ -11,9 +11,9 @@ public class LogoScript : MonoBehaviour
     public float PostFadeTimer = 0.5f;
     public float PauseTimer=2;
     float timer;
-    public float alpha;
+    float alpha;
     Color color;
-    new Component[] renderer;// = gameObjectToFade.GetComponentsInChildren(typeof(MeshRenderer));
+    new Component[] renderer;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +30,7 @@ public class LogoScript : MonoBehaviour
         timer += Time.deltaTime;
         if (timer >= FadeInTimer + PauseTimer + FadeOutTimer+PostFadeTimer+PreFadeTimer)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
         else if (timer >= FadeInTimer + PauseTimer + FadeOutTimer + PreFadeTimer)
         {

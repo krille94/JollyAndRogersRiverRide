@@ -23,7 +23,7 @@ public class PauseButtons : MonoBehaviour
 
         if (isQuit)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(1);
         }
     }
 }

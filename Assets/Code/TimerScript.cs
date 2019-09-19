@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour
 {
-    public Text timerText;
+    public GameObject timerText;
     float minutes = 0;
     float seconds = 0;
     float timerIncrease = 0;
@@ -54,6 +54,6 @@ public class TimerScript : MonoBehaviour
             newText += ":" + seconds.ToString();
         
 
-        timerText.text = "Timer: " + newText;
+        timerText.GetComponent<TextMesh>().text = "Timer: " + newText;
     }
 }

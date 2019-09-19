@@ -21,7 +21,7 @@ public class YourScore : MonoBehaviour
 
         if(timeTaken>0)
             score = 1000 / timeTaken;
-        score += (bonusesPickedUp * 10);
+        score += (bonusesPickedUp * 50);
 
         if (distanceTraveled >= 1)
             score += 100;

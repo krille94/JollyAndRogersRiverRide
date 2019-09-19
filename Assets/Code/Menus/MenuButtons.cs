@@ -15,6 +15,7 @@ public class MenuButtons : MonoBehaviour
         if (isStart)
         {
             YourScore.ResetScore();
+            Time.timeScale = 1;
             SceneManager.LoadScene(2);
         }
         if (isHighscores)

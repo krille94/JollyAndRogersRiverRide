@@ -69,6 +69,7 @@ public class Paddling : MonoBehaviour
     public PlayerIndexTypes playerIndex = 0;
 
     [SerializeField] public float paddleForce;
+    [SerializeField] public float forwardForce;
     //[SerializeField] public KeyCode keyLeft, keyRight;
 
     [SerializeField] private new Rigidbody rigidbody = null; 
@@ -103,6 +104,7 @@ public class Paddling : MonoBehaviour
             else
             {
                 impactPoint = oar.Paddle();
+                rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
                 rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
             }
         }
@@ -114,6 +116,7 @@ public class Paddling : MonoBehaviour
             else
             {
                 impactPoint = oar.Paddle();
+                rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
                 rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
             }
         }

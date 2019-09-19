@@ -628,7 +628,7 @@ PrefabInstance:
     - target: {fileID: 5769379154886515785, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
       propertyPath: MaxHull
-      value: 10
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5769379154886515785, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
@@ -675,10 +675,20 @@ PrefabInstance:
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4964568628846970014, guid: 7388af603fd750946bb0602328f3e915,
+        type: 3}
+      propertyPath: forwardForce
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 6573410831377732000, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
       propertyPath: playerIndex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6573410831377732000, guid: 7388af603fd750946bb0602328f3e915,
+        type: 3}
+      propertyPath: forwardForce
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7388af603fd750946bb0602328f3e915, type: 3}
@@ -1164,6 +1174,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544788525570686435, guid: 4a9c38f592aea8e48ab50b3944b35ce0,
+        type: 3}
+      propertyPath: minimumSpeed
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a9c38f592aea8e48ab50b3944b35ce0, type: 3}

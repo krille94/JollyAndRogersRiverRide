@@ -96,29 +96,43 @@ public class Paddling : MonoBehaviour
 
         bool rightKey = Input.GetButton("Player_"+((PlayerIndexTypes)playerIndex).ToString()+"_Paddle_Right");
         bool leftKey = Input.GetButton("Player_"+ ((PlayerIndexTypes)playerIndex).ToString()+ "_Paddle_Left");
+        bool forwardKey = Input.GetButton("Player_" + ((PlayerIndexTypes)playerIndex).ToString() + "_Paddle_Forward");
+        bool backKey = Input.GetButton("Player_" + ((PlayerIndexTypes)playerIndex).ToString() + "_Paddle_Back");
+
+        if(forwardKey)
+        {
+            impactPoint = oar.Paddle();
+            rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
+            rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
+        }
+        else if(backKey)
+        {
+            impactPoint = oar.Paddle();
+            rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
+        }
 
         if (leftKey)
         {
             if (!oar.onLeftSide)
                 oar.SetLeftSide();
-            else
+            /*else
             {
                 impactPoint = oar.Paddle();
                 rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
                 rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
-            }
+            }*/
         }
 
         if (rightKey)
         {
             if (!oar.onRightSide)
                 oar.SetRightSide();
-            else
+            /*else
             {
                 impactPoint = oar.Paddle();
                 rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
                 rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
-            }
+            }*/
         }
     }
 

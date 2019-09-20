@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour
 {
     public static GameController instance;
 
+    private bool is_dead;
+
     private void Start()
     {
         if(instance != null)
@@ -26,7 +28,21 @@ public class GameController : MonoBehaviour
 
     public void OnDeath()
     {
+        is_dead = true;
+        GameObject.FindGameObjectWithTag("Player").SetActive(false);
         YourScore.ResetScore();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+    }
+
+    private void Update()
+    {
+        if (is_dead)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                is_dead = false;
+                UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+            }
+        }
+
     }
 }

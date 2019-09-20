@@ -49,8 +49,6 @@ public class RiverSpeedController : MonoBehaviour
     [SerializeField] RiverSpeed river;
     [SerializeField] Rigidbody boat;
 
-    private List<HitPoint> currentlyAffectedPoints = new List<HitPoint>();
-
     private void Start()
     {
         if(river != null)
@@ -62,29 +60,26 @@ public class RiverSpeedController : MonoBehaviour
 
     private void Update()
     {
-        /*
+        //AddForce_Simple();
+    }
+
+    private void AddForce_Simple ()
+    {
         Vector3 averagedForce = Vector3.zero;
         int forceCount = 0;
-        foreach(HitPoint p in hitPoints)
+        foreach (HitPoint p in hitPoints)
         {
             float distance = Vector3.Distance(p.hitPoint, boat.position);
-            if(distance < 50)
+            if (distance < 50)
             {
-                //currentlyAffectedPoints.Add(p);
                 averagedForce += p.direction * (50 - distance);
                 forceCount++;
-            }
-            else
-            {
-                //if (currentlyAffectedPoints.Contains(p))
-                //    currentlyAffectedPoints.Remove(p);
             }
         }
 
         averagedForce = averagedForce / forceCount;
 
         boat.AddForce(averagedForce, ForceMode.Force);
-        */
     }
 
     public void Calculate ()
@@ -175,15 +170,6 @@ public class RiverSpeedController : MonoBehaviour
                 //Start From Opposite Side
                 Gizmos.color = Color.yellow;
                 Gizmos.DrawSphere(hitPoints[i].oppositePoint, resolution);
-            }
-        }
-
-        if(currentlyAffectedPoints.Count > 0)
-        {
-            Gizmos.color = Color.black;
-            for (int i = 0; i < currentlyAffectedPoints.Count; i++)
-            {
-                Gizmos.DrawLine(currentlyAffectedPoints[i].hitPoint, boat.position);
             }
         }
     }

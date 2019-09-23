@@ -9,11 +9,11 @@ public class MenuButtons : MonoBehaviour
     public GameObject NextMenu;
 
     public bool isStart;
-    public bool isHighscores;
+    //public bool isHighscores;
     public bool isChangeMenu;
     public bool isChangeMusic;
     public bool isQuit;
-
+    
     void OnMouseUp()
     {
         if (isStart)
@@ -22,11 +22,13 @@ public class MenuButtons : MonoBehaviour
             Time.timeScale = 1;
             SceneManager.LoadScene(2);
         }
+        /*
         if (isHighscores)
         {
             YourScore.ResetScore();
             SceneManager.LoadScene(3);
         }
+        */
         if (isChangeMusic)
         {
             GetComponent<AudioSource>().Play();

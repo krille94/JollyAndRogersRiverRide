@@ -19,9 +19,14 @@ public class RiverToolEditor : Editor
         tool.autoUpdateMesh = EditorGUILayout.Toggle("AutoUpdate", tool.autoUpdateMesh);
         if (!tool.autoUpdateMesh)
         {
-            if (GUILayout.Button("Update Mesh"))
-                tool.GenerateMesh();
+            if (GUILayout.Button("Update River"))
+                tool.UpdateRiver();
         }
+
+        if (GUILayout.Button("Build River To Asset"))
+            tool.BuildRiverPrefab();
+
+        tool.uniqName = GUILayout.TextField(tool.uniqName);
 
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
         //EditorGUILayout.Space();
@@ -88,6 +93,36 @@ public class RiverToolEditor : Editor
                 }
                 tool.vertices[i] = tool.transform.InverseTransformPoint(Handles.FreeMoveHandle(tool.transform.TransformPoint(tool.vertices[i]), Quaternion.identity, distFromCam / handleSize, Vector3.one, Handles.CircleHandleCap));
                 tool.vertices[i] = new Vector3(tool.vertices[i].x, 0, tool.vertices[i].z);
+            }
+        }
+
+        if(tool.nodes.Count > 0)
+        {
+            Handles.color = Color.white;
+            for (int i = 0; i < tool.nodes.Count; i++)
+            {
+                float distFromCam = 1;
+                if (Camera.current != null)
+                {
+                    distFromCam = Vector3.Distance(Camera.current.transform.position, tool.transform.TransformPoint(tool.vertices[i]));
+                    if (distFromCam > handleMaxDistance)
+                    {
+                        distFromCam = 0;
+                    }
+                }
+                                
+                Handles.ArrowHandleCap(0, tool.nodes[i].centerVector + tool.transform.position, Quaternion.LookRotation(tool.nodes[i].flowDirection, Vector3.forward), (distFromCam / handleSize) * 10, EventType.Repaint);
+            }
+
+            Handles.color = Color.red;
+            for (int i = 0; i < tool.nodes.Count; i++)
+            {
+                if (i + 1 < tool.nodes.Count)
+                {
+                    Vector3 pOne = tool.nodes[i].centerVector + tool.transform.position;
+                    Vector3 pTwo = tool.nodes[i + 1].centerVector + tool.transform.position;
+                    Handles.DrawLine(pOne + tool.nodes[i].flowDirection, pTwo + tool.nodes[i + 1].flowDirection);
+                }
             }
         }
     }

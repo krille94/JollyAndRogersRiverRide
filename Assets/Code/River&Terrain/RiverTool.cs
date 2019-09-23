@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [ExecuteInEditMode]
 public class RiverTool : MonoBehaviour
 {
+    public string uniqName = "RiverAssetName";
+
     public MeshFilter mf;
     public MeshRenderer mr;
 
@@ -16,13 +19,36 @@ public class RiverTool : MonoBehaviour
 
     [HideInInspector]public bool autoUpdateMesh = false;
 
+    public List<RiverNode> nodes = new List<RiverNode>();
+
     #region Main Methods
+    public void BuildRiverPrefab ()
+    {
+        if(AssetDatabase.LoadAssetAtPath("Assets/Resources/RiverBuilds/"+ uniqName +".asset", typeof(RiverObject)) != null)
+        {
+            Debug.Log("River With Name"+ uniqName +" Exist!");
+            return;
+        }
+
+        RiverObject river = ScriptableObject.CreateInstance<RiverObject>();
+        river.name = uniqName;
+
+        river.vertices = vertices.ToArray();
+        river.tris = tris.ToArray();
+        river.uvs = uvs.ToArray();
+        river.nodes = nodes.ToArray();
+
+        AssetDatabase.CreateAsset(river, "Assets/Resources/RiverBuilds/"+river.name+".asset");
+        AssetDatabase.SaveAssets();
+    }
+
     private void Update()
     {
         if (autoUpdateMesh)
         {
             GenerateMesh();
             UpdateUVs();
+            UpdateNodes();
 
             mr.sharedMaterial.mainTextureOffset = new Vector2(Time.time,Time.time);
         }
@@ -34,12 +60,20 @@ public class RiverTool : MonoBehaviour
         mesh.name = "RiverMesh";
 
         mesh.vertices = vertices.ToArray();
+        UpdateNodes();
         mesh.triangles = tris.ToArray();
+        UpdateUVs();
         mesh.uv = uvs.ToArray();
 
         mesh.RecalculateNormals();
 
         mf.sharedMesh = mesh;
+    }
+
+    public void UpdateRiver ()
+    {
+        UpdateNodes();
+        UpdateUVs();
     }
     #endregion
 
@@ -47,14 +81,57 @@ public class RiverTool : MonoBehaviour
     public void UpdateUVs()
     {
         uvs.Clear();
+
         for (int i = 0; i < vertices.Count; i++)
         {
             uvs.Add(new Vector2(vertices[i].x, vertices[i].z));
         }
     }
+
+    public void UpdateNodes()
+    {
+        nodes.Clear();
+
+        for (int i = 0; i < vertices.Count; i += 2)
+        {
+            if(i < vertices.Count && i-3 > -1)
+            {
+                Vector3 last_1_pos = vertices[i];
+
+                Vector3 last_3_pos = vertices[i - 2];
+
+                nodes.Add(new RiverNode(vertices[i+1], vertices[i], GetRiverFlow(last_1_pos, last_3_pos)));
+            }
+            else if(i + 2 < vertices.Count && i == 0)
+            {
+                Vector3 last_1_pos = vertices[i];
+
+                Vector3 last_3_pos = vertices[i + 2];
+
+                nodes.Add(new RiverNode(vertices[i + 1], vertices[i], GetRiverFlow(last_3_pos, last_1_pos)));
+            }
+            else if (i + 2 < vertices.Count && i == 2)
+            {
+                Vector3 last_1_pos = vertices[i];
+
+                Vector3 last_3_pos = vertices[i + 2];
+
+                nodes.Add(new RiverNode(vertices[i + 1], vertices[i], GetRiverFlow(last_3_pos, last_1_pos)));
+            }
+        }
+    }
     #endregion
 
     #region Construction Methods
+    private Vector3 GetRiverFlow (Vector3 topVec, Vector3 botVec)
+    {
+        Vector3 res = Vector3.zero;
+
+        res = topVec - botVec;
+
+        return res.normalized;
+    }
+
     public void AddRow()
     {
         lenght++;
@@ -65,16 +142,12 @@ public class RiverTool : MonoBehaviour
         Vector3 last_3_pos = vertices[vertices.Count - 3];
         Vector3 last_4_pos = vertices[vertices.Count - 4];
 
-        Vector3 dir_1 = last_1_pos - last_3_pos;
-        dir_1.Normalize();
+        Vector3 dir_1 = GetRiverFlow(last_1_pos, last_3_pos);
+        Vector3 dir_2 = GetRiverFlow(last_2_pos, last_4_pos);
 
-        Vector3 dir_2 = last_2_pos - last_4_pos;
-        dir_2.Normalize();
-
-        vertices.Add(last_2_pos + (dir_2 * 2));
-        vertices.Add(last_1_pos + (dir_1 * 2));
-
-
+        vertices.Add(last_2_pos + (dir_1 * 2));
+        vertices.Add(last_1_pos + (dir_2 * 2));
+        
         //uvs.Add(new Vector2(0, lenght - 1));
         //uvs.Add(new Vector2(1, lenght - 1));
         UpdateUVs();
@@ -86,6 +159,9 @@ public class RiverTool : MonoBehaviour
         tris.Add((vertices.Count - 1) - 0);
         tris.Add((vertices.Count - 1) - 2);
         tris.Add((vertices.Count - 1) - 1);
+
+        RiverNode node = new RiverNode(vertices[vertices.Count - 1], vertices[vertices.Count - 2], dir_1);
+        nodes.Add(node);
     }
 
     public void RemoveRow()
@@ -139,6 +215,8 @@ public class RiverTool : MonoBehaviour
         AddRow();
         AddRow();
         AddRow();
+
+        GenerateMesh();
     }
     #endregion
 }

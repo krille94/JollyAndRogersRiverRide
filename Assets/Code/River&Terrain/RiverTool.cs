@@ -63,6 +63,11 @@ public class RiverTool : MonoBehaviour
             return;
         }
 
+        vertices.Clear();
+
+        uvs.Clear();
+        tris.Clear();
+        nodes.Clear();
         for (int i = 0; i < obj.vertices.Length; i++)
         {
             vertices.Add(obj.vertices[i]);
@@ -190,8 +195,8 @@ public class RiverTool : MonoBehaviour
         Vector3 dir_1 = GetRiverFlow(last_1_pos, last_3_pos);
         Vector3 dir_2 = GetRiverFlow(last_2_pos, last_4_pos);
 
-        vertices.Add(last_2_pos + (dir_1 * 2));
-        vertices.Add(last_1_pos + (dir_2 * 2));
+        vertices.Add(last_2_pos + (dir_1 * 10));
+        vertices.Add(last_1_pos + (dir_2 * 10));
         
         //uvs.Add(new Vector2(0, lenght - 1));
         //uvs.Add(new Vector2(1, lenght - 1));
@@ -240,9 +245,9 @@ public class RiverTool : MonoBehaviour
         lenght = 2;
 
         vertices.Add(new Vector3(0, 0, 0));
-        vertices.Add(new Vector3(1, 0, 0));
-        vertices.Add(new Vector3(0, 0, 1));
-        vertices.Add(new Vector3(1, 0, 1));
+        vertices.Add(new Vector3(10, 0, 0));
+        vertices.Add(new Vector3(0, 0, 10));
+        vertices.Add(new Vector3(10, 0, 10));
 
         tris.Add(0);
         tris.Add(2);

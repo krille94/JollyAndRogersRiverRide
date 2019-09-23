@@ -8,6 +8,8 @@ public class RiverSpeed : MonoBehaviour
     public Vector3 movementDirection;
 
     private Rigidbody playerRigidbody;
+    
+    public RiverObject river;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +42,9 @@ public class RiverSpeed : MonoBehaviour
 
     void UpdateRigidBody(Rigidbody body)
     {
-        Vector3 movement = movementDirection;
+        RiverNode node = river.GetNodeFromPosition(playerRigidbody.transform.position);
+
+        Vector3 movement = node.flowDirection;
         movement *= (minimumSpeed);
 
         //Use rb.AddForce to gradually increase or decrease speed

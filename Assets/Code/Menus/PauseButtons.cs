@@ -7,6 +7,7 @@ public class PauseButtons : MonoBehaviour
 {
     public bool isResume;
     public bool isOptions;
+    public bool isHowToPlay;
     public bool isQuit;
     public AudioSource audioSource;
     [SerializeField] private GameObject pausePanel = null;

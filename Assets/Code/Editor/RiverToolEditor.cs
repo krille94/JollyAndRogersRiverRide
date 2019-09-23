@@ -107,7 +107,7 @@ public class RiverToolEditor : Editor
                 float distFromCam = 1;
                 if (Camera.current != null)
                 {
-                    distFromCam = Vector3.Distance(Camera.current.transform.position, tool.transform.TransformPoint(tool.vertices[i]));
+                    distFromCam = Vector3.Distance(Camera.current.transform.position, tool.transform.TransformPoint(tool.nodes[i].centerVector));
                     if (distFromCam > handleMaxDistance)
                     {
                         distFromCam = 0;

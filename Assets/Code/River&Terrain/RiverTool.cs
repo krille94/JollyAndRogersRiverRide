@@ -90,7 +90,8 @@ public class RiverTool : MonoBehaviour
             UpdateUVs();
             UpdateNodes();
 
-            mr.sharedMaterial.mainTextureOffset = new Vector2(Time.time,Time.time);
+            //mr.sharedMaterial.mainTextureOffset = new Vector2(Time.time,Time.time);
+
             for (int i = 0; i < transform.childCount; i++)
             {
                 transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mf.sharedMesh;

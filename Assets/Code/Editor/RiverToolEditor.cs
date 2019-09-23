@@ -28,6 +28,9 @@ public class RiverToolEditor : Editor
 
         tool.uniqName = GUILayout.TextField(tool.uniqName);
 
+        if (GUILayout.Button("Build River From Asset"))
+            tool.GetRiverPrefab();
+
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
         //EditorGUILayout.Space();
 

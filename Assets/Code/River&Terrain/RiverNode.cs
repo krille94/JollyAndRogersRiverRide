@@ -64,6 +64,7 @@ public class RiverObject : ScriptableObject
     public Vector3[] vertices;
     public int[] tris;
     public Vector2[] uvs;
+    public int lenght;
     public RiverNode[] nodes;
 }
 

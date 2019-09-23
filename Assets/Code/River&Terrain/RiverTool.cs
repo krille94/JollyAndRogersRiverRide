@@ -22,6 +22,17 @@ public class RiverTool : MonoBehaviour
     public List<RiverNode> nodes = new List<RiverNode>();
 
     #region Main Methods
+    private void OnEnable()
+    {
+        mf = gameObject.GetComponent<MeshFilter>();
+        mr = gameObject.GetComponent<MeshRenderer>();
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mf.sharedMesh;
+        }
+    }
+
     public void BuildRiverPrefab ()
     {
         if(AssetDatabase.LoadAssetAtPath("Assets/Resources/RiverBuilds/"+ uniqName +".asset", typeof(RiverObject)) != null)
@@ -37,9 +48,38 @@ public class RiverTool : MonoBehaviour
         river.tris = tris.ToArray();
         river.uvs = uvs.ToArray();
         river.nodes = nodes.ToArray();
+        river.lenght = lenght;
 
         AssetDatabase.CreateAsset(river, "Assets/Resources/RiverBuilds/"+river.name+".asset");
         AssetDatabase.SaveAssets();
+    }
+
+    public void GetRiverPrefab()
+    {
+        RiverObject obj = (RiverObject)AssetDatabase.LoadAssetAtPath<RiverObject>("Assets/Resources/RiverBuilds/" + uniqName + ".asset");
+        if(obj == null)
+        {
+            Debug.Log("Did not find river with this name.!");
+            return;
+        }
+
+        for (int i = 0; i < obj.vertices.Length; i++)
+        {
+            vertices.Add(obj.vertices[i]);
+        }
+        for (int i = 0; i < obj.uvs.Length; i++)
+        {
+            uvs.Add(obj.uvs[i]);
+        }
+        for (int i = 0; i < obj.tris.Length; i++)
+        {
+            tris.Add(obj.tris[i]);
+        }
+        for (int i = 0; i < obj.nodes.Length; i++)
+        {
+            nodes.Add(obj.nodes[i]);
+        }
+        lenght = obj.lenght;
     }
 
     private void Update()
@@ -51,6 +91,10 @@ public class RiverTool : MonoBehaviour
             UpdateNodes();
 
             mr.sharedMaterial.mainTextureOffset = new Vector2(Time.time,Time.time);
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mf.sharedMesh;
+            }
         }
     }
 

@@ -23,7 +23,9 @@ public class GameController : MonoBehaviour
 
     public void OnCompletedLevel()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+        StartOnMenu.MoveToMenu = "Highscore Menu";
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+
     }
 
     public void OnDeath()
@@ -40,7 +42,8 @@ public class GameController : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 is_dead = false;
-                UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+                StartOnMenu.MoveToMenu = "Highscore Menu";
+                UnityEngine.SceneManagement.SceneManager.LoadScene(1);
             }
         }
 

@@ -7,14 +7,15 @@ using UnityEngine.SceneManagement;
 public class HighScoreList : MonoBehaviour
 {
     [SerializeField] private GameObject listView = null;
-    public Text YourScoreText;
-    public Text ScoreListText;
-    public Text NameListText;
+    public GameObject YourScoreText;
+    public GameObject ScoreListText;
+    public GameObject NameListText;
 
     private int YourPlacement=0;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        listView.SetActive(false);
         SaveScore.Load();
         YourScore.CalculateScore();
 
@@ -99,7 +100,7 @@ public class HighScoreList : MonoBehaviour
         foreach (Highscore g in SaveScore.savedGames)
             allScores += (g.score.ToString()+"\n ");
 
-        ScoreListText.text = allScores;
+        ScoreListText.GetComponent<TextMesh>().text = allScores;
     }
 
     void ListNames()
@@ -114,18 +115,17 @@ public class HighScoreList : MonoBehaviour
             i++;
         }
 
-        NameListText.text = allScores;
+        NameListText.GetComponent<TextMesh>().text = allScores;
     }
 
     void CountText()
     {
         if (!listView.activeInHierarchy)
         {
-            YourScoreText.text = "Your score was: " + YourScore.score.ToString();
-            YourScoreText.text += "\nEnter your name:\n";
-            YourScoreText.text += (YourPlacement + 1).ToString() + ". " + YourScore.playerName;
+            string setText = "Your score was: " + YourScore.score.ToString() + "\nEnter your name:\n" + (YourPlacement + 1).ToString() + ". " + YourScore.playerName;
+            YourScoreText.GetComponent<TextMesh>().text = setText;
         }
-        else YourScoreText.text = " ";
+        else YourScoreText.GetComponent<TextMesh>().text = " ";
     }
 
     void AddLetterToName()

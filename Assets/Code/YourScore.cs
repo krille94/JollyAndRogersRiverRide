@@ -10,6 +10,7 @@ public class YourScore : MonoBehaviour
     public static float distanceTraveled = 0; // A value between 0 and 1, determining the distance in percent
     public static int bonusesPickedUp = 0; // Use the gold variable in GoldChestContainer! How to reach it?
     public static float damageTaken = 0; // Calculated in percentage, hull/maxhull
+    public static bool playedGame = true; // Checks if there's any score to calculate
 
     public YourScore()
     {

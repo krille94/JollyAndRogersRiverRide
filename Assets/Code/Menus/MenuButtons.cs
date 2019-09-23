@@ -9,7 +9,7 @@ public class MenuButtons : MonoBehaviour
     public GameObject NextMenu;
 
     public bool isStart;
-    //public bool isHighscores;
+    public bool isHighscores;
     public bool isChangeMenu;
     public bool isChangeMusic;
     public bool isQuit;
@@ -19,16 +19,17 @@ public class MenuButtons : MonoBehaviour
         if (isStart)
         {
             YourScore.ResetScore();
+            YourScore.playedGame = true;
             Time.timeScale = 1;
             SceneManager.LoadScene(2);
         }
-        /*
         if (isHighscores)
         {
-            YourScore.ResetScore();
-            SceneManager.LoadScene(3);
+            if (YourScore.playedGame) YourScore.playedGame = false;
+            GetComponent<TextMesh>().color = Color.black;
+            CurrentMenu.SetActive(false);
+            NextMenu.SetActive(true);
         }
-        */
         if (isChangeMusic)
         {
             GetComponent<AudioSource>().Play();

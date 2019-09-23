@@ -189,7 +189,7 @@ public class HighScoreList : MonoBehaviour
 
         if (newLetter!="none"&&newLetter!="NONE")
         {
-            if(YourScore.playerName.Length<30)
+            if(YourScore.playerName.Length<21)
                 YourScore.playerName += newLetter;
         }
     }

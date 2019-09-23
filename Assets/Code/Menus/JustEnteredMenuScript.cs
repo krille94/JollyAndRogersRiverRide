@@ -6,6 +6,7 @@ public class JustEnteredMenuScript : MonoBehaviour
 {
     private GameObject MainMenu;
     private GameObject CharacterSelectMenu;
+    private GameObject HowToPlayMenu;
     private GameObject HighscoreMenu;
     private GameObject OptionsMenu;
     private GameObject CreditsMenu;
@@ -21,6 +22,7 @@ public class JustEnteredMenuScript : MonoBehaviour
     {
         MainMenu = GameObject.Find("Main Menu");
         CharacterSelectMenu = GameObject.Find("Character Select Menu");
+        HowToPlayMenu = GameObject.Find("How To Play Menu");
         HighscoreMenu = GameObject.Find("Highscore Menu");
         OptionsMenu = GameObject.Find("Options Menu");
         CreditsMenu = GameObject.Find("Credits Menu");
@@ -30,6 +32,7 @@ public class JustEnteredMenuScript : MonoBehaviour
     {
         MainMenu.SetActive(false);
         CharacterSelectMenu.SetActive(false);
+        HowToPlayMenu.SetActive(false);
         HighscoreMenu.SetActive(false);
         OptionsMenu.SetActive(false);
         CreditsMenu.SetActive(false);
@@ -39,5 +42,6 @@ public class JustEnteredMenuScript : MonoBehaviour
         if (menu == "Highscore Menu") HighscoreMenu.SetActive(true);
         if (menu == "Options Menu") OptionsMenu.SetActive(true);
         if (menu == "Credits Menu") CreditsMenu.SetActive(true);
+        if (menu == "How To Play Menu") HowToPlayMenu.SetActive(true);
     }
 }

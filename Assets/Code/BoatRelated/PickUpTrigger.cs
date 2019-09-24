@@ -17,14 +17,13 @@ public class PickUpTrigger : MonoBehaviour
         {
             ItemType type = other.gameObject.GetComponent<ItemType>();
             other.gameObject.SetActive(false);
-            Destroy(other.gameObject);
-
-
-
+            
             if(type.itemType.ToString()=="Gold")
                 onPickUpGold(type.itemValue);
             else if (type.itemType.ToString() == "Bucket")
                 onPickUpBucket(type.itemValue);
+
+            Destroy(other.gameObject);
         }
     }
 }

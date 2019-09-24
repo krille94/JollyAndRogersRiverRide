@@ -8,29 +8,26 @@ public class MenuButtons : MonoBehaviour
     public GameObject CurrentMenu;
     public GameObject NextMenu;
 
-    public bool isStart;
-    public bool isHighscores;
-    public bool isChangeMenu;
-    public bool isChangeMusic;
-    public bool isQuit;
-    
+    public enum ButtonActions { None, StartGame, ResumeGame, Highscores, ChangeMenu, ChangeMusic, QuitGame }
+    public ButtonActions buttonAction = 0;
+
     void OnMouseUp()
     {
-        if (isStart)
+        if (buttonAction.ToString()=="StartGame")
         {
             YourScore.ResetScore();
             YourScore.playedGame = true;
             Time.timeScale = 1;
             SceneManager.LoadScene(2);
         }
-        if (isHighscores)
+        if (buttonAction.ToString() == "Highscores")
         {
             if (YourScore.playedGame) YourScore.playedGame = false;
             GetComponent<TextMesh>().color = Color.black;
             CurrentMenu.SetActive(false);
             NextMenu.SetActive(true);
         }
-        if (isChangeMusic)
+        if (buttonAction.ToString() == "ChangeMusic")
         {
             GetComponent<AudioSource>().Play();
             //audioSource.Play();
@@ -45,13 +42,13 @@ public class MenuButtons : MonoBehaviour
                 GetComponent<TextMesh>().text = "Audio: ON";
             }
         }
-        if (isChangeMenu)
+        if (buttonAction.ToString() == "ChangeMenu")
         {
             GetComponent<TextMesh>().color = Color.black;
             CurrentMenu.SetActive(false);
             NextMenu.SetActive(true);
         }
-        if (isQuit)
+        if (buttonAction.ToString() == "QuitGame")
         {
             Application.Quit();
         }

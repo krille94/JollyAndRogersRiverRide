@@ -12,9 +12,31 @@ public class RiverToolEditor : Editor
     float handleMaxDistance = 100;
     float handleSize = 100;
 
+    RiverTool tool;
+
+    private void OnEnable()
+    {
+        EditorApplication.update += Update;
+        tool = (RiverTool)target;
+    }
+
+    private void OnDisable()
+    {
+        EditorApplication.update -= Update;
+    }
+
+    public void Update ()
+    {
+        if (tool.autoUpdateMesh)
+        {
+            tool.UpdateMesh();
+            tool.UpdateNodes();
+        }
+    }
+
     public override void OnInspectorGUI()
     {
-        RiverTool tool = (RiverTool)target;
+        //RiverTool tool = (RiverTool)target;
 
         tool.autoUpdateMesh = EditorGUILayout.Toggle("AutoUpdate", tool.autoUpdateMesh);
         if (!tool.autoUpdateMesh)
@@ -30,6 +52,9 @@ public class RiverToolEditor : Editor
 
         if (GUILayout.Button("Build River From Asset"))
             tool.GetRiverPrefab();
+
+        if (GUILayout.Button("Connect With River From Controller"))
+            tool.GetRiverFromController();
 
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
         //EditorGUILayout.Space();
@@ -76,27 +101,20 @@ public class RiverToolEditor : Editor
 
         RiverTool tool = (RiverTool)target;
 
-        if(tool.mf == null)
+        ///Skiping first vertice, origin moves whole transform
+        for (int i = 1; i < tool.vertices.Count; i++)
         {
-            return;
-        }
-        else
-        {
-            ///Skiping first vertice, origin moves whole transform
-            for (int i = 1; i < tool.vertices.Count; i++)
+            float distFromCam = 1;
+            if(Camera.current != null)
             {
-                float distFromCam = 1;
-                if(Camera.current != null)
+                distFromCam = Vector3.Distance(Camera.current.transform.position, tool.transform.TransformPoint(tool.vertices[i]));
+                if(distFromCam > handleMaxDistance)
                 {
-                    distFromCam = Vector3.Distance(Camera.current.transform.position, tool.transform.TransformPoint(tool.vertices[i]));
-                    if(distFromCam > handleMaxDistance)
-                    {
-                        distFromCam = 0;
-                    }
+                    distFromCam = 0;
                 }
-                tool.vertices[i] = tool.transform.InverseTransformPoint(Handles.FreeMoveHandle(tool.transform.TransformPoint(tool.vertices[i]), Quaternion.identity, distFromCam / handleSize, Vector3.one, Handles.CircleHandleCap));
-                tool.vertices[i] = new Vector3(tool.vertices[i].x, 0, tool.vertices[i].z);
             }
+            tool.vertices[i] = tool.transform.InverseTransformPoint(Handles.FreeMoveHandle(tool.transform.TransformPoint(tool.vertices[i]), Quaternion.identity, distFromCam / handleSize, Vector3.one, Handles.CircleHandleCap));
+            tool.vertices[i] = new Vector3(tool.vertices[i].x, 0, tool.vertices[i].z);
         }
 
         if(tool.nodes.Count > 0)

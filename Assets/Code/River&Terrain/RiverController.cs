@@ -58,11 +58,11 @@ public class RiverController : MonoBehaviour
             if (playerRigidbody == null)
                 playerRigidbody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
 
-            Vector3 movement = movementDirection;
-            movement *= (minimumSpeed);
+           /// Vector3 movement = movementDirection;
+            //movement *= (minimumSpeed);
 
             //Use rb.velocity to set a specific speed
-            playerRigidbody.velocity = movement;
+            //playerRigidbody.velocity = movement;
         }
         else
         {
@@ -79,21 +79,24 @@ public class RiverController : MonoBehaviour
         MeshWaveUpdate();
     }
 
+    [SerializeField]
+    Vector3 flow;
+    [SerializeField]
+    RiverNode node;
     void PhysicsFlowUpdate()
     {
-        RiverNode node = riverAsset.GetNodeFromPosition(playerRigidbody.transform.position);
-
-        Vector3 movement = node.flowDirection;
-        movement *= (minimumSpeed);
-
+        node = riverAsset.GetNodeFromPosition(transform.position, playerRigidbody.transform.position);
+        flow = riverAsset.GetFlow(transform.position, playerRigidbody.transform.position);
+        Vector3 movement = flow;
+        playerRigidbody.AddForce(movement * (minimumSpeed * Time.deltaTime));
+        /*
         //Use rb.AddForce to gradually increase or decrease speed
         //   Giving it 0.1f leeway so that the boat won't start going back and forth between 24.97f and 25.002f
-        if (playerRigidbody.velocity.x < minimumSpeed - 0.1f)
+        if (playerRigidbody.velocity.magnitude < minimumSpeed)
             playerRigidbody.AddForce(movement * (minimumSpeed * Time.deltaTime));
-        else if (playerRigidbody.velocity.x > minimumSpeed + 0.1f)
-            playerRigidbody.AddForce(-movement * (minimumSpeed * Time.deltaTime));
-        else
+        else if (playerRigidbody.velocity.magnitude > minimumSpeed)
             playerRigidbody.velocity = movement;
+        */
     }
 
     void MeshWaveUpdate ()
@@ -156,5 +159,23 @@ public class RiverController : MonoBehaviour
     {
         if (other.GetComponent<Rigidbody>())
             other.GetComponent<Rigidbody>().drag = 1;
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (riverAsset != null)
+        {
+            for (int i = 0; i < riverAsset.nodes.Length - 1; i++)
+            {
+                Gizmos.DrawWireSphere(transform.position + riverAsset.nodes[i].centerVector, 1);
+                Gizmos.DrawLine(transform.position + riverAsset.nodes[i].centerVector, transform.position + riverAsset.nodes[i + 1].centerVector);
+            }
+        }
+
+        if (playerRigidbody != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(playerRigidbody.transform.position, transform.position + node.centerVector);
+        }
     }
 }

@@ -46,17 +46,7 @@ public class RiverSpeedController : MonoBehaviour
 
     private List<Vector3> nextIterationStartPoints = new List<Vector3>();
 
-    [SerializeField] RiverSpeed river;
     [SerializeField] Rigidbody boat;
-
-    private void Start()
-    {
-        if(river != null)
-        {
-            river.minimumSpeed = minimumSpeed;
-            river.movementDirection = defaultMovementDirection;
-        }
-    }
 
     private void Update()
     {

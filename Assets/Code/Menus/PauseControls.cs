@@ -5,12 +5,10 @@ using UnityEngine;
 public class PauseControls : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel = null;
-    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
         pausePanel.SetActive(false);
     }
 
@@ -20,7 +18,7 @@ public class PauseControls : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             // Edit this later to check if player is dead or not rather than if player exists
-            if (!pausePanel.activeInHierarchy && player.activeInHierarchy)
+            if (!pausePanel.activeInHierarchy)
             {
                 PauseGame();
             }

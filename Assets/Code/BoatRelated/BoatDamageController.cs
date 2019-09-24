@@ -15,6 +15,11 @@ public class BoatDamageController : MonoBehaviour
 
     public ParticleSystem onDamagedParticlePrefab;
 
+    public void OnDeath()
+    {
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().OnDeath();
+    }
+
     private void Start()
     {
         hull = MaxHull;
@@ -43,6 +48,7 @@ public class BoatDamageController : MonoBehaviour
         if (hull <= 0)
         {
             Time.timeScale = 0;
+            OnDeath();
             onDeath.Invoke();
         }
 

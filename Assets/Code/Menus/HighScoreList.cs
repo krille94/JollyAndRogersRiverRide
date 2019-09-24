@@ -103,8 +103,15 @@ public class HighScoreList : MonoBehaviour
     void ListScores()
     {
         string allScores=" ";
+        int i = 0;
         foreach (Highscore g in SaveScore.savedGames)
-            allScores += (g.score.ToString()+"\n ");
+        {
+            if (i == YourPlacement)
+                allScores += "<color=red>" + (g.score.ToString() + "</color>\n ");
+            else
+                allScores += (g.score.ToString() + "\n ");
+            i++;
+        }
 
         ScoreListText.GetComponent<TextMesh>().text = allScores;
     }
@@ -117,7 +124,11 @@ public class HighScoreList : MonoBehaviour
         {
             if (i < 10) allScores += "  "+i.ToString()+". ";
             else allScores += i.ToString() + ". ";
-            allScores += (g.name + "\n ");
+
+            if (i == YourPlacement+1)
+                allScores += "<color=red>" + (g.name + "</color>\n ");
+            else
+                allScores += (g.name + "\n ");
             i++;
         }
 

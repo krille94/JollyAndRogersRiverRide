@@ -8,9 +8,14 @@ public class BoatDamageController : MonoBehaviour
     public int MaxHull = 1000;
     private float hull;
 
+    public float InvincibilityFrames = 3;
+    private float InvincibilityTimer = 0;
+    private bool invincible=false;
+
     public UnityEvent onDeath;
 
     [SerializeField] PickUpTrigger trigger = null;
+
     public delegate void OnDamageRecived(float value, Vector3 point);
     public OnDamageRecived onDamaged;
 
@@ -37,6 +42,15 @@ public class BoatDamageController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(invincible)
+        {
+            InvincibilityTimer += Time.deltaTime;
+            if(InvincibilityTimer>=InvincibilityFrames)
+            {
+                InvincibilityTimer = 0;
+                invincible = false;
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -44,8 +58,12 @@ public class BoatDamageController : MonoBehaviour
         if (collision.transform.tag == "Item")
             return;
 
-        hull -= collision.relativeVelocity.magnitude;
-        
+        if(!invincible)
+        {
+            hull -= collision.relativeVelocity.magnitude;
+            invincible = true;
+        }
+
         foreach (ContactPoint contact in collision.contacts)
         {
             onDamaged(collision.relativeVelocity.magnitude, contact.point);
@@ -67,5 +85,7 @@ public class BoatDamageController : MonoBehaviour
     private void OnGUI()
     {
         GUI.Box(new Rect(0, 0, 100, 25), "HULL: " + hull.ToString("F0") + " / " + MaxHull.ToString());
+        if(invincible)
+            GUI.Box(new Rect(0, 25, 100, 25), "Invincible");
     }
 }

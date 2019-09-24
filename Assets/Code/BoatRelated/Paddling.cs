@@ -18,7 +18,7 @@ public class Oar
 
     public bool isPaddling = false;
     public float paddlingTime = 0;
-
+    
     public void SetRightSide()
     {
         onLeftSide = false;
@@ -77,7 +77,11 @@ public class Paddling : MonoBehaviour
     [SerializeField] private Oar oar = null;
 
     private Vector3 impactPoint;
-    
+
+    private bool CanControl = true;
+
+    public void SetCanControl(bool truefalse) { CanControl = truefalse; }
+
     void Update()
     {
         impactPoint = Vector3.zero;
@@ -99,40 +103,43 @@ public class Paddling : MonoBehaviour
         bool forwardKey = Input.GetButton("Player_" + ((PlayerIndexTypes)playerIndex).ToString() + "_Paddle_Forward");
         bool backKey = Input.GetButton("Player_" + ((PlayerIndexTypes)playerIndex).ToString() + "_Paddle_Back");
 
-        if(forwardKey)
+        if (CanControl)
         {
-            impactPoint = oar.Paddle();
-            rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
-            rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
-        }
-        else if(backKey)
-        {
-            impactPoint = oar.Paddle();
-            rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
-        }
-
-        if (leftKey)
-        {
-            if (!oar.onLeftSide)
-                oar.SetLeftSide();
-            /*else
+            if (forwardKey)
             {
                 impactPoint = oar.Paddle();
                 rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
                 rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
-            }*/
-        }
-
-        if (rightKey)
-        {
-            if (!oar.onRightSide)
-                oar.SetRightSide();
-            /*else
+            }
+            else if (backKey)
             {
                 impactPoint = oar.Paddle();
-                rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
-                rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
-            }*/
+                rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
+            }
+
+            if (leftKey)
+            {
+                if (!oar.onLeftSide)
+                    oar.SetLeftSide();
+                /*else
+                {
+                    impactPoint = oar.Paddle();
+                    rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
+                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
+                }*/
+            }
+
+            if (rightKey)
+            {
+                if (!oar.onRightSide)
+                    oar.SetRightSide();
+                /*else
+                {
+                    impactPoint = oar.Paddle();
+                    rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
+                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
+                }*/
+            }
         }
     }
 

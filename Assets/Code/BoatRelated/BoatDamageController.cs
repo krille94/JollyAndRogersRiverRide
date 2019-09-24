@@ -10,6 +10,7 @@ public class BoatDamageController : MonoBehaviour
 
     public UnityEvent onDeath;
 
+    [SerializeField] PickUpTrigger trigger = null;
     public delegate void OnDamageRecived(float value, Vector3 point);
     public OnDamageRecived onDamaged;
 
@@ -23,6 +24,14 @@ public class BoatDamageController : MonoBehaviour
     private void Start()
     {
         hull = MaxHull;
+        trigger.onPickUpBucket += RecoverHull;
+    }
+
+    public void RecoverHull(int amount)
+    {
+        hull += amount;
+        if (hull > MaxHull)
+            hull = MaxHull;
     }
 
     // Update is called once per frame

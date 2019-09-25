@@ -19,7 +19,7 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.W))
         {
-            YourScore.score++;
+            PlayerData.score++;
             CountText();
         }
 
@@ -27,6 +27,6 @@ public class PlayerScript : MonoBehaviour
 
     void CountText()
     {
-        countText.text = "Count: " + YourScore.score.ToString();
+        countText.text = "Count: " + PlayerData.score.ToString();
     }
 }

@@ -689,11 +689,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentMenu: {fileID: 1650352}
   NextMenu: {fileID: 67000159}
-  isStart: 0
-  isHighscores: 0
-  isChangeMenu: 1
-  isChangeMusic: 0
-  isQuit: 0
+  buttonAction: 4
 --- !u!114 &301453578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1400,11 +1396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentMenu: {fileID: 67000159}
   NextMenu: {fileID: 816344247}
-  isStart: 0
-  isHighscores: 0
-  isChangeMenu: 1
-  isChangeMusic: 0
-  isQuit: 0
+  buttonAction: 0
 --- !u!114 &682634507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2116,11 +2108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentMenu: {fileID: 67000159}
   NextMenu: {fileID: 1650352}
-  isStart: 0
-  isHighscores: 0
-  isChangeMenu: 1
-  isChangeMusic: 0
-  isQuit: 0
+  buttonAction: 0
 --- !u!114 &1060310356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2423,11 +2411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentMenu: {fileID: 816344247}
   NextMenu: {fileID: 67000159}
-  isStart: 0
-  isHighscores: 0
-  isChangeMenu: 1
-  isChangeMusic: 0
-  isQuit: 0
+  buttonAction: 4
 --- !u!114 &1127716478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3162,11 +3146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentMenu: {fileID: 0}
   NextMenu: {fileID: 0}
-  isStart: 0
-  isHighscores: 0
-  isChangeMenu: 0
-  isChangeMusic: 1
-  isQuit: 0
+  buttonAction: 5
 --- !u!114 &1333957642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3393,11 +3373,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentMenu: {fileID: 0}
   NextMenu: {fileID: 0}
-  isStart: 1
-  isHighscores: 0
-  isChangeMenu: 0
-  isChangeMusic: 0
-  isQuit: 0
+  buttonAction: 0
 --- !u!114 &1476455966
 MonoBehaviour:
   m_ObjectHideFlags: 0

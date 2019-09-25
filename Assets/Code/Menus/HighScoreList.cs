@@ -19,9 +19,9 @@ public class HighScoreList : MonoBehaviour
         listView.SetActive(false);
         SaveScore.Load();
 
-        if (YourScore.playedGame)
+        if (PlayerData.playedGame)
         {
-            YourScore.CalculateScore();
+            PlayerData.CalculateScore();
             SortScores();
             CountText();
         }
@@ -39,7 +39,7 @@ public class HighScoreList : MonoBehaviour
     void SortScores()
     {
         List<Highscore> oldScores = SaveScore.savedGames;
-        int newScore = YourScore.score;
+        int newScore = PlayerData.score;
         YourPlacement = 0;
         foreach (Highscore g in SaveScore.savedGames)
         {
@@ -52,7 +52,7 @@ public class HighScoreList : MonoBehaviour
 
         Highscore nScore = new Highscore();
         nScore.name = "Player";
-        nScore.score = YourScore.score;
+        nScore.score = PlayerData.score;
         SaveScore.savedGames.Insert(YourPlacement, nScore);
         while (SaveScore.savedGames.Count > 10)
             SaveScore.savedGames.RemoveAt(10);
@@ -81,14 +81,14 @@ public class HighScoreList : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                if (YourScore.playerName == "") YourScore.playerName = "Player";
+                if (PlayerData.playerName == "") PlayerData.playerName = "Player";
 
-                SaveScore.savedGames[YourPlacement].name = YourScore.playerName;
+                SaveScore.savedGames[YourPlacement].name = PlayerData.playerName;
                 SaveScore.Save();
                 ListScores();
                 ListNames();
                 listView.SetActive(true);
-                YourScore.playedGame = false;
+                PlayerData.playedGame = false;
                 CountText();
             }
             else if (Input.anyKeyDown)
@@ -139,7 +139,7 @@ public class HighScoreList : MonoBehaviour
     {
         if (!listView.activeInHierarchy)
         {
-            string setText = "Your score was: " + YourScore.score.ToString() + "\nEnter your name:\n" + (YourPlacement + 1).ToString() + ". " + YourScore.playerName;
+            string setText = "Your score was: " + PlayerData.score.ToString() + "\nEnter your name:\n" + (YourPlacement + 1).ToString() + ". " + PlayerData.playerName;
             YourScoreText.GetComponent<TextMesh>().text = setText;
         }
         else YourScoreText.GetComponent<TextMesh>().text = " ";
@@ -200,14 +200,14 @@ public class HighScoreList : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            if(YourScore.playerName.Length>0)
-                YourScore.playerName = YourScore.playerName.Substring(0,YourScore.playerName.Length-1);
+            if(PlayerData.playerName.Length>0)
+                PlayerData.playerName = PlayerData.playerName.Substring(0,PlayerData.playerName.Length-1);
         }
 
         if (newLetter!="none"&&newLetter!="NONE")
         {
-            if(YourScore.playerName.Length<21)
-                YourScore.playerName += newLetter;
+            if(PlayerData.playerName.Length<21)
+                PlayerData.playerName += newLetter;
         }
     }
 }

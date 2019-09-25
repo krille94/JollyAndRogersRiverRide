@@ -15,14 +15,14 @@ public class MenuButtons : MonoBehaviour
     {
         if (buttonAction.ToString()=="StartGame")
         {
-            YourScore.ResetScore();
-            YourScore.playedGame = true;
+            PlayerData.ResetScore();
+            PlayerData.playedGame = true;
             Time.timeScale = 1;
             SceneManager.LoadScene(2);
         }
         if (buttonAction.ToString() == "Highscores")
         {
-            if (YourScore.playedGame) YourScore.playedGame = false;
+            if (PlayerData.playedGame) PlayerData.playedGame = false;
             GetComponent<TextMesh>().color = Color.black;
             CurrentMenu.SetActive(false);
             NextMenu.SetActive(true);

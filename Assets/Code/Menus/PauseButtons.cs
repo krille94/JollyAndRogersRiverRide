@@ -24,7 +24,7 @@ public class PauseButtons : MonoBehaviour
 
         if (isQuit)
         {
-            YourScore.ResetScore();
+            PlayerData.ResetScore();
             SceneManager.LoadScene(1);
         }
     }

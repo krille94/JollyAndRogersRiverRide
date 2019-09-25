@@ -2414,7 +2414,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1069630004
 Transform:
   m_ObjectHideFlags: 0
@@ -2808,6 +2808,7 @@ MonoBehaviour:
   Player2Icon: {fileID: 1959885035}
   Player1Text: {fileID: 748463185}
   Player2Text: {fileID: 1416518981}
+  StartGameButton: {fileID: 1069630003}
 --- !u!1 &1277238549
 GameObject:
   m_ObjectHideFlags: 0
@@ -3868,7 +3869,7 @@ GameObject:
   - component: {fileID: 1721127749}
   - component: {fileID: 1721127748}
   m_Layer: 0
-  m_Name: Start Game
+  m_Name: Play Game
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

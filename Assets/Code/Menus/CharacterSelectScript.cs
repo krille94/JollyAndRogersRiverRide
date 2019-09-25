@@ -11,6 +11,8 @@ public class CharacterSelectScript : MonoBehaviour
     public GameObject Player1Text;
     public GameObject Player2Text;
 
+    public GameObject StartGameButton;
+
     bool Player1Chosen=false;
     bool Player2Chosen=false;
 
@@ -35,7 +37,6 @@ public class CharacterSelectScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         if (Input.GetButtonDown("Player_One_Paddle_Forward"))
         {
             if (!Player2Chosen || Player1Pos != Player2Pos)
@@ -47,10 +48,14 @@ public class CharacterSelectScript : MonoBehaviour
                 Player1Chosen = true;
                 Player1Icon.SetActive(false);
                 Player1Text.SetActive(true);
+
+                if (Player1Chosen && Player2Chosen)
+                    StartGameButton.SetActive(true);
             }
         }
         else if (Input.GetButtonDown("Player_One_Paddle_Back"))
         {
+            StartGameButton.SetActive(false);
             Player1Chosen = false;
             Player1Icon.SetActive(true);
             Player1Text.SetActive(false);
@@ -89,10 +94,14 @@ public class CharacterSelectScript : MonoBehaviour
                 Player2Chosen = true;
                 Player2Icon.SetActive(false);
                 Player2Text.SetActive(true);
+
+                if (Player1Chosen && Player2Chosen)
+                    StartGameButton.SetActive(true);
             }
         }
         else if (Input.GetButtonDown("Player_Two_Paddle_Back"))
         {
+            StartGameButton.SetActive(false);
             Player2Chosen = false;
             Player2Icon.SetActive(true);
             Player2Text.SetActive(false);

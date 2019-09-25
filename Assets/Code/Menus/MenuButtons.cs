@@ -8,7 +8,7 @@ public class MenuButtons : MonoBehaviour
     public GameObject CurrentMenu;
     public GameObject NextMenu;
 
-    public enum ButtonActions { None, StartGame, ResumeGame, Highscores, ChangeMenu, ChangeMusic, QuitGame }
+    public enum ButtonActions { None, StartGame, ResumeGame, Highscores, ChangeMenu, ChangeMusic, QuitToMainMenu, QuitApplication }
     public ButtonActions buttonAction = 0;
 
     void OnMouseUp()
@@ -19,6 +19,11 @@ public class MenuButtons : MonoBehaviour
             PlayerData.playedGame = true;
             Time.timeScale = 1;
             SceneManager.LoadScene(2);
+        }
+        if (buttonAction.ToString() == "ResumeGame")
+        {
+            Time.timeScale = 1;
+            CurrentMenu.SetActive(false);
         }
         if (buttonAction.ToString() == "Highscores")
         {
@@ -48,7 +53,12 @@ public class MenuButtons : MonoBehaviour
             CurrentMenu.SetActive(false);
             NextMenu.SetActive(true);
         }
-        if (buttonAction.ToString() == "QuitGame")
+        if (buttonAction.ToString() == "QuitToMainMenu")
+        {
+            PlayerData.ResetScore();
+            SceneManager.LoadScene(1);
+        }
+        if (buttonAction.ToString() == "QuitApplication")
         {
             Application.Quit();
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour
@@ -34,18 +35,30 @@ public class MenuButtons : MonoBehaviour
         }
         if (buttonAction.ToString() == "ChangeMusic")
         {
-            GetComponent<AudioSource>().Play();
             //audioSource.Play();
-            if(AudioListener.volume==1)
+            AudioMixer mixer = GetComponent<AudioSource>().outputAudioMixerGroup.audioMixer;
+
+            float vol=0;
+            mixer.GetFloat("volume", out vol);
+            if (vol==-80)
             {
-                AudioListener.volume = 0;
-                GetComponent<TextMesh>().text="Audio: OFF";
+                mixer.SetFloat("volume", 0);
+                //AudioListener.volume = 0;
+                if(mixer.name=="Music")
+                    GetComponent<TextMesh>().text="Music: ON";
+                else
+                    GetComponent<TextMesh>().text = "SFX: ON";
             }
             else
             {
-                AudioListener.volume = 1;
-                GetComponent<TextMesh>().text = "Audio: ON";
+                mixer.SetFloat("volume", -80);
+                //AudioListener.volume = 1;
+                if (mixer.name == "Music")
+                    GetComponent<TextMesh>().text = "Music: OFF";
+                else
+                    GetComponent<TextMesh>().text = "SFX: OFF";
             }
+            GetComponent<AudioSource>().Play();
         }
         if (buttonAction.ToString() == "ChangeMenu")
         {

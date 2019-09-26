@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class BoatDamageController : MonoBehaviour
 {
-    public int MaxHull = 1000;
+    public int MaxHull = 10;
     private float hull;
 
     public float InvincibilityFrames = 3;
@@ -60,7 +60,8 @@ public class BoatDamageController : MonoBehaviour
 
         if(!invincible)
         {
-            hull -= collision.relativeVelocity.magnitude;
+            //hull -= collision.relativeVelocity.magnitude;
+            hull--;
             invincible = true;
         }
 

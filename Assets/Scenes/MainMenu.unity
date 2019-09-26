@@ -2943,7 +2943,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080522304}
-  m_Text: 'Audio: ON'
+  m_Text: 'Music: ON'
   m_OffsetZ: 0
   m_CharacterSize: 0.5
   m_LineSpacing: 1

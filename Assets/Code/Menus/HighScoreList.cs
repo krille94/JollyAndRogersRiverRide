@@ -10,51 +10,55 @@ public class HighScoreList : MonoBehaviour
     public GameObject YourScoreText;
     public GameObject ScoreListText;
     public GameObject NameListText;
+    public GameObject RestartGame;
 
     private int YourPlacement=0;
-    // Start is called before the first frame update
-    void Awake()
+
+    void OnEnable()
     {
         listView.SetActive(false);
         SaveScore.Load();
-        YourScore.CalculateScore();
 
-        SortScores();
-        CountText();
+        if (PlayerData.playedGame)
+        {
+            PlayerData.CalculateScore();
+            SortScores();
+            CountText();
+        }
+        else
+        {
+            RestartGame.SetActive(false);
+            ListScores();
+            ListNames();
+            listView.SetActive(true);
+            CountText();
+
+        }
     }
 
     void SortScores()
     {
-        if (YourScore.score > 0)
+        List<Highscore> oldScores = SaveScore.savedGames;
+        int newScore = PlayerData.score;
+        YourPlacement = 0;
+        foreach (Highscore g in SaveScore.savedGames)
         {
-            List<Highscore> oldScores = SaveScore.savedGames;
-            int newScore = YourScore.score;
-            YourPlacement = 0;
-            foreach (Highscore g in SaveScore.savedGames)
+            if (newScore >= g.score)
             {
-                if (newScore >= g.score)
-                {
-                    break;
-                }
-                YourPlacement++;
+                break;
             }
-
-            Highscore nScore = new Highscore();
-            nScore.name = "Player";
-            nScore.score = YourScore.score;
-            SaveScore.savedGames.Insert(YourPlacement, nScore);
-            while (SaveScore.savedGames.Count > 10)
-                SaveScore.savedGames.RemoveAt(10);
-            SaveScore.Save();
-
-            if (YourPlacement >= 10)
-            {
-                ListScores();
-                ListNames();
-                listView.SetActive(true);
-            }
+            YourPlacement++;
         }
-        else
+
+        Highscore nScore = new Highscore();
+        nScore.name = "Player";
+        nScore.score = PlayerData.score;
+        SaveScore.savedGames.Insert(YourPlacement, nScore);
+        while (SaveScore.savedGames.Count > 10)
+            SaveScore.savedGames.RemoveAt(10);
+        SaveScore.Save();
+
+        if (YourPlacement >= 10)
         {
             ListScores();
             ListNames();
@@ -65,24 +69,26 @@ public class HighScoreList : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (listView.activeInHierarchy)
+        /*if (listView.activeInHierarchy)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 SceneManager.LoadScene(1);
             }
         }
-        else
+        else*/
+        if (!listView.activeInHierarchy)
         {
             if (Input.GetKeyDown(KeyCode.Return))
             {
-                if (YourScore.playerName == "") YourScore.playerName = "Player";
+                if (PlayerData.playerName == "") PlayerData.playerName = "Player";
 
-                SaveScore.savedGames[YourPlacement].name = YourScore.playerName;
+                SaveScore.savedGames[YourPlacement].name = PlayerData.playerName;
                 SaveScore.Save();
                 ListScores();
                 ListNames();
                 listView.SetActive(true);
+                PlayerData.playedGame = false;
                 CountText();
             }
             else if (Input.anyKeyDown)
@@ -97,8 +103,15 @@ public class HighScoreList : MonoBehaviour
     void ListScores()
     {
         string allScores=" ";
+        int i = 0;
         foreach (Highscore g in SaveScore.savedGames)
-            allScores += (g.score.ToString()+"\n ");
+        {
+            if (i == YourPlacement)
+                allScores += "<color=red>" + (g.score.ToString() + "</color>\n ");
+            else
+                allScores += (g.score.ToString() + "\n ");
+            i++;
+        }
 
         ScoreListText.GetComponent<TextMesh>().text = allScores;
     }
@@ -111,7 +124,11 @@ public class HighScoreList : MonoBehaviour
         {
             if (i < 10) allScores += "  "+i.ToString()+". ";
             else allScores += i.ToString() + ". ";
-            allScores += (g.name + "\n ");
+
+            if (i == YourPlacement+1)
+                allScores += "<color=red>" + (g.name + "</color>\n ");
+            else
+                allScores += (g.name + "\n ");
             i++;
         }
 
@@ -122,7 +139,7 @@ public class HighScoreList : MonoBehaviour
     {
         if (!listView.activeInHierarchy)
         {
-            string setText = "Your score was: " + YourScore.score.ToString() + "\nEnter your name:\n" + (YourPlacement + 1).ToString() + ". " + YourScore.playerName;
+            string setText = "Your score was: " + PlayerData.score.ToString() + "\nEnter your name:\n" + (YourPlacement + 1).ToString() + ". " + PlayerData.playerName;
             YourScoreText.GetComponent<TextMesh>().text = setText;
         }
         else YourScoreText.GetComponent<TextMesh>().text = " ";
@@ -183,14 +200,14 @@ public class HighScoreList : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            if(YourScore.playerName.Length>0)
-                YourScore.playerName = YourScore.playerName.Substring(0,YourScore.playerName.Length-1);
+            if(PlayerData.playerName.Length>0)
+                PlayerData.playerName = PlayerData.playerName.Substring(0,PlayerData.playerName.Length-1);
         }
 
         if (newLetter!="none"&&newLetter!="NONE")
         {
-            if(YourScore.playerName.Length<21)
-                YourScore.playerName += newLetter;
+            if(PlayerData.playerName.Length<21)
+                PlayerData.playerName += newLetter;
         }
     }
 }

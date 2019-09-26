@@ -18,7 +18,7 @@ public class EndTrigger : MonoBehaviour
     {
         //Time.timeScale = 0;
         completed = true;
-        YourScore.distanceTraveled = 1; // Means you traveled 100% of the way
+        PlayerData.distanceTraveled = 1; // Means you traveled 100% of the way
         onCompleted.Invoke();
     }
 }

@@ -32,7 +32,7 @@ public class GameController : MonoBehaviour
     {
         is_dead = true;
         GameObject.FindGameObjectWithTag("Player").SetActive(false);
-        YourScore.ResetScore();
+        PlayerData.ResetScore();
     }
 
     private void Update()

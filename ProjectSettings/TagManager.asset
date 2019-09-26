@@ -7,6 +7,7 @@ TagManager:
   - Item
   - End
   - Boost
+  - Whirlpool
   layers:
   - Default
   - TransparentFX

@@ -18,7 +18,7 @@ public class GoldChestContainer : MonoBehaviour
 
     private void Start()
     {
-        trigger.onPickUp += AddGoldAndUpdateModel;
+        trigger.onPickUpGold += AddGoldAndUpdateModel;
         controller.onDamaged += RemoveGoldAndUpdateModel;
     }
 
@@ -28,7 +28,7 @@ public class GoldChestContainer : MonoBehaviour
         if (gold > maxGold)
             gold = maxGold;
 
-        YourScore.bonusesPickedUp = gold;
+        PlayerData.bonusesPickedUp = gold;
         UpdateModel();
     }
 
@@ -61,7 +61,7 @@ public class GoldChestContainer : MonoBehaviour
         if (gold < 0)
             gold = 0;
         UpdateModel();
-        YourScore.bonusesPickedUp = gold;
+        PlayerData.bonusesPickedUp = gold;
         timedDamageActive = false;
     }
 }

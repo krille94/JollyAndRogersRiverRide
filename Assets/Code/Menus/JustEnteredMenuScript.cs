@@ -6,6 +6,7 @@ public class JustEnteredMenuScript : MonoBehaviour
 {
     private GameObject MainMenu;
     private GameObject CharacterSelectMenu;
+    private GameObject HowToPlayMenu;
     private GameObject HighscoreMenu;
     private GameObject OptionsMenu;
     private GameObject CreditsMenu;
@@ -21,6 +22,7 @@ public class JustEnteredMenuScript : MonoBehaviour
     {
         MainMenu = GameObject.Find("Main Menu");
         CharacterSelectMenu = GameObject.Find("Character Select Menu");
+        HowToPlayMenu = GameObject.Find("How To Play Menu");
         HighscoreMenu = GameObject.Find("Highscore Menu");
         OptionsMenu = GameObject.Find("Options Menu");
         CreditsMenu = GameObject.Find("Credits Menu");
@@ -28,16 +30,22 @@ public class JustEnteredMenuScript : MonoBehaviour
 
     private void StartOnSubmenu(string menu)
     {
-        MainMenu.SetActive(false);
-        CharacterSelectMenu.SetActive(false);
-        HighscoreMenu.SetActive(false);
-        OptionsMenu.SetActive(false);
-        CreditsMenu.SetActive(false);
-
         if (menu == "Main Menu") MainMenu.SetActive(true);
+        else MainMenu.SetActive(false);
+
         if (menu == "Character Select Menu") CharacterSelectMenu.SetActive(true);
+        else CharacterSelectMenu.SetActive(false);
+
         if (menu == "Highscore Menu") HighscoreMenu.SetActive(true);
+        else HighscoreMenu.SetActive(false);
+
         if (menu == "Options Menu") OptionsMenu.SetActive(true);
+        else OptionsMenu.SetActive(false);
+
         if (menu == "Credits Menu") CreditsMenu.SetActive(true);
+        else CreditsMenu.SetActive(false);
+
+        if (menu == "How To Play Menu") HowToPlayMenu.SetActive(true);
+        else HowToPlayMenu.SetActive(false);
     }
 }

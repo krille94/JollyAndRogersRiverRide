@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 [ExecuteInEditMode]
 public class AmbientSoundObject : MonoBehaviour
@@ -14,6 +15,7 @@ public class AmbientSoundObject : MonoBehaviour
     [HideInInspector]public Vector3 triggerRangeHandle;
 
     [SerializeField] AudioClip audioClip = null;
+    [SerializeField] AudioMixer audioMixer = null;
 
     private void Start()
     {
@@ -24,6 +26,8 @@ public class AmbientSoundObject : MonoBehaviour
             audio = gameObject.AddComponent<AudioSource>();
 
         audio.clip = audioClip;
+        if (audioMixer != null)
+            audio.outputAudioMixerGroup = audioMixer.outputAudioMixerGroup;
     }
 
     private void Update()

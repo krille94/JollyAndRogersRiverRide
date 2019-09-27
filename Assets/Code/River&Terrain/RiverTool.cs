@@ -19,11 +19,43 @@ public class RiverTool : MonoBehaviour
     public List<RiverNode> nodes = new List<RiverNode>();
 
     #region Main Methods
+    public void GetRiverFromMesh()
+    {
+        if(gameObject.GetComponent<MeshFilter>())
+        {
+            if(gameObject.GetComponent<MeshFilter>().sharedMesh != null)
+            {
+                Mesh m = gameObject.GetComponent<MeshFilter>().sharedMesh;
+                vertices.Clear();
+                for (int i = 0; i < m.vertices.Length; i++)
+                {
+                    vertices.Add(m.vertices[i]);
+                }
+                tris.Clear();
+                for (int i = 0; i < m.triangles.Length; i++)
+                {
+                    tris.Add(m.triangles[i]);
+                }
+                UpdateUVs();
+                UpdateNodes();
+            }
+        }
+    }
+
     public void BuildRiverPrefab ()
     {
         if(AssetDatabase.LoadAssetAtPath("Assets/Resources/RiverBuilds/"+ uniqName +".asset", typeof(RiverObject)) != null)
         {
-            Debug.Log("River With Name"+ uniqName +" Exist!");
+            Debug.Log("River With Name"+ uniqName +" Exist! No Option We Auto Overrides.");
+
+            RiverObject obj = (RiverObject)AssetDatabase.LoadAssetAtPath<RiverObject>("Assets/Resources/RiverBuilds/" + uniqName + ".asset");
+            obj.vertices = vertices.ToArray();
+            obj.tris = tris.ToArray();
+            obj.uvs = uvs.ToArray();
+            obj.nodes = nodes.ToArray();
+            obj.lenght = lenght;
+
+            AssetDatabase.SaveAssets();
             return;
         }
 

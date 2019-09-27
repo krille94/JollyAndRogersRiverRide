@@ -11,12 +11,13 @@ public class SetPlayerCharacter : MonoBehaviour
     void Awake()
     {
         // Set the player
-        GameObject newObj = new GameObject("ObjectName");
 
         string charName="";
 
         if (playerIndex.ToString() == "One") charName = PlayerData.player1Character;
         else if (playerIndex.ToString() == "Two") charName = PlayerData.player2Character;
+
+        GameObject newObj = new GameObject(charName);
 
         GameObject charObj=null;
         if (charName=="Jolly")

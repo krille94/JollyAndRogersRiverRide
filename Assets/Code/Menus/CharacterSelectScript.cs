@@ -32,6 +32,23 @@ public class CharacterSelectScript : MonoBehaviour
 
         portraitDistance=new Vector3(6,0,0);
 
+        CharNames tempName;
+        for(int i=0; i<AmountOfChars; i++)
+        {
+            tempName = (CharNames)i;
+            if(PlayerData.player1Character == tempName.ToString())
+            {
+                Player1Icon.transform.position += portraitDistance*i;
+                Player1Text.transform.position += portraitDistance*i;
+                Player1Pos+=i;
+            }
+            if (PlayerData.player2Character == tempName.ToString())
+            {
+                Player2Icon.transform.position += portraitDistance * i;
+                Player2Text.transform.position += portraitDistance * i;
+                Player2Pos += i;
+            }
+        }
     }
 
     // Update is called once per frame

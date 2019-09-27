@@ -21,6 +21,8 @@ public class BoatDamageController : MonoBehaviour
 
     public ParticleSystem onDamagedParticlePrefab;
 
+    private GameObject WaterLevel = null;
+
     public void OnDeath()
     {
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().OnDeath();
@@ -37,6 +39,7 @@ public class BoatDamageController : MonoBehaviour
         hull += amount;
         if (hull > MaxHull)
             hull = MaxHull;
+        SetWaterInBoat();
     }
 
     // Update is called once per frame
@@ -62,6 +65,7 @@ public class BoatDamageController : MonoBehaviour
         {
             //hull -= collision.relativeVelocity.magnitude;
             hull--;
+            SetWaterInBoat();
             invincible = true;
         }
 
@@ -81,6 +85,44 @@ public class BoatDamageController : MonoBehaviour
         }
 
         //Debug.LogWarning(collision.gameObject.name);
+    }
+
+    private void SetWaterInBoat()
+    {
+        if (hull == MaxHull)
+        {
+            if (WaterLevel != null)
+                WaterLevel.SetActive(false);
+        }
+        else
+        {
+            if (WaterLevel == null)
+            {
+                // Rewrite this once we have the proper dimensions and such
+                GameObject newObj;
+                newObj = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                newObj.GetComponent<MeshCollider>().convex = true;
+                newObj.name = "Boat Water";
+                newObj.transform.parent = gameObject.transform;
+
+                newObj.transform.localScale = new Vector3(0.3f, 1, 0.45f);
+                newObj.transform.localEulerAngles = new Vector3(0, 0, 0);
+
+                Material newMat = Resources.Load("Materials/SimpleWater", typeof(Material)) as Material;
+                if (newMat != null)
+                    newObj.GetComponent<MeshRenderer>().material = newMat;
+                else
+                    Debug.LogWarning("Error: Material not found");
+
+                WaterLevel = newObj;
+            }
+            else if(!WaterLevel.activeInHierarchy)
+                WaterLevel.SetActive(true);
+
+            float waterHeight;
+            waterHeight = (hull - 1) / (MaxHull - 1);
+            WaterLevel.transform.localPosition = new Vector3(0, 1 + (0.7f * (1 - waterHeight)), 0.4f);
+        }
     }
 
     private void OnGUI()

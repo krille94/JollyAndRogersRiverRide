@@ -55,6 +55,8 @@ public class RiverToolEditor : Editor
 
         if (GUILayout.Button("Connect With River From Controller"))
             tool.GetRiverFromController();
+        if (GUILayout.Button("Connect With River From MeshFilter"))
+            tool.GetRiverFromMesh();
 
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
         //EditorGUILayout.Space();

@@ -42,7 +42,8 @@ public class MenuButtons : MonoBehaviour
             mixer.GetFloat("volume", out vol);
             if (vol==-80)
             {
-                mixer.SetFloat("volume", 0);
+                vol = 0;
+                mixer.SetFloat("volume", vol);
                 //AudioListener.volume = 0;
                 if(mixer.name=="Music")
                     GetComponent<TextMesh>().text="Music: ON";
@@ -51,7 +52,8 @@ public class MenuButtons : MonoBehaviour
             }
             else
             {
-                mixer.SetFloat("volume", -80);
+                vol = -80;
+                mixer.SetFloat("volume", vol);
                 //AudioListener.volume = 1;
                 if (mixer.name == "Music")
                     GetComponent<TextMesh>().text = "Music: OFF";
@@ -59,6 +61,7 @@ public class MenuButtons : MonoBehaviour
                     GetComponent<TextMesh>().text = "SFX: OFF";
             }
             GetComponent<AudioSource>().Play();
+            UserSettings.SaveFloat(mixer.name, vol);
         }
         if (buttonAction.ToString() == "ChangeMenu")
         {

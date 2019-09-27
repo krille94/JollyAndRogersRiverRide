@@ -28,8 +28,22 @@ public class JustEnteredMenuScript : MonoBehaviour
         CreditsMenu = GameObject.Find("Credits Menu");
     }
 
+    private void SetOptionValues()
+    {
+        UserSettings.ReadSettings();
+
+        GameObject audio = GameObject.Find("Music Volume");
+        if(UserSettings.GetVolume("Music")==-80)
+            audio.GetComponent<TextMesh>().text = "Music: OFF";
+        audio = GameObject.Find("SFX Volume");
+        if (UserSettings.GetVolume("SFX") == -80)
+            audio.GetComponent<TextMesh>().text = "SFX: OFF";
+    }
+
     private void StartOnSubmenu(string menu)
     {
+        SetOptionValues();
+
         if (menu == "Main Menu") MainMenu.SetActive(true);
         else MainMenu.SetActive(false);
 

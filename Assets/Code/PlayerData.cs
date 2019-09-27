@@ -14,6 +14,7 @@ public class PlayerData : MonoBehaviour
 
     public static string player1Character;
     public static string player2Character;
+    public static int controlScheme = 2;
 
     public PlayerData()
     {

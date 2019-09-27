@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, boat.transform.position + offset, Time.deltaTime * speed * Vector3.Distance(transform.position, boat.transform.position));
+        transform.position = Vector3.MoveTowards(transform.position, new Vector3(boat.transform.position.x, 0, boat.transform.position.z) + offset, Time.deltaTime * speed * Vector3.Distance(transform.position, boat.transform.position));
         //transform.position = Vector3.Lerp(targetPosition, transform.position, Time.deltaTime);
 
         transform.LookAt(boat.transform.position + new Vector3(0, viewRot, 0));

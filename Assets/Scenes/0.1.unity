@@ -2115,8 +2115,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837428819}
   m_LocalRotation: {x: -0, y: 0.0014479624, z: -0, w: 0.999999}
-  m_LocalPosition: {x: 39.6, y: 7.1, z: 84.4}
-  m_LocalScale: {x: 18.100195, y: 6.211312, z: 17.969961}
+  m_LocalPosition: {x: 11.4, y: -0.7, z: 124.6}
+  m_LocalScale: {x: 18.100195, y: 6.211312, z: 115.11}
   m_Children: []
   m_Father: {fileID: 317152488}
   m_RootOrder: 38
@@ -2526,7 +2526,7 @@ PrefabInstance:
     - target: {fileID: 6649650119812443121, guid: 4a9c38f592aea8e48ab50b3944b35ce0,
         type: 3}
       propertyPath: minimumSpeed
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6649650119812443121, guid: 4a9c38f592aea8e48ab50b3944b35ce0,
         type: 3}
@@ -4737,7 +4737,7 @@ PrefabInstance:
     - target: {fileID: 5769379154886515787, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 379.9
+      value: 15.3
       objectReference: {fileID: 0}
     - target: {fileID: 5769379154886515787, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
@@ -5795,8 +5795,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1670484963}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 40.4, y: 14.7, z: 369.9}
+  m_LocalRotation: {x: 0.24127485, y: 0, z: 0, w: 0.97045684}
+  m_LocalPosition: {x: 40.4, y: 10, z: 5.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -6732,243 +6732,303 @@ MonoBehaviour:
   autoUpdateMesh: 1
   nodes:
   - flowDirection: {x: -0.008925652, y: 0, z: 0.9999602}
-    flowDirectionOffset_Angle: 7.5
+    flowDirectionOffset: {x: -0.000000052644864, y: 19.058035, z: 0.000000008712024}
+    finalFlowDirection: {x: -0.008925652, y: 0, z: 0.9999602}
     centerVector: {x: 44.08564, y: 0, z: -0.98272705}
     centerVectorOffset: {x: 10, y: 0, z: 10}
   - flowDirection: {x: -0.000085310996, y: 0, z: 1}
-    flowDirectionOffset_Angle: 11.9302025
+    flowDirectionOffset: {x: 0.9603463, y: 2.2350929, z: 1.038287}
+    finalFlowDirection: {x: -0.000085310996, y: 0, z: 1}
     centerVector: {x: 45.863083, y: 0, z: 59.639732}
-    centerVectorOffset: {x: 10, y: 0, z: -0.88344574}
+    centerVectorOffset: {x: 10, y: 0, z: 0.31674576}
   - flowDirection: {x: -0.000085310996, y: 0, z: 1}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: -0, y: 18.959255, z: 0}
+    finalFlowDirection: {x: -0.000085310996, y: 0, z: 1}
     centerVector: {x: 45.229145, y: 0, z: 164.96805}
     centerVectorOffset: {x: 10, y: 0, z: 10}
   - flowDirection: {x: 0.010301299, y: 0, z: 0.99994695}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: -0, y: 18.831379, z: 0}
+    finalFlowDirection: {x: 0.010301299, y: 0, z: 0.99994695}
     centerVector: {x: 43.98819, y: 0, z: 299.13214}
     centerVectorOffset: {x: 6.1301117, y: 0, z: 8.738525}
   - flowDirection: {x: -0.05239691, y: 0, z: 0.99862635}
-    flowDirectionOffset_Angle: 30.330763
+    flowDirectionOffset: {x: -0, y: 320.07794, z: 0}
+    finalFlowDirection: {x: -0.05239691, y: 0, z: 0.99862635}
     centerVector: {x: 42.37915, y: 0, z: 377.67276}
     centerVectorOffset: {x: -1.4161453, y: 0, z: -7.4813232}
   - flowDirection: {x: -0.050729807, y: 0, z: 0.9987124}
-    flowDirectionOffset_Angle: 83.99466
+    flowDirectionOffset: {x: -0, y: 283.33316, z: 0}
+    finalFlowDirection: {x: -0.050729807, y: 0, z: 0.9987124}
     centerVector: {x: 27.774837, y: 0, z: 423.41458}
-    centerVectorOffset: {x: -2.2084122, y: 0, z: -10}
+    centerVectorOffset: {x: 1.4119415, y: 0, z: -5.310974}
   - flowDirection: {x: -0.8029382, y: 0, z: 0.59606224}
-    flowDirectionOffset_Angle: 58.31369
+    flowDirectionOffset: {x: -0, y: 252.29929, z: 0}
+    finalFlowDirection: {x: -0.8029382, y: 0, z: 0.59606224}
     centerVector: {x: 2.9943619, y: 0, z: 444.8636}
-    centerVectorOffset: {x: -2.5244465, y: 0, z: -10}
+    centerVectorOffset: {x: -3.7117348, y: 0, z: -8.213928}
   - flowDirection: {x: -0.6547476, y: 0, z: -0.7558476}
-    flowDirectionOffset_Angle: 0.47962952
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.6547476, y: 0, z: -0.7558476}
     centerVector: {x: -65.095276, y: 0, z: 433.98898}
     centerVectorOffset: {x: -6.219803, y: 0, z: 0.87338257}
   - flowDirection: {x: -0.9222124, y: 0, z: -0.38668373}
-    flowDirectionOffset_Angle: 19.519318
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.9222124, y: 0, z: -0.38668373}
     centerVector: {x: -165.77856, y: 0, z: 384.54956}
     centerVectorOffset: {x: 10, y: 0, z: 10}
   - flowDirection: {x: -0.82106864, y: 0, z: 0.57082945}
-    flowDirectionOffset_Angle: 21.40445
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.82106864, y: 0, z: 0.57082945}
     centerVector: {x: -189.2172, y: 0, z: 392.59137}
     centerVectorOffset: {x: 10, y: 0, z: 10}
   - flowDirection: {x: -0.41752863, y: 0, z: 0.90866375}
-    flowDirectionOffset_Angle: 20.982117
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.41752863, y: 0, z: 0.90866375}
     centerVector: {x: -208.46898, y: 0, z: 420.24835}
     centerVectorOffset: {x: 10, y: 0, z: 10}
   - flowDirection: {x: 0.45979315, y: 0, z: 0.88802606}
-    flowDirectionOffset_Angle: 19.927124
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.45979315, y: 0, z: 0.88802606}
     centerVector: {x: -202.60645, y: 0, z: 458.45462}
     centerVectorOffset: {x: -10, y: 0, z: 10}
   - flowDirection: {x: -0.4714513, y: 0, z: 0.88189214}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.4714513, y: 0, z: 0.88189214}
     centerVector: {x: -259.1271, y: 0, z: 507.08594}
     centerVectorOffset: {x: -6.354828, y: 0, z: 10}
   - flowDirection: {x: -0.76265293, y: 0, z: 0.6468079}
-    flowDirectionOffset_Angle: 36.65741
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.76265293, y: 0, z: 0.6468079}
     centerVector: {x: -331.7674, y: 0, z: 585.2186}
     centerVectorOffset: {x: -4.4200134, y: 0, z: 7.7946777}
   - flowDirection: {x: -0.3785241, y: 0, z: 0.92559147}
-    flowDirectionOffset_Angle: 40.2619
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.3785241, y: 0, z: 0.92559147}
     centerVector: {x: -344.4643, y: 0, z: 695.9518}
     centerVectorOffset: {x: -5.211273, y: 0, z: 5.960022}
   - flowDirection: {x: -0.038729686, y: 0, z: 0.9992497}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.038729686, y: 0, z: 0.9992497}
     centerVector: {x: -339.50266, y: 0, z: 839.5875}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.09483683, y: 0, z: 0.9954929}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.09483683, y: 0, z: 0.9954929}
     centerVector: {x: -337.1936, y: 0, z: 1044.044}
     centerVectorOffset: {x: 10, y: 0, z: 10}
   - flowDirection: {x: 0.43493977, y: 0, z: 0.9004595}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.43493977, y: 0, z: 0.9004595}
     centerVector: {x: -313.05225, y: 0, z: 1088.5743}
     centerVectorOffset: {x: 10, y: 0, z: -1.9482422}
   - flowDirection: {x: 0.56601334, y: 0, z: 0.82439613}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.56601334, y: 0, z: 0.82439613}
     centerVector: {x: -230.98737, y: 0, z: 1120.2227}
     centerVectorOffset: {x: 6.9555817, y: 0, z: -10}
   - flowDirection: {x: 0.9579065, y: 0, z: 0.2870804}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.9579065, y: 0, z: 0.2870804}
     centerVector: {x: -124.96445, y: 0, z: 1154.7598}
     centerVectorOffset: {x: 9.35244, y: 0, z: -9.683228}
   - flowDirection: {x: 0.9601807, y: 0, z: 0.27937979}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.9601807, y: 0, z: 0.27937979}
     centerVector: {x: -52.08388, y: 0, z: 1176.3788}
     centerVectorOffset: {x: -10, y: 0, z: -10}
   - flowDirection: {x: 0.97367245, y: 0, z: -0.2279517}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.97367245, y: 0, z: -0.2279517}
     centerVector: {x: -36.10864, y: 0, z: 1172.0662}
     centerVectorOffset: {x: -10, y: 0, z: -10}
   - flowDirection: {x: 0.72476953, y: 0, z: -0.68899137}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.72476953, y: 0, z: -0.68899137}
     centerVector: {x: -20.1622, y: 0, z: 1156.7065}
     centerVectorOffset: {x: -7.462536, y: 0, z: -8.106079}
   - flowDirection: {x: 0.22253077, y: 0, z: -0.9749257}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.22253077, y: 0, z: -0.9749257}
     centerVector: {x: -10.290897, y: 0, z: 1130.0431}
     centerVectorOffset: {x: 5.0946026, y: 0, z: 0.71154785}
   - flowDirection: {x: 0.6842122, y: 0, z: -0.729283}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.6842122, y: 0, z: -0.729283}
     centerVector: {x: 7.228798, y: 0, z: 1118.3665}
     centerVectorOffset: {x: -4.5077095, y: 0, z: 10}
   - flowDirection: {x: 0.9292121, y: 0, z: -0.36954692}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.9292121, y: 0, z: -0.36954692}
     centerVector: {x: 16.55181, y: 0, z: 1119.8479}
     centerVectorOffset: {x: -7.7642097, y: 0, z: 10}
   - flowDirection: {x: 0.8057607, y: 0, z: 0.5922413}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.8057607, y: 0, z: 0.5922413}
     centerVector: {x: 20.3926, y: 0, z: 1127.8145}
     centerVectorOffset: {x: -5.9785995, y: 0, z: 9.966064}
   - flowDirection: {x: -0.107025705, y: 0, z: 0.99425626}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.107025705, y: 0, z: 0.99425626}
     centerVector: {x: 15.858828, y: 0, z: 1158.846}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: -0.12220905, y: 0, z: 0.99250436}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.12220905, y: 0, z: 0.99250436}
     centerVector: {x: 15.763647, y: 0, z: 1181.7307}
     centerVectorOffset: {x: 6.0279236, y: 0, z: 0.2097168}
   - flowDirection: {x: 0.13685614, y: 0, z: 0.990591}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.13685614, y: 0, z: 0.990591}
     centerVector: {x: 22.86429, y: 0, z: 1210.9583}
     centerVectorOffset: {x: 9.999998, y: 0, z: -0.2019043}
   - flowDirection: {x: 0.83089375, y: 0, z: 0.5564311}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.83089375, y: 0, z: 0.5564311}
     centerVector: {x: 82.66643, y: 0, z: 1238.7273}
     centerVectorOffset: {x: -10, y: 0, z: 0.77233887}
   - flowDirection: {x: 0.42192093, y: 0, z: 0.90663266}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.42192093, y: 0, z: 0.90663266}
     centerVector: {x: 95.89704, y: 0, z: 1265.3507}
     centerVectorOffset: {x: -10, y: 0, z: -1.7381592}
   - flowDirection: {x: -0.74065554, y: 0, z: 0.671885}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.74065554, y: 0, z: 0.671885}
     centerVector: {x: 71.885864, y: 0, z: 1288.5027}
     centerVectorOffset: {x: -10, y: 0, z: 3.1367188}
   - flowDirection: {x: -0.8900713, y: 0, z: 0.45582145}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.8900713, y: 0, z: 0.45582145}
     centerVector: {x: 31.070257, y: 0, z: 1307.3168}
     centerVectorOffset: {x: 10, y: 0, z: 10}
   - flowDirection: {x: -0.5693688, y: 0, z: 0.8220822}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.5693688, y: 0, z: 0.8220822}
     centerVector: {x: -0.45492744, y: 0, z: 1347.2844}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: -0.4931696, y: 0, z: 0.8699332}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.4931696, y: 0, z: 0.8699332}
     centerVector: {x: -33.733387, y: 0, z: 1406.2083}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: -0.083415955, y: 0, z: 0.99651486}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.083415955, y: 0, z: 0.99651486}
     centerVector: {x: -44.340836, y: 0, z: 1520.0837}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.7796204, y: 0, z: 0.6262524}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.7796204, y: 0, z: 0.6262524}
     centerVector: {x: -9.723568, y: 0, z: 1549.4905}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.8704358, y: 0, z: 0.492282}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.8704358, y: 0, z: 0.492282}
     centerVector: {x: 31.514418, y: 0, z: 1553.3232}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.94993055, y: 0, z: -0.31246123}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.94993055, y: 0, z: -0.31246123}
     centerVector: {x: 70.03021, y: 0, z: 1526.538}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.9583103, y: 0, z: -0.28572956}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.9583103, y: 0, z: -0.28572956}
     centerVector: {x: 165.33052, y: 0, z: 1508.0209}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.70606655, y: 0, z: 0.70814556}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.70606655, y: 0, z: 0.70814556}
     centerVector: {x: 193.97272, y: 0, z: 1512.2716}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.021381693, y: 0, z: 0.9997714}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.021381693, y: 0, z: 0.9997714}
     centerVector: {x: 200.17065, y: 0, z: 1561.2}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.8345374, y: 0, z: 0.55095136}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.8345374, y: 0, z: 0.55095136}
     centerVector: {x: 207.76883, y: 0, z: 1580.3501}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.9023723, y: 0, z: 0.43095732}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.9023723, y: 0, z: 0.43095732}
     centerVector: {x: 220.75421, y: 0, z: 1600.1194}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.5896753, y: 0, z: 0.80764043}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.5896753, y: 0, z: 0.80764043}
     centerVector: {x: 230.1249, y: 0, z: 1646.1326}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.46732885, y: 0, z: 0.8840836}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.46732885, y: 0, z: 0.8840836}
     centerVector: {x: 253.56236, y: 0, z: 1697.1117}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.8229188, y: 0, z: 0.5681589}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.8229188, y: 0, z: 0.5681589}
     centerVector: {x: 304.3269, y: 0, z: 1743.3732}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.6343754, y: 0, z: 0.77302516}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.6343754, y: 0, z: 0.77302516}
     centerVector: {x: 393.9046, y: 0, z: 1813.7195}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.47348845, y: 0, z: 0.88080007}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.47348845, y: 0, z: 0.88080007}
     centerVector: {x: 405.33398, y: 0, z: 1835.1785}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.7404852, y: 0, z: 0.6720727}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.7404852, y: 0, z: 0.6720727}
     centerVector: {x: 508.89532, y: 0, z: 1952.66}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.29110327, y: 0, z: 0.9566916}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.29110327, y: 0, z: 0.9566916}
     centerVector: {x: 535.242, y: 0, z: 2055.5935}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.505273, y: 0, z: 0.8629596}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.505273, y: 0, z: 0.8629596}
     centerVector: {x: 723.3446, y: 0, z: 2381.3066}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.12257462, y: 0, z: 0.99245936}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.12257462, y: 0, z: 0.99245936}
     centerVector: {x: 752.70483, y: 0, z: 2432.357}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.50580305, y: 0, z: 0.862649}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.50580305, y: 0, z: 0.862649}
     centerVector: {x: 845.6526, y: 0, z: 2569.7737}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.8312441, y: 0, z: 0.5559076}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.8312441, y: 0, z: 0.5559076}
     centerVector: {x: 896.42316, y: 0, z: 2614.5193}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.9977929, y: 0, z: -0.0664026}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.9977929, y: 0, z: -0.0664026}
     centerVector: {x: 932.746, y: 0, z: 2621.3423}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0.46971363, y: 0, z: 0.8828189}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: 0.46971363, y: 0, z: 0.8828189}
     centerVector: {x: 960.82117, y: 0, z: 2641.478}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: -0.10946849, y: 0, z: 0.99399024}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.10946849, y: 0, z: 0.99399024}
     centerVector: {x: 972.81964, y: 0, z: 2675.1685}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: -0.72754467, y: 0, z: 0.6860603}
-    flowDirectionOffset_Angle: 1
+    flowDirectionOffset: {x: 1, y: 1, z: 1}
+    finalFlowDirection: {x: -0.72754467, y: 0, z: 0.6860603}
     centerVector: {x: 961.56726, y: 0, z: 2712.4604}
     centerVectorOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &1958854461

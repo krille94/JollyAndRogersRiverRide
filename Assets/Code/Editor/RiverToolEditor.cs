@@ -146,9 +146,10 @@ public class RiverToolEditor : Editor
                 else if (tool.nodes[i].centerVectorOffset.z < -10)
                     tool.nodes[i].centerVectorOffset.z = -10;
 
-                tool.nodes[i].flowDirectionOffset_Angle = Handles.RadiusHandle(Quaternion.identity, tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset + Vector3.up, tool.nodes[i].flowDirectionOffset_Angle);
+                //tool.nodes[i].flowDirectionOffset_Angle = Handles.RadiusHandle(Quaternion.identity, tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset + Vector3.up, tool.nodes[i].flowDirectionOffset_Angle);
+                tool.nodes[i].flowDirectionOffset = Handles.RotationHandle(Quaternion.Euler(tool.nodes[i].flowDirectionOffset), tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset).eulerAngles;
 
-                Handles.ArrowHandleCap(0, tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset, Quaternion.LookRotation(tool.nodes[i].flowDirection, Vector3.forward) * Quaternion.AngleAxis(tool.nodes[i].flowDirectionOffset_Angle, Vector3.right), (distFromCam / handleSize) * 10, EventType.Repaint);
+                Handles.ArrowHandleCap(0, tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset, Quaternion.Euler(tool.nodes[i].flowDirection + tool.nodes[i].flowDirectionOffset), (distFromCam / handleSize) * 10, EventType.Repaint);
             }
 
             Handles.color = Color.red;

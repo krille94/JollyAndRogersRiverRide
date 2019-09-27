@@ -180,7 +180,7 @@ public class RiverController : MonoBehaviour
             if (node != null)
             {
                 Gizmos.color = Color.green;
-                Gizmos.DrawRay(playerRigidbody.transform.position, (Quaternion.LookRotation(node.flowDirection, Vector3.forward) * Quaternion.AngleAxis(node.flowDirectionOffset_Angle, Vector3.right)) * Vector3.right);
+                Gizmos.DrawRay(playerRigidbody.transform.position, node.finalFlowDirection * 10);
             }
         }
     }

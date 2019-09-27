@@ -4,21 +4,26 @@
 public class RiverNode
 {
     public Vector3 flowDirection;
-    public float flowDirectionOffset_Angle = 1;
+    public Vector3 flowDirectionOffset;
+    public Vector3 finalFlowDirection;
 
     public Vector3 centerVector;
     public Vector3 centerVectorOffset;
 
-    public RiverNode (Vector3 rVec, Vector3 lVec, Vector3 dir, Vector3 saveOffset, float saveFlowOffset)
+    public RiverNode (Vector3 rVec, Vector3 lVec, Vector3 saveFlowDir, Vector3 saveCenterOffset, Vector3 saveFlowOffset)
     {
-        flowDirection = dir.normalized;
+        flowDirection = saveFlowDir.normalized;
 
         centerVector = (lVec - rVec) / 2 + rVec;
 
-        centerVectorOffset = saveOffset;
-        if (saveFlowOffset == 0)
-            flowDirectionOffset_Angle = 1;
-        else
-            flowDirectionOffset_Angle = saveFlowOffset;
+        centerVectorOffset = saveCenterOffset;
+        flowDirectionOffset = saveFlowOffset;
+
+        finalFlowDirection = flowDirection;
+        //if (flowDirectionOffset == Vector3.zero)
+        //    flowDirectionOffset = Vector3.one;
+        //finalFlowDirection = flowDirection + Quaternion.LookRotation(flowDirectionOffset, Vector3.forward).eulerAngles;
+        //finalFlowDirection.Normalize();
+        //finalFlowDirection.y = 0;
     }
 }

@@ -12,16 +12,17 @@ public class CameraController : MonoBehaviour
 
     public float speed = 0.25f;
 
-    // Start is called before the first frame update
-    void Start()
+    public Vector3 targetPosition;
+
+    private void Start()
     {
-        
+        transform.position = boat.transform.position + offset;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position = Vector3.Lerp(boat.transform.position + offset, transform.position, Time.deltaTime * speed);
+        transform.position = Vector3.MoveTowards(transform.position, boat.transform.position + offset, Time.deltaTime * speed * Vector3.Distance(transform.position, boat.transform.position));
+        //transform.position = Vector3.Lerp(targetPosition, transform.position, Time.deltaTime);
 
         transform.LookAt(boat.transform.position + new Vector3(0, viewRot, 0));
     }

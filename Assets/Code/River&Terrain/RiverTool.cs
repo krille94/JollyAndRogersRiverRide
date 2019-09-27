@@ -201,17 +201,26 @@ public class RiverTool : MonoBehaviour
 
     public void UpdateNodes()
     {
+        RiverNode[] tempNodes = nodes.ToArray();
+
         nodes.Clear();
+
+        int tempNodeIndex = 0;
 
         for (int i = 0; i < vertices.Count; i += 2)
         {
-            if(i < vertices.Count && i-3 > -1)
+            if (i < vertices.Count && i-3 > -1)
             {
                 Vector3 last_1_pos = vertices[i];
 
                 Vector3 last_3_pos = vertices[i - 2];
 
-                nodes.Add(new RiverNode(vertices[i+1], vertices[i], GetRiverFlow(last_1_pos, last_3_pos)));
+                if (tempNodes.Length > tempNodeIndex)
+                    nodes.Add(new RiverNode(vertices[i + 1], vertices[i], GetRiverFlow(last_1_pos, last_3_pos), tempNodes[tempNodeIndex].centerVectorOffset, tempNodes[tempNodeIndex].flowDirectionOffset_Angle));
+                else
+                    nodes.Add(new RiverNode(vertices[i + 1], vertices[i], GetRiverFlow(last_1_pos, last_3_pos), Vector3.zero, 0));
+
+                tempNodeIndex++;
             }
             else if(i + 2 < vertices.Count && i == 0)
             {
@@ -219,15 +228,25 @@ public class RiverTool : MonoBehaviour
 
                 Vector3 last_3_pos = vertices[i + 2];
 
-                nodes.Add(new RiverNode(vertices[i + 1], vertices[i], GetRiverFlow(last_3_pos, last_1_pos)));
+                if (tempNodes.Length > tempNodeIndex)
+                    nodes.Add(new RiverNode(vertices[i + 1], vertices[i], GetRiverFlow(last_3_pos, last_1_pos), tempNodes[tempNodeIndex].centerVectorOffset, tempNodes[tempNodeIndex].flowDirectionOffset_Angle));
+                else
+                    nodes.Add(new RiverNode(vertices[i + 1], vertices[i], GetRiverFlow(last_3_pos, last_1_pos), Vector3.zero, 0));
+
+                tempNodeIndex++;
             }
             else if (i + 2 < vertices.Count && i == 2)
             {
                 Vector3 last_1_pos = vertices[i];
 
                 Vector3 last_3_pos = vertices[i + 2];
+                
+                if (tempNodes.Length > tempNodeIndex)
+                    nodes.Add(new RiverNode(vertices[i + 1], vertices[i], GetRiverFlow(last_3_pos, last_1_pos), tempNodes[tempNodeIndex].centerVectorOffset, tempNodes[tempNodeIndex].flowDirectionOffset_Angle));
+                else
+                    nodes.Add(new RiverNode(vertices[i + 1], vertices[i], GetRiverFlow(last_3_pos, last_1_pos), Vector3.zero, 0));
 
-                nodes.Add(new RiverNode(vertices[i + 1], vertices[i], GetRiverFlow(last_3_pos, last_1_pos)));
+                tempNodeIndex++;
             }
         }
     }
@@ -271,7 +290,7 @@ public class RiverTool : MonoBehaviour
         tris.Add((vertices.Count - 1) - 2);
         tris.Add((vertices.Count - 1) - 1);
 
-        RiverNode node = new RiverNode(vertices[vertices.Count - 1], vertices[vertices.Count - 2], dir_1);
+        RiverNode node = new RiverNode(vertices[vertices.Count - 1], vertices[vertices.Count - 2], dir_1, Vector3.zero, 0);
         nodes.Add(node);
     }
 

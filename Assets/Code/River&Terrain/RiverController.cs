@@ -88,7 +88,7 @@ public class RiverController : MonoBehaviour
         node = riverAsset.GetNodeFromPosition(transform.position, playerRigidbody.transform.position);
         flow = riverAsset.GetFlow(transform.position, playerRigidbody.transform.position);
         Vector3 movement = flow;
-        playerRigidbody.AddForce(movement * (minimumSpeed * Time.deltaTime));
+        playerRigidbody.AddForce(movement * (minimumSpeed * Time.deltaTime), ForceMode.VelocityChange);
         /*
         //Use rb.AddForce to gradually increase or decrease speed
         //   Giving it 0.1f leeway so that the boat won't start going back and forth between 24.97f and 25.002f
@@ -176,6 +176,12 @@ public class RiverController : MonoBehaviour
         {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(playerRigidbody.transform.position, transform.position + node.centerVector);
+
+            if (node != null)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawRay(playerRigidbody.transform.position, (Quaternion.LookRotation(node.flowDirection, Vector3.forward) * Quaternion.AngleAxis(node.flowDirectionOffset_Angle, Vector3.right)) * Vector3.right);
+            }
         }
     }
 }

@@ -131,10 +131,24 @@ public class RiverToolEditor : Editor
                     if (distFromCam > handleMaxDistance)
                     {
                         distFromCam = 0;
+                        continue;
                     }
                 }
-                                
-                Handles.ArrowHandleCap(0, tool.nodes[i].centerVector + tool.transform.position, Quaternion.LookRotation(tool.nodes[i].flowDirection, Vector3.forward), (distFromCam / handleSize) * 10, EventType.Repaint);
+
+                tool.nodes[i].centerVectorOffset = Handles.FreeMoveHandle(tool.transform.TransformPoint(tool.nodes[i].centerVector + tool.nodes[i].centerVectorOffset), Quaternion.identity, distFromCam / handleSize, Vector3.one, Handles.RectangleHandleCap) - tool.nodes[i].centerVector;
+                tool.nodes[i].centerVectorOffset.y = 0;
+                if (tool.nodes[i].centerVectorOffset.x > 10)
+                    tool.nodes[i].centerVectorOffset.x = 10;
+                else if (tool.nodes[i].centerVectorOffset.x < -10)
+                    tool.nodes[i].centerVectorOffset.x = -10;
+                if (tool.nodes[i].centerVectorOffset.z > 10)
+                    tool.nodes[i].centerVectorOffset.z = 10;
+                else if (tool.nodes[i].centerVectorOffset.z < -10)
+                    tool.nodes[i].centerVectorOffset.z = -10;
+
+                tool.nodes[i].flowDirectionOffset_Angle = Handles.RadiusHandle(Quaternion.identity, tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset + Vector3.up, tool.nodes[i].flowDirectionOffset_Angle);
+
+                Handles.ArrowHandleCap(0, tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset, Quaternion.LookRotation(tool.nodes[i].flowDirection, Vector3.forward) * Quaternion.AngleAxis(tool.nodes[i].flowDirectionOffset_Angle, Vector3.right), (distFromCam / handleSize) * 10, EventType.Repaint);
             }
 
             Handles.color = Color.red;
@@ -142,8 +156,8 @@ public class RiverToolEditor : Editor
             {
                 if (i + 1 < tool.nodes.Count)
                 {
-                    Vector3 pOne = tool.nodes[i].centerVector + tool.transform.position;
-                    Vector3 pTwo = tool.nodes[i + 1].centerVector + tool.transform.position;
+                    Vector3 pOne = tool.nodes[i].centerVector + tool.nodes[i].centerVectorOffset + tool.transform.position;
+                    Vector3 pTwo = tool.nodes[i + 1].centerVector + tool.nodes[i + 1].centerVectorOffset + tool.transform.position;
                     Handles.DrawLine(pOne + tool.nodes[i].flowDirection, pTwo + tool.nodes[i + 1].flowDirection);
                 }
             }

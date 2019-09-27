@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 176377955}
   - component: {fileID: 176377954}
   m_Layer: 0
-  m_Name: Mute/Unmute SFX
+  m_Name: SFX Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2778,7 +2778,7 @@ GameObject:
   - component: {fileID: 1080522307}
   - component: {fileID: 1080522306}
   m_Layer: 0
-  m_Name: Mute/Unmute Music
+  m_Name: Music Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

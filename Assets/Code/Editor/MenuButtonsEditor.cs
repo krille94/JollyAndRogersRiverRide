@@ -1,0 +1,32 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+
+[CustomEditor(typeof(MenuButtons))]
+public class MenuButtonsEditor : Editor
+{
+    MenuButtons tool;
+
+    private void OnEnable()
+    {
+        tool = (MenuButtons)target;
+    }
+
+    public override void OnInspectorGUI()
+    {
+        tool.buttonAction = (MenuButtons.ButtonActions)EditorGUILayout.EnumPopup("Button Action", tool.buttonAction);
+
+        //RiverTool tool = (RiverTool)target;
+        if (tool.buttonAction.ToString()=="ChangeOptions")
+        {
+            tool.optionType = (MenuButtons.OptionTypes) EditorGUILayout.EnumPopup("Option Type", tool.optionType);
+        }
+        if (tool.buttonAction.ToString() == "ChangeMenu"|| tool.buttonAction.ToString() == "Highscores")
+        {
+            tool.CurrentMenu = (GameObject)EditorGUILayout.ObjectField("Move From Menu", tool.CurrentMenu, typeof(GameObject), false);
+            tool.NextMenu = (GameObject)EditorGUILayout.ObjectField("Move To Menu", tool.NextMenu, typeof(GameObject), false);
+        }
+    }
+
+}

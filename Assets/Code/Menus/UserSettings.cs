@@ -9,11 +9,16 @@ public static class UserSettings
 {
     private static float musicVolume;
     private static float sfxVolume;
+    private static bool autoPaddle;
+    private static int controlScheme;
 
     public static void ReadSettings()
     {
         musicVolume = PlayerPrefs.GetFloat("Music");
         sfxVolume = PlayerPrefs.GetFloat("Sound Effects");
+        autoPaddle = (PlayerPrefs.GetInt("Auto Paddle") == 1);
+        controlScheme = PlayerPrefs.GetInt("Control Scheme");
+        if (controlScheme == 0) SetInt("Control Scheme", 1);
 
         AudioMixer mixer;
         mixer = Resources.Load("AudioMixers/Music") as AudioMixer;
@@ -32,8 +37,23 @@ public static class UserSettings
             return sfxVolume;
     }
 
-    public static void SaveFloat(string name, float value)
+    public static bool GetAutoPaddle()
+    {
+        return autoPaddle;
+    }
+
+    public static int GetControlScheme()
+    {
+        return controlScheme;
+    }
+
+    public static void SetFloat(string name, float value)
     {
         PlayerPrefs.SetFloat(name, value);
+    }
+
+    public static void SetInt(string name, int value)
+    {
+        PlayerPrefs.SetInt(name, value);
     }
 }

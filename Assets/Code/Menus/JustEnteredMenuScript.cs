@@ -32,12 +32,19 @@ public class JustEnteredMenuScript : MonoBehaviour
     {
         UserSettings.ReadSettings();
 
-        GameObject audio = GameObject.Find("Music Volume");
+        GameObject option = GameObject.Find("Music Volume");
         if(UserSettings.GetVolume("Music")==-80)
-            audio.GetComponent<TextMesh>().text = "Music: OFF";
-        audio = GameObject.Find("SFX Volume");
+            option.GetComponent<TextMesh>().text = "Music: OFF";
+        option = GameObject.Find("SFX Volume");
         if (UserSettings.GetVolume("SFX") == -80)
-            audio.GetComponent<TextMesh>().text = "SFX: OFF";
+            option.GetComponent<TextMesh>().text = "SFX: OFF";
+
+        option = GameObject.Find("Hold Paddle");
+        if (UserSettings.GetAutoPaddle() == true)
+            option.GetComponent<TextMesh>().text = "Hold to row: ON";
+        option = GameObject.Find("Hold Paddle");
+        if (UserSettings.GetControlScheme() == 2)
+            option.GetComponent<TextMesh>().text = "One Paddle";
     }
 
     private void StartOnSubmenu(string menu)

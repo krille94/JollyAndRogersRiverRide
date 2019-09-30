@@ -17,6 +17,7 @@ public class SetPlayerCharacter : MonoBehaviour
         if (playerIndex.ToString() == "One") charName = PlayerData.player1Character;
         else if (playerIndex.ToString() == "Two") charName = PlayerData.player2Character;
 
+        /*
         GameObject newObj = new GameObject(charName);
 
         GameObject charObj=null;
@@ -24,9 +25,7 @@ public class SetPlayerCharacter : MonoBehaviour
             charObj = Resources.Load("Models/player2model") as GameObject;
         else
             charObj = Resources.Load("Models/player1model") as GameObject;
-
         //charObj = Resources.Load("Models/"+charName+"_model") as GameObject;
-
 
         if (charObj != null)
         {
@@ -41,7 +40,7 @@ public class SetPlayerCharacter : MonoBehaviour
             else
                 newObj.transform.localEulerAngles = new Vector3(-45, 0, 0);
         }
-
+        */
         /*newObj.transform.parent = gameObject.transform;*/
     }
 

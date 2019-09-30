@@ -21,7 +21,7 @@ public class Oar
     
     public void SetRightSide(bool inWater)
     {
-        if (PlayerData.controlScheme == 1)
+        if (UserSettings.GetControlScheme() == 1)
         {
             if (!modelRight.activeInHierarchy)
                 modelRight.SetActive(true);
@@ -36,18 +36,21 @@ public class Oar
             }
             onRightSide = inWater;
         }
-        else if (PlayerData.controlScheme == 2)
+        else if (UserSettings.GetControlScheme() == 2)
         {
-            onLeftSide = false;
-            onRightSide = true;
-            modelRight.SetActive(true);
-            modelLeft.SetActive(false);
+            onRightSide = inWater;
+            modelRight.SetActive(inWater);
+            if (inWater)
+            {
+                onLeftSide = false;
+                modelLeft.SetActive(false);
+            }
         }
     }
 
     public void SetLeftSide(bool inWater)
     {
-        if (PlayerData.controlScheme == 1)
+        if (UserSettings.GetControlScheme() == 1)
         {
             if (!modelLeft.activeInHierarchy)
                 modelLeft.SetActive(true);
@@ -62,12 +65,15 @@ public class Oar
             }
             onLeftSide = inWater;
         }
-        else if (PlayerData.controlScheme == 2)
+        else if (UserSettings.GetControlScheme() == 2)
         {
-            onLeftSide = true;
-            onRightSide = false;
-            modelLeft.SetActive(true);
-            modelRight.SetActive(false);
+            onLeftSide = inWater;
+            modelLeft.SetActive(inWater);
+            if (inWater)
+            {
+                onRightSide = false;
+                modelRight.SetActive(false);
+            }
         }
     }
 
@@ -110,8 +116,9 @@ public class Oar
 
 public class Paddling : MonoBehaviour
 {
-    public enum PlayerIndexTypes { One, Two }
+    public enum PlayerIndexTypes { Jolly, Roger }
     public PlayerIndexTypes playerIndex = 0;
+    string player;
 
     [SerializeField] public float paddleForce;
     [SerializeField] public float forwardForce;
@@ -124,6 +131,7 @@ public class Paddling : MonoBehaviour
     private Vector3 impactPoint;
 
     private bool CanControl = true;
+    private bool autoPaddle = false;
 
     public void SetCanControl(bool truefalse) { CanControl = truefalse; }
 
@@ -132,8 +140,16 @@ public class Paddling : MonoBehaviour
         oar.SetLeftSide(false);
         oar.SetRightSide(false);
 
-        if(playerIndex.ToString()=="One") oar.SetLeftSide(true);
-        if (playerIndex.ToString() == "Two") oar.SetRightSide(true);
+        if (PlayerData.player1Character == playerIndex.ToString())
+            player = "One";
+        else if (PlayerData.player2Character == playerIndex.ToString())
+            player = "Two";
+        else if (playerIndex.ToString() == "Jolly") player = "One";
+        else player = "Two";
+        //if (playerIndex.ToString()=="One") oar.SetLeftSide(true);
+        //if (playerIndex.ToString() == "Two") oar.SetRightSide(true);
+
+        if (UserSettings.GetAutoPaddle()) autoPaddle = true;
     }
 
     void Update()
@@ -152,10 +168,21 @@ public class Paddling : MonoBehaviour
             return;
         }
 
-        bool rightKey = Input.GetButton("Player_"+((PlayerIndexTypes)playerIndex).ToString()+"_Paddle_Right");
-        bool leftKey = Input.GetButton("Player_"+ ((PlayerIndexTypes)playerIndex).ToString()+ "_Paddle_Left");
-        bool forwardKey = Input.GetButtonUp("Player_" + ((PlayerIndexTypes)playerIndex).ToString() + "_Paddle_Forward");
-        bool backKey = Input.GetButtonUp("Player_" + ((PlayerIndexTypes)playerIndex).ToString() + "_Paddle_Back");
+        bool rightKey = Input.GetButton("Player_"+player+"_Paddle_Right");
+        bool leftKey = Input.GetButton("Player_"+ player+ "_Paddle_Left");
+        bool forwardKey;
+        bool backKey;
+
+        if(autoPaddle==true)
+        {
+            forwardKey = Input.GetButton("Player_" + player + "_Paddle_Forward");
+            backKey = Input.GetButton("Player_" + player + "_Paddle_Back");
+        }
+        else
+        {
+            forwardKey = Input.GetButtonUp("Player_" + player + "_Paddle_Forward");
+            backKey = Input.GetButtonUp("Player_" + player + "_Paddle_Back");
+        }
 
         if (CanControl)
         {
@@ -183,13 +210,12 @@ public class Paddling : MonoBehaviour
                 }*/
             }
             else
-            {
-                if(PlayerData.controlScheme==1)
-                    if (oar.onLeftSide)
-                        oar.SetLeftSide(false);
+            { 
+                if (oar.onLeftSide)
+                    oar.SetLeftSide(false);
             }
 
-            if (rightKey)
+            if (rightKey)  
             {
                 if (!oar.onRightSide)
                     oar.SetRightSide(true);
@@ -202,9 +228,8 @@ public class Paddling : MonoBehaviour
             }
             else
             {
-                if (PlayerData.controlScheme == 1)
-                    if (oar.onRightSide)
-                        oar.SetRightSide(false);
+                if (oar.onRightSide)
+                    oar.SetRightSide(false);
             }
         }
     }

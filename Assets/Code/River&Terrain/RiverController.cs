@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class RiverController : MonoBehaviour
 {
+    public static RiverController instance;
+
     public RiverObject riverAsset;
 
     public Rigidbody playerRigidbody;
@@ -32,6 +34,10 @@ public class RiverController : MonoBehaviour
 
     private void Start()
     {
+        if (instance != null)
+            Debug.LogWarning("Multiple RiverControllers Detected");
+        instance = this;
+
         bool allWorking = true;
 
         //mesh = riverAsset.GetMesh();

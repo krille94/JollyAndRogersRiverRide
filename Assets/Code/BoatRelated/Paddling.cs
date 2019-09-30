@@ -131,6 +131,9 @@ public class Paddling : MonoBehaviour
     {
         oar.SetLeftSide(false);
         oar.SetRightSide(false);
+
+        if(playerIndex.ToString()=="One") oar.SetLeftSide(true);
+        if (playerIndex.ToString() == "Two") oar.SetRightSide(true);
     }
 
     void Update()

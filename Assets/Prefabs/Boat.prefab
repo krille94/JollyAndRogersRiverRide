@@ -2007,6 +2007,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8023683342669159607}
   - component: {fileID: 5559850223090976807}
+  - component: {fileID: 2995292979205178170}
   m_Layer: 0
   m_Name: PlayerOneSpot
   m_TagString: Untagged
@@ -2058,6 +2059,19 @@ MonoBehaviour:
     modelRight: {fileID: 18627125852462666}
     isPaddling: 0
     paddlingTime: 0
+--- !u!114 &2995292979205178170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7889112564500200150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729cb9ab9cfdafe429f48ab42c472308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
 --- !u!1 &8054634846001550018
 GameObject:
   m_ObjectHideFlags: 0
@@ -2274,6 +2288,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2087948709739803032}
   - component: {fileID: 5977487119650102553}
+  - component: {fileID: 2618684350094942491}
   m_Layer: 0
   m_Name: PlayerTwoSpot
   m_TagString: Untagged
@@ -2311,7 +2326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f2c4e1f18f1ef8429db24a0d849fc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
+  playerIndex: 1
   paddleForce: 420
   forwardForce: 0
   rigidbody: {fileID: 6475557553773465843}
@@ -2325,3 +2340,16 @@ MonoBehaviour:
     modelRight: {fileID: 2577437720776766130}
     isPaddling: 0
     paddlingTime: 0
+--- !u!114 &2618684350094942491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9129737609871257873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 729cb9ab9cfdafe429f48ab42c472308, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 1

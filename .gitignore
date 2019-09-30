@@ -63,3 +63,12 @@ TestBuild.zip
 TestBuild_week1/
 Highscore.gd
 TestBuild_week2/
+Assets/Scenes/Scenes.meta
+Assets/Code/MeshDeformer/Unity_MeshDeformer.sln.meta
+Assets/Code/MeshDeformer/Unity_MeshDeformer.csproj.meta
+Assets/Code/MeshDeformer/Unity_MeshDeformer.Plugins.csproj.meta
+Assets/Code/MeshDeformer/Unity_MeshDeformer.Editor.csproj.meta
+Assets/Code/MeshDeformer/Unity_MeshDeformer.Editor.Plugins.csproj.meta
+Assets/Code/MeshDeformer/MeshDeformer.sln.meta
+Assets/Code/MeshDeformer/MeshDeformer.csproj.meta
+Assets/Code/MeshDeformer/MeshDeformer.Editor.csproj.meta

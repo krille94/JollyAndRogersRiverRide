@@ -41,7 +41,7 @@ public class RiverTool : MonoBehaviour
             }
         }
     }
-
+#if UNITY_EDITOR
     public void BuildRiverPrefab ()
     {
         if(AssetDatabase.LoadAssetAtPath("Assets/Resources/RiverBuilds/"+ uniqName +".asset", typeof(RiverObject)) != null)
@@ -104,7 +104,7 @@ public class RiverTool : MonoBehaviour
         }
         lenght = obj.lenght;
     }
-
+#endif
     public void GetRiverFromController ()
     {
         RiverObject obj = gameObject.GetComponent<RiverController>().riverAsset;

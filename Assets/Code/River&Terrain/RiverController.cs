@@ -34,7 +34,7 @@ public class RiverController : MonoBehaviour
     {
         bool allWorking = true;
 
-        mesh = riverAsset.GetMesh();
+        //mesh = riverAsset.GetMesh();
 
         if(mesh == null)
         {
@@ -48,15 +48,15 @@ public class RiverController : MonoBehaviour
         else
             effectsPool = new GameObject("EffectsPool").transform;
 
+        if (playerRigidbody == null)
+            playerRigidbody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
+
         if (allWorking)
         {
             for (int i = 0; i < transform.childCount; i++)
             {
                 transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mesh;
             }
-
-            if (playerRigidbody == null)
-                playerRigidbody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
 
            /// Vector3 movement = movementDirection;
             //movement *= (minimumSpeed);
@@ -101,6 +101,9 @@ public class RiverController : MonoBehaviour
 
     void MeshWaveUpdate ()
     {
+        if (mesh == null)
+            return;
+
         if (Random.value > modifyFreq)
             return;
 
@@ -119,6 +122,7 @@ public class RiverController : MonoBehaviour
         mesh.vertices = verts;
     }
 
+    [SerializeField] float heightAboveWater;
     void PhysicsFloatingUpdate (Collider other)
     {
         if (usedSystemType == SystemTypes.Physics)
@@ -126,7 +130,10 @@ public class RiverController : MonoBehaviour
             float distance = 1;// collider.bounds.SqrDistance(other.transform.position);
             distance = Mathf.Abs(other.transform.position.y - transform.position.y);
 
-            other.attachedRigidbody.AddForce(Vector3.up * (physicsBouance / other.attachedRigidbody.mass) * distance * Time.fixedDeltaTime);
+            node = riverAsset.GetNodeFromPosition(transform.position, other.transform.position);
+            heightAboveWater = Mathf.Abs(other.transform.position.y - node.centerVector.y);
+            if (Mathf.Abs(other.transform.position.y - node.centerVector.y) > 0.5f)
+                other.attachedRigidbody.AddForce(Vector3.up * (physicsBouance / other.attachedRigidbody.mass) * distance * Time.fixedDeltaTime);
 
             Debug.DrawRay(other.transform.position, Vector3.up * ((physicsBouance / other.attachedRigidbody.mass) * distance) / 2500, Color.blue);
             //Debug.Log(other.name + " is colliding with water surface");

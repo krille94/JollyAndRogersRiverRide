@@ -61,10 +61,24 @@ public class RiverToolEditor : Editor
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
         //EditorGUILayout.Space();
 
-        if (GUILayout.Button("Add Row"))
-            tool.AddRow();
+        if (GUILayout.Button("Add Strait Row"))
+            tool.AddStraitRow();
+
+        GUILayout.Space(5);
+        if (GUILayout.Button("DownwardAngle: " + tool.downwardAngle.ToString() + " (Default: -5)"))
+            tool.downwardAngle = -5;
+        tool.downwardAngle = GUILayout.HorizontalSlider(tool.downwardAngle, -20, -1);
+        if (GUILayout.Button("Add Downward Row"))
+            tool.AddDownwardRow();
+
         if (GUILayout.Button("Remove Row"))
             tool.RemoveRow();
+
+        EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
+        //EditorGUILayout.Space();
+
+        if (GUILayout.Button("Make Row Downward-Flow"))
+            tool.MakeRowDownward();
 
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
         //EditorGUILayout.Space();
@@ -115,8 +129,11 @@ public class RiverToolEditor : Editor
                     distFromCam = 0;
                 }
             }
-            tool.vertices[i] = tool.transform.InverseTransformPoint(Handles.FreeMoveHandle(tool.transform.TransformPoint(tool.vertices[i]), Quaternion.identity, distFromCam / handleSize, Vector3.one, Handles.CircleHandleCap));
-            tool.vertices[i] = new Vector3(tool.vertices[i].x, 0, tool.vertices[i].z);
+            Vector3 newPos = tool.transform.InverseTransformPoint(Handles.FreeMoveHandle(tool.transform.TransformPoint(tool.vertices[i]), Quaternion.identity, distFromCam / handleSize, Vector3.one, Handles.CircleHandleCap));
+            if (newPos.y != tool.vertices[i].y)
+                tool.vertices[i] = new Vector3(newPos.x, tool.vertices[i].y, newPos.z);
+            else
+                tool.vertices[i] = newPos;
         }
 
         if(tool.nodes.Count > 0)

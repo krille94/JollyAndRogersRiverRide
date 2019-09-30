@@ -668,6 +668,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5873cd35956903f4386b78df1e355c1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  riverAsset: {fileID: 0}
+  playerRigidbody: {fileID: 0}
+  modifyFreq: 0.75
+  waveheight: 0.25
+  usedSystemType: 0
+  arcadeBouance: 100
+  physicsBouance: 75000
+  minimumSpeed: 0
+  movementDirection: {x: 0, y: 0, z: 0}
+  onImpactEffect: {fileID: 0}
+  onImpactSound: {fileID: 0}
+  flow: {x: 0, y: 0, z: 0}
+  node:
+    flowDirection: {x: 0, y: 0, z: 0}
+    flowDirectionOffset: {x: 0, y: 0, z: 0}
+    finalFlowDirection: {x: 0, y: 0, z: 0}
+    centerVector: {x: 0, y: 0, z: 0}
+    centerVectorOffset: {x: 0, y: 0, z: 0}
+  heightAboveWater: 0
 --- !u!1 &2710173274147567664
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,10 +698,6 @@ GameObject:
   - component: {fileID: 2710173274147567667}
   - component: {fileID: 2710173274147567679}
   - component: {fileID: 2710173274147567676}
-  - component: {fileID: 2710173274147567666}
-  - component: {fileID: 2710173274147567678}
-  - component: {fileID: 1950545405}
-  - component: {fileID: 4544788525570686435}
   - component: {fileID: 6256220365507406368}
   - component: {fileID: 6053473308520520231}
   m_Layer: 4
@@ -760,69 +775,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2710173274147567666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2710173274147567664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ebabec9348ca694594e2c2f4cb273a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collider: {fileID: 0}
-  filter: {fileID: 0}
-  modifyCollider: 0
-  modifyFreq: 0.42
-  waveheight: 2.5
---- !u!114 &2710173274147567678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2710173274147567664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15e1ccb55dd3bff4fad1cb02fdff7f81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usedSystemType: 1
-  arcadeBouance: 1
-  physicsBouance: 75000
---- !u!114 &1950545405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2710173274147567664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c506490a6f56b3643952b0247fc4bbb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onImpactEffect: {fileID: 4383681461319272144, guid: 8d2b7300e53b02a49af55332830bf147,
-    type: 3}
-  onImpactSound: {fileID: 3371598137648308435, guid: 1ae30b683b51adc48bb6c3bf2be1e291,
-    type: 3}
---- !u!114 &4544788525570686435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2710173274147567664}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f70706d850da4eb4faae42b6e977c633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minimumSpeed: 25
-  movementDirection: {x: 0, y: 0, z: 1}
-  river: {fileID: 0}
 --- !u!114 &6256220365507406368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -836,8 +788,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqName: RiverAssetName
-  mf: {fileID: 2710173274147567679}
-  mr: {fileID: 2710173274147567676}
   vertices:
   - {x: 0, y: 0, z: 0}
   - {x: 1, y: 0, z: 0}
@@ -865,15 +815,30 @@ MonoBehaviour:
   autoUpdateMesh: 0
   nodes:
   - flowDirection: {x: 0, y: 0, z: 1}
+    flowDirectionOffset: {x: -0, y: 0, z: 0}
+    finalFlowDirection: {x: 0, y: 0, z: 0}
     centerVector: {x: 0.5, y: 0, z: 0}
+    centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0, y: 0, z: 1}
+    flowDirectionOffset: {x: -0, y: 0, z: 0}
+    finalFlowDirection: {x: 0, y: 0, z: 0}
     centerVector: {x: 0.5, y: 0, z: 1}
+    centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0, y: 0, z: 1}
+    flowDirectionOffset: {x: -0, y: 0, z: 0}
+    finalFlowDirection: {x: 0, y: 0, z: 0}
     centerVector: {x: 0.5, y: 0, z: 3}
+    centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0, y: 0, z: 1}
+    flowDirectionOffset: {x: -0, y: 0, z: 0}
+    finalFlowDirection: {x: 0, y: 0, z: 0}
     centerVector: {x: 0.5, y: 0, z: 5}
+    centerVectorOffset: {x: 0, y: 0, z: 0}
   - flowDirection: {x: 0, y: 0, z: 1}
+    flowDirectionOffset: {x: -0, y: 0, z: 0}
+    finalFlowDirection: {x: 0, y: 0, z: 0}
     centerVector: {x: 0.5, y: 0, z: 7}
+    centerVectorOffset: {x: 0, y: 0, z: 0}
 --- !u!65 &6053473308520520231
 BoxCollider:
   m_ObjectHideFlags: 0

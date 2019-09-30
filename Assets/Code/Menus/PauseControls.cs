@@ -6,9 +6,15 @@ public class PauseControls : MonoBehaviour
 {
     [SerializeField] private GameObject pausePanel = null;
 
+    private GameObject main, options, howtoplay;
     // Start is called before the first frame update
     void Start()
     {
+        main=GameObject.Find("Pause Main Menu");
+        options=GameObject.Find("Pause Options Menu");
+        howtoplay=GameObject.Find("Pause How To Play Menu");
+        options.SetActive(false);
+        howtoplay.SetActive(false);
         pausePanel.SetActive(false);
     }
 
@@ -38,6 +44,11 @@ public class PauseControls : MonoBehaviour
     private void ContinueGame()
     {
         Time.timeScale = 1;
+
+        main.SetActive(true);
+        options.SetActive(false);
+        howtoplay.SetActive(false);
+
         pausePanel.SetActive(false);
         //enable the scripts again
     }

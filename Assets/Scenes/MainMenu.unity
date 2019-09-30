@@ -1600,7 +1600,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentMenu: {fileID: 0}
   NextMenu: {fileID: 0}
-  buttonAction: 6
+  buttonAction: 7
 --- !u!114 &635296771
 MonoBehaviour:
   m_ObjectHideFlags: 0

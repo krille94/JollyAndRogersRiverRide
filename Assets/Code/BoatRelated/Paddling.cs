@@ -19,20 +19,56 @@ public class Oar
     public bool isPaddling = false;
     public float paddlingTime = 0;
     
-    public void SetRightSide()
+    public void SetRightSide(bool inWater)
     {
-        onLeftSide = false;
-        onRightSide = true;
-        modelRight.SetActive(true);
-        modelLeft.SetActive(false);
+        if (PlayerData.controlScheme == 1)
+        {
+            if (!modelRight.activeInHierarchy)
+                modelRight.SetActive(true);
+
+            if (inWater)
+            {
+                modelRight.transform.localEulerAngles = new Vector3(0, 0, 35);
+            }
+            else
+            {
+                modelRight.transform.localEulerAngles = new Vector3(0, 0, 70);
+            }
+            onRightSide = inWater;
+        }
+        else if (PlayerData.controlScheme == 2)
+        {
+            onLeftSide = false;
+            onRightSide = true;
+            modelRight.SetActive(true);
+            modelLeft.SetActive(false);
+        }
     }
 
-    public void SetLeftSide()
+    public void SetLeftSide(bool inWater)
     {
-        onLeftSide = true;
-        onRightSide = false;
-        modelLeft.SetActive(true);
-        modelRight.SetActive(false);
+        if (PlayerData.controlScheme == 1)
+        {
+            if (!modelLeft.activeInHierarchy)
+                modelLeft.SetActive(true);
+
+            if (inWater)
+            {
+                modelLeft.transform.localEulerAngles = new Vector3(0, 180, 35);
+            }
+            else
+            {
+                modelLeft.transform.localEulerAngles = new Vector3(0, 180, 70);
+            }
+            onLeftSide = inWater;
+        }
+        else if (PlayerData.controlScheme == 2)
+        {
+            onLeftSide = true;
+            onRightSide = false;
+            modelLeft.SetActive(true);
+            modelRight.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -44,6 +80,15 @@ public class Oar
         if (isPaddling)
             return Vector3.zero;
         isPaddling = true;
+
+        if (onLeftSide && onRightSide)
+        {
+            if (!modelLeft.GetComponent<Animation>().isPlaying)
+                modelLeft.GetComponent<Animation>().Play();
+            if (!modelRight.GetComponent<Animation>().isPlaying)
+                modelRight.GetComponent<Animation>().Play();
+            return (leftSideImpactPoint.position + rightSideImpactPoint.position)/2;
+        }
 
         if (onLeftSide)
         {
@@ -82,6 +127,12 @@ public class Paddling : MonoBehaviour
 
     public void SetCanControl(bool truefalse) { CanControl = truefalse; }
 
+    private void Start()
+    {
+        oar.SetLeftSide(false);
+        oar.SetRightSide(false);
+    }
+
     void Update()
     {
         impactPoint = Vector3.zero;
@@ -100,8 +151,8 @@ public class Paddling : MonoBehaviour
 
         bool rightKey = Input.GetButton("Player_"+((PlayerIndexTypes)playerIndex).ToString()+"_Paddle_Right");
         bool leftKey = Input.GetButton("Player_"+ ((PlayerIndexTypes)playerIndex).ToString()+ "_Paddle_Left");
-        bool forwardKey = Input.GetButton("Player_" + ((PlayerIndexTypes)playerIndex).ToString() + "_Paddle_Forward");
-        bool backKey = Input.GetButton("Player_" + ((PlayerIndexTypes)playerIndex).ToString() + "_Paddle_Back");
+        bool forwardKey = Input.GetButtonUp("Player_" + ((PlayerIndexTypes)playerIndex).ToString() + "_Paddle_Forward");
+        bool backKey = Input.GetButtonUp("Player_" + ((PlayerIndexTypes)playerIndex).ToString() + "_Paddle_Back");
 
         if (CanControl)
         {
@@ -120,7 +171,7 @@ public class Paddling : MonoBehaviour
             if (leftKey)
             {
                 if (!oar.onLeftSide)
-                    oar.SetLeftSide();
+                    oar.SetLeftSide(true);
                 /*else
                 {
                     impactPoint = oar.Paddle();
@@ -128,17 +179,29 @@ public class Paddling : MonoBehaviour
                     rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
                 }*/
             }
+            else
+            {
+                if(PlayerData.controlScheme==1)
+                    if (oar.onLeftSide)
+                        oar.SetLeftSide(false);
+            }
 
             if (rightKey)
             {
                 if (!oar.onRightSide)
-                    oar.SetRightSide();
+                    oar.SetRightSide(true);
                 /*else
                 {
                     impactPoint = oar.Paddle();
                     rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
                     rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
                 }*/
+            }
+            else
+            {
+                if (PlayerData.controlScheme == 1)
+                    if (oar.onRightSide)
+                        oar.SetRightSide(false);
             }
         }
     }

@@ -44,6 +44,9 @@ public class RiverObject : ScriptableObject
             }
         }
 
+        //Vector3 res = Quaternion.ToEulerAngles(Quaternion.LookRotation(node.flowDirection, Vector3.forward) * Quaternion.AngleAxis(node.flowDirectionOffset_Angle, Vector3.right));
+        //return res * -1;
+
         RiverNode lastNode = null;
         RiverNode nextNode = null;
         if (index - 1 >= 0)
@@ -51,19 +54,21 @@ public class RiverObject : ScriptableObject
         if (index + 1 < nodes.Length)
             nextNode = nodes[index + 1];
 
-        if(lastNode == null || nextNode == null)
-            return node.flowDirection;
+        if (lastNode == null || nextNode == null)
+            return node.finalFlowDirection;
 
         float distLast = Vector3.Distance(boatPos, riverObjectOffset + lastNode.centerVector);
         float distNext = Vector3.Distance(boatPos, riverObjectOffset + nextNode.centerVector);
 
         if(distLast > distNext)
         {
-            return node.flowDirection + nextNode.flowDirection;
+            Vector3 res = node.finalFlowDirection;// + Quaternion.AngleAxis(node.flowDirectionOffset_Angle, Vector3.right).eulerAngles + nextNode.flowDirection + Quaternion.AngleAxis(nextNode.flowDirectionOffset_Angle, Vector3.right).eulerAngles;
+            return res.normalized;
         }
         else
         {
-            return node.flowDirection + lastNode.flowDirection;
+            Vector3 res = node.finalFlowDirection;// + Quaternion.AngleAxis(node.flowDirectionOffset_Angle, Vector3.right).eulerAngles + lastNode.flowDirection + Quaternion.AngleAxis(lastNode.flowDirectionOffset_Angle, Vector3.right).eulerAngles;
+            return res.normalized;
         }        
     }
 

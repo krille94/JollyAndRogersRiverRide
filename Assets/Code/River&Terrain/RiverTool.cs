@@ -153,6 +153,7 @@ public class RiverTool : MonoBehaviour
 
         mesh.RecalculateNormals();
 
+        transform.GetComponent<MeshFilter>().sharedMesh = mesh;
         for (int i = 0; i < transform.childCount; i++)
         {
             if (transform.GetChild(i).GetComponent<MeshFilter>())
@@ -168,10 +169,11 @@ public class RiverTool : MonoBehaviour
 
     public void UpdateMesh()
     {
-        Mesh mesh = transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+        Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
         if(mesh == null)
         {
             Debug.LogError("Missing mesh to modify");
+            GenerateMesh();
             return;
         }
 

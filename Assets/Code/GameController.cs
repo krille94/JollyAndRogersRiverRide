@@ -19,6 +19,8 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         Time.timeScale = 1;
+
+        UserSettings.ReadSettings();
     }
 
     public void OnCompletedLevel()

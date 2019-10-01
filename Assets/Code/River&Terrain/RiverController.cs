@@ -121,6 +121,10 @@ public class RiverController : MonoBehaviour
                 {
                     transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mesh;
                 }
+
+                if (gameObject.GetComponent<MeshCollider>() == null)
+                    gameObject.AddComponent<MeshCollider>();
+                gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
             }
 
             if (endTransform != null)

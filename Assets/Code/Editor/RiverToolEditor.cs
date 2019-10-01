@@ -80,12 +80,6 @@ public class RiverToolEditor : Editor
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
         //EditorGUILayout.Space();
 
-        if (GUILayout.Button("Make Row Downward-Flow"))
-            tool.MakeRowDownward();
-
-        EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
-        //EditorGUILayout.Space();
-
         if (GUILayout.Button("!Danger-PointOfNoReturn!"))
             displayPointofnoreturnOptions = !displayPointofnoreturnOptions;
         if(displayPointofnoreturnOptions)

@@ -368,11 +368,6 @@ public class RiverTool : MonoBehaviour
         nodes.Add(node);
     }
 
-    public void MakeRowDownward ()
-    {
-
-    }
-
     public void SetToDefaultRiverDesign()
     {
         vertices.Clear();

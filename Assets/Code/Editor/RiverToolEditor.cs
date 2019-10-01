@@ -8,6 +8,9 @@ public class RiverToolEditor : Editor
 {
     bool displayInfo = false;
     bool displayOptions = false;
+    bool displayPointofnoreturnOptions = false;
+
+    bool hideShowNodeTools = true;
 
     float handleMaxDistance = 100;
     float handleSize = 100;
@@ -83,8 +86,13 @@ public class RiverToolEditor : Editor
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
         //EditorGUILayout.Space();
 
-        if (GUILayout.Button("Reset To Default"))
-            tool.SetToDefaultRiverDesign();
+        if (GUILayout.Button("!Danger-PointOfNoReturn!"))
+            displayPointofnoreturnOptions = !displayPointofnoreturnOptions;
+        if(displayPointofnoreturnOptions)
+        {
+            if (GUILayout.Button("Reset To Default"))
+                tool.SetToDefaultRiverDesign();
+        }
 
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
         //EditorGUILayout.Space();
@@ -98,6 +106,8 @@ public class RiverToolEditor : Editor
             handleMaxDistance = GUILayout.HorizontalSlider(handleMaxDistance, 50, 300);
             EditorGUILayout.LabelField("Handle Size: " + handleSize.ToString());
             handleSize = GUILayout.HorizontalSlider(handleSize, 10, 150);
+
+            hideShowNodeTools = GUILayout.Toggle(hideShowNodeTools, "Node Tools");
         }
 
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
@@ -136,47 +146,50 @@ public class RiverToolEditor : Editor
                 tool.vertices[i] = newPos;
         }
 
-        if(tool.nodes.Count > 0)
+        if (hideShowNodeTools)
         {
-            Handles.color = Color.white;
-            for (int i = 0; i < tool.nodes.Count; i++)
+            if (tool.nodes.Count > 0)
             {
-                float distFromCam = 1;
-                if (Camera.current != null)
+                Handles.color = Color.white;
+                for (int i = 0; i < tool.nodes.Count; i++)
                 {
-                    distFromCam = Vector3.Distance(Camera.current.transform.position, tool.transform.TransformPoint(tool.nodes[i].centerVector));
-                    if (distFromCam > handleMaxDistance)
+                    float distFromCam = 1;
+                    if (Camera.current != null)
                     {
-                        distFromCam = 0;
-                        continue;
+                        distFromCam = Vector3.Distance(Camera.current.transform.position, tool.transform.TransformPoint(tool.nodes[i].centerVector));
+                        if (distFromCam > handleMaxDistance)
+                        {
+                            distFromCam = 0;
+                            continue;
+                        }
                     }
+
+                    tool.nodes[i].centerVectorOffset = Handles.FreeMoveHandle(tool.transform.TransformPoint(tool.nodes[i].centerVector + tool.nodes[i].centerVectorOffset), Quaternion.identity, distFromCam / handleSize, Vector3.one, Handles.RectangleHandleCap) - tool.nodes[i].centerVector;
+                    tool.nodes[i].centerVectorOffset.y = 0;
+                    if (tool.nodes[i].centerVectorOffset.x > 10)
+                        tool.nodes[i].centerVectorOffset.x = 10;
+                    else if (tool.nodes[i].centerVectorOffset.x < -10)
+                        tool.nodes[i].centerVectorOffset.x = -10;
+                    if (tool.nodes[i].centerVectorOffset.z > 10)
+                        tool.nodes[i].centerVectorOffset.z = 10;
+                    else if (tool.nodes[i].centerVectorOffset.z < -10)
+                        tool.nodes[i].centerVectorOffset.z = -10;
+
+                    //tool.nodes[i].flowDirectionOffset_Angle = Handles.RadiusHandle(Quaternion.identity, tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset + Vector3.up, tool.nodes[i].flowDirectionOffset_Angle);
+                    tool.nodes[i].flowDirectionOffset = Handles.RotationHandle(Quaternion.Euler(tool.nodes[i].flowDirectionOffset), tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset).eulerAngles;
+
+                    Handles.ArrowHandleCap(0, tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset, Quaternion.Euler(tool.nodes[i].flowDirection + tool.nodes[i].flowDirectionOffset), (distFromCam / handleSize) * 10, EventType.Repaint);
                 }
 
-                tool.nodes[i].centerVectorOffset = Handles.FreeMoveHandle(tool.transform.TransformPoint(tool.nodes[i].centerVector + tool.nodes[i].centerVectorOffset), Quaternion.identity, distFromCam / handleSize, Vector3.one, Handles.RectangleHandleCap) - tool.nodes[i].centerVector;
-                tool.nodes[i].centerVectorOffset.y = 0;
-                if (tool.nodes[i].centerVectorOffset.x > 10)
-                    tool.nodes[i].centerVectorOffset.x = 10;
-                else if (tool.nodes[i].centerVectorOffset.x < -10)
-                    tool.nodes[i].centerVectorOffset.x = -10;
-                if (tool.nodes[i].centerVectorOffset.z > 10)
-                    tool.nodes[i].centerVectorOffset.z = 10;
-                else if (tool.nodes[i].centerVectorOffset.z < -10)
-                    tool.nodes[i].centerVectorOffset.z = -10;
-
-                //tool.nodes[i].flowDirectionOffset_Angle = Handles.RadiusHandle(Quaternion.identity, tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset + Vector3.up, tool.nodes[i].flowDirectionOffset_Angle);
-                tool.nodes[i].flowDirectionOffset = Handles.RotationHandle(Quaternion.Euler(tool.nodes[i].flowDirectionOffset), tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset).eulerAngles;
-
-                Handles.ArrowHandleCap(0, tool.nodes[i].centerVector + tool.transform.position + tool.nodes[i].centerVectorOffset, Quaternion.Euler(tool.nodes[i].flowDirection + tool.nodes[i].flowDirectionOffset), (distFromCam / handleSize) * 10, EventType.Repaint);
-            }
-
-            Handles.color = Color.red;
-            for (int i = 0; i < tool.nodes.Count; i++)
-            {
-                if (i + 1 < tool.nodes.Count)
+                Handles.color = Color.red;
+                for (int i = 0; i < tool.nodes.Count; i++)
                 {
-                    Vector3 pOne = tool.nodes[i].centerVector + tool.nodes[i].centerVectorOffset + tool.transform.position;
-                    Vector3 pTwo = tool.nodes[i + 1].centerVector + tool.nodes[i + 1].centerVectorOffset + tool.transform.position;
-                    Handles.DrawLine(pOne + tool.nodes[i].flowDirection, pTwo + tool.nodes[i + 1].flowDirection);
+                    if (i + 1 < tool.nodes.Count)
+                    {
+                        Vector3 pOne = tool.nodes[i].centerVector + tool.nodes[i].centerVectorOffset + tool.transform.position;
+                        Vector3 pTwo = tool.nodes[i + 1].centerVector + tool.nodes[i + 1].centerVectorOffset + tool.transform.position;
+                        Handles.DrawLine(pOne + tool.nodes[i].flowDirection, pTwo + tool.nodes[i + 1].flowDirection);
+                    }
                 }
             }
         }

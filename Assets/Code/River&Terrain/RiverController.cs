@@ -81,6 +81,7 @@ public class RiverController : MonoBehaviour
     private void Update()
     {
         PhysicsFlowUpdate();
+        ArcadeFlowUpdate();
 
         MeshWaveUpdate();
 
@@ -91,20 +92,37 @@ public class RiverController : MonoBehaviour
     Vector3 flow;
     [SerializeField]
     RiverNode node;
+    void ArcadeFlowUpdate ()
+    {
+        if(usedSystemType == SystemTypes.Arcade)
+        {
+            for (int i = 0; i < observedObjects.Count; i++)
+            {
+                Rigidbody body = observedObjects[i];
+                node = riverAsset.GetNodeFromPosition(body.position);
+                flow = riverAsset.GetFlow(body.position);
+                body.AddForce(flow * (minimumSpeed * Time.deltaTime), ForceMode.VelocityChange);
+            }
+        }
+    }
+
     void PhysicsFlowUpdate()
     {
-        node = riverAsset.GetNodeFromPosition(transform.position, playerRigidbody.transform.position);
-        flow = riverAsset.GetFlow(transform.position, playerRigidbody.transform.position);
-        Vector3 movement = flow;
-        playerRigidbody.AddForce(movement * (minimumSpeed * Time.deltaTime), ForceMode.VelocityChange);
-        /*
-        //Use rb.AddForce to gradually increase or decrease speed
-        //   Giving it 0.1f leeway so that the boat won't start going back and forth between 24.97f and 25.002f
-        if (playerRigidbody.velocity.magnitude < minimumSpeed)
-            playerRigidbody.AddForce(movement * (minimumSpeed * Time.deltaTime));
-        else if (playerRigidbody.velocity.magnitude > minimumSpeed)
-            playerRigidbody.velocity = movement;
-        */
+        if (usedSystemType == SystemTypes.Physics)
+        {
+            node = riverAsset.GetNodeFromPosition(transform.position, playerRigidbody.transform.position);
+            flow = riverAsset.GetFlow(transform.position, playerRigidbody.transform.position);
+            Vector3 movement = flow;
+            playerRigidbody.AddForce(movement * (minimumSpeed * Time.deltaTime), ForceMode.VelocityChange);
+            /*
+            //Use rb.AddForce to gradually increase or decrease speed
+            //   Giving it 0.1f leeway so that the boat won't start going back and forth between 24.97f and 25.002f
+            if (playerRigidbody.velocity.magnitude < minimumSpeed)
+                playerRigidbody.AddForce(movement * (minimumSpeed * Time.deltaTime));
+            else if (playerRigidbody.velocity.magnitude > minimumSpeed)
+                playerRigidbody.velocity = movement;
+            */
+        }
     }
 
     void MeshWaveUpdate ()

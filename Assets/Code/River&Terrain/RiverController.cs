@@ -8,7 +8,10 @@ public class RiverController : MonoBehaviour
 
     public RiverObject riverAsset;
 
+    [HideInInspector]
     public Rigidbody playerRigidbody;
+
+    public List<Rigidbody> observedObjects = new List<Rigidbody>();
 
     [Header("MeshWaves")]
     [Range(0.0f, 1.0f)] public float modifyFreq = 0.75f;
@@ -17,7 +20,8 @@ public class RiverController : MonoBehaviour
     [Header("Floating")]
     public SystemTypes usedSystemType;
     public enum SystemTypes { Arcade, Physics }
-    
+
+    public LayerMask arcadeRiverLayer;
     public float arcadeBouance = 100;
     public float physicsBouance = 75000;
 
@@ -40,7 +44,7 @@ public class RiverController : MonoBehaviour
 
         bool allWorking = true;
 
-        //mesh = riverAsset.GetMesh();
+        mesh = riverAsset.GetMesh();
 
         if(mesh == null)
         {
@@ -48,27 +52,23 @@ public class RiverController : MonoBehaviour
             allWorking = false;
         }
 
-        GameObject pool = GameObject.Find("EffectsPool");
-        if (pool != null)
-            effectsPool = pool.transform;
-        else
-            effectsPool = new GameObject("EffectsPool").transform;
-
-        if (playerRigidbody == null)
-            playerRigidbody = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
-
         if (allWorking)
         {
+            GameObject pool = GameObject.Find("EffectsPool");
+            if (pool != null)
+                effectsPool = pool.transform;
+            else
+                effectsPool = new GameObject("EffectsPool").transform;
+
             for (int i = 0; i < transform.childCount; i++)
             {
                 transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mesh;
             }
 
-           /// Vector3 movement = movementDirection;
-            //movement *= (minimumSpeed);
-
-            //Use rb.velocity to set a specific speed
-            //playerRigidbody.velocity = movement;
+            gameObject.AddComponent<MeshCollider>();
+            gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
+            //gameObject.GetComponent<MeshCollider>().convex = true;
+            //gameObject.GetComponent<MeshCollider>().isTrigger = true;
         }
         else
         {
@@ -83,6 +83,8 @@ public class RiverController : MonoBehaviour
         PhysicsFlowUpdate();
 
         MeshWaveUpdate();
+
+        ArcadeFloatingUpdate();
     }
 
     [SerializeField]
@@ -128,6 +130,32 @@ public class RiverController : MonoBehaviour
         mesh.vertices = verts;
     }
 
+    void ArcadeFloatingUpdate ()
+    {
+        if (usedSystemType == SystemTypes.Arcade)
+        {
+            for (int i = 0; i < observedObjects.Count; i++)
+            {
+                Rigidbody body = observedObjects[i];
+                RaycastHit hit;
+                if (Physics.Raycast(body.transform.position + (Vector3.up * 1000), Vector3.down, out hit, 2000, arcadeRiverLayer))
+                {
+                    Debug.Log(hit.transform.name);
+                    if (hit.transform != transform)
+                        return;
+
+                    RiverNode node = riverAsset.GetNodeFromPosition(hit.point);
+
+                    body.transform.position = new Vector3(
+                        body.transform.position.x,
+                        node.centerVector.y,
+                        body.transform.position.z
+                    );
+                }
+            }
+        }
+    }
+
     [SerializeField] float heightAboveWater;
     void PhysicsFloatingUpdate (Collider other)
     {
@@ -145,7 +173,7 @@ public class RiverController : MonoBehaviour
             //Debug.Log(other.name + " is colliding with water surface");
         }
     }
-
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Rigidbody>())
@@ -173,7 +201,7 @@ public class RiverController : MonoBehaviour
         if (other.GetComponent<Rigidbody>())
             other.GetComponent<Rigidbody>().drag = 1;
     }
-
+    */
     private void OnDrawGizmos()
     {
         if (riverAsset != null)
@@ -184,7 +212,7 @@ public class RiverController : MonoBehaviour
                 Gizmos.DrawLine(transform.position + riverAsset.nodes[i].centerVector, transform.position + riverAsset.nodes[i + 1].centerVector);
             }
         }
-
+        /*
         if (playerRigidbody != null)
         {
             Gizmos.color = Color.red;
@@ -196,5 +224,6 @@ public class RiverController : MonoBehaviour
                 Gizmos.DrawRay(playerRigidbody.transform.position, node.finalFlowDirection * 10);
             }
         }
+        */
     }
 }

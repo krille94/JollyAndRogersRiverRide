@@ -8,6 +8,23 @@ public class RiverObject : ScriptableObject
     public int lenght;
     public RiverNode[] nodes;
 
+    public RiverNode GetNodeFromPosition (Vector3 pos)
+    {
+        RiverNode node = null;
+        pos.y = 0;
+        float distance = Mathf.Infinity;
+        for (int i = 0; i < nodes.Length; i++)
+        {
+            float newDist = Vector3.Distance(pos, new Vector3(nodes[i].centerVector.x, 0, nodes[i].centerVector.z));
+            if (newDist < distance)
+            {
+                node = nodes[i];
+                distance = newDist;
+            }
+        }
+        return node;
+    }
+
     public RiverNode GetNodeFromPosition (Vector3 offset, Vector3 pos)
     {
         RiverNode node = null;

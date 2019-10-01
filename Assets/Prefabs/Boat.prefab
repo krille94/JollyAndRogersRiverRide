@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4675141539308810520}
   - component: {fileID: 3607161204941508881}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Oar_Right
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -57,7 +57,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3288143052434563115}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OarImpactleft
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 3685964186676487403}
   - component: {fileID: 3520889933076733384}
   - component: {fileID: 7447137790968458899}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 6119901465980995510}
   - component: {fileID: 4248693034402383679}
   - component: {fileID: 8225355652646911445}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +243,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6843873232793121782}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OarImpactLeft
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -275,7 +275,7 @@ GameObject:
   - component: {fileID: 5744085338220559921}
   - component: {fileID: 163456800189943679}
   - component: {fileID: 4562920470489127329}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 5842476899713351292}
   - component: {fileID: 5634503242239622092}
   - component: {fileID: 5543433206774977964}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9178276300016681123}
   - component: {fileID: 6036185204899343830}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Oar_Right
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -477,7 +477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6206869959312478682}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 211226281449362217}
   - component: {fileID: 5890417708126808879}
   - component: {fileID: 1818738198165581286}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -587,7 +587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4476644603278438837}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +621,7 @@ GameObject:
   - component: {fileID: 1960982662935741928}
   - component: {fileID: 8666223611692752579}
   - component: {fileID: 1564985632346356301}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -699,7 +699,7 @@ GameObject:
   - component: {fileID: 143746643821544023}
   - component: {fileID: 4790301447373259668}
   - component: {fileID: 788126099171764736}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3186126977709578072}
   - component: {fileID: 204339978648938026}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Oar_Left
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -824,7 +824,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7543067340186220245}
   - component: {fileID: 7793199485304751019}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Oar_Left
   m_TagString: Untagged
   m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
@@ -874,7 +874,7 @@ GameObject:
   - component: {fileID: 8809404129278332829}
   - component: {fileID: 5205324379717406827}
   - component: {fileID: 1211563959281444782}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fronts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -963,7 +963,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8514789523252262299}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OarImpactRight
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -993,7 +993,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2571951444006707737}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1027,7 +1027,7 @@ GameObject:
   - component: {fileID: 4025775823436079637}
   - component: {fileID: 1883811746100142989}
   - component: {fileID: 3291906539258704790}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Pad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1105,7 +1105,7 @@ GameObject:
   - component: {fileID: 6475557552676121883}
   - component: {fileID: 6475557552676121881}
   - component: {fileID: 6475557552676121882}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1182,7 +1182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6475557552997903643}
   - component: {fileID: 6475557552997903642}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1241,7 +1241,7 @@ GameObject:
   - component: {fileID: 6475557553155197908}
   - component: {fileID: 6475557553155197906}
   - component: {fileID: 6475557553155197907}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1319,7 +1319,7 @@ GameObject:
   - component: {fileID: 6475557553283010651}
   - component: {fileID: 6475557553283010649}
   - component: {fileID: 6475557553283010650}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1395,7 +1395,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6475557553665310255}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Max
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1428,7 +1428,8 @@ GameObject:
   - component: {fileID: 6475557553773465843}
   - component: {fileID: 6475557553773465840}
   - component: {fileID: 6475557553773465853}
-  m_Layer: 0
+  - component: {fileID: 5769379155722751525}
+  m_Layer: 9
   m_Name: Boat
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1464,10 +1465,10 @@ Rigidbody:
   m_Mass: 10
   m_Drag: 1
   m_AngularDrag: 0.5
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!114 &6475557553773465840
 MonoBehaviour:
@@ -1481,11 +1482,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66a03dfe07e2d014baf5394eeb7873b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHull: 1000
-  InvincibilityFrames: 3
+  MaxHull: 10
+  InvincibilityFrames: 2
   onDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_MethodName: OnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   trigger: {fileID: 6475557553773465853}
   onDamagedParticlePrefab: {fileID: 4383681461319272144, guid: 19c228b39c1b16441a2ef1f231540979,
     type: 3}
@@ -1501,6 +1535,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5595b4961d985884fa97a5676d90c165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5769379155722751525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6475557553773465844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b00183003be293469ad745021174fb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 1000
 --- !u!1 &6475557553898291549
 GameObject:
   m_ObjectHideFlags: 0
@@ -1512,7 +1559,7 @@ GameObject:
   - component: {fileID: 6475557553898291548}
   - component: {fileID: 6475557553898291546}
   - component: {fileID: 6475557553898291547}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1588,7 +1635,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6475557554103955497}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Min
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1620,7 +1667,7 @@ GameObject:
   - component: {fileID: 6475557554695784654}
   - component: {fileID: 6475557554695784652}
   - component: {fileID: 6475557554695784653}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1699,7 +1746,7 @@ GameObject:
   - component: {fileID: 8039032737879600126}
   - component: {fileID: 518906699193163768}
   - component: {fileID: 6777419774025997716}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Fronts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1790,7 +1837,7 @@ GameObject:
   - component: {fileID: 7554405441454857361}
   - component: {fileID: 5016484283749857487}
   - component: {fileID: 4679674854326619861}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1866,7 +1913,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5465230123213083975}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: OarImpactRight
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -1898,7 +1945,7 @@ GameObject:
   - component: {fileID: 2439981771514660322}
   - component: {fileID: 6588813784794456855}
   - component: {fileID: 2300910096499065778}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1974,7 +2021,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7350573126898939369}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2008,7 +2055,7 @@ GameObject:
   - component: {fileID: 8023683342669159607}
   - component: {fileID: 5559850223090976807}
   - component: {fileID: 2995292979205178170}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerOneSpot
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -2046,8 +2093,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  paddleForce: 420
-  forwardForce: 0
+  paddleForce: 1500
+  forwardForce: 200
   rigidbody: {fileID: 6475557553773465843}
   oar:
     modelRoot: {fileID: 4675141539308810520}
@@ -2084,7 +2131,7 @@ GameObject:
   - component: {fileID: 4689259267747610405}
   - component: {fileID: 4214204245438833051}
   - component: {fileID: 6452578040210977269}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2175,7 +2222,7 @@ GameObject:
   - component: {fileID: 1767203117550664656}
   - component: {fileID: 15247447656112302}
   - component: {fileID: 1215596253862940824}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2251,7 +2298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 169474265702887027}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2289,7 +2336,7 @@ GameObject:
   - component: {fileID: 2087948709739803032}
   - component: {fileID: 5977487119650102553}
   - component: {fileID: 2618684350094942491}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PlayerTwoSpot
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -2327,8 +2374,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 1
-  paddleForce: 420
-  forwardForce: 0
+  paddleForce: 1500
+  forwardForce: 200
   rigidbody: {fileID: 6475557553773465843}
   oar:
     modelRoot: {fileID: 9178276300016681123}

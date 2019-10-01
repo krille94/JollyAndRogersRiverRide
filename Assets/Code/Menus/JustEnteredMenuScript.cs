@@ -42,7 +42,7 @@ public class JustEnteredMenuScript : MonoBehaviour
         option = GameObject.Find("Hold Paddle");
         if (UserSettings.GetAutoPaddle() == true)
             option.GetComponent<TextMesh>().text = "Hold to row: ON";
-        option = GameObject.Find("Hold Paddle");
+        option = GameObject.Find("Control Scheme");
         if (UserSettings.GetControlScheme() == 2)
             option.GetComponent<TextMesh>().text = "One Paddle";
     }

@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class RiverController : MonoBehaviour
 {
     public static RiverController instance;
 
     public RiverObject riverAsset;
-
-    [HideInInspector]
-    public Rigidbody playerRigidbody;
-
+    
     public List<Rigidbody> observedObjects = new List<Rigidbody>();
+    public Transform endTransform;
 
     [Header("MeshWaves")]
     [Range(0.0f, 1.0f)] public float modifyFreq = 0.75f;
@@ -33,9 +32,14 @@ public class RiverController : MonoBehaviour
     public ParticleSystem onImpactEffect = null;
     public AudioSource onImpactSound = null;
 
+    [Header("Debuging")]
+    [SerializeField] Vector3 flow;
+    [SerializeField] RiverNode node;
+    [SerializeField] float heightAboveWater;
+
     private Transform effectsPool;
     private Mesh mesh;
-
+    
     private void Start()
     {
         if (instance != null)
@@ -44,12 +48,38 @@ public class RiverController : MonoBehaviour
 
         bool allWorking = true;
 
-        mesh = riverAsset.GetMesh();
-
-        if(mesh == null)
+        if(riverAsset != null)
+        {
+            mesh = riverAsset.GetMesh();
+        }
+        else
         {
             Debug.LogWarning("Mesh missing from RiverObject");
             allWorking = false;
+        }
+        
+        if (mesh == null)
+        {
+            Debug.LogWarning("Mesh missing from RiverObject");
+            allWorking = false;
+        }
+
+        if (GameObject.FindGameObjectWithTag("Player"))
+        {
+            if(observedObjects.Contains(GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>()) == false)
+            {
+                observedObjects.Add(GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>());
+            }
+        }
+
+        redo:
+        foreach(Rigidbody body in observedObjects)
+        {
+            if (body == null)
+            {
+                observedObjects.Remove(body);
+                goto redo;
+            }                
         }
 
         if (allWorking)
@@ -65,10 +95,12 @@ public class RiverController : MonoBehaviour
                 transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mesh;
             }
 
-            gameObject.AddComponent<MeshCollider>();
+            if(gameObject.GetComponent<MeshCollider>() == null)
+                gameObject.AddComponent<MeshCollider>();
             gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
-            //gameObject.GetComponent<MeshCollider>().convex = true;
-            //gameObject.GetComponent<MeshCollider>().isTrigger = true;
+
+            if(endTransform != null)
+                endTransform.position = riverAsset.nodes[riverAsset.nodes.Length - 1].centerVector;
         }
         else
         {
@@ -80,6 +112,22 @@ public class RiverController : MonoBehaviour
 
     private void Update()
     {
+        if (!Application.isPlaying)
+        {
+            if(riverAsset != null)
+            {
+                mesh = riverAsset.GetMesh();
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mesh;
+                }
+            }
+
+            if (endTransform != null)
+                endTransform.position = riverAsset.nodes[riverAsset.nodes.Length - 1].centerVector;
+            return;
+        }
+
         PhysicsFlowUpdate();
         ArcadeFlowUpdate();
 
@@ -88,10 +136,6 @@ public class RiverController : MonoBehaviour
         ArcadeFloatingUpdate();
     }
 
-    [SerializeField]
-    Vector3 flow;
-    [SerializeField]
-    RiverNode node;
     void ArcadeFlowUpdate ()
     {
         if(usedSystemType == SystemTypes.Arcade)
@@ -110,18 +154,14 @@ public class RiverController : MonoBehaviour
     {
         if (usedSystemType == SystemTypes.Physics)
         {
-            node = riverAsset.GetNodeFromPosition(transform.position, playerRigidbody.transform.position);
-            flow = riverAsset.GetFlow(transform.position, playerRigidbody.transform.position);
-            Vector3 movement = flow;
-            playerRigidbody.AddForce(movement * (minimumSpeed * Time.deltaTime), ForceMode.VelocityChange);
-            /*
-            //Use rb.AddForce to gradually increase or decrease speed
-            //   Giving it 0.1f leeway so that the boat won't start going back and forth between 24.97f and 25.002f
-            if (playerRigidbody.velocity.magnitude < minimumSpeed)
-                playerRigidbody.AddForce(movement * (minimumSpeed * Time.deltaTime));
-            else if (playerRigidbody.velocity.magnitude > minimumSpeed)
-                playerRigidbody.velocity = movement;
-            */
+            for (int i = 0; i < observedObjects.Count; i++)
+            {
+                Rigidbody body = observedObjects[i];
+                node = riverAsset.GetNodeFromPosition(transform.position, body.position);
+                flow = riverAsset.GetFlow(transform.position, body.position);
+                Vector3 movement = flow;
+                body.AddForce(movement * (minimumSpeed * Time.deltaTime), ForceMode.VelocityChange);
+            }
         }
     }
 
@@ -174,7 +214,6 @@ public class RiverController : MonoBehaviour
         }
     }
 
-    [SerializeField] float heightAboveWater;
     void PhysicsFloatingUpdate (Collider other)
     {
         if (usedSystemType == SystemTypes.Physics)
@@ -191,35 +230,7 @@ public class RiverController : MonoBehaviour
             //Debug.Log(other.name + " is colliding with water surface");
         }
     }
-    /*
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Rigidbody>())
-            other.GetComponent<Rigidbody>().drag = 2;
 
-        if (other.gameObject.layer == LayerMask.NameToLayer("Boat"))
-            return;
-
-        ParticleSystem particle = Instantiate(onImpactEffect, other.transform.position, Quaternion.identity) as ParticleSystem;
-        particle.transform.SetParent(effectsPool, true);
-        Destroy(particle.gameObject, particle.main.duration);
-
-        AudioSource audio = Instantiate(onImpactSound, other.transform.position, Quaternion.identity) as AudioSource;
-        audio.transform.SetParent(effectsPool, true);
-        Destroy(audio.gameObject, audio.clip.length);
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        PhysicsFloatingUpdate(other);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.GetComponent<Rigidbody>())
-            other.GetComponent<Rigidbody>().drag = 1;
-    }
-    */
     private void OnDrawGizmos()
     {
         if (riverAsset != null)
@@ -230,18 +241,15 @@ public class RiverController : MonoBehaviour
                 Gizmos.DrawLine(transform.position + riverAsset.nodes[i].centerVector, transform.position + riverAsset.nodes[i + 1].centerVector);
             }
         }
-        /*
-        if (playerRigidbody != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(playerRigidbody.transform.position, transform.position + node.centerVector);
-
-            if (node != null)
-            {
-                Gizmos.color = Color.green;
-                Gizmos.DrawRay(playerRigidbody.transform.position, node.finalFlowDirection * 10);
-            }
-        }
-        */
     }
+
+    /*
+        ParticleSystem particle = Instantiate(onImpactEffect, other.transform.position, Quaternion.identity) as ParticleSystem;
+        particle.transform.SetParent(effectsPool, true);
+        Destroy(particle.gameObject, particle.main.duration);
+
+        AudioSource audio = Instantiate(onImpactSound, other.transform.position, Quaternion.identity) as AudioSource;
+        audio.transform.SetParent(effectsPool, true);
+        Destroy(audio.gameObject, audio.clip.length);
+    */
 }

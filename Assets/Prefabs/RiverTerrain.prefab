@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1105694362431049208}
   - component: {fileID: 8542205466280116163}
+  - component: {fileID: 776275331}
   m_Layer: 4
   m_Name: RiverTerrain
   m_TagString: Untagged
@@ -51,10 +52,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5873cd35956903f4386b78df1e355c1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  riverAsset: {fileID: 0}
-  playerRigidbody: {fileID: 0}
+  riverAsset: {fileID: 11400000, guid: 22a8dff5f2552e14391628a25f7798ca, type: 2}
   observedObjects:
   - {fileID: 0}
+  endTransform: {fileID: 0}
   modifyFreq: 0.75
   waveheight: 0.25
   usedSystemType: 0
@@ -77,6 +78,20 @@ MonoBehaviour:
     centerVector: {x: 0.87, y: 0.34, z: 0.39}
     centerVectorOffset: {x: 0.51, y: 0.18, z: 0.09}
   heightAboveWater: 0
+--- !u!64 &776275331
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105694362431049209}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 0}
 --- !u!1 &3081674981660918934
 GameObject:
   m_ObjectHideFlags: 0

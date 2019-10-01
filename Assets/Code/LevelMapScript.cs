@@ -32,18 +32,18 @@ public class LevelMapScript : MonoBehaviour
         // = river.riverAsset.GetNodeFromPosition(river.transform.position, startpoint.transform.position).centerVector;
         //end = river.riverAsset.GetNodeFromPosition(river.transform.position, endpoint.transform.position).centerVector;
         start=river.riverAsset.nodes[0].centerVector;
+        end = river.riverAsset.GetNodeFromPosition(river.transform.position, endpoint.transform.position).centerVector;
 
         int i = 0;
         foreach(RiverNode node in river.riverAsset.nodes)
         {
             levelLayout += node.centerVector;
             i++;
-            if (i == 14)
+            if (node== river.riverAsset.GetNodeFromPosition(river.transform.position, endpoint.transform.position))
                 break;
         }
         amountOfNodes = i;
         //end = river.riverAsset.nodes[i-1].centerVector;
-        end = river.riverAsset.GetNodeFromPosition(river.transform.position, endpoint.transform.position).centerVector;
         mapStartZ = 4;
         mapEndZ = -4;
         levelLength = (levelLayout.x + levelLayout.z) / 2;
@@ -59,15 +59,14 @@ public class LevelMapScript : MonoBehaviour
         RiverNode boatLocation = river.riverAsset.GetNodeFromPosition(river.transform.position, boat.transform.position);
 
         float boatPos = 0;
-        int i = 0;
         foreach (RiverNode node in river.riverAsset.nodes)
         {
             boatPos += ((node.centerVector.x + node.centerVector.z) / 2);
 
             if (node==boatLocation)
             {
-                //float alter = ((node.centerVector.x - boat.transform.position.x) + (node.centerVector.z - boat.transform.position.z));
-                //boatPos -= alter;
+                float alter = ((node.centerVector.x - boat.transform.position.x) + (node.centerVector.z - boat.transform.position.z));
+                boatPos -= alter;
                 break;
             }
         }

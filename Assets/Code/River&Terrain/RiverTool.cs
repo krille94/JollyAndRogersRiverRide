@@ -378,6 +378,7 @@ public class RiverTool : MonoBehaviour
         vertices.Clear();
         tris.Clear();
         uvs.Clear();
+        nodes.Clear();
 
         lenght = 2;
 

@@ -187,16 +187,19 @@ public class Paddling : MonoBehaviour
 
         if (CanControl)
         {
-            if (forwardKey)
+            if (oar.onLeftSide || oar.onRightSide)
             {
-                impactPoint = oar.Paddle();
-                rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
-                rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
-            }
-            else if (backKey)
-            {
-                impactPoint = oar.Paddle();
-                rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
+                if (forwardKey)
+                {
+                    impactPoint = oar.Paddle();
+                    rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
+                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
+                }
+                else if (backKey)
+                {
+                    impactPoint = oar.Paddle();
+                    rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
+                }
             }
 
             if (leftKey)

@@ -2181,7 +2181,7 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls: []
-  trigger: {fileID: 0}
+  trigger: {fileID: 812115172661265869}
   onDamagedParticlePrefab: {fileID: 4383681461319272144, guid: 19c228b39c1b16441a2ef1f231540979,
     type: 3}
 --- !u!114 &812115172661265869

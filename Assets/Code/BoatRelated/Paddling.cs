@@ -168,7 +168,7 @@ public class Paddling : MonoBehaviour
             return;
         }
 
-        bool rightKey = Input.GetButton("Player_"+player+"_Paddle_Right");
+        bool rightKey = Input.GetButton("Player_" + player + "_Paddle_Right");
         bool leftKey = Input.GetButton("Player_"+ player+ "_Paddle_Left");
         bool forwardKey;
         bool backKey;

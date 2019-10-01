@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelMapScript : MonoBehaviour
 {
     public GameObject boat;
-    public GameObject map;        // A plane showing the level's map
+    public GameObject boatIcon;        // A plane showing the level's map
     public GameObject startpoint; // Where the boat first spawns
     public GameObject endpoint;   // The goal
 
@@ -13,69 +13,82 @@ public class LevelMapScript : MonoBehaviour
     Vector3 end;
     float mapStartZ;
     float mapEndZ;
+    float mapStartX;
+    float mapEndX;
 
-    Vector3 levelLayout;
+    float levelStartX;
+    float levelEndX;
+
     float levelLength;
+    float levelWidth;
     float mapLength;
+    float mapWidth;
     Vector3 iconPos;
     int amountOfNodes;
 
     private RiverController river;
+    LineRenderer linemap;
 
     // Start is called before the first frame update
     void Start()
     {
+        linemap = GetComponent<LineRenderer>();
         river = RiverController.instance;
+        iconPos = Vector3.zero;
 
-        //Vector3 target = river.riverAsset.GetNodeFromPosition(river.transform.position, body.transform.position).centerVector;
-
-        // = river.riverAsset.GetNodeFromPosition(river.transform.position, startpoint.transform.position).centerVector;
-        //end = river.riverAsset.GetNodeFromPosition(river.transform.position, endpoint.transform.position).centerVector;
         start=river.riverAsset.nodes[0].centerVector;
         end = river.riverAsset.GetNodeFromPosition(river.transform.position, endpoint.transform.position).centerVector;
 
+        levelStartX = 0;
+        levelEndX = 0;
         int i = 0;
         foreach(RiverNode node in river.riverAsset.nodes)
         {
-            levelLayout += node.centerVector;
+            if (node.centerVector.x > levelStartX) levelStartX = node.centerVector.x;
+            if (node.centerVector.x < levelEndX) levelEndX = node.centerVector.x;
+
             i++;
-            if (node== river.riverAsset.GetNodeFromPosition(river.transform.position, endpoint.transform.position))
+
+            if (node.centerVector == end)
                 break;
         }
         amountOfNodes = i;
-        //end = river.riverAsset.nodes[i-1].centerVector;
-        mapStartZ = 4;
-        mapEndZ = -4;
-        levelLength = (levelLayout.x + levelLayout.z) / 2;
-        mapLength = mapEndZ - mapStartZ;
 
-        iconPos = transform.localPosition;
-        iconPos.z = mapEndZ;
+        mapStartZ = 4;
+        mapEndZ = -3;
+        mapStartX = 0;
+        mapEndX = -4;
+        mapLength = mapEndZ - mapStartZ;
+        mapWidth = mapEndX - mapStartX;
+        levelLength = (river.riverAsset.nodes[i].centerVector.z-river.riverAsset.nodes[0].centerVector.z) / mapLength;
+        levelWidth = (levelStartX - levelEndX) / mapWidth;
+
+        linemap.positionCount = i;
+        for (int o=0; o<i; o++)
+        {
+            Vector3 linepos = river.riverAsset.nodes[o].centerVector;
+            linepos.x /= levelWidth;
+            linepos.z /= levelLength;
+            linepos.x += mapStartX;
+            linepos.z += mapStartZ;
+            linemap.SetPosition(o, linepos);
+        }
+
+        iconPos = linemap.GetPosition(0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        RiverNode boatLocation = river.riverAsset.GetNodeFromPosition(river.transform.position, boat.transform.position);
+        Vector3 boatLocation = boat.transform.position;
 
-        float boatPos = 0;
-        foreach (RiverNode node in river.riverAsset.nodes)
-        {
-            boatPos += ((node.centerVector.x + node.centerVector.z) / 2);
+        //boatLocation /= mapLength;
+        boatLocation /= levelLength;
 
-            if (node==boatLocation)
-            {
-                float alter = ((node.centerVector.x - boat.transform.position.x) + (node.centerVector.z - boat.transform.position.z));
-                boatPos -= alter;
-                break;
-            }
-        }
+        //if (PlayerData.distanceTraveled<boatPos) PlayerData.distanceTraveled=boatPos;
 
-        boatPos /= levelLength;
-
-        if (PlayerData.distanceTraveled<boatPos) PlayerData.distanceTraveled=boatPos;
-
-        iconPos.z = mapStartZ + (boatPos * mapLength);
-        transform.localPosition = new Vector3(1, 1, iconPos.z);
+        iconPos.x = mapStartX + boatLocation.x+0.5f;
+        iconPos.z = mapStartZ + boatLocation.z;
+        boatIcon.transform.localPosition = new Vector3(iconPos.x, 1, iconPos.z);
     }
 }

@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class MouseHover : MonoBehaviour
 {
+    Color normal= new Color(1, 0.75f, 0);
+    Color highlighted = Color.white;
+    TextMesh text;
     void Start()
     {
-        GetComponent<TextMesh>().color = Color.black;
+        text = GetComponent<TextMesh>();
+        text.color = normal;
     }
 
-    void OnMouseEnter()
+    void OnMouseOver()
     {
         //GetComponent<AudioSource>().Play();
-        GetComponent<TextMesh>().color = Color.red;
+        text.color = highlighted;
     }
 
     void OnMouseExit()
     {
-        GetComponent<TextMesh>().color = Color.black;
+        text.color = normal;
     }
 }

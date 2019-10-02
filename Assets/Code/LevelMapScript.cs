@@ -32,7 +32,15 @@ public class LevelMapScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (boatIcon == null)
+            Debug.LogWarning("BoatIcon Missing!");
+
         linemap = GetComponent<LineRenderer>();
+        if (linemap == null)
+        {
+            linemap = gameObject.AddComponent<LineRenderer>();
+            Debug.LogWarning("LineRenderer Missing!\nAdded temp");
+        }
         river = RiverController.instance;
         iconPos = Vector3.zero;
 
@@ -52,6 +60,8 @@ public class LevelMapScript : MonoBehaviour
             if (node.centerVector == end)
                 break;
         }
+        if (i > river.riverAsset.nodes.Length - 1)
+            i = river.riverAsset.nodes.Length - 1;
         amountOfNodes = i;
 
         mapStartZ = 4;
@@ -89,6 +99,7 @@ public class LevelMapScript : MonoBehaviour
 
         iconPos.x = mapStartX + boatLocation.x+0.5f;
         iconPos.z = mapStartZ + boatLocation.z;
-        boatIcon.transform.localPosition = new Vector3(iconPos.x, 1, iconPos.z);
+        if(boatIcon != null)
+            boatIcon.transform.localPosition = new Vector3(iconPos.x, 1, iconPos.z);
     }
 }

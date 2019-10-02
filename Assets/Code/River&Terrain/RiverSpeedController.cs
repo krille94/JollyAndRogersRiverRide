@@ -47,7 +47,7 @@ public class RiverSpeedController : MonoBehaviour
     private List<Vector3> nextIterationStartPoints = new List<Vector3>();
 
     //Un-serialized this temporarily because it caused an annoying warning
-    [SerializeField] Rigidbody boat;
+    [SerializeField] Rigidbody boat = null;
 
     private void Update()
     {

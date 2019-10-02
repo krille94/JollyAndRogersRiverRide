@@ -79,6 +79,11 @@ public class RiverWalls : MonoBehaviour
         vertices.Add(river.vertices[index + 0] + new Vector3(0, quadHeight, 0));
         vertices.Add(river.vertices[index + 2] + new Vector3(0, quadHeight, 0));
 
+        uvs.Add(new Vector2(0, 0));
+        uvs.Add(new Vector2(1, 0));
+        uvs.Add(new Vector2(0, 1));
+        uvs.Add(new Vector2(1, 1));
+
         if (fliped)
         {
             triangles.Add(vertCount + 0);
@@ -97,10 +102,5 @@ public class RiverWalls : MonoBehaviour
             triangles.Add(vertCount + 3);
             triangles.Add(vertCount + 1);
         }
-        
-        uvs.Add(new Vector2(0, 0));
-        uvs.Add(new Vector2(1, 0));
-        uvs.Add(new Vector2(0, 1));
-        uvs.Add(new Vector2(1, 1));
     }
 }

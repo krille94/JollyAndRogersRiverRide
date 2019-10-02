@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 6649650119812443121}
   m_Layer: 0
   m_Name: RiverTerrain
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -669,10 +669,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   riverAsset: {fileID: 0}
-  playerRigidbody: {fileID: 0}
+  observedObjects:
+  - {fileID: 0}
+  endTransform: {fileID: 0}
   modifyFreq: 0.75
   waveheight: 0.25
   usedSystemType: 0
+  arcadeRiverLayer:
+    serializedVersion: 2
+    m_Bits: 0
   arcadeBouance: 100
   physicsBouance: 75000
   minimumSpeed: 0
@@ -702,7 +707,7 @@ GameObject:
   - component: {fileID: 6053473308520520231}
   m_Layer: 4
   m_Name: Water
-  m_TagString: Untagged
+  m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -839,6 +844,7 @@ MonoBehaviour:
     finalFlowDirection: {x: 0, y: 0, z: 0}
     centerVector: {x: 0.5, y: 0, z: 7}
     centerVectorOffset: {x: 0, y: 0, z: 0}
+  downwardAngle: -5
 --- !u!65 &6053473308520520231
 BoxCollider:
   m_ObjectHideFlags: 0

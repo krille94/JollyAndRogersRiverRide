@@ -22,6 +22,8 @@ public class BoatCollisionKnockBack : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         //Vector3 target = river.riverAsset.GetNodeFromPosition(river.transform.position, body.transform.position).centerVector;
+        if (collision.gameObject.tag == "River")
+            return;
 
         Vector3 target = collision.GetContact(0).point;
         target = target - body.transform.position;

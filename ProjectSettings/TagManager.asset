@@ -8,6 +8,7 @@ TagManager:
   - End
   - Boost
   - Whirlpool
+  - River
   layers:
   - Default
   - TransparentFX

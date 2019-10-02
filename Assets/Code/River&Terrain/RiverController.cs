@@ -135,7 +135,8 @@ public class RiverController : MonoBehaviour
         PhysicsFlowUpdate();
         ArcadeFlowUpdate();
 
-        MeshWaveUpdate();
+        //OutCommented Its Flattening the river, NO MORE WATERFALS :(
+        //MeshWaveUpdate();
 
         ArcadeFloatingUpdate();
     }
@@ -202,7 +203,7 @@ public class RiverController : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(body.transform.position + (Vector3.up * 1000), Vector3.down, out hit, 2000, arcadeRiverLayer))
                 {
-                    Debug.Log(hit.transform.name);
+                    //Debug.Log(hit.transform.name);
                     if (hit.transform != transform)
                         return;
 

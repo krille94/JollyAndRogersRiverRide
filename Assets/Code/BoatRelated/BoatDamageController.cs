@@ -14,7 +14,7 @@ public class BoatDamageController : MonoBehaviour
 
     public UnityEvent onDeath;
 
-    [SerializeField] PickUpTrigger trigger;
+    [SerializeField] PickUpTrigger trigger = null;
 
     public delegate void OnDamageRecived(float value, Vector3 point);
     public OnDamageRecived onDamaged;

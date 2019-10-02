@@ -18,7 +18,7 @@ public class RiverController : MonoBehaviour
 
     [Header("Floating")]
     public SystemTypes usedSystemType;
-    public enum SystemTypes { Arcade, Physics }
+    public enum SystemTypes { Arcade, Physics, non }
 
     public LayerMask arcadeRiverLayer;
     public float arcadeBouance = 100;
@@ -209,11 +209,12 @@ public class RiverController : MonoBehaviour
 
                     RiverNode node = riverAsset.GetNodeFromPosition(hit.point);
 
-                    body.transform.position = new Vector3(
+                    Vector3 targetPosition = new Vector3(
                         body.transform.position.x,
                         node.centerVector.y,
                         body.transform.position.z
                     );
+                    body.transform.position = Vector3.Lerp(body.transform.position, targetPosition, Time.deltaTime);
                 }
             }
         }

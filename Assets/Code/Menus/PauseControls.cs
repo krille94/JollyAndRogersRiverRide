@@ -13,9 +13,20 @@ public class PauseControls : MonoBehaviour
         main=GameObject.Find("Pause Main Menu");
         options=GameObject.Find("Pause Options Menu");
         howtoplay=GameObject.Find("Pause How To Play Menu");
-        options.SetActive(false);
-        howtoplay.SetActive(false);
-        pausePanel.SetActive(false);
+        if (options == null)
+            Debug.LogWarning("'Options' Menu Missing");
+        else
+            options.SetActive(false);
+        if(howtoplay == null)
+            Debug.LogWarning("'HowToPlay' Menu Missing");
+        else
+            howtoplay.SetActive(false);
+        if(pausePanel == null)
+            Debug.LogWarning("'PausePanel' Menu Missing");
+        else
+            pausePanel.SetActive(false);
+
+        ContinueGame();
     }
 
     // Update is called once per frame

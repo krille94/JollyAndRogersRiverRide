@@ -27,6 +27,10 @@ public class MenuButtonsEditor : Editor
             tool.CurrentMenu = (GameObject)EditorGUILayout.ObjectField("Move From Menu", tool.CurrentMenu, typeof(GameObject), true);
             tool.NextMenu = (GameObject)EditorGUILayout.ObjectField("Move To Menu", tool.NextMenu, typeof(GameObject), true);
         }
+        if (tool.buttonAction.ToString() == "ResumeGame")
+        {
+            tool.CurrentMenu = (GameObject)EditorGUILayout.ObjectField("Pause Menu", tool.CurrentMenu, typeof(GameObject), true);
+        }
     }
 
 }

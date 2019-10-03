@@ -108,8 +108,11 @@ public class MenuButtons : MonoBehaviour
         }
         if (buttonAction.ToString() == "ChangeMenu")
         {
-            if (NextMenu.name == "Main Menu") logo.SetActive(true);
-            else logo.SetActive(false);
+            if (logo != null)
+            {
+                if (NextMenu.name == "Main Menu") logo.SetActive(true);
+                else logo.SetActive(false);
+            }
 
             GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
             CurrentMenu.SetActive(false);

@@ -122,7 +122,7 @@ public class HighScoreList : MonoBehaviour
         int i = 1;
         foreach (Highscore g in SaveScore.savedGames)
         {
-            if (i < 10) allScores += "  "+i.ToString()+". ";
+            if (i < 10) allScores += " "+i.ToString()+". ";
             else allScores += i.ToString() + ". ";
 
             if (i == YourPlacement+1)

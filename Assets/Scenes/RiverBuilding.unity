@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -131,14 +131,14 @@ Mesh:
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
-    indexCount: 24
+    indexCount: 84
     topology: 0
     baseVertex: 0
     firstVertex: 0
-    vertexCount: 10
+    vertexCount: 30
     localAABB:
-      m_Center: {x: 5, y: 0, z: 20}
-      m_Extent: {x: 5, y: 0, z: 20}
+      m_Center: {x: 28.318586, y: -8.371447, z: 59.430393}
+      m_Extent: {x: 28.318586, y: 8.371447, z: 73.05359}
   m_Shapes:
     vertices: []
     shapes: []
@@ -155,10 +155,10 @@ Mesh:
   m_KeepVertices: 1
   m_KeepIndices: 1
   m_IndexFormat: 0
-  m_IndexBuffer: 000002000100020003000100040003000200050003000400060005000400070005000600080007000600090007000800
+  m_IndexBuffer: 0000020001000200030001000400030002000500030004000600050004000700050006000800070006000900070008000a00090008000b0009000a000c000b000a000d000b000c000e000d000c000f000d000e0010000f000e0011000f0010001200110010001300110012001400130012001500130014001600150014001700150016001800170016001900170018001a00190018001b0019001a001c001b001a001d001b001c00
   m_VertexData:
     serializedVersion: 3
-    m_VertexCount: 10
+    m_VertexCount: 30
     m_Channels:
     - stream: 0
       offset: 0
@@ -216,8 +216,8 @@ Mesh:
       offset: 0
       format: 0
       dimension: 0
-    m_DataSize: 320
-    _typelessdata: 000000000000000000000000000000000000803f000000000000000000000000000020410000000000000000000000000000803f000000000000204100000000000000000000000000002041000000000000803f000000000000000000002041000020410000000000002041000000000000803f00000000000020410000204100000000000000000000a041000000000000803f00000000000000000000a04100002041000000000000a041000000000000803f00000000000020410000a04100000000000000000000f041000000000000803f00000000000000000000f04100002041000000000000f041000000000000803f00000000000020410000f041000000000000000000002042000000000000803f000000000000000000002042000020410000000000002042000000000000803f000000000000204100002042
+    m_DataSize: 960
+    _typelessdata: 000000000000000000000000000000000000803f00000000000000000000000035106c410000000098f859c1000000000000803f0000000035106c4198f859c1000000000000000000002041000000000000803f0000000000000000000020418474a141000000000c20e4c0000000000000803f000000008474a1410c20e4c058f4be40000000000235a841000000000000803f0000000058f4be400235a841444ba24100000000ca320040000000000000803f00000000444ba241ca32004085b0524100000000c279b541000000000000803f0000000085b05241c279b541a04de0410000000052610440000000000000803f00000000a04de04152610440d4aa9c410000000076af9541000000000000803f00000000d4aa9c4176af95417213084200000000804d03c0000000000000803f0000000072130842804d03c07c9fc9410000000036649e41000000000000803f000000007c9fc94136649e4114074d42000000003873273f000000000000803f0000000014074d423873273f7cc1da4100000000d0aac741000000000000803f000000007cc1da41d0aac741778c62420000000008fd5441000000000000803f00000000778c624208fd544178e7c04100000000ccc50442000000000000803f0000000078e7c041ccc504428ca4514200000000aea60642000000000000803f000000008ca45142aea60642113d7741000000007ead2942000000000000803f00000000113d77417ead294280cb194200000000d0e94542000000000000803f0000000080cb1942d0e94542395d064100000000fe035b42000000000000803f00000000395d0641fe035b424a630342000000009a336642000000000000803f000000004a6303429a3366423173014100000000947f81423f4ea03aa76b7c3fbaa22a3e31730141947f8142c856d94100000000e43781423be59d3c35286c3fe265c53ec856d941e4378142c41db9400000a0c09ef5944234d4253dc9244d3f20ca183fc41db9409ef59442bc5ae8410000a0c0a8019142d0c3453d06b23d3f03762b3fbc5ae841a80191425853b040dd8d67c1eed6a642b969c93c09376e3f3715bb3e5853b040eed6a642203efe41e08d67c1d0f7a342ad3c7c3ca5f87b3fa443343e203efe41d0f7a342e59a084172f185c198fbe94254e4083ceb937f3f8ba3683de59a084198fbe942ea132a4272f185c19e20db42e300d83bc3e07f3fbc0df73cea132a429e20db42186ca64072f185c1e67b044300000000ffff7f3f00000000186ca640e67b04432c58514272f185c1d25e0343000000000000803f000000002c585142d25e0343
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -271,8 +271,8 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: 5, y: 0, z: 20}
-    m_Extent: {x: 5, y: 0, z: 20}
+    m_Center: {x: 28.318586, y: -8.371447, z: 59.430393}
+    m_Extent: {x: 28.318586, y: 8.371447, z: 73.05359}
   m_MeshUsageFlags: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
@@ -374,6 +374,75 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &1812823115
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6475557553773465844, guid: bfd3df4d519704d4689fea56b37ccac8,
+        type: 3}
+      propertyPath: m_Name
+      value: Boat
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475557553773465842, guid: bfd3df4d519704d4689fea56b37ccac8,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 10.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475557553773465842, guid: bfd3df4d519704d4689fea56b37ccac8,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475557553773465842, guid: bfd3df4d519704d4689fea56b37ccac8,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475557553773465842, guid: bfd3df4d519704d4689fea56b37ccac8,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475557553773465842, guid: bfd3df4d519704d4689fea56b37ccac8,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475557553773465842, guid: bfd3df4d519704d4689fea56b37ccac8,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475557553773465842, guid: bfd3df4d519704d4689fea56b37ccac8,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475557553773465842, guid: bfd3df4d519704d4689fea56b37ccac8,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475557553773465842, guid: bfd3df4d519704d4689fea56b37ccac8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475557553773465842, guid: bfd3df4d519704d4689fea56b37ccac8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475557553773465842, guid: bfd3df4d519704d4689fea56b37ccac8,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bfd3df4d519704d4689fea56b37ccac8, type: 3}
 --- !u!1 &1716577671944541696
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,57 +698,147 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60852da3d69ea0f469a408b2cf1278f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uniqName: Test
+  uniqName: AlphaReviewRiver
   vertices:
   - {x: 0, y: 0, z: 0}
-  - {x: 10, y: 0, z: 0}
+  - {x: 14.753957, y: 0, z: -13.623192}
   - {x: 0, y: 0, z: 10}
-  - {x: 10, y: 0, z: 10}
-  - {x: 0, y: 0, z: 20}
-  - {x: 10, y: 0, z: 20}
-  - {x: 0, y: 0, z: 30}
-  - {x: 10, y: 0, z: 30}
-  - {x: 0, y: 0, z: 40}
-  - {x: 10, y: 0, z: 40}
-  tris: 000000000200000001000000020000000300000001000000040000000300000002000000050000000300000004000000060000000500000004000000070000000500000006000000080000000700000006000000090000000700000008000000
+  - {x: 20.181892, y: 0, z: -7.128912}
+  - {x: 5.967327, y: 0, z: 21.025883}
+  - {x: 20.28675, y: 0, z: 2.0031}
+  - {x: 13.168096, y: 0, z: 22.684452}
+  - {x: 28.037903, y: 0, z: 2.06844}
+  - {x: 19.583412, y: 0, z: 18.710674}
+  - {x: 34.01899, y: 0, z: -2.0516052}
+  - {x: 25.202873, y: 0, z: 19.798931}
+  - {x: 51.256912, y: 0, z: 0.65410185}
+  - {x: 27.344475, y: 0, z: 24.958405}
+  - {x: 56.637173, y: 0, z: 13.311775}
+  - {x: 24.113022, y: 0, z: 33.19316}
+  - {x: 52.41069, y: 0, z: 33.662773}
+  - {x: 15.452409, y: 0, z: 42.419426}
+  - {x: 38.44873, y: 0, z: 49.478333}
+  - {x: 8.397759, y: 0, z: 54.7539}
+  - {x: 32.846962, y: 0, z: 57.550392}
+  - {x: 8.090623, y: 0, z: 64.749176}
+  - {x: 27.167374, y: 0, z: 64.60916}
+  - {x: 5.7848835, y: -5, z: 74.47972}
+  - {x: 29.044304, y: -5, z: 72.503235}
+  - {x: 5.510174, y: -14.472135, z: 83.419785}
+  - {x: 31.780334, y: -14.472137, z: 81.98401}
+  - {x: 8.537816, y: -16.742893, z: 116.991394}
+  - {x: 42.519447, y: -16.742893, z: 109.563705}
+  - {x: 5.200695, y: -16.742893, z: 132.48398}
+  - {x: 52.336105, y: -16.742893, z: 131.37039}
+  tris: 0000000002000000010000000200000003000000010000000400000003000000020000000500000003000000040000000600000005000000040000000700000005000000060000000800000007000000060000000900000007000000080000000a00000009000000080000000b000000090000000a0000000c0000000b0000000a0000000d0000000b0000000c0000000e0000000d0000000c0000000f0000000d0000000e000000100000000f0000000e000000110000000f000000100000001200000011000000100000001300000011000000120000001400000013000000120000001500000013000000140000001600000015000000140000001700000015000000160000001800000017000000160000001900000017000000180000001a00000019000000180000001b000000190000001a0000001c0000001b0000001a0000001d0000001b0000001c000000
   uvs:
   - {x: 0, y: 0}
-  - {x: 10, y: 0}
+  - {x: 14.753957, y: -13.623192}
   - {x: 0, y: 10}
-  - {x: 10, y: 10}
-  - {x: 0, y: 20}
-  - {x: 10, y: 20}
-  - {x: 0, y: 30}
-  - {x: 10, y: 30}
-  - {x: 0, y: 40}
-  - {x: 10, y: 40}
-  lenght: 5
+  - {x: 20.181892, y: -7.128912}
+  - {x: 5.967327, y: 21.025883}
+  - {x: 20.28675, y: 2.0031}
+  - {x: 13.168096, y: 22.684452}
+  - {x: 28.037903, y: 2.06844}
+  - {x: 19.583412, y: 18.710674}
+  - {x: 34.01899, y: -2.0516052}
+  - {x: 25.202873, y: 19.798931}
+  - {x: 51.256912, y: 0.65410185}
+  - {x: 27.344475, y: 24.958405}
+  - {x: 56.637173, y: 13.311775}
+  - {x: 24.113022, y: 33.19316}
+  - {x: 52.41069, y: 33.662773}
+  - {x: 15.452409, y: 42.419426}
+  - {x: 38.44873, y: 49.478333}
+  - {x: 8.397759, y: 54.7539}
+  - {x: 32.846962, y: 57.550392}
+  - {x: 8.090623, y: 64.749176}
+  - {x: 27.167374, y: 64.60916}
+  - {x: 5.7848835, y: 74.47972}
+  - {x: 29.044304, y: 72.503235}
+  - {x: 5.510174, y: 83.419785}
+  - {x: 31.780334, y: 81.98401}
+  - {x: 8.537816, y: 116.991394}
+  - {x: 42.519447, y: 109.563705}
+  - {x: 5.200695, y: 132.48398}
+  - {x: 52.336105, y: 131.37039}
+  lenght: 15
   autoUpdateMesh: 1
   nodes:
   - flowDirection: {x: 0, y: 0, z: 1}
-    flowDirectionOffset: {x: 0, y: 0, z: 0}
+    flowDirectionOffset: {x: -0, y: 0, z: 0}
     finalFlowDirection: {x: 0, y: 0, z: 1}
-    centerVector: {x: 5, y: 0, z: 0}
+    centerVector: {x: 7.3769784, y: 0, z: -6.811596}
+    centerVectorOffset: {x: 1.4923358, y: 0, z: 6.030796}
+  - flowDirection: {x: 0.47597316, y: 0, z: 0.8794598}
+    flowDirectionOffset: {x: -0, y: 43.91628, z: 0}
+    finalFlowDirection: {x: 0.47597316, y: 0, z: 0.8794598}
+    centerVector: {x: 10.090946, y: 0, z: 1.435544}
+    centerVectorOffset: {x: 1.5356159, y: 0, z: 6.220523}
+  - flowDirection: {x: 0.47597316, y: 0, z: 0.8794598}
+    flowDirectionOffset: {x: -0, y: 73.506905, z: 0}
+    finalFlowDirection: {x: 0.47597316, y: 0, z: 0.8794598}
+    centerVector: {x: 13.127039, y: 0, z: 11.514492}
+    centerVectorOffset: {x: 6.4464054, y: 0, z: -1.5697632}
+  - flowDirection: {x: 0.9744844, y: 0, z: 0.2244552}
+    flowDirectionOffset: {x: -0, y: 120.07198, z: 0}
+    finalFlowDirection: {x: 0.9744844, y: 0, z: 0.2244552}
+    centerVector: {x: 20.602999, y: 0, z: 12.376446}
+    centerVectorOffset: {x: 8.500359, y: 0, z: -0.47197342}
+  - flowDirection: {x: 0.8501233, y: 0, z: -0.5265837}
+    flowDirectionOffset: {x: -0, y: 81.17389, z: 0}
+    finalFlowDirection: {x: 0.8501233, y: 0, z: -0.5265837}
+    centerVector: {x: 26.8012, y: 0, z: 8.329535}
+    centerVectorOffset: {x: 5.6549683, y: 0, z: 1.2193012}
+  - flowDirection: {x: 0.98175967, y: 0, z: 0.1901262}
+    flowDirectionOffset: {x: -0, y: 39.01837, z: 0}
+    finalFlowDirection: {x: 0.98175967, y: 0, z: 0.1901262}
+    centerVector: {x: 38.229893, y: 0, z: 10.226517}
+    centerVectorOffset: {x: 4.0357246, y: 0, z: -2.7221985}
+  - flowDirection: {x: 0.38336748, y: 0, z: 0.9235959}
+    flowDirectionOffset: {x: -0, y: 353.1141, z: 0}
+    finalFlowDirection: {x: 0.38336748, y: 0, z: 0.9235959}
+    centerVector: {x: 41.99082, y: 0, z: 19.13509}
+    centerVectorOffset: {x: 5.3054657, y: 0, z: -4.7613525}
+  - flowDirection: {x: -0.36529687, y: 0, z: 0.9308911}
+    flowDirectionOffset: {x: -0, y: 323.94934, z: 0}
+    finalFlowDirection: {x: -0.36529687, y: 0, z: 0.9308911}
+    centerVector: {x: 38.261856, y: 0, z: 33.427967}
+    centerVectorOffset: {x: 10, y: 0, z: -10}
+  - flowDirection: {x: -0.6844032, y: 0, z: 0.72910374}
+    flowDirectionOffset: {x: -0, y: 325.65366, z: 0}
+    finalFlowDirection: {x: -0.6844032, y: 0, z: 0.72910374}
+    centerVector: {x: 26.95057, y: 0, z: 45.94888}
+    centerVectorOffset: {x: 10, y: 0, z: -10}
+  - flowDirection: {x: -0.49647734, y: 0, z: 0.8680497}
+    flowDirectionOffset: {x: -0, y: 330.68738, z: 0}
+    finalFlowDirection: {x: -0.49647734, y: 0, z: 0.8680497}
+    centerVector: {x: 20.62236, y: 0, z: 56.152145}
+    centerVectorOffset: {x: 7.854088, y: 0, z: -10}
+  - flowDirection: {x: -0.030713668, y: 0, z: 0.9995282}
+    flowDirectionOffset: {x: -0, y: 0, z: 0}
+    finalFlowDirection: {x: -0.030713668, y: 0, z: 0.9995282}
+    centerVector: {x: 17.628998, y: 0, z: 64.67917}
+    centerVectorOffset: {x: 5.230343, y: 0, z: -10}
+  - flowDirection: {x: -0.20623165, y: -0.4472137, z: 0.87032664}
+    flowDirectionOffset: {x: -0, y: 0, z: 0}
+    finalFlowDirection: {x: -0.20623165, y: -0.4472137, z: 0.87032664}
+    centerVector: {x: 17.414593, y: -5, z: 73.49148}
     centerVectorOffset: {x: 0, y: 0, z: 0}
-  - flowDirection: {x: 0, y: 0, z: 1}
-    flowDirectionOffset: {x: 0, y: 0, z: 0}
-    finalFlowDirection: {x: 0, y: 0, z: 1}
-    centerVector: {x: 5, y: 0, z: 10}
+  - flowDirection: {x: -0.021086548, y: -0.7270753, z: 0.6862338}
+    flowDirectionOffset: {x: -0, y: 0, z: 0}
+    finalFlowDirection: {x: -0.021086548, y: -0.7270753, z: 0.6862338}
+    centerVector: {x: 18.645254, y: -14.472136, z: 82.7019}
     centerVectorOffset: {x: 0, y: 0, z: 0}
-  - flowDirection: {x: 0, y: 0, z: 1}
-    flowDirectionOffset: {x: 0, y: 0, z: 0}
-    finalFlowDirection: {x: 0, y: 0, z: 1}
-    centerVector: {x: 5, y: 0, z: 20}
+  - flowDirection: {x: 0.089616954, y: -0.06721351, z: 0.99370575}
+    flowDirectionOffset: {x: -0, y: 0, z: 0}
+    finalFlowDirection: {x: 0.089616954, y: -0.06721351, z: 0.99370575}
+    centerVector: {x: 25.528631, y: -16.742893, z: 113.27755}
     centerVectorOffset: {x: 0, y: 0, z: 0}
-  - flowDirection: {x: 0, y: 0, z: 1}
-    flowDirectionOffset: {x: 0, y: 0, z: 0}
-    finalFlowDirection: {x: 0, y: 0, z: 1}
-    centerVector: {x: 5, y: 0, z: 30}
-    centerVectorOffset: {x: 0, y: 0, z: 0}
-  - flowDirection: {x: 0, y: 0, z: 1}
-    flowDirectionOffset: {x: 0, y: 0, z: 0}
-    finalFlowDirection: {x: 0, y: 0, z: 1}
-    centerVector: {x: 5, y: 0, z: 40}
+  - flowDirection: {x: -0.21057157, y: 0, z: 0.97757846}
+    flowDirectionOffset: {x: -0, y: 0, z: 0}
+    finalFlowDirection: {x: -0.21057157, y: 0, z: 0.97757846}
+    centerVector: {x: 28.7684, y: -16.742893, z: 131.92719}
     centerVectorOffset: {x: 0, y: 0, z: 0}
   downwardAngle: -5
 --- !u!33 &3625110142129231968

@@ -211,7 +211,7 @@ public class RiverController : MonoBehaviour
 
                     Vector3 targetPosition = new Vector3(
                         body.transform.position.x,
-                        node.centerVector.y,
+                        hit.point.y,
                         body.transform.position.z
                     );
                     body.transform.position = Vector3.Lerp(body.transform.position, targetPosition, Time.deltaTime);

@@ -5,7 +5,8 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class CameraController : MonoBehaviour
 {
-    public GameObject boat;
+    public RiverController riverController;
+    public Transform boat;
 
     public Vector3 offset;
     public float viewRot;
@@ -14,16 +15,14 @@ public class CameraController : MonoBehaviour
 
     public Vector3 targetPosition;
 
-    private void Start()
-    {
-        transform.position = boat.transform.position + offset;
-    }
-
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, new Vector3(boat.transform.position.x, 0, boat.transform.position.z) + offset, Time.deltaTime * speed * Vector3.Distance(transform.position, boat.transform.position));
-        //transform.position = Vector3.Lerp(targetPosition, transform.position, Time.deltaTime);
+        RiverNode node = riverController.riverAsset.GetNodeFromPosition(boat.position);
 
-        transform.LookAt(boat.transform.position + new Vector3(0, viewRot, 0));
+        targetPosition = node.centerVector + offset;
+
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * speed);
+
+        transform.LookAt(boat);
     }
 }

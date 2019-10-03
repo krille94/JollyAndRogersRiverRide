@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CharacterSelectScript : MonoBehaviour
 {
-    private enum CharNames { Jolly, Roger };
+    // Swapped name spots due to character boat spots being switched
+    private enum CharNames { Roger, Jolly };
 
     public GameObject Player1Icon;
     public GameObject Player2Icon;

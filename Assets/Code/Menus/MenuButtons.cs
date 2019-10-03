@@ -15,11 +15,8 @@ public class MenuButtons : MonoBehaviour
     public enum OptionTypes { None, Audio, Controls, HoldPaddle }
     public OptionTypes optionType = 0;
 
-    private GameObject logo;
-
     private void Start()
     {
-        logo = GameObject.Find("Logo");
     }
 
     void OnMouseUp()
@@ -38,8 +35,6 @@ public class MenuButtons : MonoBehaviour
         }
         if (buttonAction.ToString() == "Highscores")
         {
-            if (NextMenu.name == "Main Menu") logo.SetActive(true);
-            else logo.SetActive(false);
             if (PlayerData.playedGame) PlayerData.playedGame = false;
             GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
             CurrentMenu.SetActive(false);
@@ -108,12 +103,6 @@ public class MenuButtons : MonoBehaviour
         }
         if (buttonAction.ToString() == "ChangeMenu")
         {
-            if (logo != null)
-            {
-                if (NextMenu.name == "Main Menu") logo.SetActive(true);
-                else logo.SetActive(false);
-            }
-
             GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
             CurrentMenu.SetActive(false);
             NextMenu.SetActive(true);

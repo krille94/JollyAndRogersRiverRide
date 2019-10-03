@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
 public class RiverController : MonoBehaviour
 {
     public static RiverController instance;

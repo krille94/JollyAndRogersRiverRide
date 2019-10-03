@@ -129,16 +129,4 @@ public class RiverObject : ScriptableObject
             return res.normalized;
         }        
     }
-
-    public Mesh GetMesh()
-    {
-        Mesh mesh = new Mesh();
-
-        mesh.vertices = vertices;
-        mesh.triangles = tris;
-        mesh.uv = uvs;
-        mesh.RecalculateNormals();
-
-        return mesh;
-    }
 }

@@ -47,21 +47,18 @@ public class RiverController : MonoBehaviour
         instance = this;
 
         bool allWorking = true;
-
-        if(riverAsset != null)
-        {
-            mesh = riverAsset.GetMesh();
-        }
-        else
-        {
-            Debug.LogWarning("Mesh missing from RiverObject");
-            allWorking = false;
-        }
         
         if (mesh == null)
         {
-            Debug.LogWarning("Mesh missing from RiverObject");
-            allWorking = false;
+            if (riverAsset != null)
+            {
+                BuildMesh();
+            }
+            else
+            {
+                Debug.LogWarning("Mesh missing from RiverObject");
+                allWorking = false;
+            }
         }
 
         if (GameObject.FindGameObjectWithTag("Player"))
@@ -116,7 +113,7 @@ public class RiverController : MonoBehaviour
         {
             if(riverAsset != null)
             {
-                mesh = riverAsset.GetMesh();
+                BuildMesh();
                 for (int i = 0; i < transform.childCount; i++)
                 {
                     transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mesh;
@@ -139,6 +136,18 @@ public class RiverController : MonoBehaviour
         //MeshWaveUpdate();
 
         ArcadeFloatingUpdate();
+    }
+
+    /// <summary>
+    /// If mesh is corupted or missing
+    /// </summary>
+    private void BuildMesh ()
+    {
+        mesh = new Mesh();
+        mesh.vertices = riverAsset.vertices;
+        mesh.triangles = riverAsset.tris;
+        mesh.uv = riverAsset.uvs;
+        mesh.RecalculateNormals();
     }
 
     void ArcadeFlowUpdate ()

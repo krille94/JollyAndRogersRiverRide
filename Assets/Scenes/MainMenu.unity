@@ -1028,7 +1028,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 298353640}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 6.57, y: -0, z: 0.52}
+  m_LocalPosition: {x: 6.07, y: -0, z: 0.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1036088667}
@@ -1042,16 +1042,16 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 298353640}
-  m_Text: 'Step 2: Rowing.
+  m_Text: 'Press W/S (p1)
 
-    Here''s how you
+    or up/down (p2)
 
-    do that, too.'
+    to row.'
   m_OffsetZ: 0
   m_CharacterSize: 0.25
   m_LineSpacing: 1
   m_Anchor: 2
-  m_Alignment: 2
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 32
   m_FontStyle: 1
@@ -1331,7 +1331,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6b6a95bdd4da2cc4b94dab0cb63239ad, type: 2}
+  - {fileID: 2100000, guid: 12eb711df0f9c4c46a38ec73e375af67, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4478,7 +4478,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6b6a95bdd4da2cc4b94dab0cb63239ad, type: 2}
+  - {fileID: 2100000, guid: 0c7524566314704498770107c446503a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4851,7 +4851,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568659411}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -6.69, y: -0, z: 4.54}
+  m_LocalPosition: {x: -7.87, y: -0, z: 4.81}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1036088667}
@@ -4865,16 +4865,18 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568659411}
-  m_Text: 'Step 1: Leaning.
+  m_Text: 'Press A/D (p1)
 
-    Here''s how you
+    or left/right (p2)
 
-    do it.'
+    to lower your
+
+    oar into the water.'
   m_OffsetZ: 0
   m_CharacterSize: 0.25
   m_LineSpacing: 1
   m_Anchor: 0
-  m_Alignment: 0
+  m_Alignment: 1
   m_TabSize: 4
   m_FontSize: 32
   m_FontStyle: 1

@@ -18,6 +18,8 @@ public class LevelMapScript : MonoBehaviour
 
     float levelStartX;
     float levelEndX;
+    float levelStartZ;
+    float levelEndZ;
 
     float levelLength;
     float levelWidth;
@@ -55,6 +57,9 @@ public class LevelMapScript : MonoBehaviour
             if (node.centerVector.x > levelStartX) levelStartX = node.centerVector.x;
             if (node.centerVector.x < levelEndX) levelEndX = node.centerVector.x;
 
+            if (node.centerVector.z > levelStartZ) levelStartZ = node.centerVector.z;
+            if (node.centerVector.z < levelEndZ) levelEndZ = node.centerVector.z;
+
             i++;
 
             if (node.centerVector == end)
@@ -70,9 +75,8 @@ public class LevelMapScript : MonoBehaviour
         mapEndX = -4;
         mapLength = mapEndZ - mapStartZ;
         mapWidth = mapEndX - mapStartX;
-        levelLength = (river.riverAsset.nodes[i].centerVector.z-river.riverAsset.nodes[0].centerVector.z) / mapLength;
-        levelWidth = (levelStartX - levelEndX) / mapWidth;
-
+        levelLength = (levelStartZ - levelEndZ) / mapLength;
+        levelWidth = (levelEndX - levelStartX) / mapWidth;
         linemap.positionCount = i;
         for (int o=0; o<i; o++)
         {
@@ -83,6 +87,7 @@ public class LevelMapScript : MonoBehaviour
             linepos.z += mapStartZ;
             linepos.y = 0;
             linemap.SetPosition(o, linepos);
+            Debug.Log(linepos.z);
         }
 
         iconPos = linemap.GetPosition(0);
@@ -93,8 +98,8 @@ public class LevelMapScript : MonoBehaviour
     {
         Vector3 boatLocation = boat.transform.position;
 
-        //boatLocation /= mapLength;
-        boatLocation /= levelLength;
+        boatLocation.x /= levelWidth;
+        boatLocation.z /= levelLength;
 
         //if (PlayerData.distanceTraveled<boatPos) PlayerData.distanceTraveled=boatPos;
 

@@ -26,7 +26,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Agnes.unity
     guid: 4c3a6b5d3e991064e95fec685a1692c1
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   m_configObjects: {}

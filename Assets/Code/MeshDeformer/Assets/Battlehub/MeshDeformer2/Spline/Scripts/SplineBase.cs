@@ -488,7 +488,8 @@ namespace  Battlehub.MeshDeformer2
             //    SplineRuntimeEditor.Instance.SelectedSpline = null;
             //}
         }
-#else
+#endif
+#if !UNITY_STANDALONE
         
         private void Awake()
         {

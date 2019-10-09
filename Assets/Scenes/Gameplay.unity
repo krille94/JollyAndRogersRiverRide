@@ -6171,10 +6171,25 @@ PrefabInstance:
       propertyPath: force
       value: 750
       objectReference: {fileID: 0}
+    - target: {fileID: 812115171877663909, guid: 7388af603fd750946bb0602328f3e915,
+        type: 3}
+      propertyPath: paddleForce
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 812115171877663909, guid: 7388af603fd750946bb0602328f3e915,
+        type: 3}
+      propertyPath: forwardForce
+      value: 1100
+      objectReference: {fileID: 0}
     - target: {fileID: 812115172266923107, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 812115172785507392, guid: 7388af603fd750946bb0602328f3e915,
+        type: 3}
+      propertyPath: paddleForce
+      value: 600
       objectReference: {fileID: 0}
     - target: {fileID: 812115171844523448, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
@@ -9148,12 +9163,12 @@ PrefabInstance:
     - target: {fileID: 6310727412658082303, guid: 31ac5dcdbf7be234b8a7c0795006da8a,
         type: 3}
       propertyPath: offsetPosition.z
-      value: -5
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 6310727412658082303, guid: 31ac5dcdbf7be234b8a7c0795006da8a,
         type: 3}
       propertyPath: offsetPosition.y
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31ac5dcdbf7be234b8a7c0795006da8a, type: 3}

@@ -10,6 +10,15 @@ public class PauseControls : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UserSettings.ReadSettings();
+
+        GameObject temp = GameObject.Find("Music Button");
+        if (UserSettings.GetVolume("Music") == -80)
+            temp.GetComponent<TextMesh>().text = "Music: OFF";
+        temp = GameObject.Find("SFX Button");
+        if (UserSettings.GetVolume("SFX") == -80)
+            temp.GetComponent<TextMesh>().text = "SFX: OFF";
+
         main=GameObject.Find("Pause Main Menu");
         options=GameObject.Find("Pause Options Menu");
         howtoplay=GameObject.Find("Pause How To Play Menu");

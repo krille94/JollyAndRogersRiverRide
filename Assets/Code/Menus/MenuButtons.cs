@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class MenuButtons : MonoBehaviour
 {
-    public GameObject CurrentMenu;
-    public GameObject NextMenu;
+    [HideInInspector] public GameObject CurrentMenu;
+    [HideInInspector] public GameObject NextMenu;
 
     public enum ButtonActions { None, StartGame, ResumeGame, Highscores, ChangeMenu, ChangeOptions, QuitToMainMenu, QuitApplication }
-    public ButtonActions buttonAction = 0;
+    [HideInInspector] public ButtonActions buttonAction = 0;
 
     public enum OptionTypes { None, Audio, Controls, HoldPaddle }
-    public OptionTypes optionType = 0;
+    [HideInInspector] public OptionTypes optionType = 0;
 
     private void Start()
     {
@@ -110,6 +110,7 @@ public class MenuButtons : MonoBehaviour
         if (buttonAction.ToString() == "QuitToMainMenu")
         {
             PlayerData.ResetScore();
+            StartOnMenu.MoveToMenu = "Main Menu";
             SceneManager.LoadScene(1);
         }
         if (buttonAction.ToString() == "QuitApplication")

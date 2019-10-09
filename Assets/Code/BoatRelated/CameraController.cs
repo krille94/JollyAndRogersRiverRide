@@ -15,13 +15,14 @@ public class CameraController : MonoBehaviour
 
     private Vector3 targetPosition;
 
-    public Vector3 targetRotation;
+    private Vector3 targetRotationVector;
+    private Quaternion targetRotation;
 
     private RiverNode targetNode;
 
     [SerializeField] private bool newTarget = true;
 
-    public Vector3 boatOffset;
+    private Vector3 boatOffset;
 
     Skybox skybox;
 
@@ -30,7 +31,7 @@ public class CameraController : MonoBehaviour
         skybox = GetComponent<Skybox>();
         targetNode = riverController.riverAsset.GetNodeFromPosition(boat.position);
         transform.rotation = boat.transform.rotation;
-        targetRotation = targetNode.centerVector;
+        targetRotationVector = transform.rotation.eulerAngles;
     }
 
     void Update()
@@ -48,8 +49,9 @@ public class CameraController : MonoBehaviour
             var heading = targetNode.centerVector - node.centerVector;
             var distance = heading.magnitude;
             var direction = heading / distance; // This is now the normalized direction.
-            targetRotation = direction;
             targetNode = node;
+
+            targetRotation = Quaternion.LookRotation(-direction, Vector3.up);
             //transform.Rotate(new Vector3(0, targetRotation.x, 0));
             //targetPosition = targetNode.centerVector + offsetPosition;
             //Quaternion temp = transform.rotation;
@@ -76,11 +78,14 @@ public class CameraController : MonoBehaviour
             //if (Vector3.Distance(transform.position, new Vector3(targetPosition.x, transform.position.y, targetPosition.z)) < Mathf.Abs(offsetPosition.z))
             //    newTarget = false;
         }
-        targetRotation = boat.rotation.eulerAngles;
-        transform.rotation = Quaternion.Euler(targetRotation);
+        //targetRotation = boat.rotation.eulerAngles;
+        transform.Rotate(new Vector3(-offsetAngle, 0, 0));
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+
         transform.Rotate(new Vector3(offsetAngle, 0, 0));
         //Gets target position
-        Quaternion boatOffsetRot = Quaternion.Euler(targetRotation.x, targetRotation.y, targetRotation.z);
+        targetRotationVector = transform.rotation.eulerAngles;
+        Quaternion boatOffsetRot = Quaternion.Euler(targetRotationVector.x, targetRotationVector.y, targetRotationVector.z);
         boatOffset = boatOffsetRot * offsetPosition;
 
         targetPosition = boat.position + boatOffset;

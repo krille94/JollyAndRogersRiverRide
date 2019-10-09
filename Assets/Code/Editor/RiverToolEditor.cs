@@ -39,27 +39,21 @@ public class RiverToolEditor : Editor
 
     public override void OnInspectorGUI()
     {
-        //RiverTool tool = (RiverTool)target;
+        tool.uniqName = GUILayout.TextField(tool.uniqName);
 
         tool.autoUpdateMesh = EditorGUILayout.Toggle("AutoUpdate", tool.autoUpdateMesh);
         if (!tool.autoUpdateMesh)
         {
             if (GUILayout.Button("Update River"))
                 tool.UpdateRiver();
+            if (GUILayout.Button("Connect With River From Controller"))
+                tool.GetRiverFromController();
+            if (GUILayout.Button("Connect With River From MeshFilter"))
+                tool.GetRiverFromMesh();
         }
 
-        if (GUILayout.Button("Build River To Asset"))
+        if (GUILayout.Button("Save To Asset"))
             tool.BuildRiverPrefab();
-
-        tool.uniqName = GUILayout.TextField(tool.uniqName);
-
-        if (GUILayout.Button("Build River From Asset"))
-            tool.GetRiverPrefab();
-
-        if (GUILayout.Button("Connect With River From Controller"))
-            tool.GetRiverFromController();
-        if (GUILayout.Button("Connect With River From MeshFilter"))
-            tool.GetRiverFromMesh();
 
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
         //EditorGUILayout.Space();
@@ -67,15 +61,16 @@ public class RiverToolEditor : Editor
         if (GUILayout.Button("Add Strait Row"))
             tool.AddStraitRow();
 
-        GUILayout.Space(5);
-        if (GUILayout.Button("DownwardAngle: " + tool.downwardAngle.ToString() + " (Default: -5)"))
-            tool.downwardAngle = -5;
-        tool.downwardAngle = GUILayout.HorizontalSlider(tool.downwardAngle, -20, -1);
         if (GUILayout.Button("Add Downward Row"))
             tool.AddDownwardRow();
 
         if (GUILayout.Button("Remove Row"))
             tool.RemoveRow();
+
+        GUILayout.Space(5);
+        if (GUILayout.Button("DownwardAngle: " + tool.downwardAngle.ToString() + " (Default: -5)"))
+            tool.downwardAngle = -5;
+        tool.downwardAngle = GUILayout.HorizontalSlider(tool.downwardAngle, -20, -1);
 
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");
         //EditorGUILayout.Space();
@@ -86,6 +81,8 @@ public class RiverToolEditor : Editor
         {
             if (GUILayout.Button("Reset To Default"))
                 tool.SetToDefaultRiverDesign();
+            if (GUILayout.Button("Load From Asset"))
+                tool.GetRiverPrefab();
         }
 
         EditorGUILayout.LabelField("---------------------------------------------------------------------------------------------------");

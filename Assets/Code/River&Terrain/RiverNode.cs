@@ -10,8 +10,12 @@ public class RiverNode
     public Vector3 centerVector;
     public Vector3 centerVectorOffset;
 
-    public RiverNode (Vector3 rVec, Vector3 lVec, Vector3 saveFlowDir, Vector3 saveCenterOffset, Vector3 saveFlowOffset)
+    public int index;
+
+    public RiverNode (int index, Vector3 rVec, Vector3 lVec, Vector3 saveFlowDir, Vector3 saveCenterOffset, Vector3 saveFlowOffset)
     {
+        this.index = index;
+
         flowDirection = saveFlowDir.normalized;
 
         centerVector = (lVec - rVec) / 2 + rVec;

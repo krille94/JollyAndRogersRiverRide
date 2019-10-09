@@ -8,6 +8,18 @@ public class RiverObject : ScriptableObject
     public int lenght;
     public RiverNode[] nodes;
 
+    public RiverNode GetNodeFromIndex (int index)
+    {
+        foreach(RiverNode node in nodes)
+        {
+            if (node.index == index)
+                return node;
+        }
+
+        Debug.LogError("index is out of range!");
+        return null;
+    }
+
     public RiverNode GetNodeFromPosition (Vector3 pos)
     {
         RiverNode node = null;

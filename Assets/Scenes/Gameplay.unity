@@ -5149,7 +5149,7 @@ PrefabInstance:
     - target: {fileID: 8542205466280116163, guid: c823871728894aa4989b1e39d311bf1b,
         type: 3}
       propertyPath: slopeSpeedBoost
-      value: -10
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 3081674981660918933, guid: c823871728894aa4989b1e39d311bf1b,
         type: 3}
@@ -6186,6 +6186,11 @@ PrefabInstance:
       propertyPath: forwardForce
       value: 1100
       objectReference: {fileID: 0}
+    - target: {fileID: 812115171877663909, guid: 7388af603fd750946bb0602328f3e915,
+        type: 3}
+      propertyPath: paddleTime
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 812115172266923107, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
       propertyPath: m_IsActive
@@ -6200,6 +6205,11 @@ PrefabInstance:
         type: 3}
       propertyPath: forwardForce
       value: 1100
+      objectReference: {fileID: 0}
+    - target: {fileID: 812115172785507392, guid: 7388af603fd750946bb0602328f3e915,
+        type: 3}
+      propertyPath: paddleTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 812115171844523448, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}

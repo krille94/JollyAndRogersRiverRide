@@ -87,7 +87,7 @@ public class LevelMapScript : MonoBehaviour
             linepos.z += mapStartZ;
             linepos.y = 0;
             linemap.SetPosition(o, linepos);
-            Debug.Log(linepos.z);
+            //Debug.Log(linepos.z);
         }
 
         iconPos = linemap.GetPosition(0);

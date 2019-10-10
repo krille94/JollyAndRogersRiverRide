@@ -9,6 +9,8 @@ public class RiverController : MonoBehaviour
     public RiverObject riverAsset;
     
     public List<Rigidbody> observedObjects = new List<Rigidbody>();
+    private List<RiverNode> observedObjectPreviousNodes = new List<RiverNode>();
+    private List<RiverNode> observedObjectCurrentNodes = new List<RiverNode>();
     public Transform endTransform;
 
     [Header("MeshWaves")]
@@ -25,7 +27,9 @@ public class RiverController : MonoBehaviour
 
     [Header("Flow")]
     public int minimumSpeed;
+    public float slopeSpeedBoost=-2;
     public Vector3 movementDirection;
+    private float slopeAngle;
 
     [Header("SplashEffect")]
     public ParticleSystem onImpactEffect = null;
@@ -76,6 +80,12 @@ public class RiverController : MonoBehaviour
                 observedObjects.Remove(body);
                 goto redo;
             }                
+        }
+
+        foreach(Rigidbody body in observedObjects)
+        {
+            observedObjectPreviousNodes.Add(riverAsset.GetNodeFromPosition(body.position));
+            observedObjectCurrentNodes.Add(riverAsset.GetNodeFromPosition(body.position));
         }
 
         if (allWorking)
@@ -157,8 +167,16 @@ public class RiverController : MonoBehaviour
             {
                 Rigidbody body = observedObjects[i];
                 node = riverAsset.GetNodeFromPosition(body.position);
+
+                if (observedObjectCurrentNodes[i]!=node)
+                {
+                    observedObjectPreviousNodes[i] = observedObjectCurrentNodes[i];
+                    observedObjectCurrentNodes[i] = node;
+                }
+                slopeAngle = observedObjectCurrentNodes[i].centerVector.y- observedObjectPreviousNodes[i].centerVector.y;
+
                 flow = riverAsset.GetFlow(body.position);
-                body.AddForce(flow * (minimumSpeed * Time.deltaTime), ForceMode.VelocityChange);
+                body.AddForce(flow * ((minimumSpeed + (slopeAngle*slopeSpeedBoost)) * Time.deltaTime), ForceMode.VelocityChange);
             }
         }
     }
@@ -171,9 +189,18 @@ public class RiverController : MonoBehaviour
             {
                 Rigidbody body = observedObjects[i];
                 node = riverAsset.GetNodeFromPosition(transform.position, body.position);
+
+                if (observedObjectCurrentNodes[i] != node)
+                {
+                    observedObjectPreviousNodes[i] = observedObjectCurrentNodes[i];
+                    observedObjectCurrentNodes[i] = node;
+                }
+                slopeAngle = observedObjectCurrentNodes[i].centerVector.y - observedObjectPreviousNodes[i].centerVector.y;
+
+
                 flow = riverAsset.GetFlow(transform.position, body.position);
                 Vector3 movement = flow;
-                body.AddForce(movement * (minimumSpeed * Time.deltaTime), ForceMode.VelocityChange);
+                body.AddForce(movement * ((minimumSpeed + (slopeAngle * slopeSpeedBoost)) * Time.deltaTime), ForceMode.VelocityChange);
             }
         }
     }

@@ -1089,7 +1089,7 @@ MonoBehaviour:
   CurrentMenu: {fileID: 0}
   NextMenu: {fileID: 0}
   buttonAction: 5
-  optionType: 0
+  optionType: 1
 --- !u!82 &5863180797098899375
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1324,7 +1324,7 @@ MonoBehaviour:
   CurrentMenu: {fileID: 0}
   NextMenu: {fileID: 0}
   buttonAction: 5
-  optionType: 0
+  optionType: 1
 --- !u!82 &5863180797108661757
 AudioSource:
   m_ObjectHideFlags: 0

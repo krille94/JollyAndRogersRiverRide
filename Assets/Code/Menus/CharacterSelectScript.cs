@@ -24,6 +24,17 @@ public class CharacterSelectScript : MonoBehaviour
 
     Vector3 portraitDistance;
 
+    private void OnDisable()
+    {
+        StartGameButton.SetActive(false);
+        Player1Chosen = false;
+        Player1Icon.SetActive(true);
+        Player1Text.SetActive(false);
+        Player2Chosen = false;
+        Player2Icon.SetActive(true);
+        Player2Text.SetActive(false);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +71,6 @@ public class CharacterSelectScript : MonoBehaviour
             if (!Player2Chosen || Player1Pos != Player2Pos)
             {
                 CharNames name = (CharNames)Player1Pos;
-                Debug.LogWarning("Player 1 chose "+name.ToString());
                 PlayerData.player1Character = name.ToString();
 
                 Player1Chosen = true;
@@ -106,7 +116,6 @@ public class CharacterSelectScript : MonoBehaviour
             if (!Player1Chosen || Player1Pos != Player2Pos)
             {
                 CharNames name = (CharNames)Player2Pos;
-                Debug.LogWarning("Player 2 chose " + name.ToString());
                 PlayerData.player2Character = name.ToString();
 
                 Player2Chosen = true;

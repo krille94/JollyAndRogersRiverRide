@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 
 [CustomEditor(typeof(MenuButtons))]
 public class MenuButtonsEditor : Editor
@@ -30,6 +31,11 @@ public class MenuButtonsEditor : Editor
         if (tool.buttonAction.ToString() == "ResumeGame")
         {
             tool.CurrentMenu = (GameObject)EditorGUILayout.ObjectField("Pause Menu", tool.CurrentMenu, typeof(GameObject), true);
+        }
+
+        if (GUI.changed)
+        {
+            EditorUtility.SetDirty(tool);
         }
     }
 

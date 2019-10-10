@@ -89,23 +89,23 @@ public class Oar
 
         if (onLeftSide && onRightSide)
         {
-            if (!modelLeft.GetComponent<Animation>().isPlaying)
+            //if (!modelLeft.GetComponent<Animation>().isPlaying)
                 modelLeft.GetComponent<Animation>().Play();
-            if (!modelRight.GetComponent<Animation>().isPlaying)
+            //if (!modelRight.GetComponent<Animation>().isPlaying)
                 modelRight.GetComponent<Animation>().Play();
             return (leftSideImpactPoint.position + rightSideImpactPoint.position)/2;
         }
 
         if (onLeftSide)
         {
-            if (!modelLeft.GetComponent<Animation>().isPlaying)
+            //if (!modelLeft.GetComponent<Animation>().isPlaying)
                 modelLeft.GetComponent<Animation>().Play();
             return leftSideImpactPoint.position;
         }
        
         if(onRightSide)
         {
-            if (!modelRight.GetComponent<Animation>().isPlaying)
+            //if (!modelRight.GetComponent<Animation>().isPlaying)
                 modelRight.GetComponent<Animation>().Play();
             return rightSideImpactPoint.position;
         }
@@ -123,6 +123,7 @@ public class Paddling : MonoBehaviour
     [SerializeField] public float paddleForce;
     [SerializeField] public float forwardForce;
     [SerializeField] public float paddleTime;
+    [SerializeField] public float maximumSpeed=15;
     //[SerializeField] public KeyCode keyLeft, keyRight;
 
     [SerializeField] private new Rigidbody rigidbody = null; 
@@ -185,8 +186,8 @@ public class Paddling : MonoBehaviour
             forwardKey = Input.GetButtonUp("Player_" + player + "_Paddle_Forward");
             backKey = Input.GetButtonUp("Player_" + player + "_Paddle_Back");
 
-            if (forwardKey == true)
-                Debug.Log("Forward key has been hit");
+            //if (forwardKey == true)
+            //    Debug.Log("Forward key has been hit");
         }
 
         if (CanControl)
@@ -196,13 +197,21 @@ public class Paddling : MonoBehaviour
                 if (forwardKey)
                 {
                     impactPoint = oar.Paddle();
-                    rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
-                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
+
+                    if (rigidbody.velocity.magnitude < maximumSpeed)
+                    {
+                        rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
+                    }
+
+                    if (!oar.onLeftSide || !oar.onRightSide)
+                        rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
                 }
                 else if (backKey)
                 {
                     impactPoint = oar.Paddle();
-                    rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
+
+                    if (!oar.onLeftSide || !oar.onRightSide)
+                        rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
                 }
             }
 

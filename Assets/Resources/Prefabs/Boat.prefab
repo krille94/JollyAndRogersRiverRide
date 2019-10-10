@@ -1146,6 +1146,8 @@ MonoBehaviour:
   playerIndex: 0
   paddleForce: 420
   forwardForce: 1000
+  paddleTime: 0
+  maximumSpeed: 15
   rigidbody: {fileID: 812115172661265859}
   oar:
     modelRoot: {fileID: 812115172869859801}
@@ -2124,6 +2126,7 @@ GameObject:
   - component: {fileID: 812115172661265858}
   - component: {fileID: 812115172661265869}
   - component: {fileID: 812115172661265857}
+  - component: {fileID: 8914153012921587592}
   m_Layer: 9
   m_Name: Boat
   m_TagString: Player
@@ -2210,6 +2213,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 5000
+--- !u!114 &8914153012921587592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812115172661265868}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc89bd3bb4b9b045b06e0d31807741a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camera: {fileID: 0}
+  river: {fileID: 0}
+  lastPassedNodeIndex: 0
+  closestNode:
+    flowDirection: {x: 0, y: 0, z: 0}
+    flowDirectionOffset: {x: 0, y: 0, z: 0}
+    finalFlowDirection: {x: 0, y: 0, z: 0}
+    centerVector: {x: 0, y: 0, z: 0}
+    centerVectorOffset: {x: 0, y: 0, z: 0}
+    index: 0
+  force: 10
 --- !u!1 &812115172696077154
 GameObject:
   m_ObjectHideFlags: 0
@@ -2339,6 +2365,8 @@ MonoBehaviour:
   playerIndex: 1
   paddleForce: 420
   forwardForce: 1000
+  paddleTime: 0
+  maximumSpeed: 15
   rigidbody: {fileID: 812115172661265859}
   oar:
     modelRoot: {fileID: 812115171373746683}

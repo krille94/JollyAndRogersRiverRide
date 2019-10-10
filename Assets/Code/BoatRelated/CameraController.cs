@@ -18,7 +18,10 @@ public class CameraController : MonoBehaviour
     private Vector3 targetRotationVector;
     private Quaternion targetRotation;
 
-    private RiverNode targetNode;
+    /// <summary>
+    /// Consider this as the cameras current node, stuff happens fast.
+    /// </summary>
+    public RiverNode targetNode;
 
     [SerializeField] private bool newTarget = true;
 

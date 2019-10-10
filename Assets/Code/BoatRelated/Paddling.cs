@@ -17,7 +17,7 @@ public class Oar
     public GameObject modelRight;
 
     public bool isPaddling = false;
-    public float paddlingTime = 0;
+    public float paddlingTime = 0.5f;
     
     public void SetRightSide(bool inWater)
     {
@@ -122,6 +122,7 @@ public class Paddling : MonoBehaviour
 
     [SerializeField] public float paddleForce;
     [SerializeField] public float forwardForce;
+    [SerializeField] public float paddleTime;
     //[SerializeField] public KeyCode keyLeft, keyRight;
 
     [SerializeField] private new Rigidbody rigidbody = null; 
@@ -160,7 +161,7 @@ public class Paddling : MonoBehaviour
         if (oar.isPaddling)
         {
             oar.paddlingTime += Time.deltaTime;
-            if (oar.paddlingTime >= 1)
+            if (oar.paddlingTime >= paddleTime)
             {
                 oar.paddlingTime = 0;
                 oar.isPaddling = false;
@@ -170,7 +171,7 @@ public class Paddling : MonoBehaviour
         }
 
         bool rightKey = Input.GetButton("Player_" + player + "_Paddle_Right");
-        bool leftKey = Input.GetButton("Player_"+ player+ "_Paddle_Left");
+        bool leftKey = Input.GetButton("Player_"+ player + "_Paddle_Left");
         bool forwardKey;
         bool backKey;
 
@@ -183,6 +184,9 @@ public class Paddling : MonoBehaviour
         {
             forwardKey = Input.GetButtonUp("Player_" + player + "_Paddle_Forward");
             backKey = Input.GetButtonUp("Player_" + player + "_Paddle_Back");
+
+            if (forwardKey == true)
+                Debug.Log("Forward key has been hit");
         }
 
         if (CanControl)
@@ -206,12 +210,6 @@ public class Paddling : MonoBehaviour
             {
                 if (!oar.onLeftSide)
                     oar.SetLeftSide(true);
-                /*else
-                {
-                    impactPoint = oar.Paddle();
-                    rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
-                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
-                }*/
             }
             else
             { 
@@ -223,12 +221,6 @@ public class Paddling : MonoBehaviour
             {
                 if (!oar.onRightSide)
                     oar.SetRightSide(true);
-                /*else
-                {
-                    impactPoint = oar.Paddle();
-                    rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
-                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
-                }*/
             }
             else
             {

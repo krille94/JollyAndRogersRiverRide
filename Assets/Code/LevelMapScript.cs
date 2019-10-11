@@ -35,8 +35,8 @@ public class LevelMapScript : MonoBehaviour
     void Start()
     {
         float windowWidth = (float)(Screen.width * 3) / (float)(Screen.height * 4);
-        transform.localPosition = new Vector3(1.7f + windowWidth, 1.35f, 4);
-
+        transform.localPosition = new Vector3(2.7f * windowWidth, 1.35f, 4);
+        Debug.Log(transform.localPosition);
         if (boatIcon == null)
             Debug.LogWarning("BoatIcon Missing!");
 
@@ -75,7 +75,7 @@ public class LevelMapScript : MonoBehaviour
         mapStartZ = 2;
         mapEndZ = -2.5f;
         mapStartX = 3;
-        mapEndX = -2;
+        mapEndX = -1;
         mapLength = mapEndZ - mapStartZ;
         mapWidth = mapEndX - mapStartX;
         levelLength = (levelStartZ - levelEndZ) / mapLength;

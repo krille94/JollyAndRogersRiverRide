@@ -190,9 +190,8 @@ namespace Battlehub.MeshDeformer2
             {
                 m_deformer = GetComponentInParent<MeshDeformer>();
             }
-
+            /*
 #if UNITY_EDITOR
-
             //Something strange happening when removing MeshDeformerExt obj and then pressing CTRL+Z. (Can't deform recovered object)
             //And now I am unable to find good solution.
             //This needed to fix this behavior...
@@ -202,6 +201,7 @@ namespace Battlehub.MeshDeformer2
                 wrapper.Obj = this;
             }
 #endif
+*/
         }
 
         public void Shift(int delta)

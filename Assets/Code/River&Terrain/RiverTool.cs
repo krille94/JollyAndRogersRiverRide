@@ -7,27 +7,28 @@ using UnityEngine;
 public class RiverTool : MonoBehaviour
 {
     public string uniqName = "RiverAssetName";
+    [HideInInspector] public bool autoUpdateMesh = false;
 
     public List<Vector3> vertices = new List<Vector3>();
     public List<int> tris = new List<int>();
     public List<Vector2> uvs = new List<Vector2>();
 
-    public int lenght = 2;
-
-    [HideInInspector]public bool autoUpdateMesh = false;
-
     public List<RiverNode> nodes = new List<RiverNode>();
 
+    public int lenght = 2;
+    
     public float downwardAngle = -5;
 
+#if UNITY_EDITOR
     #region Main Methods
+
     public void GetRiverFromMesh()
     {
         if(gameObject.GetComponent<MeshFilter>())
         {
-            if(gameObject.GetComponent<MeshFilter>().sharedMesh != null)
+            if(gameObject.GetComponent<MeshFilter>().mesh != null)
             {
-                Mesh m = gameObject.GetComponent<MeshFilter>().sharedMesh;
+                Mesh m = gameObject.GetComponent<MeshFilter>().mesh;
                 vertices.Clear();
                 for (int i = 0; i < m.vertices.Length; i++)
                 {
@@ -43,7 +44,7 @@ public class RiverTool : MonoBehaviour
             }
         }
     }
-#if UNITY_EDITOR
+
     public void BuildRiverPrefab ()
     {
         if(AssetDatabase.LoadAssetAtPath("Assets/Resources/RiverBuilds/"+ uniqName +".asset", typeof(RiverObject)) != null)
@@ -106,60 +107,31 @@ public class RiverTool : MonoBehaviour
         }
         lenght = obj.lenght;
     }
-#endif
-    public void GetRiverFromController ()
-    {
-        RiverObject obj = gameObject.GetComponent<RiverController>().riverAsset;
-        if(obj == null)
-        {
-            Debug.LogWarning("River Controller Got No RiverAssets");
-            return;
-        }
-
-        vertices.Clear();
-        uvs.Clear();
-        tris.Clear();
-        nodes.Clear();
-
-        for (int i = 0; i < obj.vertices.Length; i++)
-        {
-            vertices.Add(obj.vertices[i]);
-        }
-        for (int i = 0; i < obj.uvs.Length; i++)
-        {
-            uvs.Add(obj.uvs[i]);
-        }
-        for (int i = 0; i < obj.tris.Length; i++)
-        {
-            tris.Add(obj.tris[i]);
-        }
-        for (int i = 0; i < obj.nodes.Length; i++)
-        {
-            nodes.Add(obj.nodes[i]);
-        }
-        lenght = obj.lenght;
-    }
-
+    
     public void GenerateMesh()
     {
         Mesh mesh = new Mesh();
         mesh.name = "RiverMesh";
 
         mesh.vertices = vertices.ToArray();
-        UpdateNodes();
+       // UpdateNodes();
         mesh.triangles = tris.ToArray();
         UpdateUVs();
         mesh.uv = uvs.ToArray();
 
         mesh.RecalculateNormals();
 
-        transform.GetComponent<MeshFilter>().sharedMesh = mesh;
+        transform.GetComponent<MeshFilter>().mesh = mesh;
         for (int i = 0; i < transform.childCount; i++)
         {
             if (transform.GetChild(i).GetComponent<MeshFilter>())
-                transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mesh;
+                transform.GetChild(i).GetComponent<MeshFilter>().mesh = mesh;
         }
     }
+
+    #endregion
+
+    #region Editor Update Methods
 
     public void UpdateRiver()
     {
@@ -169,8 +141,8 @@ public class RiverTool : MonoBehaviour
 
     public void UpdateMesh()
     {
-        Mesh mesh = transform.GetComponent<MeshFilter>().sharedMesh;
-        if(mesh == null)
+        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
+        if (mesh == null)
         {
             Debug.LogError("Missing mesh to modify");
             GenerateMesh();
@@ -188,13 +160,10 @@ public class RiverTool : MonoBehaviour
         for (int i = 0; i < transform.childCount; i++)
         {
             if (transform.GetChild(i).GetComponent<MeshFilter>())
-                transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mesh;
+                transform.GetChild(i).GetComponent<MeshFilter>().mesh = mesh;
         }
     }
 
-    #endregion
-
-    #region Editor Update Methods
     public void UpdateUVs()
     {
         uvs.Clear();
@@ -202,6 +171,32 @@ public class RiverTool : MonoBehaviour
         for (int i = 0; i < vertices.Count; i++)
         {
             uvs.Add(new Vector2(vertices[i].x, vertices[i].z));
+        }
+    }
+
+    public void ResetNodes ()
+    {
+        nodes.Clear();
+        for (int i = 0; i < vertices.Count; i += 2)
+        {
+            if (i < vertices.Count && i - 3 > -1)
+            {
+                Vector3 last_1_pos = vertices[i];
+                Vector3 last_3_pos = vertices[i - 2];
+                nodes.Add(new RiverNode(nodes.Count, vertices[i + 1], vertices[i], GetRiverFlow(last_1_pos, last_3_pos), Vector3.zero, Vector3.zero));
+            }
+            else if (i + 2 < vertices.Count && i == 0)
+            {
+                Vector3 last_1_pos = vertices[i];
+                Vector3 last_3_pos = vertices[i + 2];
+                nodes.Add(new RiverNode(nodes.Count, vertices[i + 1], vertices[i], GetRiverFlow(last_3_pos, last_1_pos), Vector3.zero, Vector3.zero));
+            }
+            else if (i + 2 < vertices.Count && i == 2)
+            {
+                Vector3 last_1_pos = vertices[i];
+                Vector3 last_3_pos = vertices[i + 2];
+                nodes.Add(new RiverNode(nodes.Count, vertices[i + 1], vertices[i], GetRiverFlow(last_3_pos, last_1_pos), Vector3.zero, Vector3.zero));
+            }
         }
     }
 
@@ -256,9 +251,11 @@ public class RiverTool : MonoBehaviour
             }
         }
     }
+
     #endregion
 
     #region Construction Methods
+
     private Vector3 GetRiverFlow (Vector3 topVec, Vector3 botVec)
     {
         Vector3 res = Vector3.zero;
@@ -399,5 +396,7 @@ public class RiverTool : MonoBehaviour
 
         GenerateMesh();
     }
+
     #endregion
+#endif
 }

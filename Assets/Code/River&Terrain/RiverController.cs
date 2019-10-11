@@ -63,18 +63,6 @@ public class RiverController : MonoBehaviour
 
         bool allWorking = true;
         
-        if (mesh == null)
-        {
-            if (riverAsset != null)
-            {
-                BuildMesh();
-            }
-            else
-            {
-                Debug.LogWarning("Mesh missing from RiverObject");
-                allWorking = false;
-            }
-        }
 
         if (GameObject.FindGameObjectWithTag("Player"))
         {
@@ -85,11 +73,13 @@ public class RiverController : MonoBehaviour
         }
 
         redo:
-        foreach(Rigidbody body in observedObjects)
+        for(int i = 0; i < observedObjects.Count; i++)
         {
-            if (body == null)
+            if (observedObjects[i] == null)
             {
-                observedObjects.Remove(body);
+                observedObjects.RemoveAt(i);
+                observedObjectPreviousNodes.RemoveAt(i);
+                observedObjectCurrentNodes.RemoveAt(i);
                 goto redo;
             }                
         }
@@ -108,15 +98,17 @@ public class RiverController : MonoBehaviour
             else
                 effectsPool = new GameObject("EffectsPool").transform;
 
+            BuildMesh();
+
             for (int i = 0; i < transform.childCount; i++)
             {
-                transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mesh;
+                transform.GetChild(i).GetComponent<MeshFilter>().mesh = mesh;
             }
 
             if(gameObject.GetComponent<MeshCollider>() == null)
                 gameObject.AddComponent<MeshCollider>();
             gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
-
+            
             if(endTransform != null)
                 endTransform.position = riverAsset.nodes[riverAsset.nodes.Length - 1].centerVector;
         }
@@ -130,6 +122,7 @@ public class RiverController : MonoBehaviour
 
     private void Update()
     {
+    /*
         if (!Application.isPlaying)
         {
             if(riverAsset != null)
@@ -149,7 +142,7 @@ public class RiverController : MonoBehaviour
                 endTransform.position = riverAsset.nodes[riverAsset.nodes.Length - 1].centerVector;
             return;
         }
-
+    */
         PhysicsFlowUpdate();
         ArcadeFlowUpdate();
 
@@ -190,8 +183,8 @@ public class RiverController : MonoBehaviour
                 flow = riverAsset.GetFlow(body.position);
                 body.AddForce(flow * ((minimumSpeed + (slopeAngle*slopeSpeedBoost)) * Time.deltaTime), ForceMode.VelocityChange);
 
-                if (body.position.y < node.centerVector.y)
-                    body.transform.position = new Vector3(body.position.x, node.centerVector.y, body.position.z);
+                //if (body.position.y != node.centerVector.y)
+                //    body.transform.position = new Vector3(body.position.x, node.centerVector.y, body.position.z);
             }
         }
     }
@@ -211,11 +204,11 @@ public class RiverController : MonoBehaviour
                     observedObjectCurrentNodes[i] = node;
                 }
                 slopeAngle = observedObjectCurrentNodes[i].centerVector.y - observedObjectPreviousNodes[i].centerVector.y;
-
-
+                
                 flow = riverAsset.GetFlow(transform.position, body.position);
-                Vector3 movement = flow;
-                body.AddForce(movement * ((minimumSpeed + (slopeAngle * slopeSpeedBoost)) * Time.deltaTime), ForceMode.VelocityChange);
+                Vector3 movement = flow * (minimumSpeed + (slopeAngle * slopeSpeedBoost));
+                if(movement.magnitude > body.velocity.magnitude)
+                    body.AddForce(movement * Time.deltaTime, ForceMode.VelocityChange);
             }
         }
     }
@@ -251,6 +244,7 @@ public class RiverController : MonoBehaviour
             {
                 Rigidbody body = observedObjects[i];
                 RaycastHit hit;
+                Debug.DrawRay(body.transform.position + (Vector3.up * 1000), Vector3.down * 2000, Color.yellow);
                 if (Physics.Raycast(body.transform.position + (Vector3.up * 1000), Vector3.down, out hit, 2000, arcadeRiverLayer))
                 {
                     //Debug.Log(hit.transform.name);
@@ -264,7 +258,12 @@ public class RiverController : MonoBehaviour
                         hit.point.y,
                         body.transform.position.z
                     );
-                    body.transform.position = Vector3.Lerp(body.transform.position, targetPosition, Time.deltaTime);
+                    body.MovePosition(Vector3.Lerp(body.position, targetPosition, Time.fixedDeltaTime * arcadeBouance));
+
+                    Quaternion targetRotation = Quaternion.LookRotation(node.flowDirection, hit.normal);
+                    //targetRotation.y = body.rotation.y;
+                    //body.MoveRotation(Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime * controllStrenght));
+                    body.transform.rotation = Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime);
                 }
             }
         }

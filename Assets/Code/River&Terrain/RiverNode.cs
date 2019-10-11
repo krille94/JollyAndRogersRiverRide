@@ -16,14 +16,14 @@ public class RiverNode
     {
         this.index = index;
 
-        flowDirection = saveFlowDir.normalized;
+        flowDirection = Vector3.forward;
 
         centerVector = (lVec - rVec) / 2 + rVec;
 
         centerVectorOffset = saveCenterOffset;
         flowDirectionOffset = saveFlowOffset;
 
-        finalFlowDirection = flowDirection;
+        finalFlowDirection = Quaternion.Euler(flowDirectionOffset.x,flowDirectionOffset.y,flowDirectionOffset.z) * flowDirection;
         //if (flowDirectionOffset == Vector3.zero)
         //    flowDirectionOffset = Vector3.one;
         //finalFlowDirection = flowDirection + Quaternion.LookRotation(flowDirectionOffset, Vector3.forward).eulerAngles;

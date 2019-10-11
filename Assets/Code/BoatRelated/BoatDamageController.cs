@@ -101,7 +101,8 @@ public class BoatDamageController : MonoBehaviour
                 // Rewrite this once we have the proper dimensions and such
                 GameObject newObj;
                 newObj = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                newObj.GetComponent<MeshCollider>().convex = true;
+                Destroy(newObj.GetComponent<MeshCollider>());
+                //newObj.GetComponent<MeshCollider>().convex = true;
                 newObj.name = "Boat Water";
                 newObj.transform.parent = gameObject.transform;
 

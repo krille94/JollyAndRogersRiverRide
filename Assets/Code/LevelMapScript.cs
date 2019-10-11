@@ -53,7 +53,7 @@ public class LevelMapScript : MonoBehaviour
         end = river.riverAsset.GetNodeFromPosition(river.transform.position, endpoint.transform.position).centerVector;
 
         levelStartX = 0;
-        levelEndX = 0;
+        levelEndX = 10000;
         int i = 0;
         foreach(RiverNode node in river.riverAsset.nodes)
         {
@@ -72,14 +72,14 @@ public class LevelMapScript : MonoBehaviour
             i = river.riverAsset.nodes.Length - 1;
         amountOfNodes = i;
 
-        mapStartZ = 4;
-        mapEndZ = -3;
-        mapStartX = 0;
-        mapEndX = -4;
+        mapStartZ = 2;
+        mapEndZ = -2.5f;
+        mapStartX = 3;
+        mapEndX = -2;
         mapLength = mapEndZ - mapStartZ;
         mapWidth = mapEndX - mapStartX;
         levelLength = (levelStartZ - levelEndZ) / mapLength;
-        levelWidth = (levelEndX - levelStartX) / mapWidth;
+        levelWidth = (levelStartX - levelEndX) / mapWidth;
         linemap.positionCount = i;
         for (int o=0; o<i; o++)
         {
@@ -106,8 +106,8 @@ public class LevelMapScript : MonoBehaviour
 
         //if (PlayerData.distanceTraveled<boatPos) PlayerData.distanceTraveled=boatPos;
 
-        iconPos.x = mapStartX + boatLocation.x+0.5f;
-        iconPos.z = mapStartZ + boatLocation.z;
+        iconPos.x = mapStartX + boatLocation.x + (boatIcon.transform.localScale.x / 2);
+        iconPos.z = mapStartZ + boatLocation.z + (boatIcon.transform.localScale.z / 2);
         if(boatIcon != null)
             boatIcon.transform.localPosition = new Vector3(iconPos.x, 1, iconPos.z);
     }

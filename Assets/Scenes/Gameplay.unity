@@ -6194,7 +6194,7 @@ PrefabInstance:
     - target: {fileID: 812115171877663909, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
       propertyPath: paddleTime
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 812115172266923107, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
@@ -6214,7 +6214,7 @@ PrefabInstance:
     - target: {fileID: 812115172785507392, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}
       propertyPath: paddleTime
-      value: 0.5
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 812115171844523448, guid: 7388af603fd750946bb0602328f3e915,
         type: 3}

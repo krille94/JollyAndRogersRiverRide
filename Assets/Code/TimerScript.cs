@@ -9,9 +9,13 @@ public class TimerScript : MonoBehaviour
     float minutes = 0;
     float seconds = 0;
     float timerIncrease = 0;
+
     // Start is called before the first frame update
     void Start()
     {
+        float windowWidth = (float)(Screen.width * 3)/(float)(Screen.height * 4);
+        timerText.transform.localPosition = new Vector3(-1+windowWidth,1.8f, 4);
+
         minutes = 0;
         seconds = 0;
         timerIncrease = 0;

@@ -34,6 +34,9 @@ public class LevelMapScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        float windowWidth = (float)(Screen.width * 3) / (float)(Screen.height * 4);
+        transform.localPosition = new Vector3(1.7f + windowWidth, 1.35f, 4);
+
         if (boatIcon == null)
             Debug.LogWarning("BoatIcon Missing!");
 

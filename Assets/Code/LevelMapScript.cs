@@ -6,7 +6,7 @@ public class LevelMapScript : MonoBehaviour
 {
     public GameObject boat;
     public GameObject boatIcon;        // A plane showing the level's map
-    public GameObject startpoint; // Where the boat first spawns
+    //public GameObject startpoint; // Where the boat first spawns
     public GameObject endpoint;   // The goal
 
     Vector3 start;

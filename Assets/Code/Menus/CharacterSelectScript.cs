@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class CharacterSelectScript : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class CharacterSelectScript : MonoBehaviour
             audio = gameObject.GetComponent<AudioSource>();
         else
             audio = gameObject.AddComponent<AudioSource>();
+        AudioMixer mix = Resources.Load("AudioMixers/Sound Effects") as AudioMixer;
+        audio.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
 
         Player1Pos = 0;
         Player2Pos = 0;
@@ -89,6 +92,7 @@ public class CharacterSelectScript : MonoBehaviour
                     audio.pitch = 2.5f;
                 else
                     audio.pitch = 0.75f;
+
                 audio.PlayOneShot(onCharacterClip[Player1Pos]);
 
                 if (Player1Chosen && Player2Chosen)

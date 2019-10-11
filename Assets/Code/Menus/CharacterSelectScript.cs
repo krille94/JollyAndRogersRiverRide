@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class CharacterSelectScript : MonoBehaviour
 {
@@ -24,7 +25,8 @@ public class CharacterSelectScript : MonoBehaviour
 
     Vector3 portraitDistance;
 
-    new AudioSource audio;
+    new AudioSource audioRoger;
+    new AudioSource audioJolly;
     [SerializeField] AudioClip[] onCharacterClip;
 
     private void OnDisable()
@@ -42,9 +44,19 @@ public class CharacterSelectScript : MonoBehaviour
     void Start()
     {
         if (gameObject.GetComponent<AudioSource>())
-            audio = gameObject.GetComponent<AudioSource>();
+            audioRoger = gameObject.GetComponent<AudioSource>();
         else
-            audio = gameObject.AddComponent<AudioSource>();
+        {
+            audioRoger = gameObject.AddComponent<AudioSource>();
+            audioJolly = gameObject.AddComponent<AudioSource>();
+        }
+        AudioMixer mix = Resources.Load("AudioMixers/Sound Effects") as AudioMixer;
+        audioRoger.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
+        audioJolly.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
+
+        audioJolly.pitch = 2.5f;
+        audioRoger.pitch = 0.75f;
+
 
         Player1Pos = 0;
         Player2Pos = 0;
@@ -86,10 +98,10 @@ public class CharacterSelectScript : MonoBehaviour
                 Player1Text.SetActive(true);
 
                 if (Player1Pos == 0)
-                    audio.pitch = 2.5f;
+                    audioJolly.PlayOneShot(onCharacterClip[Player1Pos]);
                 else
-                    audio.pitch = 0.75f;
-                audio.PlayOneShot(onCharacterClip[Player1Pos]);
+                    audioRoger.PlayOneShot(onCharacterClip[Player1Pos]);
+
 
                 if (Player1Chosen && Player2Chosen)
                     StartGameButton.SetActive(true);
@@ -137,10 +149,9 @@ public class CharacterSelectScript : MonoBehaviour
                 Player2Text.SetActive(true);
 
                 if (Player2Pos == 0)
-                    audio.pitch = 2.5f;
+                    audioJolly.PlayOneShot(onCharacterClip[Player2Pos]);
                 else
-                    audio.pitch = 0.75f;
-                audio.PlayOneShot(onCharacterClip[Player2Pos]);
+                    audioRoger.PlayOneShot(onCharacterClip[Player2Pos]);
 
                 if (Player1Chosen && Player2Chosen)
                     StartGameButton.SetActive(true);

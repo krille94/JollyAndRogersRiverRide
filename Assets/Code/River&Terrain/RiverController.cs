@@ -11,6 +11,18 @@ public class RiverController : MonoBehaviour
     public List<Rigidbody> observedObjects = new List<Rigidbody>();
     private List<RiverNode> observedObjectPreviousNodes = new List<RiverNode>();
     private List<RiverNode> observedObjectCurrentNodes = new List<RiverNode>();
+    private void RemoveObservedObject (Rigidbody obj) {
+        for (int i = 0; i < observedObjects.Count; i++)
+        {
+            if(observedObjects[i] == obj)
+            {
+                observedObjectCurrentNodes.RemoveAt(i);
+                observedObjectPreviousNodes.RemoveAt(i);
+                observedObjects.RemoveAt(i);
+                return;
+            }
+        }
+    }
     public Transform endTransform;
 
     [Header("MeshWaves")]
@@ -177,6 +189,9 @@ public class RiverController : MonoBehaviour
 
                 flow = riverAsset.GetFlow(body.position);
                 body.AddForce(flow * ((minimumSpeed + (slopeAngle*slopeSpeedBoost)) * Time.deltaTime), ForceMode.VelocityChange);
+
+                if (body.position.y < node.centerVector.y)
+                    body.transform.position = new Vector3(body.position.x, node.centerVector.y, body.position.z);
             }
         }
     }

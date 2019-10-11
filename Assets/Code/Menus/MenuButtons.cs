@@ -19,6 +19,12 @@ public class MenuButtons : MonoBehaviour
     {
     }
 
+    private void OnMouseDown()
+    {
+        if (GetComponent<AudioSource>())
+            GetComponent<AudioSource>().Play();
+    }
+
     void OnMouseUp()
     {
         if (buttonAction.ToString()=="StartGame")

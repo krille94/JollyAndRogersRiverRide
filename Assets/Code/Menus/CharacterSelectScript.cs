@@ -24,6 +24,9 @@ public class CharacterSelectScript : MonoBehaviour
 
     Vector3 portraitDistance;
 
+    new AudioSource audio;
+    [SerializeField] AudioClip[] onCharacterClip;
+
     private void OnDisable()
     {
         StartGameButton.SetActive(false);
@@ -38,6 +41,11 @@ public class CharacterSelectScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (gameObject.GetComponent<AudioSource>())
+            audio = gameObject.GetComponent<AudioSource>();
+        else
+            audio = gameObject.AddComponent<AudioSource>();
+
         Player1Pos = 0;
         Player2Pos = 0;
         AmountOfChars = 2;
@@ -76,6 +84,12 @@ public class CharacterSelectScript : MonoBehaviour
                 Player1Chosen = true;
                 Player1Icon.SetActive(false);
                 Player1Text.SetActive(true);
+
+                if (Player1Pos == 0)
+                    audio.pitch = 2.5f;
+                else
+                    audio.pitch = 0.75f;
+                audio.PlayOneShot(onCharacterClip[Player1Pos]);
 
                 if (Player1Chosen && Player2Chosen)
                     StartGameButton.SetActive(true);
@@ -121,6 +135,12 @@ public class CharacterSelectScript : MonoBehaviour
                 Player2Chosen = true;
                 Player2Icon.SetActive(false);
                 Player2Text.SetActive(true);
+
+                if (Player2Pos == 0)
+                    audio.pitch = 2.5f;
+                else
+                    audio.pitch = 0.75f;
+                audio.PlayOneShot(onCharacterClip[Player2Pos]);
 
                 if (Player1Chosen && Player2Chosen)
                     StartGameButton.SetActive(true);

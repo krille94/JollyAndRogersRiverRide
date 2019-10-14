@@ -160,6 +160,7 @@ public class Paddling : MonoBehaviour
 
         UserSettings.ReadSettings();
         if (UserSettings.GetAutoPaddle()) autoPaddle = true;
+        if (UserSettings.GetReversedControls()) reverseControls = true;
     }
 
     void Update()

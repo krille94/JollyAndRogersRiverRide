@@ -203,15 +203,14 @@ public class Paddling : MonoBehaviour
                         rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
                     }
 
-                    if (!oar.onLeftSide || !oar.onRightSide)
-                        rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
+                    
+                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
                 }
                 else if (backKey)
                 {
                     impactPoint = oar.Paddle();
 
-                    if (!oar.onLeftSide || !oar.onRightSide)
-                        rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
+                    rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
                 }
             }
 

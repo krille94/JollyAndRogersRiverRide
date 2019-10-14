@@ -18,7 +18,7 @@ public class Oar
 
     public bool isPaddling = false;
     public float paddlingTime = 0.5f;
-    
+
     public void SetRightSide(bool inWater)
     {
         if (UserSettings.GetControlScheme() == 1)
@@ -96,6 +96,12 @@ public class Oar
             return (leftSideImpactPoint.position + rightSideImpactPoint.position)/2;
         }
 
+        if (!onLeftSide && !onRightSide)
+        {
+            modelLeft.GetComponent<Animation>().Play();
+            modelRight.GetComponent<Animation>().Play();
+        }
+
         if (onLeftSide)
         {
             //if (!modelLeft.GetComponent<Animation>().isPlaying)
@@ -134,6 +140,7 @@ public class Paddling : MonoBehaviour
 
     private bool CanControl = true;
     private bool autoPaddle = false;
+    private bool reverseControls = true;
 
     public void SetCanControl(bool truefalse) { CanControl = truefalse; }
 
@@ -153,6 +160,7 @@ public class Paddling : MonoBehaviour
 
         UserSettings.ReadSettings();
         if (UserSettings.GetAutoPaddle()) autoPaddle = true;
+        if (UserSettings.GetReversedControls()) reverseControls = true;
     }
 
     void Update()
@@ -175,6 +183,17 @@ public class Paddling : MonoBehaviour
         bool leftKey = Input.GetButton("Player_"+ player + "_Paddle_Left");
         bool forwardKey;
         bool backKey;
+
+        if(reverseControls==true)
+        {
+            leftKey = Input.GetButton("Player_" + player + "_Paddle_Right");
+            rightKey = Input.GetButton("Player_" + player + "_Paddle_Left");
+        }
+        else
+        {
+            rightKey = Input.GetButton("Player_" + player + "_Paddle_Right");
+            leftKey = Input.GetButton("Player_" + player + "_Paddle_Left");
+        }
 
         if(autoPaddle==true)
         {
@@ -203,15 +222,21 @@ public class Paddling : MonoBehaviour
                         rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
                     }
 
-                    if (!oar.onLeftSide || !oar.onRightSide)
-                        rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
+
+                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
                 }
                 else if (backKey)
                 {
                     impactPoint = oar.Paddle();
 
-                    if (!oar.onLeftSide || !oar.onRightSide)
-                        rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
+                    rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
+                }
+            }
+            else
+            {
+                if (forwardKey || backKey)
+                {
+                    impactPoint = oar.Paddle();
                 }
             }
 

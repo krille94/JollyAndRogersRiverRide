@@ -175,6 +175,19 @@ public class RiverController : MonoBehaviour
 
                 if (observedObjectCurrentNodes[i]!=node)
                 {
+                    // Experimental code for having boat sharply slow down when it reaches the end of a slope
+                    // Not reliable yet ...
+                    /*
+                    slopeAngle = observedObjectCurrentNodes[i].centerVector.y - observedObjectPreviousNodes[i].centerVector.y;
+                    float slopeAngle2 = node.centerVector.y - observedObjectCurrentNodes[i].centerVector.y;
+
+                    flow = riverAsset.GetFlow(body.position);
+                    if(slopeAngle<slopeAngle2)
+                    {
+                        Debug.Log("test");
+                        body.AddForce(-flow * ((minimumSpeed + (slopeAngle * slopeSpeedBoost) * 10) * Time.deltaTime), ForceMode.VelocityChange);
+                    }*/
+
                     observedObjectPreviousNodes[i] = observedObjectCurrentNodes[i];
                     observedObjectCurrentNodes[i] = node;
                 }
@@ -260,10 +273,12 @@ public class RiverController : MonoBehaviour
                     );
                     body.MovePosition(Vector3.Lerp(body.position, targetPosition, Time.fixedDeltaTime * arcadeBouance));
 
-                    Quaternion targetRotation = Quaternion.LookRotation(node.flowDirection, hit.normal);
+                    // Commented out because boat's not supposed to forcibly face the river flow
+                    //Quaternion targetRotation = Quaternion.LookRotation(node.flowDirection, hit.normal);
+                    //body.transform.rotation = Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime);
+
                     //targetRotation.y = body.rotation.y;
                     //body.MoveRotation(Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime * controllStrenght));
-                    body.transform.rotation = Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime);
                 }
             }
         }

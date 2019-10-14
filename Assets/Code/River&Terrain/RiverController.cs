@@ -147,7 +147,7 @@ public class RiverController : MonoBehaviour
         ArcadeFlowUpdate();
 
         //OutCommented Its Flattening the river, NO MORE WATERFALS :(
-        //MeshWaveUpdate();
+        MeshWaveUpdate();
 
         ArcadeFloatingUpdate();
     }
@@ -195,7 +195,7 @@ public class RiverController : MonoBehaviour
 
                 flow = riverAsset.GetFlow(body.position);
                 body.AddForce(flow * ((minimumSpeed + (slopeAngle*slopeSpeedBoost)) * Time.deltaTime), ForceMode.VelocityChange);
-
+                //.Log((flow * (minimumSpeed + (slopeAngle * slopeSpeedBoost))).ToString());
                 //if (body.position.y != node.centerVector.y)
                 //    body.transform.position = new Vector3(body.position.x, node.centerVector.y, body.position.z);
             }
@@ -274,11 +274,11 @@ public class RiverController : MonoBehaviour
                     body.MovePosition(Vector3.Lerp(body.position, targetPosition, Time.fixedDeltaTime * arcadeBouance));
 
                     // Commented out because boat's not supposed to forcibly face the river flow
-                    //Quaternion targetRotation = Quaternion.LookRotation(node.flowDirection, hit.normal);
-                    //body.transform.rotation = Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime);
-
-                    //targetRotation.y = body.rotation.y;
-                    //body.MoveRotation(Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime * controllStrenght));
+                    Quaternion targetRotation = Quaternion.LookRotation(transform.forward, hit.normal);
+                    
+                    targetRotation.y = body.rotation.y;
+                    //body.MoveRotation(Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime * 100));
+                    body.transform.rotation = Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime);
                 }
             }
         }

@@ -10,6 +10,7 @@ public static class UserSettings
     private static float musicVolume;
     private static float sfxVolume;
     private static bool autoPaddle;
+    private static bool reversedControls;
     private static int controlScheme;
 
     public static void ReadSettings()
@@ -17,6 +18,7 @@ public static class UserSettings
         musicVolume = PlayerPrefs.GetFloat("Music");
         sfxVolume = PlayerPrefs.GetFloat("Sound Effects");
         autoPaddle = (PlayerPrefs.GetInt("Auto Paddle") == 1);
+        reversedControls = (PlayerPrefs.GetInt("Reversed Controls") == 1);
         controlScheme = PlayerPrefs.GetInt("Control Scheme");
         if (controlScheme == 0) SetInt("Control Scheme", 1);
 
@@ -40,6 +42,11 @@ public static class UserSettings
     public static bool GetAutoPaddle()
     {
         return autoPaddle;
+    }
+
+    public static bool GetReversedControls()
+    {
+        return reversedControls;
     }
 
     public static int GetControlScheme()

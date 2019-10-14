@@ -128,8 +128,9 @@ public class Paddling : MonoBehaviour
 
     [SerializeField] public float paddleForce;
     [SerializeField] public float forwardForce;
+    [SerializeField] public float backwardForce=500;
     [SerializeField] public float paddleTime;
-    [SerializeField] public float maximumSpeed=15;
+    [SerializeField] public float maximumSpeed=30;
     //[SerializeField] public KeyCode keyLeft, keyRight;
 
     [SerializeField] private new Rigidbody rigidbody = null; 
@@ -160,6 +161,7 @@ public class Paddling : MonoBehaviour
 
         UserSettings.ReadSettings();
         if (UserSettings.GetAutoPaddle()) autoPaddle = true;
+        if (UserSettings.GetReversedControls()) reverseControls = true;
     }
 
     void Update()
@@ -228,14 +230,8 @@ public class Paddling : MonoBehaviour
                 {
                     impactPoint = oar.Paddle();
 
+                    rigidbody.AddForce(-rigidbody.transform.forward * backwardForce);
                     rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
-                }
-            }
-            else
-            {
-                if (forwardKey || backKey)
-                {
-                    impactPoint = oar.Paddle();
                 }
             }
 

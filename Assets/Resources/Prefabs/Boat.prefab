@@ -122,7 +122,7 @@ MonoBehaviour:
   gold: 0
   maxGold: 25
   trigger: {fileID: 812115172661265869}
-  controller: {fileID: 812115172661265858}
+  controller: {fileID: 0}
   onImpactLostValue: 0.1
 --- !u!1 &812115171250303629
 GameObject:
@@ -2123,10 +2123,8 @@ GameObject:
   m_Component:
   - component: {fileID: 812115172661265856}
   - component: {fileID: 812115172661265859}
-  - component: {fileID: 812115172661265858}
   - component: {fileID: 812115172661265869}
-  - component: {fileID: 812115172661265857}
-  - component: {fileID: 8914153012921587592}
+  - component: {fileID: 6636639272627301862}
   m_Layer: 9
   m_Name: Boat
   m_TagString: Player
@@ -2163,31 +2161,11 @@ Rigidbody:
   m_Mass: 10
   m_Drag: 1
   m_AngularDrag: 0.5
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &812115172661265858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 812115172661265868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66a03dfe07e2d014baf5394eeb7873b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHull: 1000
-  InvincibilityFrames: 3
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  trigger: {fileID: 812115172661265869}
-  onDamagedParticlePrefab: {fileID: 4383681461319272144, guid: 19c228b39c1b16441a2ef1f231540979,
-    type: 3}
 --- !u!114 &812115172661265869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2200,7 +2178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5595b4961d985884fa97a5676d90c165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &812115172661265857
+--- !u!114 &6636639272627301862
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2209,33 +2187,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 812115172661265868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b00183003be293469ad745021174fb9, type: 3}
+  m_Script: {fileID: 11500000, guid: fc998eabcee21d44893b013a03cddfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 5000
---- !u!114 &8914153012921587592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 812115172661265868}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddc89bd3bb4b9b045b06e0d31807741a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 0}
-  river: {fileID: 0}
-  lastPassedNodeIndex: 0
-  closestNode:
-    flowDirection: {x: 0, y: 0, z: 0}
-    flowDirectionOffset: {x: 0, y: 0, z: 0}
-    finalFlowDirection: {x: 0, y: 0, z: 0}
-    centerVector: {x: 0, y: 0, z: 0}
-    centerVectorOffset: {x: 0, y: 0, z: 0}
-    index: 0
-  force: 10
+  collisionKnockback: 100
+  isCollided: 1
+  counterMesiuresStrenght: 10
+  isApplyingCountermesiureForce: 0
+  MaxHull: 1000
+  InvincibilityFrames: 3
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  trigger: {fileID: 0}
+  onDamagedParticlePrefab: {fileID: 0}
 --- !u!1 &812115172696077154
 GameObject:
   m_ObjectHideFlags: 0

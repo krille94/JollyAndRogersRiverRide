@@ -47,7 +47,9 @@ public class BoatClass : MonoBehaviour
         hull += amount;
         if (hull > MaxHull)
             hull = MaxHull;
-        SetWaterInBoat();
+
+        UpdateDamage();
+        //SetWaterInBoat();
     }
     private void SetWaterInBoat()
     {
@@ -84,7 +86,7 @@ public class BoatClass : MonoBehaviour
 
             float waterHeight;
             waterHeight = (hull - 1) / (MaxHull - 1);
-            WaterLevel.transform.localPosition = new Vector3(0, 1 + (0.65f * (1 - waterHeight)), 0.4f);
+            WaterLevel.transform.localPosition = new Vector3(0, 1 + (0.3f * (1 - waterHeight)), 0.4f);
         }
     }
     #endregion
@@ -181,6 +183,7 @@ public class BoatClass : MonoBehaviour
             else
                 hull = 0;
 
+            UpdateDamage();
             invincible = true;
         }
 

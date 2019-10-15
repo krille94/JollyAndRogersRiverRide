@@ -57,6 +57,7 @@ public class RiverController : MonoBehaviour
     
     private void Start()
     {
+        minimumSpeed = SpeedValueManager.GetSpeedValues()[0].minimumSpeed;
         if (instance != null)
             Debug.LogWarning("Multiple RiverControllers Detected");
         instance = this;

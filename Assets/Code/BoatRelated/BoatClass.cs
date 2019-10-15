@@ -26,7 +26,7 @@ public class BoatClass : MonoBehaviour
 
     [Header("Damage Controller")]
     public int MaxHull = 10;
-    private float hull;
+    private int hull;
     public float InvincibilityFrames = 3;
     private float InvincibilityTimer = 0;
     private bool invincible = false;
@@ -154,6 +154,21 @@ public class BoatClass : MonoBehaviour
         }
     }
 
+    private void UpdateDamage()
+    {
+        SetWaterInBoat();
+
+        if (SpeedValueManager.GetSpeedValues().Count >= MaxHull - hull)
+        {
+            GameObject option = GameObject.Find("PlayerOneSpot");
+            option.GetComponent<Paddling>().SetSpeedValues(MaxHull - hull);
+            option = GameObject.Find("PlayerTwoSpot");
+            option.GetComponent<Paddling>().SetSpeedValues(MaxHull - hull);
+            option = GameObject.FindGameObjectWithTag("River");
+            option.GetComponent<RiverController>().minimumSpeed = SpeedValueManager.GetSpeedValues()[MaxHull - hull].minimumSpeed;
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "Item" || collision.transform.tag == "River")
@@ -166,7 +181,6 @@ public class BoatClass : MonoBehaviour
             else
                 hull = 0;
 
-            SetWaterInBoat();
             invincible = true;
         }
 

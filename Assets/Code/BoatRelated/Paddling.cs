@@ -126,12 +126,12 @@ public class Paddling : MonoBehaviour
     public PlayerIndexTypes playerIndex = 0;
     string player;
 
-    [SerializeField] public float paddleForwardForce;
-    [SerializeField] public float forwardForce;
-    [SerializeField] public float backwardForce=500;
-    [SerializeField] public float paddleBackwardForce;
+    float turnForwardForce;
+    float forwardForce;
+    float backwardForce=500;
+    float turnBackwardForce;
     [SerializeField] public float paddleTime;
-    [SerializeField] public float maximumSpeed=30;
+    float maximumSpeed=30;
     //[SerializeField] public KeyCode keyLeft, keyRight;
 
     [SerializeField] private new Rigidbody rigidbody = null; 
@@ -148,6 +148,7 @@ public class Paddling : MonoBehaviour
 
     private void Start()
     {
+        SetSpeedValues(0);
         oar.SetLeftSide(false);
         oar.SetRightSide(false);
 
@@ -163,6 +164,20 @@ public class Paddling : MonoBehaviour
         UserSettings.ReadSettings();
         if (UserSettings.GetAutoPaddle()) autoPaddle = true;
         if (UserSettings.GetReversedControls()) reverseControls = true;
+    }
+
+    public void SetSpeedValues(int damage)
+    {
+        if (SpeedValueManager.GetSpeedValues().Count > damage)
+        {
+            SpeedValue newValue = SpeedValueManager.GetSpeedValues()[damage];
+
+            turnForwardForce = newValue.turnForwardForce;
+            turnBackwardForce = newValue.turnBackwardForce;
+            forwardForce = newValue.forwardForce;
+            backwardForce = newValue.backwardForce;
+            maximumSpeed = newValue.maximumSpeed;
+        }
     }
 
     void Update()
@@ -225,14 +240,14 @@ public class Paddling : MonoBehaviour
                     }
 
 
-                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForwardForce, impactPoint);
+                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
                 }
                 else if (backKey)
                 {
                     impactPoint = oar.Paddle();
 
                     rigidbody.AddForce(-rigidbody.transform.forward * backwardForce);
-                    rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleBackwardForce, impactPoint);
+                    rigidbody.AddForceAtPosition(-rigidbody.transform.forward * turnBackwardForce, impactPoint);
                 }
             }
 

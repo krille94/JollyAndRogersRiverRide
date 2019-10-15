@@ -126,9 +126,10 @@ public class Paddling : MonoBehaviour
     public PlayerIndexTypes playerIndex = 0;
     string player;
 
-    [SerializeField] public float paddleForce;
+    [SerializeField] public float paddleForwardForce;
     [SerializeField] public float forwardForce;
     [SerializeField] public float backwardForce=500;
+    [SerializeField] public float paddleBackwardForce;
     [SerializeField] public float paddleTime;
     [SerializeField] public float maximumSpeed=30;
     //[SerializeField] public KeyCode keyLeft, keyRight;
@@ -224,14 +225,14 @@ public class Paddling : MonoBehaviour
                     }
 
 
-                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForce, impactPoint);
+                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * paddleForwardForce, impactPoint);
                 }
                 else if (backKey)
                 {
                     impactPoint = oar.Paddle();
 
                     rigidbody.AddForce(-rigidbody.transform.forward * backwardForce);
-                    rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleForce, impactPoint);
+                    rigidbody.AddForceAtPosition(-rigidbody.transform.forward * paddleBackwardForce, impactPoint);
                 }
             }
 

@@ -16,12 +16,12 @@ public class BoatClass : MonoBehaviour
     public bool isCollided = true;
     private GameObject otherCollider;
     
-    [Header("Counter Mesiures For Going Reverse River Direction")]
-    public float counterMesiuresStrenght = 10;
+    [Header("Counter Measures For Going Reverse River Direction")]
+    public float counterMeasuresStrenght = 10;
     /// <summary>
     /// Inspector ReadOnly
     /// </summary>
-    [SerializeField] private bool isApplyingCountermesiureForce;
+    [SerializeField] private bool isApplyingCountermeasureForce;
     private int lastPassedNodeIndex = 0;
 
     [Header("Damage Controller")]
@@ -30,7 +30,7 @@ public class BoatClass : MonoBehaviour
     public float InvincibilityFrames = 3;
     private float InvincibilityTimer = 0;
     private bool invincible = false;
-    public UnityEvent onDeath;
+    //public UnityEvent onDeath;
     [SerializeField] PickUpTrigger trigger = null;
     public delegate void OnDamageRecived(float value, Vector3 point);
     public OnDamageRecived onDamaged;
@@ -38,10 +38,10 @@ public class BoatClass : MonoBehaviour
     private GameObject WaterLevel = null;
 
     #region Damage Functions
-    public void OnDeath()
+    /*public void OnDeath()
     {
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().OnDeath();
-    }
+    }*/
     public void RecoverHull(int amount)
     {
         hull += amount;
@@ -109,22 +109,22 @@ public class BoatClass : MonoBehaviour
     void Update()
     {
         //Knockback
-        if (isCollided == false)
-            return;
-
-        bool stillClose = false;
-        Collider[] hits = Physics.OverlapSphere(transform.position, 2.5f);
-        for (int i = 0; i < hits.Length; i++)
+        if (isCollided == true)
         {
-            if (hits[i].gameObject == otherCollider)
+            bool stillClose = false;
+            Collider[] hits = Physics.OverlapSphere(transform.position, 2.5f);
+            for (int i = 0; i < hits.Length; i++)
             {
-                stillClose = true;
+                if (hits[i].gameObject == otherCollider)
+                {
+                    stillClose = true;
+                }
             }
+            if (stillClose == false)
+                isCollided = false;
         }
-        if (stillClose == false)
-            isCollided = false;
 
-        //Counter Mesiures
+        //Counter Measures
         closestNode = river.riverAsset.GetNodeFromPosition(transform.position);
         if (closestNode.index > lastPassedNodeIndex)
         {
@@ -133,15 +133,15 @@ public class BoatClass : MonoBehaviour
 
         if (closestNode.index < lastPassedNodeIndex)
         {
-            GetComponent<Rigidbody>().AddForce(river.riverAsset.GetNodeFromIndex(closestNode.index).flowDirection * counterMesiuresStrenght * Time.deltaTime * (lastPassedNodeIndex - closestNode.index));
-            isApplyingCountermesiureForce = true;
+            GetComponent<Rigidbody>().AddForce(river.riverAsset.GetNodeFromIndex(closestNode.index).flowDirection * counterMeasuresStrenght * Time.deltaTime * (lastPassedNodeIndex - closestNode.index));
+            isApplyingCountermeasureForce = true;
         }
         else
         {
-            isApplyingCountermesiureForce = false;
+            isApplyingCountermeasureForce = false;
         }
 
-        //Damage Controll
+        //Damage Control
         if (invincible)
         {
             InvincibilityTimer += Time.deltaTime;
@@ -155,12 +155,11 @@ public class BoatClass : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Item")
+        if (collision.transform.tag == "Item" || collision.gameObject.tag == "River")
             return;
 
         if (!invincible)
         {
-            //hull -= collision.relativeVelocity.magnitude;
             hull--;
             SetWaterInBoat();
             invincible = true;
@@ -176,9 +175,7 @@ public class BoatClass : MonoBehaviour
 
         if (hull <= 0)
         {
-            Time.timeScale = 0;
-            OnDeath();
-            onDeath.Invoke();
+            hull = 0;
         }
 
         //Debug.LogWarning(collision.gameObject.name);
@@ -193,7 +190,7 @@ public class BoatClass : MonoBehaviour
         Vector3 target = collision.GetContact(0).point;
         target = target - body.transform.position;
         target.y = 0;
-        body.AddForce(-target.normalized * counterMesiuresStrenght);
+        body.AddForce(-target.normalized * collisionKnockback);
 
         otherCollider = collision.gameObject;
         isCollided = true;

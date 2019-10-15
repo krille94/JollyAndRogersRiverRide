@@ -12,7 +12,7 @@ public class GoldChestContainer : MonoBehaviour
     public int maxGold = 10;
 
     [SerializeField] PickUpTrigger trigger = null;
-    [SerializeField] BoatDamageController controller = null;
+    [SerializeField] BoatClass controller = null;
 
     [Range(0.0f,1.0f)]public float onImpactLostValue = 0.25f;
 

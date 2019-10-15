@@ -274,11 +274,11 @@ public class RiverController : MonoBehaviour
                     body.MovePosition(Vector3.Lerp(body.position, targetPosition, Time.fixedDeltaTime * arcadeBouance));
 
                     // Commented out because boat's not supposed to forcibly face the river flow
-                    Quaternion targetRotation = Quaternion.LookRotation(transform.forward, hit.normal);
+                    //Quaternion targetRotation = Quaternion.LookRotation(transform.forward, hit.normal);
                     
-                    targetRotation.y = body.rotation.y;
-                    //body.MoveRotation(Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime * 100));
-                    body.transform.rotation = Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime);
+                    //targetRotation.y = body.rotation.y;
+                    //body.MoveRotation(Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime));
+                    //body.transform.rotation = Quaternion.Lerp(body.rotation, targetRotation, Time.deltaTime);
                 }
             }
         }

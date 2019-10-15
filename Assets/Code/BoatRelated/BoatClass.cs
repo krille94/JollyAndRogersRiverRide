@@ -84,7 +84,7 @@ public class BoatClass : MonoBehaviour
 
             float waterHeight;
             waterHeight = (hull - 1) / (MaxHull - 1);
-            WaterLevel.transform.localPosition = new Vector3(0, 1 + (0.7f * (1 - waterHeight)), 0.4f);
+            WaterLevel.transform.localPosition = new Vector3(0, 1 + (0.65f * (1 - waterHeight)), 0.4f);
         }
     }
     #endregion
@@ -108,6 +108,7 @@ public class BoatClass : MonoBehaviour
 
     void Update()
     {
+
         //Knockback
         if (isCollided == true)
         {
@@ -155,12 +156,16 @@ public class BoatClass : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Item" || collision.gameObject.tag == "River")
+        if (collision.transform.tag == "Item" || collision.transform.tag == "River")
             return;
 
         if (!invincible)
         {
-            hull--;
+            if (hull > 0)
+                hull--;
+            else
+                hull = 0;
+
             SetWaterInBoat();
             invincible = true;
         }
@@ -173,12 +178,8 @@ public class BoatClass : MonoBehaviour
             Destroy(particle.gameObject, particle.main.duration);
         }
 
-        if (hull <= 0)
-        {
-            hull = 0;
-        }
 
-        //Debug.LogWarning(collision.gameObject.name);
+        Debug.LogWarning(collision.gameObject.name);
     }
 
     private void OnCollisionStay(Collision collision)

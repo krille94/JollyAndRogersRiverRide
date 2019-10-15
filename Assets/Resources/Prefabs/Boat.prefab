@@ -1144,10 +1144,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  paddleForce: 420
-  forwardForce: 1000
-  paddleTime: 0
-  maximumSpeed: 15
+  paddleForwardForce: 1100
+  forwardForce: 2000
+  backwardForce: 2000
+  paddleBackwardForce: 1100
+  paddleTime: 0.6
+  maximumSpeed: 30
   rigidbody: {fileID: 812115172661265859}
   oar:
     modelRoot: {fileID: 812115172869859801}
@@ -2190,16 +2192,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc998eabcee21d44893b013a03cddfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionKnockback: 100
+  collisionKnockback: 1000
   isCollided: 1
-  counterMesiuresStrenght: 10
-  isApplyingCountermesiureForce: 0
-  MaxHull: 1000
+  counterMeasuresStrenght: 10
+  isApplyingCountermeasureForce: 0
+  MaxHull: 8
   InvincibilityFrames: 3
-  onDeath:
-    m_PersistentCalls:
-      m_Calls: []
-  trigger: {fileID: 0}
+  trigger: {fileID: 812115172661265869}
   onDamagedParticlePrefab: {fileID: 0}
 --- !u!1 &812115172696077154
 GameObject:
@@ -2328,10 +2327,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 1
-  paddleForce: 420
-  forwardForce: 1000
-  paddleTime: 0
-  maximumSpeed: 15
+  paddleForwardForce: 1100
+  forwardForce: 2000
+  backwardForce: 2000
+  paddleBackwardForce: 1100
+  paddleTime: 0.6
+  maximumSpeed: 30
   rigidbody: {fileID: 812115172661265859}
   oar:
     modelRoot: {fileID: 812115171373746683}

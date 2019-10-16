@@ -168,8 +168,10 @@ public class BoatClass : FloatingObject
             else
                 hull = 0;
 
-            UpdateDamage();
             invincible = true;
+            GameObject cam = GameObject.Find("Main Camera");
+            cam.GetComponent<CameraController>().StartShakeCam();
+            UpdateDamage();
         }
 
         foreach (ContactPoint contact in collision.contacts)

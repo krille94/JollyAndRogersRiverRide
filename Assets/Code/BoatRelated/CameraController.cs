@@ -29,12 +29,54 @@ public class CameraController : MonoBehaviour
 
     Skybox skybox;
 
+    [Header("Shake Cam")]
+    public float shakeDuration=1.5f;
+    float shakeTimer = 0;
+    float oneShake = 0;
+    public float timePerShake = 0.2f;
+    bool shaking = false;
+    Vector3 shakeDir = Vector3.zero;
+    public float shakeIntensity=5;
+    Vector3 shakeOffset = Vector3.zero;
+
     private void Start()
     {
+        shakeTimer = shakeDuration;
         skybox = GetComponent<Skybox>();
         targetNode = riverController.riverAsset.GetNodeFromPosition(boat.position);
         transform.rotation = boat.transform.rotation;
         targetRotationVector = transform.rotation.eulerAngles;
+    }
+
+    public void StartShakeCam()
+    {
+        shakeTimer = 0;
+        oneShake = 0;
+        shaking = true;
+        shakeDir.x = Random.Range(-1.0f, 1.0f);
+        shakeDir.y = Random.Range(-1.0f, 1.0f);
+    }
+
+    void ShakeCam()
+    {
+        oneShake += Time.deltaTime;
+        shakeTimer += Time.deltaTime;
+        if (oneShake >= timePerShake)
+        {
+            oneShake = 0;
+            shakeDir.x = Random.Range(-1.0f, 1.0f);
+            shakeDir.y = Random.Range(-1.0f, 1.0f);
+        }
+
+        if (oneShake<= timePerShake/2)  shakeOffset = shakeDir * (oneShake * shakeIntensity);
+        else                            shakeOffset = shakeDir * ((timePerShake - oneShake) * shakeIntensity);
+
+
+        if (shakeTimer >= shakeDuration)
+        {
+            shaking = false;
+            shakeOffset = Vector3.zero;
+        }
     }
 
     void Update()
@@ -43,6 +85,9 @@ public class CameraController : MonoBehaviour
         {
             skybox.material.SetFloat("_Rotation", Time.time);
         }
+
+        if(shaking)
+        { ShakeCam(); }
 
         RiverNode node = riverController.riverAsset.GetNodeFromPosition(boat.position);
 
@@ -91,7 +136,7 @@ public class CameraController : MonoBehaviour
         Quaternion boatOffsetRot = Quaternion.Euler(targetRotationVector.x, targetRotationVector.y, targetRotationVector.z);
         boatOffset = boatOffsetRot * offsetPosition;
 
-        targetPosition = boat.position + boatOffset;
+        targetPosition = boat.position + boatOffset + shakeOffset;
         transform.position = targetPosition;
 
 

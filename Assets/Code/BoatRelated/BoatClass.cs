@@ -183,8 +183,10 @@ public class BoatClass : MonoBehaviour
             else
                 hull = 0;
 
-            UpdateDamage();
             invincible = true;
+            GameObject cam = GameObject.Find("Main Camera");
+            cam.GetComponent<CameraController>().StartShakeCam();
+            UpdateDamage();
         }
 
         foreach (ContactPoint contact in collision.contacts)

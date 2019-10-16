@@ -122,7 +122,7 @@ MonoBehaviour:
   gold: 0
   maxGold: 25
   trigger: {fileID: 812115172661265869}
-  controller: {fileID: 0}
+  controller: {fileID: 6636639272627301862}
   onImpactLostValue: 0.1
 --- !u!1 &812115171250303629
 GameObject:
@@ -910,12 +910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
-  paddleForwardForce: 1100
-  forwardForce: 2000
-  backwardForce: 2000
-  paddleBackwardForce: 1100
   paddleTime: 0.6
-  maximumSpeed: 30
   rigidbody: {fileID: 812115172661265859}
   oar:
     modelRoot: {fileID: 812115172869859801}
@@ -1831,6 +1826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc998eabcee21d44893b013a03cddfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  observers: []
   collisionKnockback: 1000
   isCollided: 1
   counterMeasuresStrenght: 10
@@ -1980,12 +1976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 1
-  paddleForwardForce: 1100
-  forwardForce: 2000
-  backwardForce: 2000
-  paddleBackwardForce: 1100
   paddleTime: 0.6
-  maximumSpeed: 30
   rigidbody: {fileID: 812115172661265859}
   oar:
     modelRoot: {fileID: 812115171373746683}

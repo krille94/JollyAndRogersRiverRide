@@ -1,0 +1,54 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class BigWhirlwindScript : MonoBehaviour
+{
+    Transform rotationObj;
+
+    [SerializeField]
+    List<FloatingObject> observerdObjects = new List<FloatingObject>();
+
+    public float force = 10;
+
+    void Start()
+    {
+        GameObject obj = new GameObject("directionTransform");
+        obj.transform.SetParent(transform);
+        rotationObj = obj.transform;
+    }
+
+    void Update()
+    {
+        for (int i = 0; i < observerdObjects.Count; i++)
+        {
+            rotationObj.position = observerdObjects[i].transform.position;
+            rotationObj.LookAt(transform);
+
+            observerdObjects[i].GetRigidbody().AddForce((rotationObj.forward + rotationObj.right) * force);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<FloatingObject>())
+        {
+            other.GetComponent<FloatingObject>().observers.Add(gameObject);
+            observerdObjects.Add(other.GetComponent<FloatingObject>());
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.GetComponent<FloatingObject>())
+        {
+            other.GetComponent<FloatingObject>().observers.Remove(gameObject);
+            observerdObjects.Remove(other.GetComponent<FloatingObject>());
+        }
+    }
+
+    public void OnDestroyed (FloatingObject obj)
+    {
+        observerdObjects.Remove(obj);
+    }
+}

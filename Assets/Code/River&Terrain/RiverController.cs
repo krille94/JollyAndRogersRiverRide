@@ -8,20 +8,9 @@ public class RiverController : MonoBehaviour
 
     public RiverObject riverAsset;
     
-    public List<Rigidbody> observedObjects = new List<Rigidbody>();
-    private List<RiverNode> observedObjectPreviousNodes = new List<RiverNode>();
-    private List<RiverNode> observedObjectCurrentNodes = new List<RiverNode>();
-    private void RemoveObservedObject (Rigidbody obj) {
-        for (int i = 0; i < observedObjects.Count; i++)
-        {
-            if(observedObjects[i] == obj)
-            {
-                observedObjectCurrentNodes.RemoveAt(i);
-                observedObjectPreviousNodes.RemoveAt(i);
-                observedObjects.RemoveAt(i);
-                return;
-            }
-        }
+    public List<FloatingObject> observedObjects = new List<FloatingObject>();
+    private void RemoveObservedObject (FloatingObject obj) {
+        observedObjects.Remove(obj);
     }
     public Transform endTransform;
 
@@ -46,12 +35,7 @@ public class RiverController : MonoBehaviour
     [Header("SplashEffect")]
     public ParticleSystem onImpactEffect = null;
     public AudioSource onImpactSound = null;
-
-    [Header("Debuging")]
-    [SerializeField] Vector3 flow;
-    [SerializeField] RiverNode node;
-    [SerializeField] float heightAboveWater;
-
+    
     private Transform effectsPool;
     private Mesh mesh;
     
@@ -67,9 +51,9 @@ public class RiverController : MonoBehaviour
 
         if (GameObject.FindGameObjectWithTag("Player"))
         {
-            if(observedObjects.Contains(GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>()) == false)
+            if(observedObjects.Contains(GameObject.FindGameObjectWithTag("Player").GetComponent<FloatingObject>()) == false)
             {
-                observedObjects.Add(GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>());
+                observedObjects.Add(GameObject.FindGameObjectWithTag("Player").GetComponent<FloatingObject>());
             }
         }
 
@@ -79,16 +63,8 @@ public class RiverController : MonoBehaviour
             if (observedObjects[i] == null)
             {
                 observedObjects.RemoveAt(i);
-                observedObjectPreviousNodes.RemoveAt(i);
-                observedObjectCurrentNodes.RemoveAt(i);
                 goto redo;
             }                
-        }
-
-        foreach(Rigidbody body in observedObjects)
-        {
-            observedObjectPreviousNodes.Add(riverAsset.GetNodeFromPosition(body.position));
-            observedObjectCurrentNodes.Add(riverAsset.GetNodeFromPosition(body.position));
         }
 
         if (allWorking)
@@ -123,28 +99,17 @@ public class RiverController : MonoBehaviour
 
     private void Update()
     {
-    /*
-        if (!Application.isPlaying)
+        foreach(FloatingObject obj in observedObjects)
         {
-            if(riverAsset != null)
+            RiverNode closest = riverAsset.GetNodeFromPosition(obj.transform.position);
+            RiverNode last = obj.GetNodes().closest;
+            if(closest != last)
             {
-                BuildMesh();
-                for (int i = 0; i < transform.childCount; i++)
-                {
-                    transform.GetChild(i).GetComponent<MeshFilter>().sharedMesh = mesh;
-                }
-
-                if (gameObject.GetComponent<MeshCollider>() == null)
-                    gameObject.AddComponent<MeshCollider>();
-                gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
+                last = closest;
             }
-
-            if (endTransform != null)
-                endTransform.position = riverAsset.nodes[riverAsset.nodes.Length - 1].centerVector;
-            return;
+            obj.UpdateNodes(closest, last);
         }
-    */
-        PhysicsFlowUpdate();
+
         ArcadeFlowUpdate();
 
         //OutCommented Its Flattening the river, NO MORE WATERFALS :(
@@ -171,63 +136,51 @@ public class RiverController : MonoBehaviour
         {
             for (int i = 0; i < observedObjects.Count; i++)
             {
-                Rigidbody body = observedObjects[i];
-                node = riverAsset.GetNodeFromPosition(body.position);
+                FloatingObject obj = observedObjects[i];
+                slopeAngle = obj.GetNodes().closest.centerVector.y- obj.GetNodes().last.centerVector.y;
 
-                if (observedObjectCurrentNodes[i]!=node)
-                {
-                    // Experimental code for having boat sharply slow down when it reaches the end of a slope
-                    // Not reliable yet ...
-                    /*
-                    slopeAngle = observedObjectCurrentNodes[i].centerVector.y - observedObjectPreviousNodes[i].centerVector.y;
-                    float slopeAngle2 = node.centerVector.y - observedObjectCurrentNodes[i].centerVector.y;
-
-                    flow = riverAsset.GetFlow(body.position);
-                    if(slopeAngle<slopeAngle2)
-                    {
-                        Debug.Log("test");
-                        body.AddForce(-flow * ((minimumSpeed + (slopeAngle * slopeSpeedBoost) * 10) * Time.deltaTime), ForceMode.VelocityChange);
-                    }*/
-
-                    observedObjectPreviousNodes[i] = observedObjectCurrentNodes[i];
-                    observedObjectCurrentNodes[i] = node;
-                }
-                slopeAngle = observedObjectCurrentNodes[i].centerVector.y- observedObjectPreviousNodes[i].centerVector.y;
-
-                flow = riverAsset.GetFlow(body.position);
-                body.AddForce(flow * ((minimumSpeed + (slopeAngle*slopeSpeedBoost)) * Time.deltaTime), ForceMode.VelocityChange);
-                //.Log((flow * (minimumSpeed + (slopeAngle * slopeSpeedBoost))).ToString());
-                //if (body.position.y != node.centerVector.y)
-                //    body.transform.position = new Vector3(body.position.x, node.centerVector.y, body.position.z);
+                Vector3 flow = obj.GetNodes().closest.finalFlowDirection;
+                obj.GetRigidbody().AddForce(flow * ((minimumSpeed + (slopeAngle*slopeSpeedBoost)) * Time.deltaTime), ForceMode.VelocityChange);
             }
         }
     }
 
-    void PhysicsFlowUpdate()
+    void ArcadeFloatingUpdate ()
     {
-        if (usedSystemType == SystemTypes.Physics)
+        if (usedSystemType == SystemTypes.Arcade)
         {
             for (int i = 0; i < observedObjects.Count; i++)
             {
-                Rigidbody body = observedObjects[i];
-                node = riverAsset.GetNodeFromPosition(transform.position, body.position);
-
-                if (observedObjectCurrentNodes[i] != node)
+                FloatingObject obj = observedObjects[i];
+                RaycastHit hit;
+                Debug.DrawRay(obj.transform.position + (Vector3.up * 1000), Vector3.down * 2000, Color.yellow);
+                if (Physics.Raycast(obj.transform.position + (Vector3.up * 1000), Vector3.down, out hit, 2000, arcadeRiverLayer))
                 {
-                    observedObjectPreviousNodes[i] = observedObjectCurrentNodes[i];
-                    observedObjectCurrentNodes[i] = node;
+                    //Debug.Log(hit.transform.name);
+                    if (hit.transform != transform)
+                        return;
+
+                    RiverNode node = riverAsset.GetNodeFromPosition(hit.point);
+
+                    Vector3 targetPosition = new Vector3(
+                        obj.transform.position.x,
+                        hit.point.y,
+                        obj.transform.position.z
+                    );
+                    obj.GetRigidbody().MovePosition(Vector3.Lerp(obj.transform.position, targetPosition, Time.fixedDeltaTime * arcadeBouance));
+
+                    // Commented out because boat's not supposed to forcibly face the river flow
+                    //Quaternion targetRotation = Quaternion.LookRotation(transform.forward, hit.normal);
+                    
+                    //targetRotation.y = body.rotation.y;
+                    //body.MoveRotation(Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime));
+                    //body.transform.rotation = Quaternion.Lerp(body.rotation, targetRotation, Time.deltaTime);
                 }
-                slopeAngle = observedObjectCurrentNodes[i].centerVector.y - observedObjectPreviousNodes[i].centerVector.y;
-                
-                flow = riverAsset.GetFlow(transform.position, body.position);
-                Vector3 movement = flow * (minimumSpeed + (slopeAngle * slopeSpeedBoost));
-                if(movement.magnitude > body.velocity.magnitude)
-                    body.AddForce(movement * Time.deltaTime, ForceMode.VelocityChange);
             }
         }
     }
 
-    void MeshWaveUpdate ()
+    void MeshWaveUpdate()
     {
         if (mesh == null)
             return;
@@ -248,58 +201,6 @@ public class RiverController : MonoBehaviour
         mesh.RecalculateNormals();
 
         mesh.vertices = verts;
-    }
-
-    void ArcadeFloatingUpdate ()
-    {
-        if (usedSystemType == SystemTypes.Arcade)
-        {
-            for (int i = 0; i < observedObjects.Count; i++)
-            {
-                Rigidbody body = observedObjects[i];
-                RaycastHit hit;
-                Debug.DrawRay(body.transform.position + (Vector3.up * 1000), Vector3.down * 2000, Color.yellow);
-                if (Physics.Raycast(body.transform.position + (Vector3.up * 1000), Vector3.down, out hit, 2000, arcadeRiverLayer))
-                {
-                    //Debug.Log(hit.transform.name);
-                    if (hit.transform != transform)
-                        return;
-
-                    RiverNode node = riverAsset.GetNodeFromPosition(hit.point);
-
-                    Vector3 targetPosition = new Vector3(
-                        body.transform.position.x,
-                        hit.point.y,
-                        body.transform.position.z
-                    );
-                    body.MovePosition(Vector3.Lerp(body.position, targetPosition, Time.fixedDeltaTime * arcadeBouance));
-
-                    // Commented out because boat's not supposed to forcibly face the river flow
-                    //Quaternion targetRotation = Quaternion.LookRotation(transform.forward, hit.normal);
-                    
-                    //targetRotation.y = body.rotation.y;
-                    //body.MoveRotation(Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime));
-                    //body.transform.rotation = Quaternion.Lerp(body.rotation, targetRotation, Time.deltaTime);
-                }
-            }
-        }
-    }
-
-    void PhysicsFloatingUpdate (Collider other)
-    {
-        if (usedSystemType == SystemTypes.Physics)
-        {
-            float distance = 1;// collider.bounds.SqrDistance(other.transform.position);
-            distance = Mathf.Abs(other.transform.position.y - transform.position.y);
-
-            node = riverAsset.GetNodeFromPosition(transform.position, other.transform.position);
-            heightAboveWater = Mathf.Abs(other.transform.position.y - node.centerVector.y);
-            if (Mathf.Abs(other.transform.position.y - node.centerVector.y) > 0.5f)
-                other.attachedRigidbody.AddForce(Vector3.up * (physicsBouance / other.attachedRigidbody.mass) * distance * Time.fixedDeltaTime);
-
-            Debug.DrawRay(other.transform.position, Vector3.up * ((physicsBouance / other.attachedRigidbody.mass) * distance) / 2500, Color.blue);
-            //Debug.Log(other.name + " is colliding with water surface");
-        }
     }
 
     private void OnDrawGizmos()

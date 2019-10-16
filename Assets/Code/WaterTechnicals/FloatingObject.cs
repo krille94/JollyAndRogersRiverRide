@@ -9,7 +9,9 @@ public class FloatingObject : MonoBehaviour
     public Rigidbody GetRigidbody() { return body; }
 
     protected RiverController river;
+    [SerializeField]
     protected RiverNode closestNode;
+    [SerializeField]
     protected RiverNode lastNode;
     public struct FloatingObjectNodes
     {

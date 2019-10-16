@@ -103,7 +103,7 @@ public class RiverController : MonoBehaviour
         {
             RiverNode closest = riverAsset.GetNodeFromPosition(obj.transform.position);
             RiverNode last = obj.GetNodes().closest;
-            if(closest != last)
+            if(closest.index != last.index)
             {
                 last = closest;
             }

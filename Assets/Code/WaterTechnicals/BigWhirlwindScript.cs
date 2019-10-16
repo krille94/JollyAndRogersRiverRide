@@ -9,7 +9,8 @@ public class BigWhirlwindScript : MonoBehaviour
     [SerializeField]
     List<FloatingObject> observerdObjects = new List<FloatingObject>();
 
-    public float force = 10;
+    public float centrificalForce = 10;
+    public float inwardForce = 5;
 
     void Start()
     {
@@ -25,7 +26,7 @@ public class BigWhirlwindScript : MonoBehaviour
             rotationObj.position = observerdObjects[i].transform.position;
             rotationObj.LookAt(transform);
 
-            observerdObjects[i].GetRigidbody().AddForce((rotationObj.forward + rotationObj.right) * force);
+            observerdObjects[i].GetRigidbody().AddForce((-observerdObjects[i].GetNodes().closest.finalFlowDirection * inwardForce) + (((rotationObj.right+rotationObj.forward)/2) * centrificalForce));
         }
     }
 

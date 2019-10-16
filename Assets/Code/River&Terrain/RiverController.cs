@@ -156,12 +156,11 @@ public class RiverController : MonoBehaviour
                 Debug.DrawRay(obj.transform.position + (Vector3.up * 1000), Vector3.down * 2000, Color.yellow);
                 if (Physics.Raycast(obj.transform.position + (Vector3.up * 1000), Vector3.down, out hit, 2000, arcadeRiverLayer))
                 {
-                    //Debug.Log(hit.transform.name);
                     if (hit.transform != transform)
+                    {
+                        Debug.Log(hit.transform.name);
                         return;
-
-                    RiverNode node = riverAsset.GetNodeFromPosition(hit.point);
-
+                    }
                     Vector3 targetPosition = new Vector3(
                         obj.transform.position.x,
                         hit.point.y,

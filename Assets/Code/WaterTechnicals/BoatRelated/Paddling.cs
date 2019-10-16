@@ -203,13 +203,29 @@ public class Paddling : MonoBehaviour
 
         if(reverseControls==true)
         {
-            leftKey = Input.GetButton("Player_" + player + "_Paddle_Right");
-            rightKey = Input.GetButton("Player_" + player + "_Paddle_Left");
+            float joyStickDir = Input.GetAxis("Player_" + player + "_Joystick_Movement");
+            if (Input.GetButton("Player_" + player + "_Paddle_Right") || joyStickDir > 0)
+                leftKey = true;
+            else
+                leftKey = false;
+
+            if (Input.GetButton("Player_" + player + "_Paddle_Left") || joyStickDir < 0)
+                rightKey = true;
+            else
+                rightKey = false;
         }
         else
         {
-            rightKey = Input.GetButton("Player_" + player + "_Paddle_Right");
-            leftKey = Input.GetButton("Player_" + player + "_Paddle_Left");
+            float joyStickDir = Input.GetAxis("Player_" + player + "_Joystick_Movement");
+            if (Input.GetButton("Player_" + player + "_Paddle_Right") || joyStickDir < 0)
+                rightKey = true;
+            else
+                rightKey = false;
+
+            if (Input.GetButton("Player_" + player + "_Paddle_Left") || joyStickDir > 0)
+                leftKey = true;
+            else
+                leftKey = false;
         }
 
         if(autoPaddle==true)

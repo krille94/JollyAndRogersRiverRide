@@ -116,7 +116,7 @@ public class CharacterSelectScript : MonoBehaviour
         }
         else if(!Player1Chosen)
         {
-            if (Input.GetButtonDown("Player_One_Paddle_Right"))
+            if (Input.GetButtonDown("Player_One_Paddle_Right")|| Input.GetAxis("Player_One_Joystick_Movement")>0)
             {
                 if (Player1Pos + 1 < AmountOfChars)
                 {
@@ -125,7 +125,7 @@ public class CharacterSelectScript : MonoBehaviour
                     Player1Pos++;
                 }
             }
-            else if (Input.GetButtonDown("Player_One_Paddle_Left"))
+            else if (Input.GetButtonDown("Player_One_Paddle_Left")|| Input.GetAxis("Player_One_Joystick_Movement")<0)
             {
                 if (Player1Pos > 0)
                 {
@@ -166,7 +166,7 @@ public class CharacterSelectScript : MonoBehaviour
         }
         else if (!Player2Chosen)
         {
-            if (Input.GetButtonDown("Player_Two_Paddle_Right"))
+            if (Input.GetButtonDown("Player_Two_Paddle_Right")|| Input.GetAxis("Player_Two_Joystick_Movement")>0)
             {
                 if (Player2Pos + 1 < AmountOfChars)
                 {
@@ -175,7 +175,7 @@ public class CharacterSelectScript : MonoBehaviour
                     Player2Pos++;
                 }
             }
-            else if (Input.GetButtonDown("Player_Two_Paddle_Left"))
+            else if (Input.GetButtonDown("Player_Two_Paddle_Left")|| Input.GetAxis("Player_Two_Joystick_Movement")<0)
             {
                 if (Player2Pos > 0)
                 {

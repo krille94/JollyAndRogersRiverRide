@@ -50,7 +50,11 @@ public class LevelMapScript : MonoBehaviour
         iconPos = Vector3.zero;
 
         start=river.riverAsset.nodes[0].centerVector;
-        end = river.riverAsset.GetNodeFromPosition(river.transform.position, endpoint.transform.position).centerVector;
+
+        if(endpoint)
+        {
+            end = river.riverAsset.GetNodeFromPosition(river.transform.position, endpoint.transform.position).centerVector;
+        }
 
         levelStartX = 0;
         levelEndX = 10000;

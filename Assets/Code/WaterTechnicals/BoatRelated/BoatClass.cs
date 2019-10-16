@@ -164,13 +164,16 @@ public class BoatClass : FloatingObject
         if (!invincible)
         {
             if (hull > 0)
+            {
                 hull--;
+
+                GameObject cam = GameObject.Find("Main Camera");
+                cam.GetComponent<CameraController>().StartShakeCam();
+            }
             else
                 hull = 0;
 
             invincible = true;
-            GameObject cam = GameObject.Find("Main Camera");
-            cam.GetComponent<CameraController>().StartShakeCam();
             UpdateDamage();
         }
 

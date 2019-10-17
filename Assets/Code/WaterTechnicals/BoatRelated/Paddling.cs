@@ -81,7 +81,7 @@ public class Oar
     /// Returns a point where the paddle hits the water
     /// </summary>
     /// <returns></returns>
-    public Vector3 Paddle()
+    public Vector3 Paddle(string whichway)
     {
         if (isPaddling)
             return Vector3.zero;
@@ -90,29 +90,29 @@ public class Oar
         if (onLeftSide && onRightSide)
         {
             //if (!modelLeft.GetComponent<Animation>().isPlaying)
-                modelLeft.GetComponent<Animation>().Play();
+                modelLeft.GetComponent<Animation>().Play("OarLeft"+whichway+"Animation");
             //if (!modelRight.GetComponent<Animation>().isPlaying)
-                modelRight.GetComponent<Animation>().Play();
+                modelRight.GetComponent<Animation>().Play("OarRight" + whichway + "Animation");
             return (leftSideImpactPoint.position + rightSideImpactPoint.position)/2;
         }
 
         if (!onLeftSide && !onRightSide)
         {
-            modelLeft.GetComponent<Animation>().Play();
-            modelRight.GetComponent<Animation>().Play();
+            //modelLeft.GetComponent<Animation>().Play();
+            //modelRight.GetComponent<Animation>().Play();
         }
 
         if (onLeftSide)
         {
             //if (!modelLeft.GetComponent<Animation>().isPlaying)
-                modelLeft.GetComponent<Animation>().Play();
+                modelLeft.GetComponent<Animation>().Play("OarLeft" + whichway + "Animation");
             return leftSideImpactPoint.position;
         }
        
         if(onRightSide)
         {
             //if (!modelRight.GetComponent<Animation>().isPlaying)
-                modelRight.GetComponent<Animation>().Play();
+                modelRight.GetComponent<Animation>().Play("OarRight" + whichway + "Animation");
             return rightSideImpactPoint.position;
         }
 
@@ -173,7 +173,7 @@ public class Paddling : MonoBehaviour
         //if (playerIndex.ToString() == "Two") oar.SetRightSide(true);
 
         UserSettings.ReadSettings();
-        if (UserSettings.GetAutoPaddle()) autoPaddle = true;
+        //if (UserSettings.GetAutoPaddle()) autoPaddle = true;
         if (UserSettings.GetReversedControls()) reverseControls = true;
     }
 
@@ -219,8 +219,8 @@ public class Paddling : MonoBehaviour
         }
 
 
-        bool rightKey = Input.GetButton("Player_" + player + "_Paddle_Right");
-        bool leftKey = Input.GetButton("Player_"+ player + "_Paddle_Left");
+        bool rightKey;
+        bool leftKey;
         bool holdingForwardKey;
         bool holdingBackKey;
         bool releasingForwardKey;
@@ -306,7 +306,7 @@ public class Paddling : MonoBehaviour
 
                     if (fullyChargedBoost)
                     {
-                        impactPoint = oar.Paddle();
+                        impactPoint = oar.Paddle("Forward");
                         chargeForce = forwardForce;
                         rigidbody.AddForceAtPosition(rigidbody.transform.forward * (turnForwardForce*boostTurnMultiplier), impactPoint);
                     }
@@ -315,7 +315,7 @@ public class Paddling : MonoBehaviour
                         chargeTimer = 0;
                         boostTimer = 0;
 
-                        impactPoint = oar.Paddle();
+                        impactPoint = oar.Paddle("Forward");
 
                         if (rigidbody.velocity.magnitude < maximumSpeed)
                         {   rigidbody.AddForce(rigidbody.transform.forward * forwardForce); }
@@ -328,7 +328,7 @@ public class Paddling : MonoBehaviour
 
                     if (fullyChargedBoost)
                     {
-                        impactPoint = oar.Paddle();
+                        impactPoint = oar.Paddle("Backward");
                         chargeForce = backwardForce;
                         rigidbody.AddForceAtPosition(-rigidbody.transform.forward * (turnBackwardForce*boostTurnMultiplier), impactPoint);
                     }
@@ -337,7 +337,7 @@ public class Paddling : MonoBehaviour
                         chargeTimer = 0;
                         boostTimer = 0;
 
-                        impactPoint = oar.Paddle();
+                        impactPoint = oar.Paddle("Backward");
 
                         rigidbody.AddForce(-rigidbody.transform.forward * backwardForce);
                         rigidbody.AddForceAtPosition(-rigidbody.transform.forward * turnBackwardForce, impactPoint);

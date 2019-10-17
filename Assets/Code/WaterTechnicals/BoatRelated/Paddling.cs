@@ -132,6 +132,7 @@ public class Paddling : MonoBehaviour
     float turnBackwardForce;
     [SerializeField] public float paddleTime;
     float maximumSpeed=30;
+
     //[SerializeField] public KeyCode keyLeft, keyRight;
 
     [SerializeField] private new Rigidbody rigidbody = null; 
@@ -143,6 +144,16 @@ public class Paddling : MonoBehaviour
     private bool CanControl = true;
     private bool autoPaddle = false;
     private bool reverseControls = true;
+
+    [Header("Charge Boost")]
+    public float boostTurnMultiplier = 2;
+    public float chargeTimerMax = 1;
+    float chargeTimer = 0;
+    public float boostTimerMax = 0.3f;
+    float boostTimer = 0;
+    float chargeForce = 0;
+    public bool fullyChargedBoost = false;
+    bool chargingBoost = false;
 
     public void SetCanControl(bool truefalse) { CanControl = truefalse; }
 
@@ -184,6 +195,17 @@ public class Paddling : MonoBehaviour
     {
         impactPoint = Vector3.zero;
 
+        if (fullyChargedBoost && !chargingBoost)
+        {
+            //if (rigidbody.velocity.magnitude < maximumSpeed)
+            { rigidbody.AddForce(rigidbody.transform.forward * (chargeForce * (Time.deltaTime*boostTimerMax))); }
+
+            boostTimer += Time.deltaTime;
+            if (boostTimer >= boostTimerMax)
+            {
+                fullyChargedBoost = false;
+            }
+        }
         if (oar.isPaddling)
         {
             oar.paddlingTime += Time.deltaTime;
@@ -196,12 +218,15 @@ public class Paddling : MonoBehaviour
             return;
         }
 
+
         bool rightKey = Input.GetButton("Player_" + player + "_Paddle_Right");
         bool leftKey = Input.GetButton("Player_"+ player + "_Paddle_Left");
-        bool forwardKey;
-        bool backKey;
+        bool holdingForwardKey;
+        bool holdingBackKey;
+        bool releasingForwardKey;
+        bool releasingBackKey;
 
-        if(reverseControls==true)
+        if (reverseControls==true)
         {
             float joyStickDir = Input.GetAxis("Player_" + player + "_Joystick_Movement");
             if (Input.GetButton("Player_" + player + "_Paddle_Right") || joyStickDir > 0)
@@ -228,7 +253,21 @@ public class Paddling : MonoBehaviour
                 leftKey = false;
         }
 
-        if(autoPaddle==true)
+        holdingForwardKey = Input.GetButton("Player_" + player + "_Paddle_Forward");
+        releasingForwardKey = Input.GetButtonUp("Player_" + player + "_Paddle_Forward");
+
+        if(!holdingForwardKey&&!releasingForwardKey)
+        {
+            holdingBackKey = Input.GetButton("Player_" + player + "_Paddle_Back");
+            releasingBackKey = Input.GetButtonUp("Player_" + player + "_Paddle_Back");
+        }
+        else
+        {
+            holdingBackKey = false;
+            releasingBackKey = false;
+        }
+
+        /*if(autoPaddle==true)
         {
             forwardKey = Input.GetButton("Player_" + player + "_Paddle_Forward");
             backKey = Input.GetButton("Player_" + player + "_Paddle_Back");
@@ -240,30 +279,69 @@ public class Paddling : MonoBehaviour
 
             //if (forwardKey == true)
             //    Debug.Log("Forward key has been hit");
-        }
+        }*/
 
         if (CanControl)
         {
             if (oar.onLeftSide || oar.onRightSide)
             {
-                if (forwardKey)
+                if(holdingForwardKey||holdingBackKey)
                 {
-                    impactPoint = oar.Paddle();
-
-                    if (rigidbody.velocity.magnitude < maximumSpeed)
+                    chargingBoost = true;
+                    if (chargeTimer < chargeTimerMax)
                     {
-                        rigidbody.AddForce(rigidbody.transform.forward * forwardForce);
+                        chargeTimer += Time.deltaTime;
+
+                        if (chargeTimer >= chargeTimerMax)
+                        {
+                            chargeTimer = chargeTimerMax;
+                            fullyChargedBoost = true;
+                        }
                     }
-
-
-                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
                 }
-                else if (backKey)
-                {
-                    impactPoint = oar.Paddle();
 
-                    rigidbody.AddForce(-rigidbody.transform.forward * backwardForce);
-                    rigidbody.AddForceAtPosition(-rigidbody.transform.forward * turnBackwardForce, impactPoint);
+                if (releasingForwardKey)
+                {
+                    chargingBoost = false;
+
+                    if (fullyChargedBoost)
+                    {
+                        impactPoint = oar.Paddle();
+                        chargeForce = forwardForce;
+                        rigidbody.AddForceAtPosition(rigidbody.transform.forward * (turnForwardForce*boostTurnMultiplier), impactPoint);
+                    }
+                    else
+                    { 
+                        chargeTimer = 0;
+                        boostTimer = 0;
+
+                        impactPoint = oar.Paddle();
+
+                        if (rigidbody.velocity.magnitude < maximumSpeed)
+                        {   rigidbody.AddForce(rigidbody.transform.forward * forwardForce); }
+                        rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
+                    }
+                }
+                else if (releasingBackKey)
+                {
+                    chargingBoost = false;
+
+                    if (fullyChargedBoost)
+                    {
+                        impactPoint = oar.Paddle();
+                        chargeForce = backwardForce;
+                        rigidbody.AddForceAtPosition(-rigidbody.transform.forward * (turnBackwardForce*boostTurnMultiplier), impactPoint);
+                    }
+                    else
+                    {
+                        chargeTimer = 0;
+                        boostTimer = 0;
+
+                        impactPoint = oar.Paddle();
+
+                        rigidbody.AddForce(-rigidbody.transform.forward * backwardForce);
+                        rigidbody.AddForceAtPosition(-rigidbody.transform.forward * turnBackwardForce, impactPoint);
+                    }
                 }
             }
 

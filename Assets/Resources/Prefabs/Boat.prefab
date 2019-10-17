@@ -165,9 +165,10 @@ Animation:
   m_GameObject: {fileID: 812115171250303629}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 15eeb637fd26b3340b24c055e2949449, type: 2}
+  m_Animation: {fileID: 7400000, guid: 265a89f443f05f546b955d7b9f45ca62, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 15eeb637fd26b3340b24c055e2949449, type: 2}
+  - {fileID: 7400000, guid: 265a89f443f05f546b955d7b9f45ca62, type: 2}
+  - {fileID: 7400000, guid: afbffa1423c34d34ca258c6c94a68266, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -447,9 +448,10 @@ Animation:
   m_GameObject: {fileID: 812115171336068893}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 15eeb637fd26b3340b24c055e2949449, type: 2}
+  m_Animation: {fileID: 7400000, guid: 265a89f443f05f546b955d7b9f45ca62, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: 15eeb637fd26b3340b24c055e2949449, type: 2}
+  - {fileID: 7400000, guid: 265a89f443f05f546b955d7b9f45ca62, type: 2}
+  - {fileID: 7400000, guid: afbffa1423c34d34ca258c6c94a68266, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -498,6 +500,7 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 15eeb637fd26b3340b24c055e2949449, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 15eeb637fd26b3340b24c055e2949449, type: 2}
+  - {fileID: 7400000, guid: ba4d6bfa6d93fb849b76cc226efdcf3e, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -922,6 +925,10 @@ MonoBehaviour:
     modelRight: {fileID: 812115172869859800}
     isPaddling: 0
     paddlingTime: 0
+  boostTurnMultiplier: 2
+  chargeTimerMax: 1
+  boostTimerMax: 0.3
+  fullyChargedBoost: 0
 --- !u!1 &812115171927960499
 GameObject:
   m_ObjectHideFlags: 0
@@ -1826,6 +1833,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc998eabcee21d44893b013a03cddfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  closestNode:
+    flowDirection: {x: 0, y: 0, z: 0}
+    flowDirectionOffset: {x: 0, y: 0, z: 0}
+    finalFlowDirection: {x: 0, y: 0, z: 0}
+    centerVector: {x: 0, y: 0, z: 0}
+    centerVectorOffset: {x: 0, y: 0, z: 0}
+    index: 0
+  lastNode:
+    flowDirection: {x: 0, y: 0, z: 0}
+    flowDirectionOffset: {x: 0, y: 0, z: 0}
+    finalFlowDirection: {x: 0, y: 0, z: 0}
+    centerVector: {x: 0, y: 0, z: 0}
+    centerVectorOffset: {x: 0, y: 0, z: 0}
+    index: 0
   observers: []
   collisionKnockback: 1000
   isCollided: 1
@@ -1988,6 +2009,10 @@ MonoBehaviour:
     modelRight: {fileID: 812115171373746682}
     isPaddling: 0
     paddlingTime: 0
+  boostTurnMultiplier: 2
+  chargeTimerMax: 1
+  boostTimerMax: 0.3
+  fullyChargedBoost: 0
 --- !u!1 &812115172787139928
 GameObject:
   m_ObjectHideFlags: 0
@@ -2218,6 +2243,7 @@ Animation:
   m_Animation: {fileID: 7400000, guid: 15eeb637fd26b3340b24c055e2949449, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: 15eeb637fd26b3340b24c055e2949449, type: 2}
+  - {fileID: 7400000, guid: ba4d6bfa6d93fb849b76cc226efdcf3e, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0

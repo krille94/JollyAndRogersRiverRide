@@ -39,9 +39,6 @@ public class JustEnteredMenuScript : MonoBehaviour
         if (UserSettings.GetVolume("SFX") == -80)
             option.GetComponent<TextMesh>().text = "SFX: OFF";
 
-        option = GameObject.Find("Hold Paddle");
-        if (UserSettings.GetAutoPaddle() == true)
-            option.GetComponent<TextMesh>().text = "Hold to row: ON";
         option = GameObject.Find("Reverse Controls");
         if (UserSettings.GetReversedControls() == true)
             option.GetComponent<TextMesh>().text = "Controls: reverse";

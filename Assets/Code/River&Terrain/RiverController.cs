@@ -162,29 +162,13 @@ public class RiverController : MonoBehaviour
                         obj.transform.position.z
                     );
                     obj.GetRigidbody().MovePosition(Vector3.Lerp(obj.transform.position, targetPosition, Time.fixedDeltaTime * arcadeBouance));
-
-                    Vector3 hitNormal = hit.normal;
-                    Vector3 vector = Vector3.right;
-                    float objY = obj.transform.rotation.y;
-
-                    // Om båten roterar så börjar den snurra på Z axeln istället för X axeln!
-                    // TargetRotation byter från 0,1,0,0 till 0,0,0,1, så båtens Y rotation använder både
-                    //    Y och W. Kanske går att göra matte för att få till rätt rotation? Tills dess
-                    //    kommer båten inte försöka vända sig mot floden om den har roterat för mycket.
-
-                    if (objY <= 0.25f && objY >= -0.25f)
-                    { }
-                    else if (objY >= 0.75f || objY <= -0.75f)
-                    { }
-                    else
-                        hitNormal = Vector3.zero;
-
-                    Quaternion target2 = Quaternion.LookRotation(Vector3.right, hitNormal);
+                                        
+                    Quaternion target2 = Quaternion.LookRotation(Vector3.right, hit.normal);
                     Quaternion targetRotation = obj.transform.rotation;
 
-                    targetRotation.x = target2.x;
+                    targetRotation.x = target2.x * obj.transform.rotation.w;
+                    targetRotation.z = target2.z * obj.transform.rotation.y;
 
-                    //body.MoveRotation(Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime));
                     obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, targetRotation, Time.deltaTime);
                 }
             }

@@ -64,9 +64,9 @@ public class FloatingObject : MonoBehaviour
     }
 
     public bool trackNodeProgress = true;
-    public float nodeProgress;
-    public float nodeProgressClosestDist;
-    public bool reverseProgress;
+    [HideInInspector] public float nodeProgress;
+    [HideInInspector] public float nodeProgressClosestDist;
+    [HideInInspector] public bool reverseProgress;
 
     public List<GameObject> observers = new List<GameObject>();
 

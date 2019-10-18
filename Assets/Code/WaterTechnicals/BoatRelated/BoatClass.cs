@@ -79,8 +79,8 @@ public class BoatClass : FloatingObject
                 WaterLevel.SetActive(true);
 
             float waterHeight;
-            waterHeight = (hull - 1) / (MaxHull - 1);
-            WaterLevel.transform.localPosition = new Vector3(0, 1 + (0.3f * (1 - waterHeight)), 0.4f);
+            waterHeight = (float)(hull - 1) / (float)(MaxHull - 1);
+            WaterLevel.transform.localPosition = new Vector3(0, 0.1f + (0.7f * (1 - waterHeight)), 0.4f);
         }
     }
     #endregion

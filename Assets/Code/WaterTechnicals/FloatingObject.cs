@@ -93,6 +93,8 @@ public class FloatingObject : MonoBehaviour
     {
         foreach(GameObject observer in observers)
         {
+            if (observer == null)
+                continue;
             observer.SendMessage("OnDestroyed", this);
         }
     }

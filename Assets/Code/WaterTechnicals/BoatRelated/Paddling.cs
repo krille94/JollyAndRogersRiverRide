@@ -154,6 +154,7 @@ public class Paddling : MonoBehaviour
     float chargeForce = 0;
     public bool fullyChargedBoost = false;
     bool chargingBoost = false;
+    public float sidePushForce = 5000;
 
     public void SetCanControl(bool truefalse) { CanControl = truefalse; }
 
@@ -204,8 +205,11 @@ public class Paddling : MonoBehaviour
             if (boostTimer >= boostTimerMax)
             {
                 fullyChargedBoost = false;
+                chargeTimer = 0;
+                boostTimer = 0;
             }
         }
+
         if (oar.isPaddling)
         {
             oar.paddlingTime += Time.deltaTime;
@@ -308,6 +312,9 @@ public class Paddling : MonoBehaviour
                     {
                         impactPoint = oar.Paddle("Forward");
                         chargeForce = forwardForce;
+                        if(oar.onLeftSide) rigidbody.AddRelativeForce (Vector3.left*sidePushForce);
+                        else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.right* sidePushForce);
+
                         rigidbody.AddForceAtPosition(rigidbody.transform.forward * (turnForwardForce*boostTurnMultiplier), impactPoint);
                     }
                     else

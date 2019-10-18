@@ -19,11 +19,54 @@ public class FloatingObject : MonoBehaviour
         public RiverNode closest; public RiverNode last;
     }
     public FloatingObjectNodes GetNodes() { return new FloatingObjectNodes(closestNode,lastNode); }
-    public void UpdateNodes (RiverNode c, RiverNode l)
+    public void UpdateNodes (RiverNode closest)
     {
-        closestNode = c;
-        lastNode = l;
+        if(closest.index > closestNode.index)
+        {
+            lastNode = closestNode;
+        }
+
+        if(closest.index != closestNode.index)
+        {
+            closestNode = closest;
+            nodeProgressClosestDist = Vector3.Distance(transform.position, closestNode.centerVector);
+
+            if (trackNodeProgress)
+            {
+                nodeProgress = Vector3.Distance(transform.position, closestNode.centerVector);
+                if (nodeProgress <= nodeProgressClosestDist)
+                {
+                    nodeProgressClosestDist = nodeProgress;
+                    reverseProgress = false;
+                }
+                else
+                {
+                    reverseProgress = true;
+                }
+            }
+        }
+        else if(closest.index == lastNode.index)
+        {
+            if (trackNodeProgress)
+            {
+                nodeProgress = Vector3.Distance(transform.position, closestNode.centerVector);
+                if (nodeProgress >= nodeProgressClosestDist)
+                {
+                    nodeProgressClosestDist = nodeProgress;
+                    reverseProgress = false;
+                }
+                else
+                {
+                    reverseProgress = true;
+                }
+            }
+        }
     }
+
+    public bool trackNodeProgress = true;
+    public float nodeProgress;
+    public float nodeProgressClosestDist;
+    public bool reverseProgress;
 
     public List<GameObject> observers = new List<GameObject>();
 

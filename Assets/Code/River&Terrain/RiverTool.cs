@@ -141,6 +141,12 @@ public class RiverTool : MonoBehaviour
 
     public void UpdateMesh()
     {
+        if (transform.GetComponent<MeshFilter>() == null)
+        {
+            autoUpdateMesh = false;
+            Debug.LogWarning("Tool is not supported without a MeshFilter");
+            return;
+        }
         Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
         if (mesh == null)
         {

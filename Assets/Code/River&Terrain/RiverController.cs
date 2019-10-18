@@ -102,12 +102,7 @@ public class RiverController : MonoBehaviour
         foreach(FloatingObject obj in observedObjects)
         {
             RiverNode closest = riverAsset.GetNodeFromPosition(obj.transform.position);
-            RiverNode last = obj.GetNodes().closest;
-            if(closest.index != last.index)
-            {
-                last = closest;
-            }
-            obj.UpdateNodes(closest, last);
+            obj.UpdateNodes(closest);
         }
 
         ArcadeFlowUpdate();
@@ -167,13 +162,14 @@ public class RiverController : MonoBehaviour
                         obj.transform.position.z
                     );
                     obj.GetRigidbody().MovePosition(Vector3.Lerp(obj.transform.position, targetPosition, Time.fixedDeltaTime * arcadeBouance));
+                                        
+                    Quaternion target2 = Quaternion.LookRotation(Vector3.right, hit.normal);
+                    Quaternion targetRotation = obj.transform.rotation;
 
-                    // Commented out because boat's not supposed to forcibly face the river flow
-                    //Quaternion targetRotation = Quaternion.LookRotation(transform.forward, hit.normal);
-                    
-                    //targetRotation.y = body.rotation.y;
-                    //body.MoveRotation(Quaternion.Lerp(body.rotation, targetRotation, Time.fixedDeltaTime));
-                    //body.transform.rotation = Quaternion.Lerp(body.rotation, targetRotation, Time.deltaTime);
+                    targetRotation.x = target2.x * obj.transform.rotation.w;
+                    targetRotation.z = target2.z * obj.transform.rotation.y;
+
+                    obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, targetRotation, Time.deltaTime);
                 }
             }
         }

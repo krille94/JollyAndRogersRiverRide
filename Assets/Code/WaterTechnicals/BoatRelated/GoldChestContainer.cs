@@ -18,7 +18,7 @@ public class GoldChestContainer : MonoBehaviour
 
     private void Start()
     {
-        trigger.onPickUpGold += AddGoldAndUpdateModel;
+        trigger.onAddPoints += AddGoldAndUpdateModel;
         controller.onDamaged += RemoveGoldAndUpdateModel;
     }
 

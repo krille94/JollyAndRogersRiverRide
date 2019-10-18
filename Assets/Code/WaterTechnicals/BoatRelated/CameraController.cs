@@ -92,7 +92,10 @@ public class CameraController : MonoBehaviour
         { ShakeCam(); }
 
         if (boat.reverseProgress)
+        {
+            transform.position = boat.transform.position + boatOffset + shakeOffset;
             return;
+        }
         
         RiverNode boatNode = boat.GetNodes().closest;
 

@@ -5,23 +5,31 @@ using UnityEngine.Events;
 
 public class PickUpTrigger : MonoBehaviour
 {
-    public delegate void OnPickUpGold(int value);
-    public OnPickUpGold onPickUpGold;
+    public delegate void OnAddPoints(int value);
+    public OnAddPoints onAddPoints;
 
-    public delegate void OnPickUpBucket(int value);
-    public OnPickUpBucket onPickUpBucket;
+    public delegate void OnHealDamage(int value);
+    public OnHealDamage onHealDamage;
+
+    public delegate void OnLowerTime(int value);
+    public OnLowerTime onLowerTime;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Item")
         {
-            ItemType type = other.gameObject.GetComponent<ItemType>();
+            ItemEffect[] type = other.gameObject.GetComponents<ItemEffect>();
             other.gameObject.SetActive(false);
             
-            if(type.itemType.ToString()=="Gold")
-                onPickUpGold(type.itemValue);
-            else if (type.itemType.ToString() == "Bucket")
-                onPickUpBucket(type.itemValue);
+            for(int i=0; i<type.Length; i++)
+            {
+                if (type[i].itemEffect.ToString() == "AddPoints")
+                    onAddPoints(type[i].amount);
+                else if (type[i].itemEffect.ToString() == "HealDamage")
+                    onHealDamage(type[i].amount);
+                else if (type[i].itemEffect.ToString() == "LowerTime")
+                    onLowerTime(type[i].amount);
+            }
 
             Destroy(other.gameObject);
         }

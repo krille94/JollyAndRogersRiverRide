@@ -90,7 +90,7 @@ public class BoatClass : FloatingObject
         base.Initialize();
 
         hull = MaxHull;
-        trigger.onPickUpBucket += RecoverHull;
+        trigger.onHealDamage += RecoverHull;
     }
 
     void Update()

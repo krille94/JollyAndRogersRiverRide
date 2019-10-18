@@ -31,7 +31,7 @@ public class BoatDamageController : MonoBehaviour
     private void Start()
     {
         hull = MaxHull;
-        trigger.onPickUpBucket += RecoverHull;
+        trigger.onHealDamage += RecoverHull;
     }
 
     public void RecoverHull(int amount)

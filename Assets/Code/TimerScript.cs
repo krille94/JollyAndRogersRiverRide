@@ -9,6 +9,7 @@ public class TimerScript : MonoBehaviour
     float minutes = 0;
     float seconds = 0;
     float timerIncrease = 0;
+    [SerializeField] PickUpTrigger trigger = null;
 
     // Start is called before the first frame update
     void Start()
@@ -16,10 +17,28 @@ public class TimerScript : MonoBehaviour
         float windowWidth = (float)(Screen.width * 3)/(float)(Screen.height * 4);
         timerText.transform.localPosition = new Vector3(-1+windowWidth,1.8f, 4);
 
+        trigger.onLowerTime += LowerTime;
+
         minutes = 0;
         seconds = 0;
         timerIncrease = 0;
         SetTimerText();
+    }
+
+    public void LowerTime(int amount)
+    {
+        seconds -= amount;
+
+        if(seconds<0)
+        {
+            if (minutes > 0)
+            {
+                minutes -= 1;
+                seconds += 60;
+            }
+            else
+                seconds = 0;
+        }
     }
 
     // Update is called once per frame

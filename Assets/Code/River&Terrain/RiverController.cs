@@ -102,12 +102,7 @@ public class RiverController : MonoBehaviour
         foreach(FloatingObject obj in observedObjects)
         {
             RiverNode closest = riverAsset.GetNodeFromPosition(obj.transform.position);
-            RiverNode last = obj.GetNodes().closest;
-            if(closest.index != last.index)
-            {
-                last = closest;
-            }
-            obj.UpdateNodes(closest, last);
+            obj.UpdateNodes(closest);
         }
 
         ArcadeFlowUpdate();

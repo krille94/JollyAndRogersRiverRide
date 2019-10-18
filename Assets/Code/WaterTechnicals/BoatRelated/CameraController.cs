@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     public RiverController riverController;
-    public Transform boat;
+    public FloatingObject boat;
 
     public Vector3 offsetPosition;
     public float offsetAngle;
@@ -43,7 +43,7 @@ public class CameraController : MonoBehaviour
     {
         shakeTimer = shakeDuration;
         skybox = GetComponent<Skybox>();
-        targetNode = riverController.riverAsset.GetNodeFromPosition(boat.position);
+        targetNode = riverController.riverAsset.GetNodeFromPosition(boat.transform.position);
         transform.rotation = boat.transform.rotation;
         targetRotationVector = transform.rotation.eulerAngles;
     }
@@ -79,6 +79,8 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    private float lastFrameProgress;
+
     void Update()
     {
         if(skybox != null)
@@ -89,15 +91,17 @@ public class CameraController : MonoBehaviour
         if(shaking)
         { ShakeCam(); }
 
-        RiverNode node = riverController.riverAsset.GetNodeFromPosition(boat.position);
-
+        if (boat.reverseProgress)
+            return;
         
-        if (node != targetNode)
+        RiverNode boatNode = boat.GetNodes().closest;
+
+        if (boatNode != targetNode)
         {
-            var heading = targetNode.centerVector - node.centerVector;
+            var heading = targetNode.centerVector - boatNode.centerVector;
             var distance = heading.magnitude;
             var direction = heading / distance; // This is now the normalized direction.
-            targetNode = node;
+            targetNode = boatNode;
 
             targetRotation = Quaternion.LookRotation(-direction, Vector3.up);
             //transform.Rotate(new Vector3(0, targetRotation.x, 0));
@@ -136,7 +140,7 @@ public class CameraController : MonoBehaviour
         Quaternion boatOffsetRot = Quaternion.Euler(targetRotationVector.x, targetRotationVector.y, targetRotationVector.z);
         boatOffset = boatOffsetRot * offsetPosition;
 
-        targetPosition = boat.position + boatOffset + shakeOffset;
+        targetPosition = boat.transform.position + boatOffset + shakeOffset;
         transform.position = targetPosition;
 
 

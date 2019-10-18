@@ -312,8 +312,8 @@ public class Paddling : MonoBehaviour
                     {
                         impactPoint = oar.Paddle("Forward");
                         chargeForce = forwardForce;
-                        if(oar.onLeftSide) rigidbody.AddRelativeForce (Vector3.left*sidePushForce);
-                        else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.right* sidePushForce);
+                        if(oar.onLeftSide) rigidbody.AddRelativeForce (Vector3.right*sidePushForce);
+                        else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left* sidePushForce);
 
                         rigidbody.AddForceAtPosition(rigidbody.transform.forward * (turnForwardForce*boostTurnMultiplier), impactPoint);
                     }

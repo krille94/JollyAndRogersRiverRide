@@ -200,6 +200,8 @@ public class Paddling : MonoBehaviour
         {
             //if (rigidbody.velocity.magnitude < maximumSpeed)
             { rigidbody.AddForce(rigidbody.transform.forward * (chargeForce * (Time.deltaTime*boostTimerMax))); }
+            if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
+            else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * sidePushForce);
 
             boostTimer += Time.deltaTime;
             if (boostTimer >= boostTimerMax)
@@ -312,8 +314,6 @@ public class Paddling : MonoBehaviour
                     {
                         impactPoint = oar.Paddle("Forward");
                         chargeForce = forwardForce;
-                        if(oar.onLeftSide) rigidbody.AddRelativeForce (Vector3.right*sidePushForce);
-                        else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left* sidePushForce);
 
                         rigidbody.AddForceAtPosition(rigidbody.transform.forward * (turnForwardForce*boostTurnMultiplier), impactPoint);
                     }

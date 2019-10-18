@@ -26,8 +26,11 @@ public class FloatingObject : MonoBehaviour
             lastNode = closestNode;
         }
 
-        if(closest.index != closestNode.index)
+        //Is using index more efficient? All nodes have index 0, so comparing indexes won't work for now
+        //if(closest.index != closestNode.index)
+        if (closest != closestNode)
         {
+            lastNode = closestNode;
             closestNode = closest;
             nodeProgressClosestDist = Vector3.Distance(transform.position, closestNode.centerVector);
 

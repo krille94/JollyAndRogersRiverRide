@@ -29,6 +29,7 @@ public class RiverController : MonoBehaviour
     [Header("Flow")]
     public int minimumSpeed;
     public float slopeSpeedBoost=-2;
+    public float slopeBoatTurnSpeed=5;
     public Vector3 movementDirection;
     private float slopeAngle;
 
@@ -169,7 +170,7 @@ public class RiverController : MonoBehaviour
                     targetRotation.x = target2.x * obj.transform.rotation.w;
                     targetRotation.z = target2.z * obj.transform.rotation.y;
 
-                    obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, targetRotation, Time.deltaTime);
+                    obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, targetRotation, Time.deltaTime*slopeBoatTurnSpeed);
                 }
             }
         }

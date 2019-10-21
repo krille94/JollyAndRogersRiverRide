@@ -40,14 +40,20 @@ public class DebugMonitor : MonoBehaviour
         if (displayMonitor == false)
             return;
 
-        GUI.BeginGroup(new Rect(Screen.width - 200, 0, 200, 50 + (75 * monitoredObjects.Count)));
-        GUI.Box(new Rect(0, 0, 200, 50 + (75 * monitoredObjects.Count)),"Debug Monitor");
+        GUI.BeginGroup(new Rect(Screen.width - 200, 0, 200, 50 + (25 * monitoredObjects.Count)));
+        GUI.Box(new Rect(0, 0, 200, 50 + (25 * monitoredObjects.Count)),"Debug Monitor");
         if(GUI.Button(new Rect(0,0,25,25), "X")) { this.enabled = false; }
         int heightIndex = 1;
 
-        if(container != null)
+        Rect rect = new Rect(10, 25, 200, 25);
+        float msec = Time.deltaTime * 1000.0f;
+        float fps = 1.0f / Time.deltaTime;
+        string text = string.Format("{0:0.0} ms ({1:0.} fps)", msec, fps);
+        GUI.Label(rect, text);
+
+        if (container != null)
         {
-            GUI.Label(new Rect(0, 25, 200, 25), "Gold Ammount: " + (float)container.gold / (float)container.maxGold + "%");
+            GUI.Label(new Rect(0, 50, 200, 25), "Gold Amount: " + (float)container.gold / (float)container.maxGold + "%");
 
             heightIndex++;
         }

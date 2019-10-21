@@ -26,7 +26,7 @@ public class BigWhirlwindScript : MonoBehaviour
             rotationObj.position = observerdObjects[i].transform.position;
             rotationObj.LookAt(transform);
 
-            observerdObjects[i].GetRigidbody().AddForce((-observerdObjects[i].GetNodes().closest.finalFlowDirection * inwardForce) + (((rotationObj.right+rotationObj.forward)/2) * centrificalForce));
+            observerdObjects[i].GetRigidbody().AddForce(((-observerdObjects[i].GetNodes().closest.finalFlowDirection * inwardForce) + (((rotationObj.right+rotationObj.forward)/2) * centrificalForce) * Time.deltaTime));
         }
     }
 

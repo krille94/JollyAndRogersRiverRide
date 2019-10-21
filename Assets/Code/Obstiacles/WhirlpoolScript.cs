@@ -20,7 +20,7 @@ public class WhirlpoolScript : MonoBehaviour
                 active = false;
                 dizzy = true;
                 Rigidbody rigidbody = other.gameObject.GetComponent<Rigidbody>();
-                rigidbody.AddTorque(rigidbody.transform.up * 42000);
+                rigidbody.AddTorque(rigidbody.transform.up * spinSpeed);
 
                 GameObject.Find("PlayerOneSpot").GetComponent<Paddling>().SetCanControl(false);
                 GameObject.Find("PlayerTwoSpot").GetComponent<Paddling>().SetCanControl(false);

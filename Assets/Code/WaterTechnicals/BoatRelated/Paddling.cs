@@ -142,7 +142,6 @@ public class Paddling : MonoBehaviour
     private Vector3 impactPoint;
 
     private bool CanControl = true;
-    private bool autoPaddle = false;
     private bool reverseControls = true;
 
     [Header("Charge Boost")]
@@ -329,7 +328,8 @@ public class Paddling : MonoBehaviour
                         if (rigidbody.velocity.magnitude < maximumSpeed)
                         {   rigidbody.AddForce(rigidbody.transform.forward * forwardForce); }
                         rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
-                        rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
+                        if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
+                        else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * sidePushForce);
                     }
                 }
                 else if (releasingBackKey)

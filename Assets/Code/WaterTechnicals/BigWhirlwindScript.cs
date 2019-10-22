@@ -30,8 +30,13 @@ public class BigWhirlwindScript : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
+        if (other.tag == "Player")
+        {
+            RiverController.instance.minimumSpeed = SpeedValueManager.GetSpeedValues()[SpeedValueManager.GetSpeedValues().Count-1].minimumSpeed;
+        }
+
         if (other.GetComponent<FloatingObject>())
         {
             other.GetComponent<FloatingObject>().observers.Add(gameObject);

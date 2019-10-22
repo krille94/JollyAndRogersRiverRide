@@ -147,7 +147,7 @@ public class Paddling : MonoBehaviour
     float backwardForce=500;
     float turnBackwardForce;
     float paddleTime;
-    float maximumSpeed=30;
+    //float maximumSpeed=30;
 
     public GameObject characterModel;
     //[SerializeField] public KeyCode keyLeft, keyRight;
@@ -159,7 +159,7 @@ public class Paddling : MonoBehaviour
     private Vector3 impactPoint;
 
     private bool CanControl = true;
-    private bool reverseControls = true;
+    //private bool reverseControls = true;
     private bool autoPaddle = false;
     private float controlScheme;
 
@@ -174,6 +174,11 @@ public class Paddling : MonoBehaviour
     bool chargingBoost = false;
     public float boostSidePushForce = 5000;
     float sidePushForce = 0;
+
+
+    public bool tiltedBoat = false;
+    float boatTiltAngle = 0.4f;
+
 
     public void SetCanControl(bool truefalse) { CanControl = truefalse; }
 
@@ -195,7 +200,7 @@ public class Paddling : MonoBehaviour
         UserSettings.ReadSettings();
         controlScheme = UserSettings.GetControlScheme();
         if (UserSettings.GetAutoPaddle()) autoPaddle = true;
-        if (UserSettings.GetReversedControls()) reverseControls = true;
+        //if (UserSettings.GetReversedControls()) reverseControls = true;
     }
 
     public void SetSpeedValues(int damage)
@@ -208,7 +213,7 @@ public class Paddling : MonoBehaviour
             turnBackwardForce = newValue.turnBackwardForce;
             forwardForce = newValue.forwardForce;
             backwardForce = newValue.backwardForce;
-            maximumSpeed = newValue.maximumSpeed;
+            //maximumSpeed = newValue.maximumSpeed;
             sidePushForce = newValue.sidePushForce;
             paddleTime = newValue.paddleTime;
         }
@@ -318,6 +323,16 @@ public class Paddling : MonoBehaviour
             {
                 if (leftKey)
                 {
+                    if(!tiltedBoat)
+                    {
+                        tiltedBoat = true;
+                        PlayerData.boatTiltOffset = -boatTiltAngle;
+                    }
+                    else if(PlayerData.boatTiltOffset > 0)
+                    {
+                        PlayerData.boatTiltOffset = -boatTiltAngle;
+                    }
+
                     //oar.onLeftSide = true;
                     //oar.onRightSide = false;
                     //if (!oar.onLeftSide)
@@ -333,6 +348,15 @@ public class Paddling : MonoBehaviour
                 }
                 else if (rightKey)
                 {
+                    if (!tiltedBoat)
+                    {
+                        tiltedBoat = true;
+                        PlayerData.boatTiltOffset = boatTiltAngle;
+                    }
+                    else if (PlayerData.boatTiltOffset < 0)
+                    {
+                        PlayerData.boatTiltOffset = boatTiltAngle;
+                    }
                     //oar.onLeftSide = false;
                     //oar.onRightSide = true;
                     //if (!oar.onRightSide)
@@ -348,6 +372,13 @@ public class Paddling : MonoBehaviour
                 }
                 else
                 {
+                    if (tiltedBoat)
+                    {
+                        tiltedBoat = false;
+                        PlayerData.boatTilted = false;
+                        PlayerData.boatTiltOffset = 0;
+                    }
+
                     oar.SetLeftSide(false);
                     oar.SetRightSide(false);
                     Quaternion rot = characterModel.transform.localRotation;
@@ -488,7 +519,7 @@ public class Paddling : MonoBehaviour
 
                             impactPoint = oar.Paddle("Forward");
 
-                            if (rigidbody.velocity.magnitude < maximumSpeed)
+                            //if (rigidbody.velocity.magnitude < maximumSpeed)
                             { rigidbody.AddForce(rigidbody.transform.forward * forwardForce); }
                             rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
                             if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * sidePushForce);

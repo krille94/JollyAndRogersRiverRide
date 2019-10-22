@@ -3,8 +3,8 @@
 [System.Serializable]
 public class SpeedValue
 {
-    public int minimumSpeed;
-    public float maximumSpeed;
+    public int riverSpeed;
+    //public float maximumSpeed;
 
     public float turnForwardForce;
     public float forwardForce;

@@ -42,7 +42,7 @@ public class RiverController : MonoBehaviour
     
     private void Start()
     {
-        minimumSpeed = SpeedValueManager.GetSpeedValues()[0].minimumSpeed;
+        minimumSpeed = SpeedValueManager.GetSpeedValues()[0].riverSpeed;
         if (instance != null)
             Debug.LogWarning("Multiple RiverControllers Detected");
         instance = this;
@@ -162,6 +162,7 @@ public class RiverController : MonoBehaviour
                         hit.point.y,
                         obj.transform.position.z
                     );
+
                     obj.GetRigidbody().MovePosition(Vector3.Lerp(obj.transform.position, targetPosition, Time.fixedDeltaTime * arcadeBouance));
                                         
                     Quaternion target2 = Quaternion.LookRotation(Vector3.right, hit.normal);
@@ -169,7 +170,16 @@ public class RiverController : MonoBehaviour
 
                     targetRotation.x = target2.x * obj.transform.rotation.w;
                     targetRotation.z = target2.z * obj.transform.rotation.y;
+                    
+                    /*float boatTilt=PlayerData.boatTiltOffset;
 
+                    Quaternion oldRot = obj.transform.rotation;
+                    if(!PlayerData.boatTilted&&PlayerData.boatTiltOffset!=0)
+                    {
+                        PlayerData.boatTilted = true;
+                        oldRot.x -= PlayerData.boatTiltOffset * -obj.transform.rotation.y;
+                        oldRot.z -= PlayerData.boatTiltOffset * -obj.transform.rotation.w;
+                    }*/
                     obj.transform.rotation = Quaternion.Lerp(obj.transform.rotation, targetRotation, Time.deltaTime*slopeBoatTurnSpeed);
                 }
             }

@@ -152,7 +152,7 @@ public class BoatClass : FloatingObject
             option = GameObject.Find("PlayerTwoSpot");
             option.GetComponent<Paddling>().SetSpeedValues(MaxHull - hull);
             option = GameObject.FindGameObjectWithTag("River");
-            option.GetComponent<RiverController>().minimumSpeed = SpeedValueManager.GetSpeedValues()[MaxHull - hull].minimumSpeed;
+            option.GetComponent<RiverController>().minimumSpeed = SpeedValueManager.GetSpeedValues()[MaxHull - hull].riverSpeed;
         }
     }
 

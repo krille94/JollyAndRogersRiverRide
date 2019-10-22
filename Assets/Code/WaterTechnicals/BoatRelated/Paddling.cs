@@ -20,23 +20,24 @@ public class Oar
     public float paddlingTime = 0.5f;
 
     public void SetRightSide(bool inWater)
-    {/*
-        if (UserSettings.GetControlScheme() == 1)
+    {
+        //if (UserSettings.GetControlScheme() == 1)
         {
             if (!modelRight.activeInHierarchy)
                 modelRight.SetActive(true);
 
-            if (inWater)
+            //if (inWater)
             {
                 modelRight.transform.localEulerAngles = new Vector3(0, 0, 35);
             }
-            else
+            //else
             {
-                modelRight.transform.localEulerAngles = new Vector3(0, 0, 70);
+              //  modelRight.transform.localEulerAngles = new Vector3(0, 0, 70);
             }
             onRightSide = inWater;
-        }
-        else if (UserSettings.GetControlScheme() == 2)*/
+            onRightSide = true;
+        }/*
+        else if (UserSettings.GetControlScheme() == 2)
         {
             onRightSide = inWater;
             modelRight.SetActive(inWater);
@@ -45,27 +46,28 @@ public class Oar
                 onLeftSide = false;
                 modelLeft.SetActive(false);
             }
-        }
+        }*/
     }
 
     public void SetLeftSide(bool inWater)
-    {/*
-        if (UserSettings.GetControlScheme() == 1)
+    {
+        //if (UserSettings.GetControlScheme() == 1)
         {
             if (!modelLeft.activeInHierarchy)
                 modelLeft.SetActive(true);
 
-            if (inWater)
+            //if (inWater)
             {
                 modelLeft.transform.localEulerAngles = new Vector3(0, 180, 35);
             }
-            else
+            //else
             {
-                modelLeft.transform.localEulerAngles = new Vector3(0, 180, 70);
+            //    modelLeft.transform.localEulerAngles = new Vector3(0, 180, 70);
             }
             onLeftSide = inWater;
-        }
-        else if (UserSettings.GetControlScheme() == 2)*/
+            onLeftSide = true;
+        }/*
+        else if (UserSettings.GetControlScheme() == 2)
         {
             onLeftSide = inWater;
             modelLeft.SetActive(inWater);
@@ -74,7 +76,7 @@ public class Oar
                 onRightSide = false;
                 modelRight.SetActive(false);
             }
-        }
+        }*/
     }
 
     /// <summary>
@@ -158,6 +160,7 @@ public class Paddling : MonoBehaviour
 
     private bool CanControl = true;
     private bool reverseControls = true;
+    private bool autoPaddle = false;
     private float controlScheme;
 
     [Header("Charge Boost")]
@@ -191,7 +194,7 @@ public class Paddling : MonoBehaviour
 
         UserSettings.ReadSettings();
         controlScheme = UserSettings.GetControlScheme();
-        //if (UserSettings.GetControlScheme()) autoPaddle = true;
+        //if (UserSettings.GetAutoPaddle()) autoPaddle = true;
         if (UserSettings.GetReversedControls()) reverseControls = true;
     }
 
@@ -299,6 +302,25 @@ public class Paddling : MonoBehaviour
             releasingBackKey = false;
         }
 
+        if (autoPaddle == true)
+        {
+            releasingForwardKey = Input.GetButton("Player_" + player + "_Paddle_Forward");
+            releasingBackKey = Input.GetButton("Player_" + player + "_Paddle_Back");
+        }
+        else
+        {
+            if (!holdingForwardKey && !releasingForwardKey)
+            {
+                holdingBackKey = Input.GetButton("Player_" + player + "_Paddle_Back");
+                releasingBackKey = Input.GetButtonUp("Player_" + player + "_Paddle_Back");
+            }
+            else
+            {
+                holdingBackKey = false;
+                releasingBackKey = false;
+            }
+        }
+
         if (CanControl)
         {
             if (controlScheme == 1)
@@ -330,12 +352,12 @@ public class Paddling : MonoBehaviour
                     Quaternion rot = characterModel.transform.localRotation;
                     rot.z = 0;
                     characterModel.transform.localRotation = rot;
-
+                    /*
                     if (oar.onLeftSide)
                         oar.SetLeftSide(false);
                     if (oar.onRightSide)
                         oar.SetRightSide(false);
-
+                        */
 
                     if (holdingForwardKey || holdingBackKey)
                     {
@@ -355,7 +377,7 @@ public class Paddling : MonoBehaviour
                     if (releasingForwardKey)
                     {
                         chargingBoost = false;
-
+                        /*
                         if (playerIndex.ToString() == "Jolly")
                         {
                             if (!oar.onLeftSide)
@@ -365,7 +387,7 @@ public class Paddling : MonoBehaviour
                         {
                             if (!oar.onRightSide)
                                 oar.SetRightSide(true);
-                        }
+                        }*/
 
                         if (fullyChargedBoost)
                         {
@@ -392,7 +414,7 @@ public class Paddling : MonoBehaviour
                     else if (releasingBackKey)
                     {
                         chargingBoost = false;
-
+                        /*
                         if (playerIndex.ToString() == "Jolly")
                         {
                             if (!oar.onLeftSide)
@@ -402,7 +424,7 @@ public class Paddling : MonoBehaviour
                         {
                             if (!oar.onRightSide)
                                 oar.SetRightSide(true);
-                        }
+                        }*/
                         if (fullyChargedBoost)
                         {
                             impactPoint = oar.Paddle("Backward");

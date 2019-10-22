@@ -130,7 +130,7 @@ public class Paddling : MonoBehaviour
     float forwardForce;
     float backwardForce=500;
     float turnBackwardForce;
-    [SerializeField] public float paddleTime;
+    float paddleTime;
     float maximumSpeed=30;
 
     //[SerializeField] public KeyCode keyLeft, keyRight;
@@ -190,6 +190,7 @@ public class Paddling : MonoBehaviour
             backwardForce = newValue.backwardForce;
             maximumSpeed = newValue.maximumSpeed;
             sidePushForce = newValue.sidePushForce;
+            paddleTime = newValue.paddleTime;
         }
     }
 

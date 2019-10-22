@@ -21,6 +21,13 @@ public class FloatingObject : MonoBehaviour
     public FloatingObjectNodes GetNodes() { return new FloatingObjectNodes(closestNode,lastNode); }
     public void UpdateNodes (RiverNode closest)
     {
+        if(lastNode.centerVector == Vector3.zero|| closestNode.centerVector == Vector3.zero)
+        {
+            closestNode = closest;
+            lastNode = closest;
+            return;
+        }
+
         if(closest.index > closestNode.index)
         {
             lastNode = closestNode;

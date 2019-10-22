@@ -8,6 +8,6 @@ public class CrazyTreeRotation : MonoBehaviour
 
     void Update()
     {
-        transform.Rotate(Vector3.up * spinSpeed);
+        transform.Rotate(Vector3.up * (spinSpeed*Time.deltaTime));
     }
 }

@@ -11,6 +11,7 @@ public class SpeedValue
     public float backwardForce = 500;
     public float turnBackwardForce;
     public float paddleTime;
+    public float sidePushForce;
     
     public SpeedValue()
     {

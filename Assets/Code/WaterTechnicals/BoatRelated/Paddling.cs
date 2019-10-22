@@ -154,7 +154,8 @@ public class Paddling : MonoBehaviour
     float chargeForce = 0;
     public bool fullyChargedBoost = false;
     bool chargingBoost = false;
-    public float sidePushForce = 5000;
+    public float boostSidePushForce = 5000;
+    float sidePushForce = 0;
 
     public void SetCanControl(bool truefalse) { CanControl = truefalse; }
 
@@ -189,6 +190,7 @@ public class Paddling : MonoBehaviour
             forwardForce = newValue.forwardForce;
             backwardForce = newValue.backwardForce;
             maximumSpeed = newValue.maximumSpeed;
+            sidePushForce = newValue.sidePushForce;
         }
     }
 
@@ -200,8 +202,8 @@ public class Paddling : MonoBehaviour
         {
             //if (rigidbody.velocity.magnitude < maximumSpeed)
             { rigidbody.AddForce(rigidbody.transform.forward * (chargeForce * (Time.deltaTime*boostTimerMax))); }
-            if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
-            else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * sidePushForce);
+            if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * boostSidePushForce);
+            else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * boostSidePushForce);
 
             boostTimer += Time.deltaTime;
             if (boostTimer >= boostTimerMax)
@@ -327,6 +329,7 @@ public class Paddling : MonoBehaviour
                         if (rigidbody.velocity.magnitude < maximumSpeed)
                         {   rigidbody.AddForce(rigidbody.transform.forward * forwardForce); }
                         rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
+                        rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
                     }
                 }
                 else if (releasingBackKey)

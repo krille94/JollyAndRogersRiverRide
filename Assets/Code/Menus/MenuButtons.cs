@@ -12,7 +12,7 @@ public class MenuButtons : MonoBehaviour
     public enum ButtonActions { None, StartGame, ResumeGame, Highscores, ChangeMenu, ChangeOptions, QuitToMainMenu, QuitApplication }
     [HideInInspector] public ButtonActions buttonAction = 0;
 
-    public enum OptionTypes { None, Audio, Controls, ReverseControls }
+    public enum OptionTypes { None, Audio, Controls, ReverseControls, AutoPaddle }
     [HideInInspector] public OptionTypes optionType = 0;
 
     private void Start()
@@ -48,8 +48,22 @@ public class MenuButtons : MonoBehaviour
         }
         if (buttonAction.ToString() == "ChangeOptions")
         {
-            if (optionType.ToString() == "ReverseControls")
+            if (optionType.ToString() == "AutoPaddle")
             {
+                if (UserSettings.GetAutoPaddle())
+                {
+                    UserSettings.SetInt("Auto Paddle", 0);
+                    GetComponent<TextMesh>().text = "Auto Paddle: OFF";
+                }
+                else
+                {
+                    UserSettings.SetInt("Auto Paddle", 1);
+                    GetComponent<TextMesh>().text = "Auto Paddle: ON";
+                }
+                UserSettings.ReadSettings();
+            }
+            if (optionType.ToString() == "ReverseControls")
+            { 
                 if (UserSettings.GetReversedControls())
                 {
                     UserSettings.SetInt("Reversed Controls", 0);

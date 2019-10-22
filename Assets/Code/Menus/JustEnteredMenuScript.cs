@@ -45,6 +45,9 @@ public class JustEnteredMenuScript : MonoBehaviour
         option = GameObject.Find("Control Scheme");
         if (UserSettings.GetControlScheme() == 2)
             option.GetComponent<TextMesh>().text = "Old Control Scheme";
+        option = GameObject.Find("Auto Paddle");
+        if (UserSettings.GetAutoPaddle()==false)
+            option.GetComponent<TextMesh>().text = "Auto Paddle: OFF";
     }
 
     private void StartOnSubmenu(string menu)

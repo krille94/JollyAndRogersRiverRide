@@ -82,11 +82,11 @@ public class RiverController : MonoBehaviour
             {
                 transform.GetChild(i).GetComponent<MeshFilter>().mesh = mesh;
             }
-
+            /*
             if(gameObject.GetComponent<MeshCollider>() == null)
                 gameObject.AddComponent<MeshCollider>();
             gameObject.GetComponent<MeshCollider>().sharedMesh = mesh;
-            
+            */
             if(endTransform != null)
                 endTransform.position = riverAsset.nodes[riverAsset.nodes.Length - 1].centerVector;
         }

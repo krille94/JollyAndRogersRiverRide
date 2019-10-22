@@ -39,8 +39,11 @@ public class BigWhirlwindScript : MonoBehaviour
 
         if (other.GetComponent<FloatingObject>())
         {
-            other.GetComponent<FloatingObject>().observers.Add(gameObject);
-            observerdObjects.Add(other.GetComponent<FloatingObject>());
+            if(observerdObjects.Contains(other.GetComponent<FloatingObject>()) == false)
+            {
+                other.GetComponent<FloatingObject>().observers.Add(gameObject);
+                observerdObjects.Add(other.GetComponent<FloatingObject>());
+            }
         }
     }
 

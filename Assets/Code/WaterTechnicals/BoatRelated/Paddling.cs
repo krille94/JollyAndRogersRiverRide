@@ -85,8 +85,6 @@ public class Oar
     /// <returns></returns>
     public Vector3 Paddle(string whichway, bool playAnim = true)
     {
-        if (isPaddling)
-            return Vector3.zero;
 
         if(whichway=="Left")
         {
@@ -97,6 +95,8 @@ public class Oar
             return rightSideImpactPoint.position;
         }
 
+        if (isPaddling)
+            return Vector3.zero;
         isPaddling = true;
 
         if (onLeftSide && onRightSide)
@@ -104,8 +104,10 @@ public class Oar
             if (playAnim)
             {
                 //if (!modelLeft.GetComponent<Animation>().isPlaying)
+                modelLeft.GetComponent<Animation>().Stop("OarLeft" + whichway + "Animation");
                 modelLeft.GetComponent<Animation>().Play("OarLeft" + whichway + "Animation");
                 //if (!modelRight.GetComponent<Animation>().isPlaying)
+                modelRight.GetComponent<Animation>().Stop("OarRight" + whichway + "Animation");
                 modelRight.GetComponent<Animation>().Play("OarRight" + whichway + "Animation");
             }
             return (leftSideImpactPoint.position + rightSideImpactPoint.position)/2;
@@ -251,7 +253,7 @@ public class Paddling : MonoBehaviour
                 oar.isPaddling = false;
             }
 
-            return;
+            //return;
         }
 
 
@@ -354,94 +356,97 @@ public class Paddling : MonoBehaviour
                         */
                 }
 
-                if (holdingForwardKey || holdingBackKey)
+                if (!oar.isPaddling)
                 {
-                    chargingBoost = true;
-                    if (chargeTimer < chargeTimerMax)
+                    if (holdingForwardKey || holdingBackKey)
                     {
-                        chargeTimer += Time.deltaTime;
-
-                        if (chargeTimer >= chargeTimerMax)
+                        chargingBoost = true;
+                        if (chargeTimer < chargeTimerMax)
                         {
-                            chargeTimer = chargeTimerMax;
-                            fullyChargedBoost = true;
+                            chargeTimer += Time.deltaTime;
+
+                            if (chargeTimer >= chargeTimerMax)
+                            {
+                                chargeTimer = chargeTimerMax;
+                                fullyChargedBoost = true;
+                            }
                         }
                     }
-                }
 
-                if (releasingForwardKey)
-                {
-                    chargingBoost = false;
-                    /*
-                    if (playerIndex.ToString() == "Jolly")
+                    if (releasingForwardKey)
                     {
-                        if (!oar.onLeftSide)
-                            oar.SetLeftSide(true);
+                        chargingBoost = false;
+                        /*
+                        if (playerIndex.ToString() == "Jolly")
+                        {
+                            if (!oar.onLeftSide)
+                                oar.SetLeftSide(true);
+                        }
+                        else
+                        {
+                            if (!oar.onRightSide)
+                                oar.SetRightSide(true);
+                        }*/
+
+                        if (fullyChargedBoost)
+                        {
+
+                            impactPoint = oar.Paddle("Forward");
+                            chargeForce = forwardForce;
+
+                            rigidbody.AddForce(rigidbody.transform.forward * (turnForwardForce * boostTurnMultiplier));
+                        }
+                        else
+                        {
+                            chargeTimer = 0;
+                            boostTimer = 0;
+
+                            impactPoint = oar.Paddle("Forward");
+
+                            if (rigidbody.velocity.magnitude < maximumSpeed)
+                            { rigidbody.AddForce(rigidbody.transform.forward * forwardForce); }
+                            //rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
+                            //if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
+                            //else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * sidePushForce);
+                        }
                     }
-                    else
+                    else if (releasingBackKey)
                     {
-                        if (!oar.onRightSide)
-                            oar.SetRightSide(true);
-                    }*/
+                        chargingBoost = false;
+                        /*
+                        if (playerIndex.ToString() == "Jolly")
+                        {
+                            if (!oar.onLeftSide)
+                                oar.SetLeftSide(true);
+                        }
+                        else
+                        {
+                            if (!oar.onRightSide)
+                                oar.SetRightSide(true);
+                        }*/
+                        if (fullyChargedBoost)
+                        {
+                            impactPoint = oar.Paddle("Backward");
+                            chargeForce = backwardForce;
+                            rigidbody.AddForce(-rigidbody.transform.forward * (turnBackwardForce * boostTurnMultiplier));
+                        }
+                        else
+                        {
+                            chargeTimer = 0;
+                            boostTimer = 0;
 
-                    if (fullyChargedBoost)
-                    {
+                            impactPoint = oar.Paddle("Backward");
 
-                        impactPoint = oar.Paddle("Forward");
-                        chargeForce = forwardForce;
-
-                        rigidbody.AddForce(rigidbody.transform.forward * (turnForwardForce * boostTurnMultiplier));
-                    }
-                    else
-                    {
-                        chargeTimer = 0;
-                        boostTimer = 0;
-
-                        impactPoint = oar.Paddle("Forward");
-
-                        if (rigidbody.velocity.magnitude < maximumSpeed)
-                        { rigidbody.AddForce(rigidbody.transform.forward * forwardForce); }
-                        //rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
-                        //if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
-                        //else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * sidePushForce);
-                    }
-                }
-                else if (releasingBackKey)
-                {
-                    chargingBoost = false;
-                    /*
-                    if (playerIndex.ToString() == "Jolly")
-                    {
-                        if (!oar.onLeftSide)
-                            oar.SetLeftSide(true);
-                    }
-                    else
-                    {
-                        if (!oar.onRightSide)
-                            oar.SetRightSide(true);
-                    }*/
-                    if (fullyChargedBoost)
-                    {
-                        impactPoint = oar.Paddle("Backward");
-                        chargeForce = backwardForce;
-                        rigidbody.AddForce(-rigidbody.transform.forward * (turnBackwardForce * boostTurnMultiplier));
-                    }
-                    else
-                    {
-                        chargeTimer = 0;
-                        boostTimer = 0;
-
-                        impactPoint = oar.Paddle("Backward");
-
-                        rigidbody.AddForce(-rigidbody.transform.forward * backwardForce);
-                        //rigidbody.AddForceAtPosition(-rigidbody.transform.forward * turnBackwardForce, impactPoint);
+                            rigidbody.AddForce(-rigidbody.transform.forward * backwardForce);
+                            //rigidbody.AddForceAtPosition(-rigidbody.transform.forward * turnBackwardForce, impactPoint);
+                        }
                     }
                 }
             }
 
             if (controlScheme == 2)
             {
-                if (oar.onLeftSide || oar.onRightSide)
+                if (!oar.isPaddling &&  (oar.onLeftSide || oar.onRightSide))
                 {
                     if (holdingForwardKey || holdingBackKey)
                     {

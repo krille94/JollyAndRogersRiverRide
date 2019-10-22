@@ -26,13 +26,13 @@ public class Oar
             if (!modelRight.activeInHierarchy)
                 modelRight.SetActive(true);
 
-            //if (inWater)
+            if (inWater)
             {
                 modelRight.transform.localEulerAngles = new Vector3(0, 0, 35);
             }
-            //else
+            else
             {
-              //  modelRight.transform.localEulerAngles = new Vector3(0, 0, 70);
+                modelRight.transform.localEulerAngles = new Vector3(0, 0, 70);
             }
             onRightSide = inWater;
             onRightSide = true;
@@ -56,13 +56,13 @@ public class Oar
             if (!modelLeft.activeInHierarchy)
                 modelLeft.SetActive(true);
 
-            //if (inWater)
+            if (inWater)
             {
                 modelLeft.transform.localEulerAngles = new Vector3(0, 180, 35);
             }
-            //else
+            else
             {
-            //    modelLeft.transform.localEulerAngles = new Vector3(0, 180, 70);
+                modelLeft.transform.localEulerAngles = new Vector3(0, 180, 70);
             }
             onLeftSide = inWater;
             onLeftSide = true;
@@ -88,12 +88,12 @@ public class Oar
 
         if(whichway=="Left")
         {
-            modelLeft.GetComponent<Animation>().Play("OarLeftForwardAnimation");
+            //modelLeft.GetComponent<Animation>().Play("OarLeftForwardAnimation");
             return leftSideImpactPoint.position;
         }
         if(whichway=="Right")
         {
-            modelRight.GetComponent<Animation>().Play("OarRightForwardAnimation");
+            //modelRight.GetComponent<Animation>().Play("OarRightForwardAnimation");
             return rightSideImpactPoint.position;
         }
 
@@ -321,7 +321,8 @@ public class Paddling : MonoBehaviour
                     //oar.onLeftSide = true;
                     //oar.onRightSide = false;
                     //if (!oar.onLeftSide)
-                    //    oar.SetLeftSide(true);
+                    oar.SetRightSide(false);
+                    oar.SetLeftSide(true);
                     Quaternion rot = characterModel.transform.localRotation;
                     rot.z = .25f;
                     characterModel.transform.localRotation = rot;
@@ -335,7 +336,8 @@ public class Paddling : MonoBehaviour
                     //oar.onLeftSide = false;
                     //oar.onRightSide = true;
                     //if (!oar.onRightSide)
-                    //    oar.SetRightSide(true);
+                    oar.SetRightSide(true);
+                    oar.SetLeftSide(false);
                     impactPoint = oar.Paddle("Right");
                     //rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
                     rigidbody.AddTorque(rigidbody.transform.up * turnForwardForce);
@@ -346,6 +348,8 @@ public class Paddling : MonoBehaviour
                 }
                 else
                 {
+                    oar.SetLeftSide(false);
+                    oar.SetRightSide(false);
                     Quaternion rot = characterModel.transform.localRotation;
                     rot.z = 0;
                     characterModel.transform.localRotation = rot;

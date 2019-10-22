@@ -88,10 +88,12 @@ public class Oar
 
         if(whichway=="Left")
         {
+            modelLeft.GetComponent<Animation>().Play("OarLeftForwardAnimation");
             return leftSideImpactPoint.position;
         }
         if(whichway=="Right")
         {
+            modelRight.GetComponent<Animation>().Play("OarRightForwardAnimation");
             return rightSideImpactPoint.position;
         }
 
@@ -316,8 +318,8 @@ public class Paddling : MonoBehaviour
             {
                 if (leftKey)
                 {
-                    oar.onLeftSide = true;
-                    oar.onRightSide = false;
+                    //oar.onLeftSide = true;
+                    //oar.onRightSide = false;
                     //if (!oar.onLeftSide)
                     //    oar.SetLeftSide(true);
                     Quaternion rot = characterModel.transform.localRotation;
@@ -330,8 +332,8 @@ public class Paddling : MonoBehaviour
                 }
                 else if (rightKey)
                 {
-                    oar.onLeftSide = false;
-                    oar.onRightSide = true;
+                    //oar.onLeftSide = false;
+                    //oar.onRightSide = true;
                     //if (!oar.onRightSide)
                     //    oar.SetRightSide(true);
                     impactPoint = oar.Paddle("Right");
@@ -347,8 +349,8 @@ public class Paddling : MonoBehaviour
                     Quaternion rot = characterModel.transform.localRotation;
                     rot.z = 0;
                     characterModel.transform.localRotation = rot;
-                    oar.onRightSide = false;
-                    oar.onLeftSide = false;
+                    //oar.onRightSide = false;
+                    //oar.onLeftSide = false;
                     /*
                     if (oar.onLeftSide)
                         oar.SetLeftSide(false);
@@ -404,7 +406,7 @@ public class Paddling : MonoBehaviour
 
                             impactPoint = oar.Paddle("Forward");
 
-                            if (rigidbody.velocity.magnitude < maximumSpeed)
+                            //if (rigidbody.velocity.magnitude < maximumSpeed)
                             { rigidbody.AddForce(rigidbody.transform.forward * forwardForce); }
                             //rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
                             //if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * sidePushForce);

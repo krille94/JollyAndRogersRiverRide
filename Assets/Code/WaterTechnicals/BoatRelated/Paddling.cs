@@ -99,7 +99,7 @@ public class Oar
             return Vector3.zero;
         isPaddling = true;
 
-        if (onLeftSide && onRightSide)
+        if (onLeftSide == onRightSide)
         {
             if (playAnim)
             {
@@ -113,25 +113,20 @@ public class Oar
             return (leftSideImpactPoint.position + rightSideImpactPoint.position)/2;
         }
 
-        if (!onLeftSide && !onRightSide)
-        {
-            //modelLeft.GetComponent<Animation>().Play();
-            //modelRight.GetComponent<Animation>().Play();
-        }
 
         if (onLeftSide)
         {
             //if (!modelLeft.GetComponent<Animation>().isPlaying)
-            if (playAnim)
-                modelLeft.GetComponent<Animation>().Play("OarLeft" + whichway + "Animation");
+            modelLeft.GetComponent<Animation>().Stop("OarLeft" + whichway + "Animation");
+            modelLeft.GetComponent<Animation>().Play("OarLeft" + whichway + "Animation");
             return leftSideImpactPoint.position;
         }
        
         if(onRightSide)
         {
             //if (!modelRight.GetComponent<Animation>().isPlaying)
-            if (playAnim)
-                modelRight.GetComponent<Animation>().Play("OarRight" + whichway + "Animation");
+            modelRight.GetComponent<Animation>().Stop("OarRight" + whichway + "Animation");
+            modelRight.GetComponent<Animation>().Play("OarRight" + whichway + "Animation");
             return rightSideImpactPoint.position;
         }
 
@@ -263,7 +258,7 @@ public class Paddling : MonoBehaviour
         bool holdingBackKey;
         bool releasingForwardKey;
         bool releasingBackKey;
-
+        /*
         if (reverseControls==true)
         {
             float joyStickDir = Input.GetAxis("Player_" + player + "_Joystick_Movement");
@@ -277,7 +272,7 @@ public class Paddling : MonoBehaviour
             else
                 rightKey = false;
         }
-        else
+        else*/
         {
             float joyStickDir = Input.GetAxis("Player_" + player + "_Joystick_Movement");
             if (Input.GetButton("Player_" + player + "_Paddle_Right") || joyStickDir < 0)
@@ -321,26 +316,30 @@ public class Paddling : MonoBehaviour
             {
                 if (leftKey)
                 {
+                    oar.onLeftSide = true;
+                    oar.onRightSide = false;
                     //if (!oar.onLeftSide)
                     //    oar.SetLeftSide(true);
                     Quaternion rot = characterModel.transform.localRotation;
-                    rot.z = -.25f;
+                    rot.z = .25f;
                     characterModel.transform.localRotation = rot;
                     impactPoint = oar.Paddle("Left");
                     //rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
-                    rigidbody.AddTorque(rigidbody.transform.up * turnForwardForce);
+                    rigidbody.AddTorque(rigidbody.transform.up * -turnForwardForce);
                     //rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
                 }
                 else if (rightKey)
                 {
+                    oar.onLeftSide = false;
+                    oar.onRightSide = true;
                     //if (!oar.onRightSide)
                     //    oar.SetRightSide(true);
                     impactPoint = oar.Paddle("Right");
                     //rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
-                    rigidbody.AddTorque(rigidbody.transform.up * -turnForwardForce);
+                    rigidbody.AddTorque(rigidbody.transform.up * turnForwardForce);
                     //rigidbody.AddRelativeForce(Vector3.left * sidePushForce);
                     Quaternion rot = characterModel.transform.localRotation;
-                    rot.z = .25f;
+                    rot.z = -.25f;
                     characterModel.transform.localRotation = rot;
                 }
                 else
@@ -348,6 +347,8 @@ public class Paddling : MonoBehaviour
                     Quaternion rot = characterModel.transform.localRotation;
                     rot.z = 0;
                     characterModel.transform.localRotation = rot;
+                    oar.onRightSide = false;
+                    oar.onLeftSide = false;
                     /*
                     if (oar.onLeftSide)
                         oar.SetLeftSide(false);

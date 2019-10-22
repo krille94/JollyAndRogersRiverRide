@@ -67,12 +67,12 @@ public class MenuButtons : MonoBehaviour
                 if (UserSettings.GetControlScheme()==1)
                 {
                     UserSettings.SetInt("Control Scheme", 2);
-                    GetComponent<TextMesh>().text = "One Paddle";
+                    GetComponent<TextMesh>().text = "Old Control Scheme";
                 }
                 else
                 {
                     UserSettings.SetInt("Control Scheme", 1);
-                    GetComponent<TextMesh>().text = "Two Paddles";
+                    GetComponent<TextMesh>().text = "New Control Scheme";
                 }
                 UserSettings.ReadSettings();
             }

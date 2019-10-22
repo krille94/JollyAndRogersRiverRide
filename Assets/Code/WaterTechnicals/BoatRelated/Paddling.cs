@@ -20,7 +20,7 @@ public class Oar
     public float paddlingTime = 0.5f;
 
     public void SetRightSide(bool inWater)
-    {
+    {/*
         if (UserSettings.GetControlScheme() == 1)
         {
             if (!modelRight.activeInHierarchy)
@@ -36,7 +36,7 @@ public class Oar
             }
             onRightSide = inWater;
         }
-        else if (UserSettings.GetControlScheme() == 2)
+        else if (UserSettings.GetControlScheme() == 2)*/
         {
             onRightSide = inWater;
             modelRight.SetActive(inWater);
@@ -49,7 +49,7 @@ public class Oar
     }
 
     public void SetLeftSide(bool inWater)
-    {
+    {/*
         if (UserSettings.GetControlScheme() == 1)
         {
             if (!modelLeft.activeInHierarchy)
@@ -65,7 +65,7 @@ public class Oar
             }
             onLeftSide = inWater;
         }
-        else if (UserSettings.GetControlScheme() == 2)
+        else if (UserSettings.GetControlScheme() == 2)*/
         {
             onLeftSide = inWater;
             modelLeft.SetActive(inWater);
@@ -143,6 +143,7 @@ public class Paddling : MonoBehaviour
 
     private bool CanControl = true;
     private bool reverseControls = true;
+    private float controlScheme;
 
     [Header("Charge Boost")]
     public float boostTurnMultiplier = 2;
@@ -174,7 +175,8 @@ public class Paddling : MonoBehaviour
         //if (playerIndex.ToString() == "Two") oar.SetRightSide(true);
 
         UserSettings.ReadSettings();
-        //if (UserSettings.GetAutoPaddle()) autoPaddle = true;
+        controlScheme = UserSettings.GetControlScheme();
+        //if (UserSettings.GetControlScheme()) autoPaddle = true;
         if (UserSettings.GetReversedControls()) reverseControls = true;
     }
 
@@ -200,10 +202,17 @@ public class Paddling : MonoBehaviour
 
         if (fullyChargedBoost && !chargingBoost)
         {
-            //if (rigidbody.velocity.magnitude < maximumSpeed)
-            { rigidbody.AddForce(rigidbody.transform.forward * (chargeForce * (Time.deltaTime*boostTimerMax))); }
-            if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * boostSidePushForce);
-            else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * boostSidePushForce);
+            if (controlScheme == 1)
+            {
+                rigidbody.AddForce(rigidbody.transform.forward * (chargeForce * (Time.deltaTime * boostTimerMax)));
+            }
+            if (controlScheme == 2)
+            {
+                //if (rigidbody.velocity.magnitude < maximumSpeed)
+                { rigidbody.AddForce(rigidbody.transform.forward * (chargeForce * (Time.deltaTime * boostTimerMax))); }
+                if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * boostSidePushForce);
+                else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * boostSidePushForce);
+            }
 
             boostTimer += Time.deltaTime;
             if (boostTimer >= boostTimerMax)
@@ -275,25 +284,40 @@ public class Paddling : MonoBehaviour
             releasingBackKey = false;
         }
 
-        /*if(autoPaddle==true)
-        {
-            forwardKey = Input.GetButton("Player_" + player + "_Paddle_Forward");
-            backKey = Input.GetButton("Player_" + player + "_Paddle_Back");
-        }
-        else
-        {
-            forwardKey = Input.GetButtonUp("Player_" + player + "_Paddle_Forward");
-            backKey = Input.GetButtonUp("Player_" + player + "_Paddle_Back");
-
-            //if (forwardKey == true)
-            //    Debug.Log("Forward key has been hit");
-        }*/
-
         if (CanControl)
         {
-            if (oar.onLeftSide || oar.onRightSide)
+            if (controlScheme == 1)
             {
-                if(holdingForwardKey||holdingBackKey)
+                if (leftKey)
+                {
+                    if (!oar.onLeftSide)
+                        oar.SetLeftSide(true);
+                    impactPoint = oar.Paddle("Forward");
+                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
+                    //rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
+                }
+                else
+                {
+                    if (oar.onLeftSide)
+                        oar.SetLeftSide(false);
+                }
+
+                if (rightKey&&!leftKey)
+                {
+                    if (!oar.onRightSide)
+                        oar.SetRightSide(true);
+                    impactPoint = oar.Paddle("Forward");
+                    rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
+                    //rigidbody.AddRelativeForce(Vector3.left * sidePushForce);
+                }
+                else
+                {
+                    if (oar.onRightSide)
+                        oar.SetRightSide(false);
+                }
+
+
+                if (holdingForwardKey || holdingBackKey)
                 {
                     chargingBoost = true;
                     if (chargeTimer < chargeTimerMax)
@@ -317,20 +341,20 @@ public class Paddling : MonoBehaviour
                         impactPoint = oar.Paddle("Forward");
                         chargeForce = forwardForce;
 
-                        rigidbody.AddForceAtPosition(rigidbody.transform.forward * (turnForwardForce*boostTurnMultiplier), impactPoint);
+                        rigidbody.AddForce(rigidbody.transform.forward * (turnForwardForce * boostTurnMultiplier));
                     }
                     else
-                    { 
+                    {
                         chargeTimer = 0;
                         boostTimer = 0;
 
                         impactPoint = oar.Paddle("Forward");
 
                         if (rigidbody.velocity.magnitude < maximumSpeed)
-                        {   rigidbody.AddForce(rigidbody.transform.forward * forwardForce); }
-                        rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
-                        if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
-                        else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * sidePushForce);
+                        { rigidbody.AddForce(rigidbody.transform.forward * forwardForce); }
+                        //rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
+                        //if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
+                        //else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * sidePushForce);
                     }
                 }
                 else if (releasingBackKey)
@@ -341,7 +365,7 @@ public class Paddling : MonoBehaviour
                     {
                         impactPoint = oar.Paddle("Backward");
                         chargeForce = backwardForce;
-                        rigidbody.AddForceAtPosition(-rigidbody.transform.forward * (turnBackwardForce*boostTurnMultiplier), impactPoint);
+                        rigidbody.AddForce(-rigidbody.transform.forward * (turnBackwardForce * boostTurnMultiplier));
                     }
                     else
                     {
@@ -351,31 +375,99 @@ public class Paddling : MonoBehaviour
                         impactPoint = oar.Paddle("Backward");
 
                         rigidbody.AddForce(-rigidbody.transform.forward * backwardForce);
-                        rigidbody.AddForceAtPosition(-rigidbody.transform.forward * turnBackwardForce, impactPoint);
+                        //rigidbody.AddForceAtPosition(-rigidbody.transform.forward * turnBackwardForce, impactPoint);
                     }
                 }
             }
 
-            if (leftKey)
+            if (controlScheme == 2)
             {
-                if (!oar.onLeftSide)
-                    oar.SetLeftSide(true);
-            }
-            else
-            { 
-                if (oar.onLeftSide)
-                    oar.SetLeftSide(false);
-            }
+                if (oar.onLeftSide || oar.onRightSide)
+                {
+                    if (holdingForwardKey || holdingBackKey)
+                    {
+                        chargingBoost = true;
+                        if (chargeTimer < chargeTimerMax)
+                        {
+                            chargeTimer += Time.deltaTime;
 
-            if (rightKey)  
-            {
-                if (!oar.onRightSide)
-                    oar.SetRightSide(true);
-            }
-            else
-            {
-                if (oar.onRightSide)
-                    oar.SetRightSide(false);
+                            if (chargeTimer >= chargeTimerMax)
+                            {
+                                chargeTimer = chargeTimerMax;
+                                fullyChargedBoost = true;
+                            }
+                        }
+                    }
+
+                    if (releasingForwardKey)
+                    {
+                        chargingBoost = false;
+
+                        if (fullyChargedBoost)
+                        {
+                            impactPoint = oar.Paddle("Forward");
+                            chargeForce = forwardForce;
+
+                            rigidbody.AddForceAtPosition(rigidbody.transform.forward * (turnForwardForce * boostTurnMultiplier), impactPoint);
+                        }
+                        else
+                        {
+                            chargeTimer = 0;
+                            boostTimer = 0;
+
+                            impactPoint = oar.Paddle("Forward");
+
+                            if (rigidbody.velocity.magnitude < maximumSpeed)
+                            { rigidbody.AddForce(rigidbody.transform.forward * forwardForce); }
+                            rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
+                            if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
+                            else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * sidePushForce);
+                        }
+                    }
+                    else if (releasingBackKey)
+                    {
+                        chargingBoost = false;
+
+                        if (fullyChargedBoost)
+                        {
+                            impactPoint = oar.Paddle("Backward");
+                            chargeForce = backwardForce;
+                            rigidbody.AddForceAtPosition(-rigidbody.transform.forward * (turnBackwardForce * boostTurnMultiplier), impactPoint);
+                        }
+                        else
+                        {
+                            chargeTimer = 0;
+                            boostTimer = 0;
+
+                            impactPoint = oar.Paddle("Backward");
+
+                            rigidbody.AddForce(-rigidbody.transform.forward * backwardForce);
+                            rigidbody.AddForceAtPosition(-rigidbody.transform.forward * turnBackwardForce, impactPoint);
+                        }
+                    }
+                }
+
+                if (leftKey)
+                {
+                    if (!oar.onLeftSide)
+                        oar.SetLeftSide(true);
+                }
+                else
+                {
+                    if (oar.onLeftSide)
+                        oar.SetLeftSide(false);
+                }
+
+                if (rightKey)
+                {
+                    if (!oar.onRightSide)
+                        oar.SetRightSide(true);
+                }
+                else
+                {
+                    if (oar.onRightSide)
+                        oar.SetRightSide(false);
+                }
             }
         }
     }

@@ -30,6 +30,8 @@ public class BoatClass : FloatingObject
     public OnDamageRecived onDamaged;
     public ParticleSystem onDamagedParticlePrefab;
     private GameObject WaterLevel = null;
+    [SerializeField] private AudioClip[] onDamagedSoundClips;
+    [SerializeField] private AudioSource source;
 
     #region Damage Functions
     /*public void OnDeath()
@@ -91,6 +93,11 @@ public class BoatClass : FloatingObject
 
         hull = MaxHull;
         trigger.onHealDamage += RecoverHull;
+
+        if (source == null)
+            source = gameObject.GetComponent<AudioSource>();
+        if (source == null)
+            source = gameObject.AddComponent<AudioSource>();
     }
 
     void Update()
@@ -185,6 +192,10 @@ public class BoatClass : FloatingObject
             Destroy(particle.gameObject, particle.main.duration);
         }
 
+        if(!source.isPlaying)
+        {
+            source.PlayOneShot(onDamagedSoundClips[Random.Range(0, onDamagedSoundClips.Length-1)]);
+        }
 
         Debug.LogWarning(collision.gameObject.name);
     }

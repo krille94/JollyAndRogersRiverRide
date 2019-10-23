@@ -3,47 +3,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class AmbientSoundObject : MonoBehaviour
 {
     private AmbientSoundsController controller;
 
     public float triggerRange = 1;
 
-    private new AudioSource audio;
+    public bool muteOnExit;
+    private bool fading;
+
+    private new AudioSource audioSource;
 
     [HideInInspector]public Vector3 triggerRangeHandle;
 
-    [SerializeField] AudioClip audioClip = null;
+    [SerializeField] AudioClip[] audioClips = null;
     [SerializeField] AudioMixer audioMixer = null;
 
     private void Start()
     {
         controller = AmbientSoundsController.controller;
 
-        audio = GetComponent<AudioSource>();
-        if (audio == null)
-            audio = gameObject.AddComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
 
-        audio.clip = audioClip;
+        if(audioClips.Length > 0)
+            audioSource.clip = audioClips[0];
+
         if (audioMixer != null)
-            audio.outputAudioMixerGroup = audioMixer.outputAudioMixerGroup;
+            audioSource.outputAudioMixerGroup = audioMixer.outputAudioMixerGroup;
     }
 
     private void Update()
     {
         if (controller == null)
             return;
+
+        if (fading)
+        {
+            audioSource.volume -= Time.deltaTime;
+            if (audioSource.volume <= 0)
+            {
+                fading = false;
+                audioSource.volume = 1;
+                audioSource.Stop();
+            }
+            return;
+        }
         
         if(Vector3.Distance(transform.position, controller.playerBoat.transform.position) <= triggerRange)
         {
-            if (!audio.isPlaying)
-                audio.Play();
+            if (!audioSource.isPlaying)
+                audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Length - 1)]);
         }
-        else
+        else if(muteOnExit)
         {
-            if (audio.isPlaying)
-                audio.Stop();
+            if (audioSource.isPlaying)
+                fading = true;
         }
     }
 

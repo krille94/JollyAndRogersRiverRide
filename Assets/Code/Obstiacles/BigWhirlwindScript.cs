@@ -34,7 +34,7 @@ public class BigWhirlwindScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            RiverController.instance.minimumSpeed = SpeedValueManager.GetSpeedValues()[SpeedValueManager.GetSpeedValues().Count-1].minimumSpeed;
+            RiverController.instance.minimumSpeed = SpeedValueManager.GetSpeedValues()[SpeedValueManager.GetSpeedValues().Count-1].riverSpeed;
         }
 
         if (other.GetComponent<FloatingObject>())

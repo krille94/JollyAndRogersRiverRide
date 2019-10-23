@@ -186,18 +186,18 @@ public class BoatClass : FloatingObject
 
         foreach (ContactPoint contact in collision.contacts)
         {
-            onDamaged(collision.relativeVelocity.magnitude, contact.point);
+            //onDamaged(collision.relativeVelocity.magnitude, contact.point);
 
             ParticleSystem particle = Instantiate(onDamagedParticlePrefab, contact.point, Quaternion.identity) as ParticleSystem;
             Destroy(particle.gameObject, particle.main.duration);
+
+            if (!source.isPlaying)
+            {
+                source.PlayOneShot(onDamagedSoundClips[Random.Range(0, onDamagedSoundClips.Length - 1)]);
+            }
         }
 
-        if(!source.isPlaying)
-        {
-            source.PlayOneShot(onDamagedSoundClips[Random.Range(0, onDamagedSoundClips.Length-1)]);
-        }
-
-        Debug.LogWarning(collision.gameObject.name);
+        //Debug.LogWarning(collision.gameObject.name);
     }
 
     private void OnCollisionStay(Collision collision)

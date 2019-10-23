@@ -178,7 +178,8 @@ public class RiverToolEditor : Editor
                         slopeAngle = tool.nodes[i].centerVector.y - tool.nodes[i+1].centerVector.y;
                     if (slopeAngle == 0)
                         slopeAngle = 1;
-                    Handles.Label(tool.nodes[i].centerVector, "Flow Direction:\n" + (tool.nodes[i].finalFlowDirection * slopeAngle).ToString());
+
+                    Handles.Label(tool.nodes[i].centerVector, "Node: " + i.ToString() + "\n" + "Flow Direction:\n" + (tool.nodes[i].finalFlowDirection * slopeAngle).ToString());
                 }
 
                 Handles.color = Color.red;

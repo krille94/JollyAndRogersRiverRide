@@ -45,6 +45,8 @@ public class CameraController : MonoBehaviour
     bool blockedVertical = false;
     bool blockedHorizontal = false;
     public Vector3 offset = Vector3.zero;
+    public float autoCorrectRadius=7;
+    float oldNodeY=0;
 
     private void Start()
     {
@@ -106,46 +108,90 @@ public class CameraController : MonoBehaviour
 
         Vector3 heading;
         float distance;
-        Vector3 direction; // This is now the normalized direction.
+        Vector3 direction; // This is the normalized direction.
         Vector3 basePos = transform.position;
+        Vector3 adjustPos = Vector3.zero;
         heading = transform.position - (boat.transform.position + new Vector3(0, 5, 0));
         distance = heading.magnitude;
         direction = heading / distance;
 
         RaycastHit hit;
         Debug.DrawRay(transform.position, -heading, Color.red);
-        Debug.DrawRay(transform.position - new Vector3(-5, 0, 0), -heading - new Vector3(-5, 0, 0), Color.red);
-        Debug.DrawRay(transform.position - new Vector3(5, 0, 0), -heading - new Vector3(5, 0, 0), Color.red);
 
-        Debug.DrawRay(transform.position - new Vector3(0, 5, 0), -heading - new Vector3(0, 5, 0), Color.red);
-        Debug.DrawRay(transform.position - new Vector3(0, -5, 0), -heading - new Vector3(0, -5, 0), Color.red);
+
+        //Debug.DrawRay(transform.position - new Vector3(0, 5, 0), -heading - new Vector3(0, 5, 0), Color.red);
+        //Debug.DrawRay(transform.position - new Vector3(0, -5, 0), -heading - new Vector3(0, -5, 0), Color.red);
 
         blocked = false;
         offset = Vector3.zero;
+        bool centerBlocked = false;
 
         if (Physics.Raycast(transform.position, -heading, out hit, distance))
         {
+            
             blockedVertical = false;
             blockedHorizontal = false;
 
-            if (hit.collider.gameObject.tag=="River")
+            /*if (hit.collider.gameObject.tag=="River")
                 blockedVertical = true;
-            else if (hit.collider.gameObject.tag == "Untagged")
+            else */if (hit.collider.gameObject.tag == "Untagged")
                 blockedHorizontal = true;
 
             if(blockedVertical||blockedHorizontal)
+            {
                 blocked = true;
+                centerBlocked = true;
+            }
         }
         else
         {
+            adjustPos.Set(0, autoCorrectRadius, 0);
+            Debug.DrawRay(transform.position - adjustPos, -heading+adjustPos, Color.red);
+            adjustPos = transform.right * autoCorrectRadius;
 
-            blocked = false;
+            Debug.DrawRay(transform.position - adjustPos, -heading + adjustPos, Color.red);
+            Debug.DrawRay(transform.position + adjustPos, -heading - adjustPos, Color.red);
+
+            /*if (Physics.Raycast(transform.position + adjustPos, -heading, out hit, distance))
+            {
+                adjustPos = -adjustPos;
+                if (hit.collider.gameObject.tag == "River")
+                    blockedVertical = true;
+                else if (hit.collider.gameObject.tag == "Untagged")
+                    blockedHorizontal = true;
+
+                if (blockedVertical || blockedHorizontal)
+                    blocked = true;
+            }
+            else if (Physics.Raycast(transform.position - adjustPos, -heading, out hit, distance))
+            {
+                if (hit.collider.gameObject.tag == "River")
+                    blockedVertical = true;
+                else if (hit.collider.gameObject.tag == "Untagged")
+                    blockedHorizontal = true;
+
+                if (blockedVertical || blockedHorizontal)
+                    blocked = true;
+            }
+            else*/
+            {
+                adjustPos.Set(0, autoCorrectRadius, 0);
+                if (Physics.Raycast(transform.position - adjustPos, -heading + adjustPos, out hit, distance))
+                {
+                    if (hit.collider.gameObject.tag == "River")
+                        blockedVertical = true;
+
+                    if (blockedVertical || blockedHorizontal)
+                        blocked = true;
+                }
+            }
         }
 
         if (blocked)
         {
-            offset = FixBlockedCamera(basePos, blockedVertical, blockedHorizontal);
+            offset = FixBlockedCamera(basePos, adjustPos, blockedVertical, blockedHorizontal);
         }
+        //Debug.Log(offset);
 
         RiverNode boatNode = boat.GetNodes().closest;
 
@@ -156,6 +202,7 @@ public class CameraController : MonoBehaviour
                 heading = (targetNode.centerVector + offset) - boatNode.centerVector;
                 distance = heading.magnitude;
                 direction = heading / distance; // This is now the normalized direction.
+
                 oldTargetNode = targetNode;
                 targetNode = boatNode;
 
@@ -166,18 +213,26 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            heading = (oldTargetNode.centerVector + offset) - targetNode.centerVector;
-            distance = heading.magnitude;
-            direction = heading / distance; // This is now the normalized direction.
+            if (oldTargetNode.centerVector!=Vector3.zero)
+            {
+                heading = (oldTargetNode.centerVector + offset) - targetNode.centerVector;
+                distance = heading.magnitude;
+                direction = heading / distance; // This is now the normalized direction.
 
-            targetRotation = Quaternion.LookRotation(-direction, Vector3.up);
+                targetRotation = Quaternion.LookRotation(-direction, Vector3.up);
 
+                if(offset==Vector3.zero)
+                {
+                    targetRotation.x = 0;
+                    targetRotation.z = 0;
+                }
+            }
 
         }
 
 
         transform.Rotate(new Vector3(-offsetAngle, 0, 0));
-        if(offset!=Vector3.zero)
+        if(centerBlocked)
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * (rotationSpeed+blockRotationSpeed));
         else
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
@@ -194,14 +249,14 @@ public class CameraController : MonoBehaviour
 
     }
 
-    private Vector3 FixBlockedCamera(Vector3 basePos, bool blockedVertical, bool blockedHorizontal)
+    private Vector3 FixBlockedCamera(Vector3 basePos, Vector3 adjustPos, bool blockedVertical, bool blockedHorizontal)
     {
         Vector3 heading;
         float distance;
         Vector3 direction; // This is now the normalized direction.
         Vector3 offset = Vector3.zero;
 
-        heading = transform.position - (boat.transform.position + new Vector3(0, 5, 0));
+        heading = basePos - (boat.transform.position + new Vector3(0, 5, 0));
         distance = heading.magnitude;
         direction = heading / distance;
 
@@ -213,16 +268,16 @@ public class CameraController : MonoBehaviour
 
         if (blockedVertical)
         {
-            if (!Physics.Raycast(moveCamera, -heading, out hit, distance))
+            if (!Physics.Raycast(moveCamera, -heading+adjustPos, out hit, distance))
             {
+                offset = adjustPos;
                 offset.y += 5;
             }
         }
-
+        /*
         if(blockedHorizontal)
         {
-            moveCamera.y -= 5;
-            moveCamera.z += 5;
+            moveCamera = Vector3.right*5;
             heading = moveCamera - (boat.transform.position + new Vector3(0, 5, 0));
             Debug.DrawRay(moveCamera, -heading, Color.green);
             if (!Physics.Raycast(moveCamera, -heading, out hit, distance))
@@ -231,7 +286,7 @@ public class CameraController : MonoBehaviour
             }
             else
             {
-                moveCamera.z -= 100;
+                moveCamera = -moveCamera;
                 heading = moveCamera - (boat.transform.position + new Vector3(0, 5, 0));
                 Debug.DrawRay(moveCamera, -heading, Color.magenta);
                 if (!Physics.Raycast(moveCamera, -heading, out hit, distance))
@@ -261,7 +316,7 @@ public class CameraController : MonoBehaviour
                 }
             }
         }
-        return offset;
+        */return offset;
     }
 
     private void OnGUI()

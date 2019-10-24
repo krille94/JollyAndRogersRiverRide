@@ -33,6 +33,10 @@ public class AmbientSoundObject : MonoBehaviour
 
         if (audioMixer != null)
             audioSource.outputAudioMixerGroup = audioMixer.outputAudioMixerGroup;
+
+        AudioMixer mix = Resources.Load("AudioMixers/Sound Effects") as AudioMixer;
+        audioSource.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
+
     }
 
     private void Update()

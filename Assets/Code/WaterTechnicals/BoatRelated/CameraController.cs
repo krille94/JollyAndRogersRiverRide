@@ -114,7 +114,11 @@ public class CameraController : MonoBehaviour
 
         RaycastHit hit;
         Debug.DrawRay(transform.position, -heading, Color.red);
-        Debug.DrawRay(transform.position-new Vector3(2,0,0), -heading - new Vector3(2, 0, 0), Color.red);
+        Debug.DrawRay(transform.position - new Vector3(-5, 0, 0), -heading - new Vector3(-5, 0, 0), Color.red);
+        Debug.DrawRay(transform.position - new Vector3(5, 0, 0), -heading - new Vector3(5, 0, 0), Color.red);
+
+        Debug.DrawRay(transform.position - new Vector3(0, 5, 0), -heading - new Vector3(0, 5, 0), Color.red);
+        Debug.DrawRay(transform.position - new Vector3(0, -5, 0), -heading - new Vector3(0, -5, 0), Color.red);
 
         blocked = false;
         offset = Vector3.zero;
@@ -133,7 +137,10 @@ public class CameraController : MonoBehaviour
                 blocked = true;
         }
         else
+        {
+
             blocked = false;
+        }
 
         if (blocked)
         {
@@ -144,15 +151,18 @@ public class CameraController : MonoBehaviour
 
         if (boatNode != targetNode)
         {
-            heading = (targetNode.centerVector + offset) - boatNode.centerVector;
-            distance = heading.magnitude;
-            direction = heading / distance; // This is now the normalized direction.
-            oldTargetNode = targetNode;
-            targetNode = boatNode;
+            if (boatNode != oldTargetNode)
+            {
+                heading = (targetNode.centerVector + offset) - boatNode.centerVector;
+                distance = heading.magnitude;
+                direction = heading / distance; // This is now the normalized direction.
+                oldTargetNode = targetNode;
+                targetNode = boatNode;
 
-            targetRotation = Quaternion.LookRotation(-direction, Vector3.up);
+                targetRotation = Quaternion.LookRotation(-direction, Vector3.up);
 
-            newTarget = true;
+                newTarget = true;
+            }
         }
         else
         {

@@ -151,31 +151,31 @@ public class CameraController : MonoBehaviour
 
             Debug.DrawRay(transform.position - adjustPos, -heading + adjustPos, Color.red);
             Debug.DrawRay(transform.position + adjustPos, -heading - adjustPos, Color.red);
-
-            /*if (Physics.Raycast(transform.position + adjustPos, -heading, out hit, distance))
+            if (Physics.Raycast(transform.position + adjustPos, -heading, out hit, distance))
             {
                 adjustPos = -adjustPos;
-                if (hit.collider.gameObject.tag == "River")
-                    blockedVertical = true;
-                else if (hit.collider.gameObject.tag == "Untagged")
+                if (hit.collider.gameObject.tag == "Untagged")
+                {
                     blockedHorizontal = true;
-
-                if (blockedVertical || blockedHorizontal)
+                    Debug.Log(hit.collider.gameObject.name);
                     blocked = true;
+                }
             }
-            else if (Physics.Raycast(transform.position - adjustPos, -heading, out hit, distance))
+            if (Physics.Raycast(transform.position - adjustPos, -heading, out hit, distance))
             {
-                if (hit.collider.gameObject.tag == "River")
-                    blockedVertical = true;
-                else if (hit.collider.gameObject.tag == "Untagged")
-                    blockedHorizontal = true;
-
-                if (blockedVertical || blockedHorizontal)
+                if (hit.collider.gameObject.tag == "Untagged")
+                {
+                    if (blockedHorizontal == true)
+                        blockedHorizontal = false;
+                    else
+                        blockedHorizontal = true;
                     blocked = true;
+                    Debug.Log(hit.collider.gameObject.name);
+                }
             }
-            else*/
+            else
             {
-                adjustPos.Set(0, autoCorrectRadius, 0);
+                adjustPos.y += 5;
                 if (Physics.Raycast(transform.position - adjustPos, -heading + adjustPos, out hit, distance))
                 {
                     if (hit.collider.gameObject.tag == "River")
@@ -232,7 +232,7 @@ public class CameraController : MonoBehaviour
 
 
         transform.Rotate(new Vector3(-offsetAngle, 0, 0));
-        if(centerBlocked)
+        if(blocked)
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * (rotationSpeed+blockRotationSpeed));
         else
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
@@ -293,30 +293,9 @@ public class CameraController : MonoBehaviour
                 {
                     offset.z += -50;
                 }
-                else
-                {
-                    moveCamera.z += 15;
-                    heading = moveCamera - (boat.transform.position + new Vector3(0, 5, 0));
-                    Debug.DrawRay(moveCamera, -heading, Color.green);
-                    if (!Physics.Raycast(moveCamera, -heading, out hit, distance))
-                    {
-                        offset.z += 100;
-                    }
-                    else
-                    {
-                        moveCamera.z -= 20;
-                        heading = moveCamera - (boat.transform.position + new Vector3(0, 5, 0));
-                        Debug.DrawRay(moveCamera, -heading, Color.magenta);
-                        if (!Physics.Raycast(moveCamera, -heading, out hit, distance))
-                        {
-                            offset.z += -100;
-                        }
-                    }
-
-                }
             }
-        }
-        */return offset;
+        }*/
+        return offset;
     }
 
     private void OnGUI()

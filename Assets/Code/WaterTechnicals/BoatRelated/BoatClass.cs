@@ -33,7 +33,6 @@ public class BoatClass : FloatingObject
     private GameObject WaterLevel = null;
     [SerializeField] private AudioClip[] onDamagedSoundClips;
     [SerializeField] private AudioSource source;
-
     #region Damage Functions
     /*public void OnDeath()
     {
@@ -174,6 +173,11 @@ public class BoatClass : FloatingObject
         if (collision.transform.tag == "Item" || collision.transform.tag == "River")
             return;
 
+        if (collision.gameObject.tag == "End")
+        {
+            GameController.instance.OnCompletedLevel();
+            return;
+        }
         if (!invincible)
         {
             if (hull > 0)
@@ -211,6 +215,12 @@ public class BoatClass : FloatingObject
         //Vector3 target = river.riverAsset.GetNodeFromPosition(river.transform.position, body.transform.position).centerVector;
         if (collision.gameObject.tag == "River")
             return;
+
+        if (collision.gameObject.tag == "End")
+        {
+            GameController.instance.OnCompletedLevel();
+            return;
+        }
 
         Vector3 target = collision.GetContact(0).point;
         target = target - body.transform.position;

@@ -99,13 +99,18 @@ public class MenuButtons : MonoBehaviour
                 mixer.GetFloat("volume", out vol);
                 if (vol == -80)
                 {
-                    vol = 0;
-                    mixer.SetFloat("volume", vol);
                     //AudioListener.volume = 0;
                     if (mixer.name == "Music")
+                    {
+                        vol = -15;
                         GetComponent<TextMesh>().text = "Music: ON";
+                    }
                     else
+                    {
+                        vol = 0;
                         GetComponent<TextMesh>().text = "SFX: ON";
+                    }
+                    mixer.SetFloat("volume", vol);
                 }
                 else
                 {

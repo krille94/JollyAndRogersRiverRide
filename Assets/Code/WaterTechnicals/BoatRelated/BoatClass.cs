@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Audio;
 
 public class BoatClass : FloatingObject
 {
@@ -97,7 +98,12 @@ public class BoatClass : FloatingObject
         if (source == null)
             source = gameObject.GetComponent<AudioSource>();
         if (source == null)
+        {
             source = gameObject.AddComponent<AudioSource>();
+
+            AudioMixer mix = Resources.Load("AudioMixers/Sound Effects") as AudioMixer;
+            source.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
+        }
     }
 
     void Update()

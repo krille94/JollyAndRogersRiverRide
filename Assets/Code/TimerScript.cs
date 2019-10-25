@@ -14,8 +14,8 @@ public class TimerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        float windowWidth = (float)(Screen.width * 3)/(float)(Screen.height * 4);
-        timerText.transform.localPosition = new Vector3(-1+windowWidth,1.8f, 4);
+        //float windowWidth = (float)(Screen.width * 3)/(float)(Screen.height * 4);
+        //timerText.transform.localPosition = new Vector3(-1+windowWidth,1.8f, 4);
 
         trigger.onLowerTime += LowerTime;
 

@@ -70,7 +70,7 @@ public class BoatClass : FloatingObject
             _texture = Resources.Load("Materials/Menus/Boat_8") as Texture;
         healthBar.GetComponent<Renderer>().material.mainTexture = _texture;
 
-        Debug.Log(_texture.name);
+        //Debug.Log(_texture.name);
         if (hull == MaxHull)
         {
             if (WaterLevel != null)
@@ -117,6 +117,9 @@ public class BoatClass : FloatingObject
         trigger.onHealDamage += RecoverHull;
 
         healthBar = GameObject.Find("HealthBar");
+
+        float windowWidth = (float)(Screen.width * 3) / (float)(Screen.height * 4);
+        healthBar.transform.localPosition = new Vector3(-2.6f * windowWidth, 1.35f, 4);
 
         if (source == null)
             source = gameObject.GetComponent<AudioSource>();

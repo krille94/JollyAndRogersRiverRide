@@ -225,17 +225,17 @@ public class Paddling : MonoBehaviour
 
         if (fullyChargedBoost && !chargingBoost)
         {
-            if (controlScheme == 1)
+            //if (controlScheme == 1)
             {
                 rigidbody.AddForce(rigidbody.transform.forward * (chargeForce * (Time.deltaTime * boostTimerMax)));
             }
-            if (controlScheme == 2)
+            /*if (controlScheme == 2)
             {
                 //if (rigidbody.velocity.magnitude < maximumSpeed)
                 { rigidbody.AddForce(rigidbody.transform.forward * (chargeForce * (Time.deltaTime * boostTimerMax))); }
                 if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * boostSidePushForce);
                 else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * boostSidePushForce);
-            }
+            }*/
 
             boostTimer += Time.deltaTime;
             if (boostTimer >= boostTimerMax)
@@ -319,7 +319,7 @@ public class Paddling : MonoBehaviour
 
         if (CanControl)
         {
-            if (controlScheme == 1)
+            //if (controlScheme == 1)
             {
                 if (leftKey)
                 {
@@ -481,7 +481,7 @@ public class Paddling : MonoBehaviour
                     }
                 }
             }
-
+            /*
             if (controlScheme == 2)
             {
                 if (!oar.isPaddling &&  (oar.onLeftSide || oar.onRightSide))
@@ -571,6 +571,7 @@ public class Paddling : MonoBehaviour
                         oar.SetRightSide(false);
                 }
             }
+            */
         }
     }
 

@@ -2,16 +2,18 @@
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
+	   _MainTex("Base (RGB) Trans (A)", 2D) = "white" {}
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { "Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType" = "Transparent" }
         LOD 100
-
+		//ZWrite Off
+		Blend SrcAlpha OneMinusSrcAlpha
+		Cull Front
         Pass
         {
-			Cull Front
+
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag

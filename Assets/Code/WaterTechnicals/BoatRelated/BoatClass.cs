@@ -70,7 +70,7 @@ public class BoatClass : FloatingObject
             _texture = Resources.Load("Materials/Menus/Boat_8") as Texture;
         healthBar.GetComponent<Renderer>().material.mainTexture = _texture;
 
-        Debug.Log(_texture.name);
+        //Debug.Log(_texture.name);
         if (hull == MaxHull)
         {
             if (WaterLevel != null)

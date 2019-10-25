@@ -25,6 +25,7 @@ public class BoatClass : FloatingObject
     public float InvincibilityFrames = 3;
     private float InvincibilityTimer = 0;
     private bool invincible = false;
+    private GameObject healthBar = null;
     //public UnityEvent onDeath;
     [SerializeField] PickUpTrigger trigger = null;
     public delegate void OnDamageRecived(float value, Vector3 point);
@@ -49,6 +50,27 @@ public class BoatClass : FloatingObject
     }
     private void SetWaterInBoat()
     {
+        float boatImg = (float)hull / (float)MaxHull;
+        Texture _texture = Resources.Load("Materials/Menus/Boat_9") as Texture;
+        if (boatImg == 1)
+            _texture = Resources.Load("Materials/Menus/Boat_1") as Texture;
+        else if (boatImg >= 0.8f)
+            _texture = Resources.Load("Materials/Menus/Boat_2") as Texture;
+        else if (boatImg >= 0.7f)
+            _texture = Resources.Load("Materials/Menus/Boat_3") as Texture;
+        else if (boatImg >= 0.6f)
+            _texture = Resources.Load("Materials/Menus/Boat_4") as Texture;
+        else if (boatImg >= 0.5f)
+            _texture = Resources.Load("Materials/Menus/Boat_5") as Texture;
+        else if (boatImg >= 0.4f)
+            _texture = Resources.Load("Materials/Menus/Boat_6") as Texture;
+        else if (boatImg >= 0.2f)
+            _texture = Resources.Load("Materials/Menus/Boat_7") as Texture;
+        else if (boatImg > 0)
+            _texture = Resources.Load("Materials/Menus/Boat_8") as Texture;
+        healthBar.GetComponent<Renderer>().material.mainTexture = _texture;
+
+        Debug.Log(_texture.name);
         if (hull == MaxHull)
         {
             if (WaterLevel != null)
@@ -93,6 +115,8 @@ public class BoatClass : FloatingObject
 
         hull = MaxHull;
         trigger.onHealDamage += RecoverHull;
+
+        healthBar = GameObject.Find("HealthBar");
 
         if (source == null)
             source = gameObject.GetComponent<AudioSource>();
@@ -233,8 +257,8 @@ public class BoatClass : FloatingObject
 
     private void OnGUI()
     {
-        GUI.Box(new Rect(0, 0, 100, 25), "HULL: " + hull.ToString("F0") + " / " + MaxHull.ToString());
+        //GUI.Box(new Rect(0, 0, 100, 25), "HULL: " + hull.ToString("F0") + " / " + MaxHull.ToString());
         if (invincible)
-            GUI.Box(new Rect(0, 25, 100, 25), "Invincible");
+            GUI.Box(new Rect(0, 0, 100, 25), "Invincible");
     }
 }

@@ -157,7 +157,6 @@ public class CameraController : MonoBehaviour
                 if (hit.collider.gameObject.tag == "Untagged")
                 {
                     blockedHorizontal = true;
-                    Debug.Log(hit.collider.gameObject.name);
                     blocked = true;
                 }
             }
@@ -170,7 +169,6 @@ public class CameraController : MonoBehaviour
                     else
                         blockedHorizontal = true;
                     blocked = true;
-                    Debug.Log(hit.collider.gameObject.name);
                 }
             }
             else

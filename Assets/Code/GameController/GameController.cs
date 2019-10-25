@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
 
     private bool is_dead;
+
+    public UnityEvent onPlay;
 
     private void Start()
     {
@@ -19,6 +21,11 @@ public class GameController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         Time.timeScale = 1;
+    }
+
+    public void OnStartLevel ()
+    {
+        onPlay.Invoke();
     }
 
     public void OnCompletedLevel()

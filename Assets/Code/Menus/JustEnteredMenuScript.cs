@@ -54,7 +54,7 @@ public class JustEnteredMenuScript : MonoBehaviour
     {
         SetOptionValues();
 
-        if (menu != "Main Menu") GameObject.Find("Logo").SetActive(false);
+        //if (menu != "Main Menu") GameObject.Find("Logo").SetActive(false);
 
         if (menu == "Main Menu") MainMenu.SetActive(true);
         else MainMenu.SetActive(false);

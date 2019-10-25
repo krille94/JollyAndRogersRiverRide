@@ -35,6 +35,7 @@ public class Oar
                 modelRight.transform.localEulerAngles = new Vector3(0, 0, 35);
                 if (!onRightSide)
                 {
+                    Debug.Log("Set Oar");
                     GameObject ps = GameObject.Instantiate(psSplashPrefab, rightSideImpactPoint.position, Quaternion.identity) as GameObject;
                     ps.transform.SetParent(effectPool);
                     GameObject.Destroy(ps, 10);
@@ -46,7 +47,6 @@ public class Oar
 
             }
             onRightSide = inWater;
-            onRightSide = true;
         }/*
         else if (UserSettings.GetControlScheme() == 2)
         {
@@ -70,10 +70,6 @@ public class Oar
             if (inWater)
             {
                 modelLeft.transform.localEulerAngles = new Vector3(0, 180, 35);
-            }
-            else
-            {
-                modelLeft.transform.localEulerAngles = new Vector3(0, 180, 70);
                 if (!onLeftSide)
                 {
                     Debug.Log("Set Oar");
@@ -82,8 +78,11 @@ public class Oar
                     GameObject.Destroy(ps, 10);
                 }
             }
+            else
+            {
+                modelLeft.transform.localEulerAngles = new Vector3(0, 180, 70);
+            }
             onLeftSide = inWater;
-            onLeftSide = true;
         }/*
         else if (UserSettings.GetControlScheme() == 2)
         {

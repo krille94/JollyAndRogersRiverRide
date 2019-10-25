@@ -14,6 +14,14 @@ public class PickUpTrigger : MonoBehaviour
     public delegate void OnLowerTime(int value);
     public OnLowerTime onLowerTime;
 
+    [SerializeField] ParticleSystem vfxSystem;
+    private Transform effectsPool;
+
+    private void Start()
+    {
+        effectsPool = GameObject.Find("EffectsPool").transform;
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Item")
@@ -34,6 +42,10 @@ public class PickUpTrigger : MonoBehaviour
             Destroy(other.gameObject);
 
             GetComponent<AudioSource>().Play();
+
+            ParticleSystem ps = Instantiate(vfxSystem, other.transform.position, Quaternion.identity) as ParticleSystem;
+            ps.transform.SetParent(effectsPool);
+            Destroy(ps.gameObject, 10);
         }
     }
 }

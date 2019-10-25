@@ -50,7 +50,7 @@ public class TimerScript : MonoBehaviour
 
             while (timerIncrease > 1)
             {
-                PlayerData.timeTaken++;
+                PlayerData.score++;
                 seconds += 1;
                 timerIncrease -= 1;
                 if (seconds >= 60)

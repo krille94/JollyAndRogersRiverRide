@@ -279,7 +279,7 @@ MonoBehaviour:
   offsetPosition: {x: 0, y: 7, z: -25}
   offsetAngle: 0
   translationSpeed: 0.25
-  rotationSpeed: 0.5
+  rotationSpeed: 0.4
   blockRotationSpeed: 2
   targetNode:
     flowDirection: {x: 0, y: 0, z: 0}

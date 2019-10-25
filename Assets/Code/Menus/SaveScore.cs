@@ -14,7 +14,7 @@ public static class SaveScore
     {
         if(savedGames.Count==0)
         {
-            for (int i = 10; i > 0; i--)
+            for (int i = 0; i < 10; i++)
                 SetDefaultHighscores(i);
         }
         //savedGames.Add(Highscore.current);
@@ -41,7 +41,7 @@ public static class SaveScore
         }
         else
         {
-            for (int i = 10; i > 0; i--)
+            for (int i = 0; i < 10; i++)
                 SetDefaultHighscores(i);
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Create("Highscore.gd");
@@ -55,18 +55,18 @@ public static class SaveScore
     private static void SetDefaultHighscores(int i)
     {
         Highscore nScore = new Highscore();
-        nScore.score = i;
+        nScore.score = 90+(i*10);
 
-             if (i == 1) nScore.name = "haha I suck";
-        else if (i == 2) nScore.name = "placeholder guy 14";
-        else if (i == 3) nScore.name = "It's fine";
-        else if (i == 4) nScore.name = "WELL... IT'S THERE NOW";
+             if (i == 9) nScore.name = "haha I suck";
+        else if (i == 8) nScore.name = "placeholder guy 14";
+        else if (i == 7) nScore.name = "It's fine";
+        else if (i == 6) nScore.name = "WELL... IT'S THERE NOW";
         else if (i == 5) nScore.name = "wait was caps planned?";
-        else if (i == 6) nScore.name = "TEXT LIMIT BABY!!!!!!!!!!!!!!!";
-        else if (i == 7) nScore.name = "River Something";
-        else if (i == 8) nScore.name = "River Ride?";
-        else if (i == 9) nScore.name = "River Run";
-        else if (i == 10) nScore.name = "Jolly & Roger";
+        else if (i == 4) nScore.name = "TEXT LIMIT BABY!!!!!!!!!!!!!!!";
+        else if (i == 3) nScore.name = "River Something";
+        else if (i == 2) nScore.name = "River Ride?";
+        else if (i == 1) nScore.name = "River Run";
+        else if (i == 0) nScore.name = "Jolly & Roger";
 
         SaveScore.savedGames.Add(nScore);
     }

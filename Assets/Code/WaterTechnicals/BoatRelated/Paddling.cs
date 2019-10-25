@@ -19,6 +19,10 @@ public class Oar
     public bool isPaddling = false;
     public float paddlingTime = 0.5f;
 
+    public GameObject psSplashPrefab;
+
+    [HideInInspector]public Transform effectPool;
+
     public void SetRightSide(bool inWater)
     {
         //if (UserSettings.GetControlScheme() == 1)
@@ -29,13 +33,20 @@ public class Oar
             if (inWater)
             {
                 modelRight.transform.localEulerAngles = new Vector3(0, 0, 35);
+                if (!onRightSide)
+                {
+                    Debug.Log("Set Oar");
+                    GameObject ps = GameObject.Instantiate(psSplashPrefab, rightSideImpactPoint.position, Quaternion.identity) as GameObject;
+                    ps.transform.SetParent(effectPool);
+                    GameObject.Destroy(ps, 10);
+                }
             }
             else
             {
                 modelRight.transform.localEulerAngles = new Vector3(0, 0, 70);
+
             }
             onRightSide = inWater;
-            onRightSide = true;
         }/*
         else if (UserSettings.GetControlScheme() == 2)
         {
@@ -59,13 +70,19 @@ public class Oar
             if (inWater)
             {
                 modelLeft.transform.localEulerAngles = new Vector3(0, 180, 35);
+                if (!onLeftSide)
+                {
+                    Debug.Log("Set Oar");
+                    GameObject ps = GameObject.Instantiate(psSplashPrefab, leftSideImpactPoint.position, Quaternion.identity) as GameObject;
+                    ps.transform.SetParent(effectPool);
+                    GameObject.Destroy(ps, 10);
+                }
             }
             else
             {
                 modelLeft.transform.localEulerAngles = new Vector3(0, 180, 70);
             }
             onLeftSide = inWater;
-            onLeftSide = true;
         }/*
         else if (UserSettings.GetControlScheme() == 2)
         {
@@ -201,6 +218,8 @@ public class Paddling : MonoBehaviour
         controlScheme = UserSettings.GetControlScheme();
         if (UserSettings.GetAutoPaddle()) autoPaddle = true;
         //if (UserSettings.GetReversedControls()) reverseControls = true;
+
+        oar.effectPool = GameObject.Find("EffectsPool").transform;
     }
 
     public void SetSpeedValues(int damage)

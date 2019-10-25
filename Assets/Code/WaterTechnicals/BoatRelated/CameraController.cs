@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
     public float offsetAngle;
 
     public float translationSpeed = 0.25f;
-    public float rotationSpeed = 0.5f;
+    public float rotationSpeed = 0.4f;
     public float blockRotationSpeed = 2;
 
     private Vector3 targetPosition;
@@ -230,7 +230,7 @@ public class CameraController : MonoBehaviour
 
 
         transform.Rotate(new Vector3(-offsetAngle, 0, 0));
-        if(blocked)
+        if(centerBlocked)
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * (rotationSpeed+blockRotationSpeed));
         else
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);

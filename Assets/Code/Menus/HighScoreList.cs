@@ -13,13 +13,14 @@ public class HighScoreList : MonoBehaviour
     public GameObject RestartGame;
 
     private int YourPlacement=0;
+    private int ScoresPerText = 10;
 
     void OnEnable()
     {
         listView.SetActive(false);
         SaveScore.Load();
 
-        if (PlayerData.playedGame)
+        if (PlayerData.playedGame && PlayerData.score > 0)
         {
             PlayerData.CalculateScore();
             SortScores();
@@ -27,6 +28,7 @@ public class HighScoreList : MonoBehaviour
         }
         else
         {
+            YourPlacement = 11;
             RestartGame.SetActive(false);
             ListScores();
             ListNames();
@@ -43,7 +45,7 @@ public class HighScoreList : MonoBehaviour
         YourPlacement = 0;
         foreach (Highscore g in SaveScore.savedGames)
         {
-            if (newScore >= g.score)
+            if (newScore <= g.score)
             {
                 break;
             }
@@ -100,16 +102,38 @@ public class HighScoreList : MonoBehaviour
 
     }
 
+    string ConvertToTime(int score)
+    {
+        string time = "";
+        int minutes = 0;
+        while(score>=60)
+        {
+            minutes++;
+            score -= 60;
+        }
+
+        if (minutes < 10)
+            time += "0";
+        time += minutes.ToString() + ":";
+
+        if (score < 10)
+            time += "0";
+        time += score.ToString();
+
+        return time;
+    }
+
     void ListScores()
     {
         string allScores=" ";
         int i = 0;
         foreach (Highscore g in SaveScore.savedGames)
         {
+            string score = ConvertToTime(g.score);
             if (i == YourPlacement)
-                allScores += "<color=red>" + (g.score.ToString() + "</color>\n ");
+                allScores += "<color=red>" + score + "</color>\n ";
             else
-                allScores += (g.score.ToString() + "\n ");
+                allScores += score + "\n ";
             i++;
         }
 
@@ -139,7 +163,8 @@ public class HighScoreList : MonoBehaviour
     {
         if (!listView.activeInHierarchy)
         {
-            string setText = "Your score was: " + PlayerData.score.ToString() + "\nEnter your name:\n" + (YourPlacement + 1).ToString() + ". " + PlayerData.playerName;
+            string score = ConvertToTime(PlayerData.score);
+            string setText = "Your score was: " + score + "\nEnter your name:\n" + (YourPlacement + 1).ToString() + ". " + PlayerData.playerName;
             YourScoreText.GetComponent<TextMesh>().text = setText;
         }
         else YourScoreText.GetComponent<TextMesh>().text = " ";

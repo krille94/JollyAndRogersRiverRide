@@ -14,6 +14,7 @@ public class JustEnteredMenuScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.Find("Boat").SetActive(false);
         CollectMenus();
         StartOnSubmenu(StartOnMenu.MoveToMenu);
     }

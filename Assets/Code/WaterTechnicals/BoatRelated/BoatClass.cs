@@ -118,6 +118,9 @@ public class BoatClass : FloatingObject
 
         healthBar = GameObject.Find("HealthBar");
 
+        float windowWidth = (float)(Screen.width * 3) / (float)(Screen.height * 4);
+        healthBar.transform.localPosition = new Vector3(-2.6f * windowWidth, 1.35f, 4);
+
         if (source == null)
             source = gameObject.GetComponent<AudioSource>();
         if (source == null)

@@ -9,6 +9,7 @@ public class CameraController : MonoBehaviour
 
     public Vector3 offsetPosition;
     public float offsetAngle;
+    public float slopeAngle=0;
 
     public float translationSpeed = 0.25f;
     public float rotationSpeed = 0.4f;
@@ -111,7 +112,7 @@ public class CameraController : MonoBehaviour
         Vector3 direction; // This is the normalized direction.
         Vector3 basePos = transform.position;
         Vector3 adjustPos = Vector3.zero;
-        heading = transform.position - (boat.transform.position + new Vector3(0, 5, 0));
+        heading = basePos - (boat.transform.position + new Vector3(0, 5, 0));
         distance = heading.magnitude;
         direction = heading / distance;
 
@@ -187,7 +188,7 @@ public class CameraController : MonoBehaviour
 
         if (blocked)
         {
-            offset = FixBlockedCamera(basePos, adjustPos, blockedVertical, blockedHorizontal);
+            //offset = FixBlockedCamera(basePos, adjustPos, blockedVertical, blockedHorizontal);
         }
         //Debug.Log(offset);
 
@@ -197,7 +198,10 @@ public class CameraController : MonoBehaviour
         {
             if (boatNode != oldTargetNode)
             {
-                heading = (targetNode.centerVector + offset) - boatNode.centerVector;
+                slopeAngle = targetNode.centerVector.y - boatNode.centerVector.y;
+                if ((int)boat.transform.position.y == (int)boatNode.centerVector.y) slopeAngle = 0;
+                Debug.Log(boat.transform.position.y + " " + boatNode.centerVector.y);
+                heading = (targetNode.centerVector + offset + new Vector3(0, slopeAngle, 0)) - boatNode.centerVector;
                 distance = heading.magnitude;
                 direction = heading / distance; // This is now the normalized direction.
 
@@ -213,13 +217,13 @@ public class CameraController : MonoBehaviour
         {
             if (oldTargetNode.centerVector!=Vector3.zero)
             {
-                heading = (oldTargetNode.centerVector + offset) - targetNode.centerVector;
+                heading = (oldTargetNode.centerVector + offset + new Vector3(0, slopeAngle, 0)) - targetNode.centerVector;
                 distance = heading.magnitude;
                 direction = heading / distance; // This is now the normalized direction.
 
                 targetRotation = Quaternion.LookRotation(-direction, Vector3.up);
 
-                if(offset==Vector3.zero)
+                if(offset==Vector3.zero&&slopeAngle==0)
                 {
                     targetRotation.x = 0;
                     targetRotation.z = 0;

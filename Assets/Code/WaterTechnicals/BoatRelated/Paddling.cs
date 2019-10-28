@@ -19,7 +19,7 @@ public class Oar
     public bool isPaddling = false;
     public float paddlingTime = 0.5f;
 
-    public GameObject psSplashPrefab;
+    public ParticleSystem psSplash;
 
     [HideInInspector]public Transform effectPool;
 
@@ -35,10 +35,9 @@ public class Oar
                 modelRight.transform.localEulerAngles = new Vector3(0, 0, 35);
                 if (!onRightSide)
                 {
-                    Debug.Log("Set Oar");
-                    GameObject ps = GameObject.Instantiate(psSplashPrefab, rightSideImpactPoint.position, Quaternion.identity) as GameObject;
+                    ParticleSystem ps = GameObject.Instantiate(psSplash, rightSideImpactPoint.position, Quaternion.identity) as ParticleSystem;
                     ps.transform.SetParent(effectPool);
-                    GameObject.Destroy(ps, 10);
+                    GameObject.Destroy(ps.gameObject, ps.main.duration);
                 }
             }
             else
@@ -72,10 +71,9 @@ public class Oar
                 modelLeft.transform.localEulerAngles = new Vector3(0, 180, 35);
                 if (!onLeftSide)
                 {
-                    Debug.Log("Set Oar");
-                    GameObject ps = GameObject.Instantiate(psSplashPrefab, leftSideImpactPoint.position, Quaternion.identity) as GameObject;
+                    ParticleSystem ps = GameObject.Instantiate(psSplash, leftSideImpactPoint.position, Quaternion.identity) as ParticleSystem;
                     ps.transform.SetParent(effectPool);
-                    GameObject.Destroy(ps, 10);
+                    GameObject.Destroy(ps.gameObject, ps.main.duration);
                 }
             }
             else

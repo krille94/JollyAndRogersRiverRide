@@ -59,15 +59,25 @@ public class MenuCameraFlyby : MonoBehaviour
         transform.parent.gameObject.SetActive(true);
         isPlaying = true;
         positionIndex = 0;
-        cam.transform.position = positionPoints[positionIndex].position;
-        cam.transform.rotation = positionPoints[positionIndex].rotation;
+        oriPos = cam.transform.position = positionPoints[positionIndex].position;
+        oriRot = cam.transform.rotation = positionPoints[positionIndex].rotation;
     }
     private float timeSpent;
     public Camera cam;
+    public void ResetToStart ()
+    {
+        isPlaying = false;
+        positionIndex = 0;
+        cam.transform.position = positionPoints[positionIndex].position;
+        cam.transform.rotation = positionPoints[positionIndex].rotation;
+    }
 
     [SerializeField] bool playOnAwake;
     [SerializeField] bool loop;
     [SerializeField,Tooltip("This Whill Only Trigger If Looping Is False")] UnityEvent onCompleted;
+
+    private Vector3 oriPos;
+    private Quaternion oriRot;
 
     private void Start()
     {
@@ -93,13 +103,15 @@ public class MenuCameraFlyby : MonoBehaviour
 
         timeSpent += Time.deltaTime;
 
-        cam.transform.position = Vector3.Slerp(cam.transform.position, positionPoints[positionIndex].position, Time.deltaTime * translateSpeed);
-        cam.transform.rotation = Quaternion.Slerp(cam.transform.rotation, positionPoints[positionIndex].rotation, Time.deltaTime * rotateSpeed);
+        cam.transform.position = Vector3.Slerp(oriPos, positionPoints[positionIndex].position, timeSpent / positionPoints[positionIndex].duration);
+        cam.transform.rotation = Quaternion.Slerp(oriRot, positionPoints[positionIndex].rotation, timeSpent / positionPoints[positionIndex].duration);
 
         if(Vector3.Distance(cam.transform.position, positionPoints[positionIndex].position) <= stopingDistance)
         {
             if(timeSpent >= positionPoints[positionIndex].duration)
             {
+                oriPos = positionPoints[positionIndex].position;
+                oriRot = positionPoints[positionIndex].rotation;
                 timeSpent = 0;
                 positionIndex++;
                 if (loop)
@@ -113,6 +125,7 @@ public class MenuCameraFlyby : MonoBehaviour
                     {
                         onCompleted.Invoke();
                         this.enabled = false;
+                        isPlaying = false;
                     }
                 }
             }

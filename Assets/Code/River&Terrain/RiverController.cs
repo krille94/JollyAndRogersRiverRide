@@ -142,6 +142,8 @@ public class RiverController : MonoBehaviour
             for (int i = 0; i < observedObjects.Count; i++)
             {
                 FloatingObject obj = observedObjects[i];
+                if (obj.enabled == false)
+                    continue;
                 slopeAngle = obj.GetNodes().closest.centerVector.y- obj.GetNodes().last.centerVector.y;
 
                 Vector3 flow = obj.GetNodes().closest.finalFlowDirection;
@@ -157,6 +159,8 @@ public class RiverController : MonoBehaviour
             for (int i = 0; i < observedObjects.Count; i++)
             {
                 FloatingObject obj = observedObjects[i];
+                if (obj.enabled == false)
+                    continue;
                 RaycastHit hit;
                 Debug.DrawRay(obj.transform.position + (Vector3.up * 1000), Vector3.down * 2000, Color.yellow);
                 if (Physics.Raycast(obj.transform.position + (Vector3.up * 1000), Vector3.down, out hit, 2000, arcadeRiverLayer))

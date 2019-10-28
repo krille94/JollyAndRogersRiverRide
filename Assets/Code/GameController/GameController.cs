@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     private bool is_dead;
 
     public UnityEvent onPlay;
+    public UnityEvent onComplete;
 
     private void Start()
     {
@@ -31,9 +32,10 @@ public class GameController : MonoBehaviour
 
     public void OnCompletedLevel()
     {
+        Debug.Log("OnCompletedLevel");
         StartOnMenu.MoveToMenu = "Highscore Menu";
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
-
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        onComplete.Invoke();
     }
 
     public void OnDeath()

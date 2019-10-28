@@ -147,7 +147,12 @@ public class RiverTool : MonoBehaviour
             Debug.LogWarning("Tool is not supported without a MeshFilter");
             return;
         }
-        Mesh mesh = transform.GetComponent<MeshFilter>().mesh;
+        Mesh mesh;
+#if UnityEditor
+        mesh = transform.GetComponent<MeshFilter>().sharedMesh;
+#else
+        mesh = transform.GetComponent<MeshFilter>().mesh;
+#endif
         if (mesh == null)
         {
             Debug.LogError("Missing mesh to modify");
@@ -258,9 +263,9 @@ public class RiverTool : MonoBehaviour
         }
     }
 
-    #endregion
+#endregion
 
-    #region Construction Methods
+        #region Construction Methods
 
     private Vector3 GetRiverFlow (Vector3 topVec, Vector3 botVec)
     {
@@ -403,6 +408,6 @@ public class RiverTool : MonoBehaviour
         GenerateMesh();
     }
 
-    #endregion
+        #endregion
 #endif
-}
+    }

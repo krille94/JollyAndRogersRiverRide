@@ -20,6 +20,7 @@ public class Oar
     public float paddlingTime = 0.5f;
 
     public ParticleSystem psSplash;
+    public AudioSource onPaddleSplashSound;
 
     [HideInInspector]public Transform effectPool;
 
@@ -38,6 +39,7 @@ public class Oar
                     ParticleSystem ps = GameObject.Instantiate(psSplash, rightSideImpactPoint.position, Quaternion.identity) as ParticleSystem;
                     ps.transform.SetParent(effectPool);
                     GameObject.Destroy(ps.gameObject, ps.main.duration);
+                    onPaddleSplashSound.Play();
                 }
             }
             else
@@ -46,22 +48,11 @@ public class Oar
 
             }
             onRightSide = inWater;
-        }/*
-        else if (UserSettings.GetControlScheme() == 2)
-        {
-            onRightSide = inWater;
-            modelRight.SetActive(inWater);
-            if (inWater)
-            {
-                onLeftSide = false;
-                modelLeft.SetActive(false);
-            }
-        }*/
+        }
     }
 
     public void SetLeftSide(bool inWater)
     {
-        //if (UserSettings.GetControlScheme() == 1)
         {
             if (!modelLeft.activeInHierarchy)
                 modelLeft.SetActive(true);
@@ -74,6 +65,7 @@ public class Oar
                     ParticleSystem ps = GameObject.Instantiate(psSplash, leftSideImpactPoint.position, Quaternion.identity) as ParticleSystem;
                     ps.transform.SetParent(effectPool);
                     GameObject.Destroy(ps.gameObject, ps.main.duration);
+                    onPaddleSplashSound.Play();
                 }
             }
             else
@@ -81,17 +73,7 @@ public class Oar
                 modelLeft.transform.localEulerAngles = new Vector3(0, 180, 70);
             }
             onLeftSide = inWater;
-        }/*
-        else if (UserSettings.GetControlScheme() == 2)
-        {
-            onLeftSide = inWater;
-            modelLeft.SetActive(inWater);
-            if (inWater)
-            {
-                onRightSide = false;
-                modelRight.SetActive(false);
-            }
-        }*/
+        }
     }
 
     /// <summary>
@@ -178,6 +160,8 @@ public class Paddling : MonoBehaviour
     //private bool reverseControls = true;
     private bool autoPaddle = false;
     private float controlScheme;
+
+    [SerializeField] AudioSource onPaddleSwoshSound;
 
     [Header("Charge Boost")]
     public float boostTurnMultiplier = 2;
@@ -432,6 +416,8 @@ public class Paddling : MonoBehaviour
 
                     if (releasingForwardKey)
                     {
+                        GetComponent<AudioSource>().Play();
+
                         chargingBoost = false;
                         fullyChargedBoost = false;
                         /*
@@ -470,6 +456,7 @@ public class Paddling : MonoBehaviour
                     }
                     else if (releasingBackKey)
                     {
+                        GetComponent<AudioSource>().Play();
                         chargingBoost = false;
                         fullyChargedBoost = false;
                         /*
@@ -502,6 +489,7 @@ public class Paddling : MonoBehaviour
                     }
                 }
             }
+            #region OldControlScheme
             /*
             if (controlScheme == 2)
             {
@@ -593,6 +581,7 @@ public class Paddling : MonoBehaviour
                 }
             }
             */
+            #endregion
         }
     }
 

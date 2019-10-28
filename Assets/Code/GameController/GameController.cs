@@ -12,6 +12,8 @@ public class GameController : MonoBehaviour
     public UnityEvent onPlay;
     public UnityEvent onComplete;
 
+    private GameObject mainMenu;
+
     private void Start()
     {
         if(instance != null)
@@ -21,6 +23,7 @@ public class GameController : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
+        mainMenu = GameObject.Find("MainMenu");
 
         Time.timeScale = 1;
     }
@@ -32,10 +35,14 @@ public class GameController : MonoBehaviour
 
     public void OnCompletedLevel()
     {
-        Debug.Log("OnCompletedLevel");
-        StartOnMenu.MoveToMenu = "Highscore Menu";
-        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
-        onComplete.Invoke();
+        if (isPlaying)
+        {
+            isPlaying = false;
+            Debug.Log("OnCompletedLevel");
+            StartOnMenu.MoveToMenu = "Highscore Menu";
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            onComplete.Invoke();
+        }
     }
 
     public void OnDeath()

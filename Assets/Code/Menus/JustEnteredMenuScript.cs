@@ -18,6 +18,12 @@ public class JustEnteredMenuScript : MonoBehaviour
         StartOnSubmenu(StartOnMenu.MoveToMenu);
     }
 
+    public void SetSubmenu()
+    {
+        StartOnSubmenu(StartOnMenu.MoveToMenu);
+
+    }
+
     private void CollectMenus()
     {
         MainMenu = GameObject.Find("Main Menu");
@@ -52,9 +58,8 @@ public class JustEnteredMenuScript : MonoBehaviour
 
     private void StartOnSubmenu(string menu)
     {
-        SetOptionValues();
+        //SetOptionValues();
 
-        //if (menu != "Main Menu") GameObject.Find("Logo").SetActive(false);
 
         if (menu == "Main Menu") MainMenu.SetActive(true);
         else MainMenu.SetActive(false);

@@ -21,7 +21,7 @@ public class MenuButtonsEditor : Editor
         //RiverTool tool = (RiverTool)target;
         if (tool.buttonAction.ToString() == "StartGame")
         {
-            tool.CurrentMenu = (GameObject)EditorGUILayout.ObjectField("Boat", tool.CurrentMenu, typeof(GameObject), true);
+            //tool.CurrentMenu = (GameObject)EditorGUILayout.ObjectField("Boat", tool.CurrentMenu, typeof(GameObject), true);
         }
         if (tool.buttonAction.ToString()=="ChangeOptions")
         {

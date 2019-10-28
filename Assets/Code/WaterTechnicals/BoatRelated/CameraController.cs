@@ -188,7 +188,7 @@ public class CameraController : MonoBehaviour
 
         if (blocked)
         {
-            //offset = FixBlockedCamera(basePos, adjustPos, blockedVertical, blockedHorizontal);
+            offset = FixBlockedCamera(basePos, adjustPos, blockedVertical, blockedHorizontal);
         }
         //Debug.Log(offset);
 
@@ -199,8 +199,8 @@ public class CameraController : MonoBehaviour
             if (boatNode != oldTargetNode)
             {
                 slopeAngle = targetNode.centerVector.y - boatNode.centerVector.y;
-                if ((int)boat.transform.position.y == (int)boatNode.centerVector.y) slopeAngle = 0;
-                Debug.Log(boat.transform.position.y + " " + boatNode.centerVector.y);
+                if (boat.transform.position.y - boatNode.centerVector.y <= 0.5f) slopeAngle = 0;
+                //Debug.Log(boat.transform.position.y + " " + boatNode.centerVector.y);
                 heading = (targetNode.centerVector + offset + new Vector3(0, slopeAngle, 0)) - boatNode.centerVector;
                 distance = heading.magnitude;
                 direction = heading / distance; // This is now the normalized direction.

@@ -24,12 +24,15 @@ public class BigWhirlwindScript : MonoBehaviour
     {
         transform.Rotate(Vector3.up * rotateAnimSpeed * Time.deltaTime);
 
-        for (int i = 0; i < observerdObjects.Count; i++)
+        if (!GameObject.Find("Pause Screen"))
         {
-            rotationObj.position = observerdObjects[i].transform.position;
-            rotationObj.LookAt(transform);
+            for (int i = 0; i < observerdObjects.Count; i++)
+            {
+                rotationObj.position = observerdObjects[i].transform.position;
+                rotationObj.LookAt(transform);
 
-            observerdObjects[i].GetRigidbody().AddForce(((-observerdObjects[i].GetNodes().closest.finalFlowDirection * inwardForce) + (((rotationObj.right+rotationObj.forward)/2) * centrificalForce) * Time.deltaTime));
+                observerdObjects[i].GetRigidbody().AddForce(((-observerdObjects[i].GetNodes().closest.finalFlowDirection * inwardForce) + (((rotationObj.right + rotationObj.forward) / 2) * centrificalForce) * Time.deltaTime));
+            }
         }
     }
 

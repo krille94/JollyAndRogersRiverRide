@@ -23,7 +23,7 @@ public class CharacterSelectScript : MonoBehaviour
 
     int AmountOfChars;
 
-    Vector3 portraitDistance;
+    public Vector3 portraitDistance;
 
     new AudioSource audioRoger;
     new AudioSource audioJolly;
@@ -120,8 +120,8 @@ public class CharacterSelectScript : MonoBehaviour
             {
                 if (Player1Pos + 1 < AmountOfChars)
                 {
-                    Player1Icon.transform.position += portraitDistance;
-                    Player1Text.transform.position += portraitDistance;
+                    Player1Icon.transform.localPosition += portraitDistance;
+                    Player1Text.transform.localPosition += portraitDistance;
                     Player1Pos++;
                 }
             }
@@ -129,8 +129,8 @@ public class CharacterSelectScript : MonoBehaviour
             {
                 if (Player1Pos > 0)
                 {
-                    Player1Icon.transform.position -= portraitDistance;
-                    Player1Text.transform.position -= portraitDistance;
+                    Player1Icon.transform.localPosition -= portraitDistance;
+                    Player1Text.transform.localPosition -= portraitDistance;
                     Player1Pos--;
                 }
             }
@@ -170,8 +170,8 @@ public class CharacterSelectScript : MonoBehaviour
             {
                 if (Player2Pos + 1 < AmountOfChars)
                 {
-                    Player2Icon.transform.position += portraitDistance;
-                    Player2Text.transform.position += portraitDistance;
+                    Player2Icon.transform.localPosition += portraitDistance;
+                    Player2Text.transform.localPosition += portraitDistance;
                     Player2Pos++;
                 }
             }
@@ -179,8 +179,8 @@ public class CharacterSelectScript : MonoBehaviour
             {
                 if (Player2Pos > 0)
                 {
-                    Player2Icon.transform.position -= portraitDistance;
-                    Player2Text.transform.position -= portraitDistance;
+                    Player2Icon.transform.localPosition -= portraitDistance;
+                    Player2Text.transform.localPosition -= portraitDistance;
                     Player2Pos--;
                 }
             }

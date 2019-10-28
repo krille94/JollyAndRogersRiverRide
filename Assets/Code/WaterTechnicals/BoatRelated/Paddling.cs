@@ -250,20 +250,13 @@ public class Paddling : MonoBehaviour
             else
                 return;
         }
-
+        /*
         if (fullyChargedBoost && !chargingBoost)
         {
             //if (controlScheme == 1)
             {
                 rigidbody.AddForce(rigidbody.transform.forward * (chargeForce * (Time.deltaTime * boostTimerMax)));
             }
-            /*if (controlScheme == 2)
-            {
-                //if (rigidbody.velocity.magnitude < maximumSpeed)
-                { rigidbody.AddForce(rigidbody.transform.forward * (chargeForce * (Time.deltaTime * boostTimerMax))); }
-                if (oar.onLeftSide) rigidbody.AddRelativeForce(Vector3.right * boostSidePushForce);
-                else if (oar.onRightSide) rigidbody.AddRelativeForce(Vector3.left * boostSidePushForce);
-            }*/
 
             boostTimer += Time.deltaTime;
             if (boostTimer >= boostTimerMax)
@@ -272,7 +265,7 @@ public class Paddling : MonoBehaviour
                 chargeTimer = 0;
                 boostTimer = 0;
             }
-        }
+        }*/
 
         if (oar.isPaddling)
         {
@@ -442,6 +435,7 @@ public class Paddling : MonoBehaviour
                     if (releasingForwardKey)
                     {
                         chargingBoost = false;
+                        fullyChargedBoost = false;
                         /*
                         if (playerIndex.ToString() == "Jolly")
                         {
@@ -479,6 +473,7 @@ public class Paddling : MonoBehaviour
                     else if (releasingBackKey)
                     {
                         chargingBoost = false;
+                        fullyChargedBoost = false;
                         /*
                         if (playerIndex.ToString() == "Jolly")
                         {

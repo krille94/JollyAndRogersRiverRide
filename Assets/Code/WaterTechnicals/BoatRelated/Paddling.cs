@@ -158,6 +158,7 @@ public class Paddling : MonoBehaviour
     public enum PlayerIndexTypes { Jolly, Roger }
     public PlayerIndexTypes playerIndex = 0;
     string player;
+    private bool isPlaying = false;
 
     float turnForwardForce;
     float forwardForce;
@@ -241,6 +242,14 @@ public class Paddling : MonoBehaviour
     void Update()
     {
         impactPoint = Vector3.zero;
+
+        if (!isPlaying)
+        {
+            if (GameController.isPlaying)
+                isPlaying = true;
+            else
+                return;
+        }
 
         if (fullyChargedBoost && !chargingBoost)
         {

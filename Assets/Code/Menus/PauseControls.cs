@@ -43,14 +43,16 @@ public class PauseControls : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            // Edit this later to check if player is dead or not rather than if player exists
-            if (!pausePanel.activeInHierarchy)
+            if (GameController.isPlaying)
             {
-                PauseGame();
-            }
-            else if (pausePanel.activeInHierarchy)
-            {
-                ContinueGame();
+                if (!pausePanel.activeInHierarchy)
+                {
+                    PauseGame();
+                }
+                else if (pausePanel.activeInHierarchy)
+                {
+                    ContinueGame();
+                }
             }
         }
     }

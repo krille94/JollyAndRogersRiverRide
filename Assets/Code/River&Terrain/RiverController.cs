@@ -7,7 +7,8 @@ public class RiverController : MonoBehaviour
     public static RiverController instance;
 
     public RiverObject riverAsset;
-    
+    private bool isPlaying;
+
     public List<FloatingObject> observedObjects = new List<FloatingObject>();
     private void RemoveObservedObject (FloatingObject obj) {
         observedObjects.Remove(obj);
@@ -100,18 +101,26 @@ public class RiverController : MonoBehaviour
 
     private void Update()
     {
-        foreach(FloatingObject obj in observedObjects)
+        if (isPlaying)
         {
-            RiverNode closest = riverAsset.GetNodeFromPosition(obj.transform.position);
-            obj.UpdateNodes(closest);
+            foreach (FloatingObject obj in observedObjects)
+            {
+                RiverNode closest = riverAsset.GetNodeFromPosition(obj.transform.position);
+                obj.UpdateNodes(closest);
+            }
+
+            ArcadeFlowUpdate();
+
+            //OutCommented Its Flattening the river, NO MORE WATERFALS :(
+            MeshWaveUpdate();
+
+            ArcadeFloatingUpdate();
         }
-
-        ArcadeFlowUpdate();
-
-        //OutCommented Its Flattening the river, NO MORE WATERFALS :(
-        MeshWaveUpdate();
-
-        ArcadeFloatingUpdate();
+        else
+        {
+            if (GameController.isPlaying)
+                isPlaying = true;
+        }
     }
 
     /// <summary>

@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
+    public static bool isPlaying=false;
 
     private bool is_dead;
 
@@ -40,6 +41,11 @@ public class GameController : MonoBehaviour
         is_dead = true;
         GameObject.FindGameObjectWithTag("Player").SetActive(false);
         PlayerData.ResetScore();
+    }
+
+    public void OnStartPlaying()
+    {
+        isPlaying = true;
     }
 
     private void Update()

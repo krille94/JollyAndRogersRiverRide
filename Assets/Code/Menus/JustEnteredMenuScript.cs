@@ -38,13 +38,13 @@ public class JustEnteredMenuScript : MonoBehaviour
         option = GameObject.Find("SFX Volume");
         if (UserSettings.GetVolume("SFX") == -80)
             option.GetComponent<TextMesh>().text = "SFX: OFF";
-
+        /*
         option = GameObject.Find("Reverse Controls");
         if (UserSettings.GetReversedControls() == true)
             option.GetComponent<TextMesh>().text = "Controls: reverse";
         option = GameObject.Find("Control Scheme");
         if (UserSettings.GetControlScheme() == 2)
-            option.GetComponent<TextMesh>().text = "Old Control Scheme";
+            option.GetComponent<TextMesh>().text = "Old Control Scheme";*/
         option = GameObject.Find("Auto Paddle");
         if (UserSettings.GetAutoPaddle()==false)
             option.GetComponent<TextMesh>().text = "Auto Paddle: OFF";

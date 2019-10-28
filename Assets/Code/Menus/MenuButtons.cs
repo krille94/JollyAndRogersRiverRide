@@ -34,7 +34,7 @@ public class MenuButtons : MonoBehaviour
             Time.timeScale = 1;
 
             GameController.instance.OnStartLevel();
-            GameObject.Find("2D Menu Assets").SetActive(false);
+            //GameObject.Find("2D Menu Assets").SetActive(false);
             //SceneManager.LoadScene(2);
         }
         if (buttonAction.ToString() == "ResumeGame")

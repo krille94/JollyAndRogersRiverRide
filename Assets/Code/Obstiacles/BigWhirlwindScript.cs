@@ -11,6 +11,7 @@ public class BigWhirlwindScript : MonoBehaviour
 
     public float centrificalForce = 10;
     public float inwardForce = 5;
+    public float rotateAnimSpeed = -60;
 
     void Start()
     {
@@ -21,6 +22,8 @@ public class BigWhirlwindScript : MonoBehaviour
 
     void Update()
     {
+        transform.Rotate(Vector3.up * rotateAnimSpeed * Time.deltaTime);
+
         for (int i = 0; i < observerdObjects.Count; i++)
         {
             rotationObj.position = observerdObjects[i].transform.position;

@@ -18,7 +18,7 @@ GameObject:
   m_TagString: Whirlpool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3130731812212528418
 Transform:
@@ -106,5 +106,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 1
-  spinSpeed: 42000
+  spinSpeed: -42000
+  rotateAnimSpeed: -200
   dizzyDuration: 2.5

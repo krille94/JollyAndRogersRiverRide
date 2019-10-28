@@ -19,6 +19,10 @@ public class MenuButtonsEditor : Editor
         tool.buttonAction = (MenuButtons.ButtonActions)EditorGUILayout.EnumPopup("Button Action", tool.buttonAction);
 
         //RiverTool tool = (RiverTool)target;
+        if (tool.buttonAction.ToString() == "StartGame")
+        {
+            tool.CurrentMenu = (GameObject)EditorGUILayout.ObjectField("Boat", tool.CurrentMenu, typeof(GameObject), true);
+        }
         if (tool.buttonAction.ToString()=="ChangeOptions")
         {
             tool.optionType = (MenuButtons.OptionTypes) EditorGUILayout.EnumPopup("Option Type", tool.optionType);

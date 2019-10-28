@@ -212,7 +212,8 @@ public class BoatClass : FloatingObject
                 hull--;
 
                 GameObject cam = GameObject.Find("Main Camera");
-                cam.GetComponent<CameraController>().StartShakeCam();
+                if(cam != null)
+                    cam.GetComponent<CameraController>().StartShakeCam();
             }
             else
                 hull = 0;

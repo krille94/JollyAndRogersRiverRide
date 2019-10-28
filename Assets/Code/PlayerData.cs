@@ -26,12 +26,13 @@ public class PlayerData : MonoBehaviour
     {
         // How do we fairly calculate the time? Need to re-calculate once we know the median time for a run
 
-        if(timeTaken>0)
+        //score = timeTaken;
+        /*if (timeTaken>0)
             score = 1000 / timeTaken;
         score += (bonusesPickedUp * 50);
 
         if (distanceTraveled >= 1)
-            score += 100;
+            score += 100;*/
     }
 
     public static void ResetScore()

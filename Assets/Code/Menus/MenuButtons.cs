@@ -32,7 +32,10 @@ public class MenuButtons : MonoBehaviour
             PlayerData.ResetScore();
             PlayerData.playedGame = true;
             Time.timeScale = 1;
-            SceneManager.LoadScene(2);
+
+            GameController.instance.OnStartLevel();
+            GameObject.Find("2D Menu Assets").SetActive(false);
+            //SceneManager.LoadScene(2);
         }
         if (buttonAction.ToString() == "ResumeGame")
         {

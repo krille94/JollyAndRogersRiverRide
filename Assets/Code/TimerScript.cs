@@ -81,6 +81,6 @@ public class TimerScript : MonoBehaviour
             newText += ":" + seconds.ToString();
         
 
-        timerText.GetComponent<TextMesh>().text = "Timer: " + newText;
+        timerText.GetComponent<TextMesh>().text = newText;
     }
 }

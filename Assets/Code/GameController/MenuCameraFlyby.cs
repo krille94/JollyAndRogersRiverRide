@@ -62,10 +62,17 @@ public class MenuCameraFlyby : MonoBehaviour
         oriPos = cam.transform.position = positionPoints[positionIndex].position;
         oriRot = cam.transform.rotation = positionPoints[positionIndex].rotation;
     }
+    public void Skip()
+    {
+        onCompleted.Invoke();
+        this.enabled = false;
+        isPlaying = false;
+    }
     private float timeSpent;
     public Camera cam;
     public void ResetToStart ()
     {
+        this.enabled = true;
         isPlaying = false;
         positionIndex = 0;
         cam.transform.position = positionPoints[positionIndex].position;

@@ -51,7 +51,9 @@ public class HighScoreList : MonoBehaviour
             }
             YourPlacement++;
         }
-
+    }
+    void SaveYourScore()
+    { 
         Highscore nScore = new Highscore();
         nScore.name = "Player";
         nScore.score = PlayerData.score;
@@ -84,6 +86,8 @@ public class HighScoreList : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Return))
             {
                 if (PlayerData.playerName == "") PlayerData.playerName = "Player";
+
+                SaveYourScore();
 
                 SaveScore.savedGames[YourPlacement].name = PlayerData.playerName;
                 SaveScore.Save();

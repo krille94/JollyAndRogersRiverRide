@@ -161,8 +161,6 @@ public class Paddling : MonoBehaviour
     private bool autoPaddle = false;
     private float controlScheme;
 
-    [SerializeField] AudioSource onPaddleSwoshSound;
-
     [Header("Charge Boost")]
     public float boostTurnMultiplier = 2;
     public float chargeTimerMax = 1;
@@ -179,6 +177,9 @@ public class Paddling : MonoBehaviour
     public bool tiltedBoat = false;
     float boatTiltAngle = 0.4f;
 
+    [Header("Sound And Animations")]
+    [SerializeField] AudioSource onPaddleSwoshSound;
+    [SerializeField] Animator animator;
 
     public void SetCanControl(bool truefalse) { CanControl = truefalse; }
 
@@ -348,6 +349,8 @@ public class Paddling : MonoBehaviour
                     //rigidbody.AddForceAtPosition(rigidbody.transform.forward * turnForwardForce, impactPoint);
                     rigidbody.AddTorque(rigidbody.transform.up * -turnForwardForce);
                     //rigidbody.AddRelativeForce(Vector3.right * sidePushForce);
+                    if (animator != null)
+                        animator.SetFloat("Left/Right", 0.0f);
                 }
                 else if (rightKey)
                 {
@@ -372,6 +375,8 @@ public class Paddling : MonoBehaviour
                     Quaternion rot = characterModel.transform.localRotation;
                     rot.z = -.25f;
                     characterModel.transform.localRotation = rot;
+                    if (animator != null)
+                        animator.SetFloat("Left/Right", 1.0f);
                 }
                 else
                 {
@@ -395,6 +400,8 @@ public class Paddling : MonoBehaviour
                     if (oar.onRightSide)
                         oar.SetRightSide(false);
                         */
+                    if (animator != null)
+                        animator.SetFloat("Left/Right", 0.5f);
                 }
 
                 if (!oar.isPaddling)
@@ -417,6 +424,8 @@ public class Paddling : MonoBehaviour
                     if (releasingForwardKey)
                     {
                         onPaddleSwoshSound.Play();
+                        if(animator != null)
+                            animator.SetTrigger("Rowing");
 
                         chargingBoost = false;
                         fullyChargedBoost = false;
@@ -457,6 +466,8 @@ public class Paddling : MonoBehaviour
                     else if (releasingBackKey)
                     {
                         onPaddleSwoshSound.Play();
+                        if (animator != null)
+                            animator.SetTrigger("Rowing");
 
                         chargingBoost = false;
                         fullyChargedBoost = false;

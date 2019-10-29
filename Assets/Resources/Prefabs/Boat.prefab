@@ -5567,13 +5567,14 @@ MonoBehaviour:
       type: 3}
     onPaddleSplashSound: {fileID: 8577229884844078561}
     effectPool: {fileID: 0}
-  onPaddleSwoshSound: {fileID: 2492368529040044981}
   boostTurnMultiplier: 1
   chargeTimerMax: 0.5
   boostTimerMax: 0.5
   fullyChargedBoost: 0
   boostSidePushForce: 200
   tiltedBoat: 0
+  onPaddleSwoshSound: {fileID: 2492368529040044981}
+  animator: {fileID: 0}
 --- !u!1 &812115171927960499
 GameObject:
   m_ObjectHideFlags: 0
@@ -6368,7 +6369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 1
-  characterModel: {fileID: 6117281129629956105}
+  characterModel: {fileID: 812115172266923107}
   rigidbody: {fileID: 812115172661265859}
   oar:
     modelRoot: {fileID: 812115171373746683}
@@ -6384,13 +6385,14 @@ MonoBehaviour:
       type: 3}
     onPaddleSplashSound: {fileID: 4643118683657369832}
     effectPool: {fileID: 0}
-  onPaddleSwoshSound: {fileID: 46169376880340502}
   boostTurnMultiplier: 1
   chargeTimerMax: 0.5
   boostTimerMax: 0.5
   fullyChargedBoost: 0
   boostSidePushForce: 200
   tiltedBoat: 0
+  onPaddleSwoshSound: {fileID: 46169376880340502}
+  animator: {fileID: 879794980423034720}
 --- !u!1 &812115172826838712
 GameObject:
   m_ObjectHideFlags: 0
@@ -21839,15 +21841,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 22e8356b8db7e114e8b8d9b49e6f48ab, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e62cbde5c09bbf4a9c06d9c6bad68a1, type: 3}
---- !u!4 &7115594082635598362 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 9e62cbde5c09bbf4a9c06d9c6bad68a1,
+--- !u!95 &879794980423034720 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: -6057140222963153312, guid: 9e62cbde5c09bbf4a9c06d9c6bad68a1,
     type: 3}
   m_PrefabInstance: {fileID: 2865731719271833856}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6117281129629956105 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 9e62cbde5c09bbf4a9c06d9c6bad68a1,
+--- !u!4 &7115594082635598362 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 9e62cbde5c09bbf4a9c06d9c6bad68a1,
     type: 3}
   m_PrefabInstance: {fileID: 2865731719271833856}
   m_PrefabAsset: {fileID: 0}

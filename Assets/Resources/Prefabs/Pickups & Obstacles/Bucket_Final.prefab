@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3448216358825907722}
   - component: {fileID: -7939848396965630203}
   - component: {fileID: 9043956819099495706}
+  - component: {fileID: 6358408301401168073}
   m_Layer: 0
   m_Name: Bucket_Final
   m_TagString: Item
@@ -63,6 +64,20 @@ CapsuleCollider:
   m_Height: 4.4513283
   m_Direction: 1
   m_Center: {x: 0.11873627, y: -0.0660969, z: 0}
+--- !u!114 &6358408301401168073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837995703387071513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9fdd520172969245a9d461cc929dc03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemEffect: 1
+  amount: 6
 --- !u!1 &3907822274859045331
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +89,6 @@ GameObject:
   - component: {fileID: 1677918636094857981}
   - component: {fileID: 7375632248481172706}
   - component: {fileID: 1937963598848506059}
-  - component: {fileID: 2554360687277503698}
   - component: {fileID: 1143126247441153064}
   - component: {fileID: 7913114789715322649}
   m_Layer: 0
@@ -144,20 +158,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2554360687277503698
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3907822274859045331}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9fdd520172969245a9d461cc929dc03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemEffect: 1
-  amount: 6
 --- !u!95 &1143126247441153064
 Animator:
   serializedVersion: 3

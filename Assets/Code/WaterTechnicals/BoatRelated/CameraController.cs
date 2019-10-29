@@ -197,7 +197,7 @@ public class CameraController : MonoBehaviour
             if (boatNode != oldTargetNode)
             {
                 slopeAngle = targetNode.centerVector.y - boatNode.centerVector.y;
-                Debug.Log(boat.transform.position.y - boatNode.centerVector.y + " or " + slopeAngle);
+                //Debug.Log(boat.transform.position.y - boatNode.centerVector.y + " or " + slopeAngle);
                 if (boat.transform.position.y - boatNode.centerVector.y < 0) slopeAngle = 0;
                 //Debug.Log(slopeAngle);
                 heading = (targetNode.centerVector + offset + new Vector3(0, slopeAngle, 0)) - boatNode.centerVector;

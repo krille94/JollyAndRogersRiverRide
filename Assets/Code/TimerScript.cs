@@ -44,6 +44,9 @@ public class TimerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!GameController.isPlaying)
+            return;
+
         if (minutes < 99 || seconds < 59)
         {
             timerIncrease += Time.deltaTime;

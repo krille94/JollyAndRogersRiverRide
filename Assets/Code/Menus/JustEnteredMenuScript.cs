@@ -10,11 +10,13 @@ public class JustEnteredMenuScript : MonoBehaviour
     private GameObject HighscoreMenu;
     private GameObject OptionsMenu;
     private GameObject CreditsMenu;
+    private List<GameObject> options = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
         CollectMenus();
+
         StartOnSubmenu(StartOnMenu.MoveToMenu);
     }
 
@@ -32,18 +34,24 @@ public class JustEnteredMenuScript : MonoBehaviour
         HighscoreMenu = GameObject.Find("Highscore Menu");
         OptionsMenu = GameObject.Find("Options Menu");
         CreditsMenu = GameObject.Find("Credits Menu");
+
+        options.Add(GameObject.Find("Music Volume"));
+        options.Add(GameObject.Find("SFX Volume"));
+        options.Add(GameObject.Find("Auto Paddle"));
     }
 
     private void SetOptionValues()
     {
         UserSettings.ReadSettings();
 
-        GameObject option = GameObject.Find("Music Volume");
         if(UserSettings.GetVolume("Music")==-80)
-            option.GetComponent<TextMesh>().text = "Music: OFF";
-        option = GameObject.Find("SFX Volume");
+            options[0].GetComponent<TextMesh>().text = "Music: OFF";
+        else
+            options[0].GetComponent<TextMesh>().text = "Music: ON";
         if (UserSettings.GetVolume("SFX") == -80)
-            option.GetComponent<TextMesh>().text = "SFX: OFF";
+            options[1].GetComponent<TextMesh>().text = "SFX: OFF";
+        else
+            options[1].GetComponent<TextMesh>().text = "SFX: ON";
         /*
         option = GameObject.Find("Reverse Controls");
         if (UserSettings.GetReversedControls() == true)
@@ -51,15 +59,15 @@ public class JustEnteredMenuScript : MonoBehaviour
         option = GameObject.Find("Control Scheme");
         if (UserSettings.GetControlScheme() == 2)
             option.GetComponent<TextMesh>().text = "Old Control Scheme";*/
-        option = GameObject.Find("Auto Paddle");
         if (UserSettings.GetAutoPaddle()==false)
-            option.GetComponent<TextMesh>().text = "Auto Paddle: OFF";
+            options[2].GetComponent<TextMesh>().text = "Auto Paddle: OFF";
+        else
+            options[2].GetComponent<TextMesh>().text = "Auto Paddle: ON";
     }
 
     private void StartOnSubmenu(string menu)
     {
-        //SetOptionValues();
-
+        SetOptionValues();
 
         if (menu == "Main Menu") MainMenu.SetActive(true);
         else MainMenu.SetActive(false);

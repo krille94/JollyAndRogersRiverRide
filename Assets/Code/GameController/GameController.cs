@@ -10,9 +10,9 @@ public class GameController : MonoBehaviour
     private bool is_dead;
 
     public UnityEvent onPlay;
+    public UnityEvent onReset;
     public UnityEvent onComplete;
-
-    private GameObject mainMenu;
+    public UnityEvent onQuitToMainMenu;
 
     private void Start()
     {
@@ -23,14 +23,19 @@ public class GameController : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
-        mainMenu = GameObject.Find("MainMenu");
 
         Time.timeScale = 1;
     }
 
     public void OnStartLevel ()
     {
-        onPlay.Invoke();
+        if(!isPlaying)
+            onPlay.Invoke();
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            onReset.Invoke();
+        }
     }
 
     public void OnCompletedLevel()
@@ -40,16 +45,17 @@ public class GameController : MonoBehaviour
             isPlaying = false;
             Debug.Log("OnCompletedLevel");
             StartOnMenu.MoveToMenu = "Highscore Menu";
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
             onComplete.Invoke();
+            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
     }
 
-    public void OnDeath()
+    public void OnQuitToMenu()
     {
-        is_dead = true;
-        GameObject.FindGameObjectWithTag("Player").SetActive(false);
-        PlayerData.ResetScore();
+        isPlaying = false;
+        StartOnMenu.MoveToMenu = "Main Menu";
+        onQuitToMainMenu.Invoke();
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 
     public void OnStartPlaying()

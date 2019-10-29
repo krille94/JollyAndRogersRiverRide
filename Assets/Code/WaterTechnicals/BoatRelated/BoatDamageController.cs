@@ -25,7 +25,7 @@ public class BoatDamageController : MonoBehaviour
 
     public void OnDeath()
     {
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().OnDeath();
+        //GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().OnDeath();
     }
 
     private void Start()

@@ -146,8 +146,6 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            adjustPos.Set(0, autoCorrectRadius, 0);
-            Debug.DrawRay(transform.position - adjustPos, -heading+adjustPos, Color.red);
             adjustPos = transform.right * autoCorrectRadius;
 
             Debug.DrawRay(transform.position - adjustPos, -heading + adjustPos, Color.red);
@@ -171,7 +169,7 @@ public class CameraController : MonoBehaviour
                         blockedHorizontal = true;
                     blocked = true;
                 }
-            }
+            }/*
             else
             {
                 adjustPos.y += 5;
@@ -183,7 +181,7 @@ public class CameraController : MonoBehaviour
                     if (blockedVertical || blockedHorizontal)
                         blocked = true;
                 }
-            }
+            }*/
         }
 
         if (blocked)
@@ -199,8 +197,9 @@ public class CameraController : MonoBehaviour
             if (boatNode != oldTargetNode)
             {
                 slopeAngle = targetNode.centerVector.y - boatNode.centerVector.y;
-                if (boat.transform.position.y - boatNode.centerVector.y <= 0.5f) slopeAngle = 0;
-                //Debug.Log(boat.transform.position.y + " " + boatNode.centerVector.y);
+                Debug.Log(boat.transform.position.y - boatNode.centerVector.y + " or " + slopeAngle);
+                if (boat.transform.position.y - boatNode.centerVector.y < 0) slopeAngle = 0;
+                //Debug.Log(slopeAngle);
                 heading = (targetNode.centerVector + offset + new Vector3(0, slopeAngle, 0)) - boatNode.centerVector;
                 distance = heading.magnitude;
                 direction = heading / distance; // This is now the normalized direction.
@@ -264,18 +263,6 @@ public class CameraController : MonoBehaviour
 
         RaycastHit hit;
         Vector3 moveCamera = basePos;
-        moveCamera.y += 5;
-        heading = moveCamera - (boat.transform.position + new Vector3(0, 5, 0));
-        Debug.DrawRay(moveCamera, -heading, Color.blue);
-
-        if (blockedVertical)
-        {
-            if (!Physics.Raycast(moveCamera, -heading+adjustPos, out hit, distance))
-            {
-                offset = adjustPos;
-                offset.y += 5;
-            }
-        }
         /*
         if(blockedHorizontal)
         {

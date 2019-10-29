@@ -27,6 +27,7 @@ public class TimerScript : MonoBehaviour
 
     public void LowerTime(int amount)
     {
+        PlayerData.score -= amount;
         seconds -= amount;
 
         if(seconds<0)

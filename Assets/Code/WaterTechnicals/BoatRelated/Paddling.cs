@@ -416,7 +416,7 @@ public class Paddling : MonoBehaviour
 
                     if (releasingForwardKey)
                     {
-                        GetComponent<AudioSource>().Play();
+                        onPaddleSwoshSound.Play();
 
                         chargingBoost = false;
                         fullyChargedBoost = false;
@@ -456,7 +456,8 @@ public class Paddling : MonoBehaviour
                     }
                     else if (releasingBackKey)
                     {
-                        GetComponent<AudioSource>().Play();
+                        onPaddleSwoshSound.Play();
+
                         chargingBoost = false;
                         fullyChargedBoost = false;
                         /*

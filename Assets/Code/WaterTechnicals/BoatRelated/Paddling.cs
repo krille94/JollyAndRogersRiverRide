@@ -241,7 +241,16 @@ public class Paddling : MonoBehaviour
         if (!isPlaying)
         {
             if (GameController.isPlaying)
+            {
                 isPlaying = true;
+
+                if (PlayerData.player1Character == playerIndex.ToString())
+                    player = "One";
+                else if (PlayerData.player2Character == playerIndex.ToString())
+                    player = "Two";
+                else if (playerIndex.ToString() == "Jolly") player = "One";
+                else player = "Two";
+            }
             else
                 return;
         }

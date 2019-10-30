@@ -6123,10 +6123,15 @@ MonoBehaviour:
   onDamagedParticlePrefab: {fileID: 19800004, guid: 639631e8fd4ef66408b218a8c2235dd6,
     type: 3}
   onDamagedSoundClips:
-  - {fileID: 8300000, guid: 10a226ba7f77fe046bd84138e2563d2b, type: 3}
-  - {fileID: 8300000, guid: 708a591660eed584fa50b5acb1774394, type: 3}
-  - {fileID: 8300000, guid: aa4e0570260c1df45acb0d77b20561c3, type: 3}
-  - {fileID: 8300000, guid: de9489c5f03cb5e4eaf3b7e4a79f8105, type: 3}
+  - {fileID: 8300000, guid: 12e086051f0d54540928a2fee33902c3, type: 3}
+  - {fileID: 8300000, guid: 65ce6af03bd3bf845966d9f20017dde7, type: 3}
+  - {fileID: 8300000, guid: e2740544ba003f242a2ac9c5569ab07d, type: 3}
+  - {fileID: 8300000, guid: 55f43e863ca64fe468c2a1c3d1cdbc10, type: 3}
+  - {fileID: 8300000, guid: 26a8b081a31e8bc4a95762fe84eedd04, type: 3}
+  - {fileID: 8300000, guid: 13c12680c7c821d40858eac70ec69d17, type: 3}
+  - {fileID: 8300000, guid: 4ec842fec3620264e98c74855d0f8875, type: 3}
+  - {fileID: 8300000, guid: 8cf834c428d546d48bbb2c99d5ecf88d, type: 3}
+  - {fileID: 8300000, guid: 47c817e2c2dd73847b8c7c9d5d66ad5c, type: 3}
   source: {fileID: 0}
 --- !u!136 &8710042116675489598
 CapsuleCollider:
@@ -21754,11 +21759,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Animation_row
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 9e62cbde5c09bbf4a9c06d9c6bad68a1,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: f6c19df75363cc341a6cbccc92c2780a, type: 2}
     - target: {fileID: -4216859302048453862, guid: 9e62cbde5c09bbf4a9c06d9c6bad68a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -21829,6 +21829,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.7293
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 9e62cbde5c09bbf4a9c06d9c6bad68a1,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: f6c19df75363cc341a6cbccc92c2780a, type: 2}
     - target: {fileID: 1648216931545363437, guid: 9e62cbde5c09bbf4a9c06d9c6bad68a1,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

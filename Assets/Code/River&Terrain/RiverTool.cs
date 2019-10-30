@@ -148,7 +148,7 @@ public class RiverTool : MonoBehaviour
             return;
         }
         Mesh mesh;
-#if UnityEditor
+#if !UnityEditor
         mesh = transform.GetComponent<MeshFilter>().sharedMesh;
 #else
         mesh = transform.GetComponent<MeshFilter>().mesh;

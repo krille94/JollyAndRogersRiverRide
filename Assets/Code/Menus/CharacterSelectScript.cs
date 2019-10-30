@@ -18,6 +18,7 @@ public class CharacterSelectScript : MonoBehaviour
 
     bool Player1Chosen =false;
     bool Player2Chosen=false;
+    bool onReturn = false;
 
     int Player1Pos;
     int Player2Pos;
@@ -87,42 +88,68 @@ public class CharacterSelectScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (StartGameButton.GetComponent<MouseHover>().GetSelected())
-        {
-            StartGameButton.GetComponent<MouseHover>().SetSelected(false);
-
-            ReturnButton.GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
-            StartGameButton.GetComponent<TextMesh>().color = Color.white;
-        }
-        else if (ReturnButton.GetComponent<MouseHover>().GetSelected())
+        if (ReturnButton.GetComponent<MouseHover>().GetSelected())
         {
             ReturnButton.GetComponent<MouseHover>().SetSelected(false);
-
-            StartGameButton.GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
             ReturnButton.GetComponent<TextMesh>().color = Color.white;
         }
 
-
-        if (Input.GetButtonDown("Player_One_Paddle_Forward"))
+        if (Input.GetAxis("Player_One_Joystick_Vertical") > 0)
         {
-            if (!Player2Chosen || Player1Pos != Player2Pos)
+            if (!Player1Chosen)
             {
-                CharNames name = (CharNames)Player1Pos;
-                PlayerData.player1Character = name.ToString();
-
-                Player1Chosen = true;
+                onReturn = true;
+                ReturnButton.GetComponent<TextMesh>().color = Color.white;
                 Player1Icon.SetActive(false);
-                Player1Text.SetActive(true);
-
-                if (Player1Pos == 0)
-                    audioJolly.PlayOneShot(onCharacterClip[Player1Pos]);
-                else
-                    audioRoger.PlayOneShot(onCharacterClip[Player1Pos]);
-
-
-                if (Player1Chosen && Player2Chosen)
-                    StartGameButton.SetActive(true);
             }
+        }
+        else if (Input.GetAxis("Player_One_Joystick_Vertical") < 0)
+        {
+            if (onReturn)
+            {
+                onReturn = false;
+                ReturnButton.GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
+                Player1Icon.SetActive(true);
+            }
+        }
+
+        if (Input.GetButtonDown("Player_One_Paddle_Back"))
+        {
+            if (!onReturn)
+            {
+                if (Player1Chosen == false)
+                {
+                    if (!Player2Chosen || Player1Pos != Player2Pos)
+                    {
+                        CharNames name = (CharNames)Player1Pos;
+                        PlayerData.player1Character = name.ToString();
+
+                        Player1Chosen = true;
+                        Player1Icon.SetActive(false);
+                        Player1Text.SetActive(true);
+
+                        if (Player1Pos == 0)
+                            audioJolly.PlayOneShot(onCharacterClip[Player1Pos]);
+                        else
+                            audioRoger.PlayOneShot(onCharacterClip[Player1Pos]);
+
+
+                        if (Player1Chosen && Player2Chosen)
+                        {
+                            StartGameButton.SetActive(true);
+                            ReturnButton.GetComponent<TextMesh>().color = new Color(0.85f, 0.65f, 0);
+                        }
+                    }
+                }
+                else
+                {
+                    StartGameButton.SetActive(false);
+                    ReturnButton.GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
+                    Player1Chosen = false;
+                    Player1Icon.SetActive(true);
+                    Player1Text.SetActive(false);
+                }
+            }/*
         }
         else if (Input.GetButtonUp("Player_One_Paddle_Back"))
         {
@@ -132,13 +159,13 @@ public class CharacterSelectScript : MonoBehaviour
                 Player1Chosen = false;
                 Player1Icon.SetActive(true);
                 Player1Text.SetActive(false);
-            }
-            else
+            }*/
+            else if(onReturn)
             {
                 ReturnButton.GetComponent<MenuButtons>().PressButton();
             }
         }
-        else if(!Player1Chosen)
+        else if(!Player1Chosen&&!onReturn)
         {
             if (Input.GetButtonDown("Player_One_Paddle_Right")|| Input.GetAxis("Player_One_Joystick_Horizontal")>0)
             {
@@ -162,35 +189,51 @@ public class CharacterSelectScript : MonoBehaviour
 
         if(Input.GetButtonDown("Player_One_Pause") /*|| Input.GetButtonUp("Player_Two_Pause")*/)
         {
-            StartGameButton.GetComponent<MenuButtons>().PressButton();
+            if(Player1Chosen&&Player2Chosen)
+                StartGameButton.GetComponent<MenuButtons>().PressButton();
         }
-        else if (Input.GetButtonDown("Player_Two_Paddle_Forward"))
+
+        if (Input.GetButtonDown("Player_Two_Paddle_Back"))
         {
-            if (!Player1Chosen || Player1Pos != Player2Pos)
+            if (!Player2Chosen)
             {
-                CharNames name = (CharNames)Player2Pos;
-                PlayerData.player2Character = name.ToString();
+                if (!Player1Chosen || Player1Pos != Player2Pos)
+                {
+                    CharNames name = (CharNames)Player2Pos;
+                    PlayerData.player2Character = name.ToString();
 
-                Player2Chosen = true;
-                Player2Icon.SetActive(false);
-                Player2Text.SetActive(true);
+                    Player2Chosen = true;
+                    Player2Icon.SetActive(false);
+                    Player2Text.SetActive(true);
 
-                if (Player2Pos == 0)
-                    audioJolly.PlayOneShot(onCharacterClip[Player2Pos]);
-                else
-                    audioRoger.PlayOneShot(onCharacterClip[Player2Pos]);
+                    if (Player2Pos == 0)
+                        audioJolly.PlayOneShot(onCharacterClip[Player2Pos]);
+                    else
+                        audioRoger.PlayOneShot(onCharacterClip[Player2Pos]);
 
-                if (Player1Chosen && Player2Chosen)
-                    StartGameButton.SetActive(true);
+                    if (Player1Chosen && Player2Chosen)
+                    {
+                        StartGameButton.SetActive(true);
+                        ReturnButton.GetComponent<TextMesh>().color = new Color(0.85f, 0.65f, 0);
+                    }
+                }
             }
-        }
+            else
+            {
+                ReturnButton.GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
+                StartGameButton.SetActive(false);
+                Player2Chosen = false;
+                Player2Icon.SetActive(true);
+                Player2Text.SetActive(false);
+            }
+        }/*
         else if (Input.GetButtonDown("Player_Two_Paddle_Back"))
         {
             StartGameButton.SetActive(false);
             Player2Chosen = false;
             Player2Icon.SetActive(true);
             Player2Text.SetActive(false);
-        }
+        }*/
         else if (!Player2Chosen)
         {
             if (Input.GetButtonDown("Player_Two_Paddle_Right")|| Input.GetAxis("Player_Two_Joystick_Horizontal")>0)

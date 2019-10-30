@@ -306,7 +306,7 @@ public class Paddling : MonoBehaviour
         }
         else*/
         {
-            float joyStickDir = Input.GetAxis("Player_" + player + "_Joystick_Movement");
+            float joyStickDir = Input.GetAxis("Player_" + player + "_Joystick_Horizontal");
             if (Input.GetButton("Player_" + player + "_Paddle_Right") || joyStickDir > 0)
                 rightKey = true;
             else

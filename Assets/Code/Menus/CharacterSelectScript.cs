@@ -87,6 +87,22 @@ public class CharacterSelectScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (StartGameButton.GetComponent<MouseHover>().GetSelected())
+        {
+            StartGameButton.GetComponent<MouseHover>().SetSelected(false);
+
+            ReturnButton.GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
+            StartGameButton.GetComponent<TextMesh>().color = Color.white;
+        }
+        else if (ReturnButton.GetComponent<MouseHover>().GetSelected())
+        {
+            ReturnButton.GetComponent<MouseHover>().SetSelected(false);
+
+            StartGameButton.GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
+            ReturnButton.GetComponent<TextMesh>().color = Color.white;
+        }
+
+
         if (Input.GetButtonDown("Player_One_Paddle_Forward"))
         {
             if (!Player2Chosen || Player1Pos != Player2Pos)

@@ -21,12 +21,20 @@ public class MenuButtons : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GetComponent<AudioSource>())
-            GetComponent<AudioSource>().Play();
+        //if (GetComponent<AudioSource>())
+        //    GetComponent<AudioSource>().Play();
     }
 
     void OnMouseUp()
     {
+        PressButton();
+    }
+
+    public void PressButton()
+    {
+        if (GetComponent<AudioSource>())
+            GetComponent<AudioSource>().Play();
+
         if (buttonAction.ToString()=="StartGame")
         {
             PlayerData.ResetScore();
@@ -45,7 +53,7 @@ public class MenuButtons : MonoBehaviour
         if (buttonAction.ToString() == "Highscores")
         {
             if (PlayerData.playedGame) PlayerData.playedGame = false;
-            GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
+            //GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
             CurrentMenu.SetActive(false);
             NextMenu.SetActive(true);
         }
@@ -131,7 +139,7 @@ public class MenuButtons : MonoBehaviour
         }
         if (buttonAction.ToString() == "ChangeMenu")
         {
-            GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
+            //GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
             CurrentMenu.SetActive(false);
             NextMenu.SetActive(true);
         }

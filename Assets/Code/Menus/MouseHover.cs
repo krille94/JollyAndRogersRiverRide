@@ -10,7 +10,7 @@ public class MouseHover : MonoBehaviour
     void Start()
     {
         text = GetComponent<TextMesh>();
-        text.color = normal;
+        //text.color = normal;
     }
 
     void OnMouseOver()

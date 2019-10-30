@@ -181,7 +181,19 @@ public class Paddling : MonoBehaviour
     [SerializeField] AudioSource onPaddleSwoshSound;
     [SerializeField] Animator animator;
 
-    public void SetCanControl(bool truefalse) { CanControl = truefalse; }
+    public void SetCanControl(bool truefalse)
+    {
+        CanControl = truefalse;
+
+        if(CanControl==false)
+        {
+            oar.SetLeftSide(false);
+            oar.SetRightSide(false);
+            Quaternion rot = characterModel.transform.localRotation;
+            rot.z = 0;
+            characterModel.transform.localRotation = rot;
+        }
+    }
 
     private void Start()
     {
@@ -229,7 +241,16 @@ public class Paddling : MonoBehaviour
         if (!isPlaying)
         {
             if (GameController.isPlaying)
+            {
                 isPlaying = true;
+
+                if (PlayerData.player1Character == playerIndex.ToString())
+                    player = "One";
+                else if (PlayerData.player2Character == playerIndex.ToString())
+                    player = "Two";
+                else if (playerIndex.ToString() == "Jolly") player = "One";
+                else player = "Two";
+            }
             else
                 return;
         }

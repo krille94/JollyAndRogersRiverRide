@@ -11,6 +11,7 @@ public class TimerScript : MonoBehaviour
     float timerIncrease = 0;
     [SerializeField] PickUpTrigger trigger = null;
 
+    public float popSize = 2;
     public float popAnimSpeed = 1;
     public float popWaitSpeed = 0.1f;
     float popWait = 0.0f;
@@ -34,7 +35,7 @@ public class TimerScript : MonoBehaviour
 
     public void LowerTime(int amount)
     {
-        timerText.transform.localScale=normalScale*2;
+        timerText.transform.localScale=normalScale*popSize;
         timerText.GetComponent<TextMesh>().color = Color.white;
 
         PlayerData.score -= amount;
@@ -64,7 +65,7 @@ public class TimerScript : MonoBehaviour
                 popWait += Time.deltaTime;
             else
             {
-                timerText.transform.localScale -= normalScale * (Time.deltaTime * popAnimSpeed);
+                timerText.transform.localScale -= ((normalScale*popSize)-normalScale) * (Time.deltaTime * popAnimSpeed);
                 timerText.GetComponent<TextMesh>().color += ((normalColor-Color.white) * (Time.deltaTime / popAnimSpeed)); ;
 
                 if (timerText.transform.localScale.x < normalScale.x)

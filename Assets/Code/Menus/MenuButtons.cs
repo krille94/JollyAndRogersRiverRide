@@ -37,6 +37,7 @@ public class MenuButtons : MonoBehaviour
 
         if (buttonAction.ToString()=="StartGame")
         {
+            GameObject.Find("Character Select Script").GetComponent<CharacterSelectScript>().SetStartedGame(true);
             PlayerData.ResetScore();
             PlayerData.playedGame = true;
             Time.timeScale = 1;

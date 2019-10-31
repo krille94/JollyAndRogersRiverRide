@@ -24,6 +24,7 @@ public class CharacterSelectScript : MonoBehaviour
     int Player2Pos;
 
     int AmountOfChars;
+    private bool startedGame=false;
 
     public Vector3 portraitDistance;
 
@@ -33,6 +34,7 @@ public class CharacterSelectScript : MonoBehaviour
 
     private void OnDisable()
     {
+        startedGame = false;
         StartGameButton.SetActive(false);
         Player1Chosen = false;
         Player1Icon.SetActive(true);
@@ -58,6 +60,7 @@ public class CharacterSelectScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startedGame = false;
         if (gameObject.GetComponent<AudioSource>())
             audioRoger = gameObject.GetComponent<AudioSource>();
         else
@@ -98,9 +101,27 @@ public class CharacterSelectScript : MonoBehaviour
         }
     }
 
+    public void SetStartedGame(bool onoff)
+    {
+        startedGame = onoff;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (startedGame)
+            return;
+
+        if (Input.GetButtonUp("Player_One_Pause") /*|| Input.GetButtonUp("Player_Two_Pause")*/)
+        {
+            if (Player1Chosen && Player2Chosen)
+            {
+                //startedGame = true;
+                StartGameButton.GetComponent<MenuButtons>().PressButton();
+                return;
+            }
+        }
+
         if (ReturnButton.GetComponent<MouseHover>().GetSelected()&&!StartGameButton.activeInHierarchy)
         {
             ReturnButton.GetComponent<MouseHover>().SetSelected(false);
@@ -200,11 +221,6 @@ public class CharacterSelectScript : MonoBehaviour
             }
         }
 
-        if(Input.GetButtonUp("Player_One_Pause") /*|| Input.GetButtonUp("Player_Two_Pause")*/)
-        {
-            if(Player1Chosen&&Player2Chosen)
-                StartGameButton.GetComponent<MenuButtons>().PressButton();
-        }
 
         if (Input.GetButtonDown("Player_Two_Paddle_Back"))
         {

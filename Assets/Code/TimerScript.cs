@@ -11,12 +11,19 @@ public class TimerScript : MonoBehaviour
     float timerIncrease = 0;
     [SerializeField] PickUpTrigger trigger = null;
 
+    public float popAnimSpeed = 1;
+    public float popWaitSpeed = 0.1f;
+    float popWait = 0.0f;
+    Vector3 normalScale;
+    Color normalColor;
+
     // Start is called before the first frame update
     void Start()
     {
         //float windowWidth = (float)(Screen.width * 3)/(float)(Screen.height * 4);
         //timerText.transform.localPosition = new Vector3(-1+windowWidth,1.8f, 4);
-
+        normalScale = timerText.transform.localScale;
+        normalColor = timerText.GetComponent<TextMesh>().color;
         trigger.onLowerTime += LowerTime;
 
         minutes = 0;
@@ -27,6 +34,9 @@ public class TimerScript : MonoBehaviour
 
     public void LowerTime(int amount)
     {
+        timerText.transform.localScale=normalScale*2;
+        timerText.GetComponent<TextMesh>().color = Color.white;
+
         PlayerData.score -= amount;
         seconds -= amount;
 
@@ -47,6 +57,24 @@ public class TimerScript : MonoBehaviour
     {
         if (!GameController.isPlaying)
             return;
+
+        if(timerText.transform.localScale.x>normalScale.x)
+        {
+            if (popWait < popWaitSpeed)
+                popWait += Time.deltaTime;
+            else
+            {
+                timerText.transform.localScale -= normalScale * (Time.deltaTime * popAnimSpeed);
+                timerText.GetComponent<TextMesh>().color += ((normalColor-Color.white) * (Time.deltaTime / popAnimSpeed)); ;
+
+                if (timerText.transform.localScale.x < normalScale.x)
+                {
+                    timerText.transform.localScale = normalScale;
+                    timerText.GetComponent<TextMesh>().color = normalColor;
+                    popWait = 0;
+                }
+            }
+        }
 
         if (minutes < 99 || seconds < 59)
         {

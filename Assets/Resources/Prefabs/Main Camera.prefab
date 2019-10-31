@@ -45,6 +45,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerText: {fileID: 1561996873}
   trigger: {fileID: 0}
+  popAnimSpeed: 1.2
+  popWaitSpeed: 0.2
 --- !u!1 &1134819982
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,7 +75,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1109437481}
-  - {fileID: 1561996874}
+  - {fileID: 2545998024185870893}
   - {fileID: 5863180796651674907}
   - {fileID: 9153263083467555249}
   - {fileID: 9112354143424496172}
@@ -105,17 +107,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1561996873}
-  m_LocalRotation: {x: 0.0019821227, y: -0, z: -0, w: 0.9999981}
-  m_LocalPosition: {x: 0, y: 0, z: 4}
-  m_LocalScale: {x: 0.24, y: 0.24, z: 0.2250878}
-  m_Children:
-  - {fileID: 2545998024185870893}
-  m_Father: {fileID: 1134819983}
-  m_RootOrder: 1
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.70710677}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.857143, y: 2.8571422, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2545998024185870893}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.21728, y: 2.0067}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1561996876
@@ -168,7 +169,7 @@ TextMesh:
   m_OffsetZ: 0
   m_CharacterSize: 0.25
   m_LineSpacing: 1
-  m_Anchor: 0
+  m_Anchor: 4
   m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 36
@@ -191,7 +192,7 @@ GameObject:
   - component: {fileID: 4921327850190355372}
   - component: {fileID: 747749230856744567}
   m_Layer: 5
-  m_Name: Plane
+  m_Name: TimerText_BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,15 +206,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 320368591911481671}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35, y: 1, z: 0.35}
-  m_Children: []
-  m_Father: {fileID: 1561996874}
-  m_RootOrder: 0
+  m_LocalPosition: {x: 0, y: 0, z: 3.9994957}
+  m_LocalScale: {x: 0.084, y: 0.22508793, z: 0.084000036}
+  m_Children:
+  - {fileID: 1561996874}
+  m_Father: {fileID: 1134819983}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1, y: -0.53}
+  m_AnchoredPosition: {x: 0, y: 1.8795013}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!33 &2592550629650875262

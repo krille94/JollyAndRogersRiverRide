@@ -79,6 +79,7 @@ public class MenuCameraFlyby : MonoBehaviour
         positionIndex = 0;
         cam.transform.position = positionPoints[positionIndex].position;
         cam.transform.rotation = positionPoints[positionIndex].rotation;
+        cam.fieldOfView = 90;
     }
 
     [SerializeField] bool playOnAwake;
@@ -87,6 +88,9 @@ public class MenuCameraFlyby : MonoBehaviour
 
     private Vector3 oriPos;
     private Quaternion oriRot;
+
+    private float origFOV;
+    private float finalFOV;
 
     private void Start()
     {
@@ -99,6 +103,7 @@ public class MenuCameraFlyby : MonoBehaviour
         {
             cam.transform.position = positionPoints[0].position;
             cam.transform.rotation = positionPoints[0].rotation;
+            origFOV = cam.fieldOfView;
         }
 
         if (playOnAwake)
@@ -112,7 +117,9 @@ public class MenuCameraFlyby : MonoBehaviour
         if (!loop && endOnCam==null)
         {
             endOnCam = GameObject.Find("Main Camera");
-            AddCameraPosition(endOnCam.transform.position, endOnCam.transform.rotation, 1);
+            AddCameraPosition(endOnCam.transform.position, endOnCam.transform.rotation, 1.2f);
+            AddCameraPosition(endOnCam.transform.position, endOnCam.transform.rotation, 0.25f);
+            finalFOV = endOnCam.GetComponent<Camera>().fieldOfView;
         }
 
         timeSpent += Time.deltaTime;
@@ -120,7 +127,12 @@ public class MenuCameraFlyby : MonoBehaviour
         cam.transform.position = Vector3.Slerp(oriPos, positionPoints[positionIndex].position, timeSpent / positionPoints[positionIndex].duration);
         cam.transform.rotation = Quaternion.Slerp(oriRot, positionPoints[positionIndex].rotation, timeSpent / positionPoints[positionIndex].duration);
 
-        if(Vector3.Distance(cam.transform.position, positionPoints[positionIndex].position) <= stopingDistance)
+        if (positionIndex == positionPoints.Length-2)
+        {
+            cam.fieldOfView-=(origFOV-finalFOV)*(Time.deltaTime / positionPoints[positionIndex].duration);
+        }
+
+        if (Vector3.Distance(cam.transform.position, positionPoints[positionIndex].position) <= stopingDistance)
         {
             if(timeSpent >= positionPoints[positionIndex].duration)
             {
@@ -137,6 +149,10 @@ public class MenuCameraFlyby : MonoBehaviour
                 {
                     if (positionIndex >= positionPoints.Length)
                     {
+                        if (endOnCam != null)
+                        {   RemoveCameraPosition(positionIndex - 1);
+                            RemoveCameraPosition(positionIndex - 2);    }
+
                         onCompleted.Invoke();
                         this.enabled = false;
                         isPlaying = false;

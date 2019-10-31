@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8276285231364855458}
   - component: {fileID: 4270646286700539236}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: How To Play BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 2375905661538912988}
   - component: {fileID: 6939177472262377890}
   m_Layer: 0
-  m_Name: Return Button
+  m_Name: Return
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2018,7 +2018,7 @@ GameObject:
   - component: {fileID: 5863180797318849140}
   - component: {fileID: 3412694543983126794}
   m_Layer: 0
-  m_Name: Return Button
+  m_Name: Return
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

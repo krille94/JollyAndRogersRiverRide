@@ -76,14 +76,14 @@ public class MenuControls : MonoBehaviour
         }
 
 
-        if (Input.GetButtonUp("Player_One_Paddle_Back"))
+        if (Input.GetButtonUp("Player_One_Paddle_Forward"))
         {
             buttons[menuOption].GetComponent<MenuButtons>().PressButton();
-        }/*
+        }
         if (Input.GetButtonUp("Player_One_Paddle_Back"))
         {
             if(buttons[buttons.Count-1].name=="Return")
                 buttons[buttons.Count - 1].GetComponent<MenuButtons>().PressButton();
-        }*/
+        }
     }
 }

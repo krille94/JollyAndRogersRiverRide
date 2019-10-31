@@ -112,11 +112,10 @@ public class CharacterSelectScript : MonoBehaviour
         if (startedGame)
             return;
 
-        if (Input.GetButtonUp("Player_One_Pause") /*|| Input.GetButtonUp("Player_Two_Pause")*/)
+        if (Input.GetButtonUp("Player_One_Pause") || Input.GetButtonUp("Player_Two_Pause"))
         {
             if (Player1Chosen && Player2Chosen)
             {
-                //startedGame = true;
                 StartGameButton.GetComponent<MenuButtons>().PressButton();
                 return;
             }
@@ -147,7 +146,7 @@ public class CharacterSelectScript : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Player_One_Paddle_Back"))
+        if (Input.GetButtonUp("Player_One_Paddle_Forward"))
         {
             if (!onReturn)
             {
@@ -175,15 +174,12 @@ public class CharacterSelectScript : MonoBehaviour
                         }
                     }
                 }
-                else
-                {
-                    StartGameButton.SetActive(false);
-                    ReturnButton.GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
-                    Player1Chosen = false;
-                    Player1Icon.SetActive(true);
-                    Player1Text.SetActive(false);
-                }
-            }/*
+            }
+            else
+            {
+                ReturnButton.GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
+                ReturnButton.GetComponent<MenuButtons>().PressButton();
+            }
         }
         else if (Input.GetButtonUp("Player_One_Paddle_Back"))
         {
@@ -193,9 +189,10 @@ public class CharacterSelectScript : MonoBehaviour
                 Player1Chosen = false;
                 Player1Icon.SetActive(true);
                 Player1Text.SetActive(false);
-            }*/
-            else if(onReturn)
+            }
+            else
             {
+                ReturnButton.GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
                 ReturnButton.GetComponent<MenuButtons>().PressButton();
             }
         }
@@ -222,7 +219,7 @@ public class CharacterSelectScript : MonoBehaviour
         }
 
 
-        if (Input.GetButtonDown("Player_Two_Paddle_Back"))
+        if (Input.GetButtonDown("Player_Two_Paddle_Forward"))
         {
             if (!Player2Chosen)
             {
@@ -247,22 +244,14 @@ public class CharacterSelectScript : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                ReturnButton.GetComponent<TextMesh>().color = new Color(1, 0.75f, 0);
-                StartGameButton.SetActive(false);
-                Player2Chosen = false;
-                Player2Icon.SetActive(true);
-                Player2Text.SetActive(false);
-            }
-        }/*
+        }
         else if (Input.GetButtonDown("Player_Two_Paddle_Back"))
         {
             StartGameButton.SetActive(false);
             Player2Chosen = false;
             Player2Icon.SetActive(true);
             Player2Text.SetActive(false);
-        }*/
+        }
         else if (!Player2Chosen)
         {
             if (Input.GetButtonDown("Player_Two_Paddle_Right")|| Input.GetAxis("Player_Two_Joystick_Horizontal")>0)

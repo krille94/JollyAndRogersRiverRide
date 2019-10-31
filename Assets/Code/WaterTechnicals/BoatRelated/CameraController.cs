@@ -175,6 +175,9 @@ public class CameraController : MonoBehaviour
 
         if (boatNode != targetNode)
         {
+            if(targetNode.centerVector==Vector3.zero)
+                targetNode = boatNode;
+
             if (boatNode != oldTargetNode)
             {
                 slopeAngle = targetNode.centerVector.y - boatNode.centerVector.y;

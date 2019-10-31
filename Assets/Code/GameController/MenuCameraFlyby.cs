@@ -14,6 +14,7 @@ public struct CameraPositions
 
 public class MenuCameraFlyby : MonoBehaviour
 {
+    GameObject endOnCam;
     public CameraPositions[] positionPoints;
     public void AddCameraPosition (Vector3 pos, Quaternion rot, float timeToPlay)
     {
@@ -107,6 +108,11 @@ public class MenuCameraFlyby : MonoBehaviour
     {
         if (isPlaying == false)
             return;
+        if (!loop && endOnCam==null)
+        {
+            endOnCam = GameObject.Find("Main Camera");
+            AddCameraPosition(endOnCam.transform.position, endOnCam.transform.rotation, 1);
+        }
 
         timeSpent += Time.deltaTime;
 

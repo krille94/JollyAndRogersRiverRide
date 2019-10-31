@@ -35,6 +35,7 @@ public class CharacterSelectScript : MonoBehaviour
     private void OnDisable()
     {
         startedGame = false;
+        onReturn = false;
         StartGameButton.SetActive(false);
         Player1Chosen = false;
         Player1Icon.SetActive(true);

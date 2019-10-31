@@ -187,7 +187,7 @@ public class CharacterSelectScript : MonoBehaviour
             }
         }
 
-        if(Input.GetButtonDown("Player_One_Pause") /*|| Input.GetButtonUp("Player_Two_Pause")*/)
+        if(Input.GetButtonUp("Player_One_Pause") /*|| Input.GetButtonUp("Player_Two_Pause")*/)
         {
             if(Player1Chosen&&Player2Chosen)
                 StartGameButton.GetComponent<MenuButtons>().PressButton();

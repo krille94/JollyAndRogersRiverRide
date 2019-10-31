@@ -40,6 +40,19 @@ public class CharacterSelectScript : MonoBehaviour
         Player2Chosen = false;
         Player2Icon.SetActive(true);
         Player2Text.SetActive(false);
+
+        while(Player1Pos>0)
+        {
+            Player1Icon.transform.localPosition -= portraitDistance;
+            Player1Text.transform.localPosition -= portraitDistance;
+            Player1Pos--;
+        }
+        while (Player2Pos > 0)
+        {
+            Player2Icon.transform.localPosition -= portraitDistance;
+            Player2Text.transform.localPosition -= portraitDistance;
+            Player2Pos--;
+        }
     }
 
     // Start is called before the first frame update
@@ -74,7 +87,7 @@ public class CharacterSelectScript : MonoBehaviour
             {
                 Player1Icon.transform.position += portraitDistance*i;
                 Player1Text.transform.position += portraitDistance*i;
-                Player1Pos+=i;
+                Player1Pos += i;
             }
             if (PlayerData.player2Character == tempName.ToString())
             {

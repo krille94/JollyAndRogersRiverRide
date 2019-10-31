@@ -62,6 +62,7 @@ public class MenuCameraFlyby : MonoBehaviour
         positionIndex = 0;
         oriPos = cam.transform.position = positionPoints[positionIndex].position;
         oriRot = cam.transform.rotation = positionPoints[positionIndex].rotation;
+        positionIndex = 1;
     }
     public void Skip()
     {

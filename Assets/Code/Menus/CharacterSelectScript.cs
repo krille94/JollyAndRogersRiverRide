@@ -88,7 +88,7 @@ public class CharacterSelectScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ReturnButton.GetComponent<MouseHover>().GetSelected())
+        if (ReturnButton.GetComponent<MouseHover>().GetSelected()&&!StartGameButton.activeInHierarchy)
         {
             ReturnButton.GetComponent<MouseHover>().SetSelected(false);
             ReturnButton.GetComponent<TextMesh>().color = Color.white;

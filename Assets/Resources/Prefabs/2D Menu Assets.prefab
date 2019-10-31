@@ -1063,7 +1063,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266298498920956033}
-  m_Text: "LOWER OAR: A/D (P1), \n        Left/Right (P2)\r\n\nROW: W/S (P1), \n        Up/Down
+  m_Text: "TURN: A/D (P1), \n       Left/Right (P2)\r\n\nROW: W/S (P1), \n        Up/Down
     (P2)"
   m_OffsetZ: 0
   m_CharacterSize: 0.25

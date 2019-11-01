@@ -181,7 +181,7 @@ public class CameraController : MonoBehaviour
             if (boatNode != oldTargetNode)
             {
                 slopeAngle = targetNode.centerVector.y - boatNode.centerVector.y;
-                if (boat.transform.position.y - boatNode.centerVector.y < 0) slopeAngle = 0;
+                //if (boat.transform.position.y - boatNode.centerVector.y < 0) slopeAngle = 0;
                 heading = (targetNode.centerVector + offset + new Vector3(0, slopeAngle, 0)) - boatNode.centerVector;
                 distance = heading.magnitude;
                 direction = heading / distance; // This is now the normalized direction.

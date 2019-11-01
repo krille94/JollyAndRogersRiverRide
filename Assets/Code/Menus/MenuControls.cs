@@ -45,7 +45,7 @@ public class MenuControls : MonoBehaviour
                 }
             }
 
-            if (Input.GetAxis("Player_One_Joystick_Vertical") > 0)
+            if (Input.GetAxis("Player_One_Joystick_Vertical") > 0||Input.GetButtonUp("Player_One_Menu_Down"))
             {
                 if (!alreadyMoved)
                 {
@@ -59,7 +59,7 @@ public class MenuControls : MonoBehaviour
                     buttons[menuOption].GetComponent<TextMesh>().color = highlighted;
                 }
             }
-            else if (Input.GetAxis("Player_One_Joystick_Vertical") < 0)
+            else if (Input.GetAxis("Player_One_Joystick_Vertical") < 0 || Input.GetButtonUp("Player_One_Menu_Up"))
             {
                 if (!alreadyMoved)
                 {

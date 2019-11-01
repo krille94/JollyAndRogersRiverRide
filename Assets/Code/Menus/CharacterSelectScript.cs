@@ -32,6 +32,9 @@ public class CharacterSelectScript : MonoBehaviour
     new AudioSource audioJolly;
     [SerializeField] AudioClip[] onCharacterClip;
 
+    [SerializeField] float jollyPitch = 2.5f;
+    [SerializeField] float rogerPitch = 0.75f;
+
     private void OnDisable()
     {
         startedGame = false;
@@ -73,8 +76,8 @@ public class CharacterSelectScript : MonoBehaviour
         audioRoger.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
         audioJolly.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
 
-        audioJolly.pitch = 2.5f;
-        audioRoger.pitch = 0.75f;
+        audioJolly.pitch = jollyPitch;
+        audioRoger.pitch = rogerPitch;
 
 
         Player1Pos = 0;

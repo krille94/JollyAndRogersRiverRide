@@ -118,6 +118,8 @@ public class RiverController : MonoBehaviour
         }
         else
         {
+            ArcadeFloatingUpdate();
+
             if (GameController.isPlaying)
                 isPlaying = true;
         }

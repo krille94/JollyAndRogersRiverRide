@@ -31,36 +31,52 @@ public class MenuControls : MonoBehaviour
             buttons[menuOption].GetComponent<TextMesh>().color = highlighted;
         }
 
-        if (Input.GetAxis("Player_One_Joystick_Vertical") > 0)
+        if (buttons.Count > 1)
         {
-            if (!alreadyMoved && buttons.Count > 1)
+            for (int i = 0; i < buttons.Count; i++)
             {
-                alreadyMoved = true;
+                if (buttons[i].GetComponent<MouseHover>().GetSelected())
+                {
+                    buttons[i].GetComponent<MouseHover>().SetSelected(false);
 
-                buttons[menuOption].GetComponent<TextMesh>().color = normal;
-                menuOption++;
-                if (menuOption >= buttons.Count)
-                    menuOption = 0;
-
-                buttons[menuOption].GetComponent<TextMesh>().color = highlighted;
+                    buttons[menuOption].GetComponent<TextMesh>().color = normal;
+                    buttons[i].GetComponent<TextMesh>().color = highlighted;
+                    menuOption = i;
+                }
             }
-        }
-        else if (Input.GetAxis("Player_One_Joystick_Vertical") < 0)
-        {
-            if (!alreadyMoved && buttons.Count > 1)
+
+            if (Input.GetAxis("Player_One_Joystick_Vertical") > 0||Input.GetButtonUp("Player_One_Menu_Down"))
             {
-                alreadyMoved = true;
-                buttons[menuOption].GetComponent<TextMesh>().color = normal;
-                menuOption--;
-                if (menuOption < 0)
-                    menuOption = buttons.Count-1;
-                buttons[menuOption].GetComponent<TextMesh>().color = highlighted;
-            }
-        }
-        else
-            alreadyMoved = false;
+                if (!alreadyMoved)
+                {
+                    alreadyMoved = true;
 
-        if(Input.GetButtonUp("Player_One_Paddle_Forward"))
+                    buttons[menuOption].GetComponent<TextMesh>().color = normal;
+                    menuOption++;
+                    if (menuOption >= buttons.Count)
+                        menuOption = 0;
+
+                    buttons[menuOption].GetComponent<TextMesh>().color = highlighted;
+                }
+            }
+            else if (Input.GetAxis("Player_One_Joystick_Vertical") < 0 || Input.GetButtonUp("Player_One_Menu_Up"))
+            {
+                if (!alreadyMoved)
+                {
+                    alreadyMoved = true;
+                    buttons[menuOption].GetComponent<TextMesh>().color = normal;
+                    menuOption--;
+                    if (menuOption < 0)
+                        menuOption = buttons.Count-1;
+                    buttons[menuOption].GetComponent<TextMesh>().color = highlighted;
+                }
+            }
+            else
+                alreadyMoved = false;
+        }
+
+
+        if (Input.GetButtonUp("Player_One_Paddle_Forward"))
         {
             buttons[menuOption].GetComponent<MenuButtons>().PressButton();
         }

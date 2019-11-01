@@ -3634,7 +3634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1266298499761956526
 Transform:
   m_ObjectHideFlags: 0
@@ -4886,6 +4886,8 @@ MonoBehaviour:
   onCharacterClip:
   - {fileID: 8300000, guid: c6f5ac71049e92c44a315087655a5c9f, type: 3}
   - {fileID: 8300000, guid: c6f5ac71049e92c44a315087655a5c9f, type: 3}
+  jollyPitch: 2.5
+  rogerPitch: 0.75
 --- !u!1 &1266298500426051909
 GameObject:
   m_ObjectHideFlags: 0

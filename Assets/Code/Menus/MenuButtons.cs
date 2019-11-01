@@ -132,9 +132,11 @@ public class MenuButtons : MonoBehaviour
                     if (mixer.name == "Music")
                         GetComponent<TextMesh>().text = "Music: OFF";
                     else
+                    {
+                        GetComponent<AudioSource>().Play();
                         GetComponent<TextMesh>().text = "SFX: OFF";
+                    }
                 }
-                GetComponent<AudioSource>().Play();
                 UserSettings.SetFloat(mixer.name, vol);
             }
         }

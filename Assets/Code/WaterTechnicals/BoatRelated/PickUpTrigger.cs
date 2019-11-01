@@ -17,6 +17,9 @@ public class PickUpTrigger : MonoBehaviour
     [SerializeField] ParticleSystem vfxSystem;
     private Transform effectsPool;
 
+    [SerializeField] AudioClip sourceClip;
+    [SerializeField] AudioSource sourceUsed;
+
     private void Start()
     {
         effectsPool = GameObject.Find("EffectsPool").transform;
@@ -41,7 +44,8 @@ public class PickUpTrigger : MonoBehaviour
 
             Destroy(other.gameObject);
 
-            GetComponent<AudioSource>().Play();
+            if (sourceUsed != null)
+                sourceUsed.PlayOneShot(sourceClip);
 
             ParticleSystem ps = Instantiate(vfxSystem, other.transform.position, Quaternion.identity) as ParticleSystem;
             ps.transform.SetParent(effectsPool);

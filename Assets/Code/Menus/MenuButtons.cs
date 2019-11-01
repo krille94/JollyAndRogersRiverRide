@@ -15,11 +15,13 @@ public class MenuButtons : MonoBehaviour
     public enum OptionTypes { None, Audio, Controls, ReverseControls, AutoPaddle }
     [HideInInspector] public OptionTypes optionType = 0;
 
-    [SerializeField] AudioSource source;
+    [SerializeField] AudioSource onClickSound;
+    [SerializeField] AudioSource onHoverSound;
 
     private void Start()
     {
-        source = GameObject.Find("ButtonAudioSounds").GetComponent<AudioSource>();
+        onClickSound = GameObject.Find("ButtonAudioPressed").GetComponent<AudioSource>();
+        onHoverSound = GameObject.Find("ButtonAudioHover").GetComponent<AudioSource>();
     }
 
     private void OnMouseDown()
@@ -33,9 +35,14 @@ public class MenuButtons : MonoBehaviour
         PressButton();
     }
 
+    private void OnMouseEnter()
+    {
+        onHoverSound.Play();
+    }
+
     public void PressButton()
     {
-        source.Play();
+        onClickSound.Play();
 
         if (buttonAction.ToString()=="StartGame")
         {

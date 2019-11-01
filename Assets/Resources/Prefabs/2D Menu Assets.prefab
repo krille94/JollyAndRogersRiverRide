@@ -787,7 +787,7 @@ TextMesh:
   m_GameObject: {fileID: 1266298498769220754}
   m_Text: 'GOLD: Decreases your time.
 
-    BUCKET: Decreases your damage.'
+    BUCKET: Empties your boat of water.'
   m_OffsetZ: 0
   m_CharacterSize: 0.25
   m_LineSpacing: 1.5
@@ -1063,8 +1063,10 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266298498920956033}
-  m_Text: "TURN: A/D (P1), \n       Left/Right (P2)\r\n\nROW: W/S (P1), \n        Up/Down
-    (P2)"
+  m_Text: 'TURN THE BOAT: Left Stick.
+
+
+    ROW FORWARDS/BACKWARDS: A/B.'
   m_OffsetZ: 0
   m_CharacterSize: 0.25
   m_LineSpacing: 0.75
@@ -3190,8 +3192,8 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266298499615185166}
-  m_Text: "Reach the end of the river as fast as you can! \nBut be careful; taking
-    damage slows you down!"
+  m_Text: "Reach the end of the river as fast as you can! \nBut be careful; Collisions
+    fills your boat with water,\n\nslowing you down!"
   m_OffsetZ: 0
   m_CharacterSize: 0.25
   m_LineSpacing: 1

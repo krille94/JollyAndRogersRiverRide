@@ -210,6 +210,21 @@ public class BoatClass : FloatingObject
             GameController.instance.OnCompletedLevel();
             return;
         }
+
+        foreach (ContactPoint contact in collision.contacts)
+        {
+            if (invincible)
+                continue;
+
+            ParticleSystem particle = Instantiate(onDamagedParticlePrefab, contact.point, Quaternion.identity) as ParticleSystem;
+            Destroy(particle.gameObject, particle.main.duration);
+
+            //if (!source.isPlaying)
+            //{
+            source.PlayOneShot(onDamagedSoundClips[Random.Range(0, onDamagedSoundClips.Length - 1)]);
+            //}
+        }
+
         if (!invincible)
         {
             if (hull > 0)
@@ -225,20 +240,6 @@ public class BoatClass : FloatingObject
 
             invincible = true;
             UpdateDamage();
-        }
-
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            if (invincible)
-                continue;
-
-            ParticleSystem particle = Instantiate(onDamagedParticlePrefab, contact.point, Quaternion.identity) as ParticleSystem;
-            Destroy(particle.gameObject, particle.main.duration);
-
-            //if (!source.isPlaying)
-            //{
-                source.PlayOneShot(onDamagedSoundClips[Random.Range(0, onDamagedSoundClips.Length - 1)]);
-            //}
         }
     }
 

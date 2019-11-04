@@ -20,8 +20,10 @@ public class MenuButtons : MonoBehaviour
 
     private void Start()
     {
-        onClickSound = GameObject.Find("ButtonAudioPressed").GetComponent<AudioSource>();
-        onHoverSound = GameObject.Find("ButtonAudioHover").GetComponent<AudioSource>();
+        if(onClickSound==null)
+            onClickSound = GameObject.Find("ButtonAudioPressed").GetComponent<AudioSource>();
+        if (onHoverSound == null)
+            onHoverSound = GameObject.Find("ButtonAudioHover").GetComponent<AudioSource>();
     }
 
     private void OnMouseDown()
@@ -37,12 +39,14 @@ public class MenuButtons : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        onHoverSound.Play();
+        if (onHoverSound != null)
+            onHoverSound.Play();
     }
 
     public void PressButton()
     {
-        onClickSound.Play();
+        if (onClickSound != null)
+            onClickSound.Play();
 
         if (buttonAction.ToString()=="StartGame")
         {

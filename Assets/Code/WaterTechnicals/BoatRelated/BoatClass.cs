@@ -34,6 +34,9 @@ public class BoatClass : FloatingObject
     private GameObject WaterLevel = null;
     [SerializeField] private AudioClip[] onDamagedSoundClips;
     [SerializeField] private AudioSource source;
+
+    [SerializeField] private ParticleSystem waterParticles;
+
     #region Damage Functions
     /*public void OnDeath()
     {
@@ -178,6 +181,11 @@ public class BoatClass : FloatingObject
                 invincible = false;
             }
         }
+
+        waterParticles.emissionRate = GetComponent<Rigidbody>().velocity.magnitude;
+        waterParticles.transform.position = GetComponent<CapsuleCollider>().ClosestPoint(transform.position + GetComponent<Rigidbody>().velocity);
+        waterParticles.transform.LookAt(transform);
+        waterParticles.transform.Rotate(Vector3.up * 180);
     }
 
     public void UpdateDamage(int customSpeed=-1)
@@ -227,7 +235,7 @@ public class BoatClass : FloatingObject
             Destroy(particle.gameObject, particle.main.duration);
 
             int soundClip = Mathf.RoundToInt(Mathf.Clamp((collision.relativeVelocity.magnitude/2)-5, 0, onDamagedSoundClips.Length - 1));
-            Debug.Log((collision.relativeVelocity.magnitude / 2) - 5 + " m, " + soundClip + " s");
+            //Debug.Log((collision.relativeVelocity.magnitude / 2) - 5 + " m, " + soundClip + " s");
             if (soundClip >= onDamagedSoundClips.Length)
                 soundClip = onDamagedSoundClips.Length - 1;
             source.PlayOneShot(onDamagedSoundClips[soundClip]);

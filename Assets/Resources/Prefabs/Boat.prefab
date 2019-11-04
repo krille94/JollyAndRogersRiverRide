@@ -5406,6 +5406,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vfxSystem: {fileID: 198697523132625420, guid: 1f2cbd9cd8807d142b1b63ff11ea79dd,
     type: 3}
+  sourceClip: {fileID: 8300000, guid: b3cef30b7e15f2f4896f93ee94080513, type: 3}
+  sourceUsed: {fileID: 8130033583801300265}
 --- !u!114 &6636639272627301862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5442,7 +5444,7 @@ MonoBehaviour:
   counterMeasuresStrenght: 10
   isApplyingCountermeasureForce: 0
   MaxHull: 6
-  InvincibilityFrames: 4
+  InvincibilityFrames: 2
   trigger: {fileID: 812115172661265869}
   onDamagedParticlePrefab: {fileID: 19800004, guid: 639631e8fd4ef66408b218a8c2235dd6,
     type: 3}
@@ -5456,6 +5458,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4ec842fec3620264e98c74855d0f8875, type: 3}
   - {fileID: 8300000, guid: 8cf834c428d546d48bbb2c99d5ecf88d, type: 3}
   - {fileID: 8300000, guid: 47c817e2c2dd73847b8c7c9d5d66ad5c, type: 3}
+  - {fileID: 8300000, guid: 98d7d881c4650f944ad134d0b5eec773, type: 3}
   source: {fileID: 0}
 --- !u!136 &8710042116675489598
 CapsuleCollider:

@@ -226,10 +226,11 @@ public class BoatClass : FloatingObject
             ParticleSystem particle = Instantiate(onDamagedParticlePrefab, contact.point, Quaternion.identity) as ParticleSystem;
             Destroy(particle.gameObject, particle.main.duration);
 
-            //if (!source.isPlaying)
-            //{
-            source.PlayOneShot(onDamagedSoundClips[Random.Range(0, onDamagedSoundClips.Length - 1)]);
-            //}
+            int soundClip = Mathf.RoundToInt(Mathf.Clamp((collision.relativeVelocity.magnitude/2)-5, 0, onDamagedSoundClips.Length - 1));
+            Debug.Log((collision.relativeVelocity.magnitude / 2) - 5 + " m, " + soundClip + " s");
+            if (soundClip >= onDamagedSoundClips.Length)
+                soundClip = onDamagedSoundClips.Length - 1;
+            source.PlayOneShot(onDamagedSoundClips[soundClip]);
         }
 
         if (!invincible)

@@ -40,7 +40,7 @@ public class BigWhirlwindScript : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            RiverController.instance.minimumSpeed = SpeedValueManager.GetSpeedValues()[SpeedValueManager.GetSpeedValues().Count-1].riverSpeed;
+            other.GetComponent<BoatClass>().UpdateDamage(SpeedValueManager.GetSpeedValues().Count - 1);
         }
 
         if (other.GetComponent<FloatingObject>())
@@ -55,6 +55,11 @@ public class BigWhirlwindScript : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.tag == "Player")
+        {
+            other.GetComponent<BoatClass>().UpdateDamage();
+        }
+
         if (other.GetComponent<FloatingObject>())
         {
             other.GetComponent<FloatingObject>().observers.Remove(gameObject);

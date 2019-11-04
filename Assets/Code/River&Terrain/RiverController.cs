@@ -115,6 +115,7 @@ public class RiverController : MonoBehaviour
             MeshWaveUpdate();
 
             ArcadeFloatingUpdate();
+
         }
         else
         {

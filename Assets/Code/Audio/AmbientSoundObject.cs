@@ -58,7 +58,7 @@ public class AmbientSoundObject : MonoBehaviour
         
         if(Vector3.Distance(transform.position, controller.playerBoat.transform.position) <= triggerRange)
         {
-            if (!audioSource.isPlaying)
+            if (!audioSource.isPlaying&&audioClips.Length>0)
                 audioSource.PlayOneShot(audioClips[Random.Range(0, audioClips.Length - 1)]);
         }
         else if(muteOnExit)

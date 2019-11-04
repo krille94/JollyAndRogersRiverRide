@@ -180,24 +180,31 @@ public class BoatClass : FloatingObject
         }
     }
 
-    private void UpdateDamage()
+    public void UpdateDamage(int customSpeed=-1)
     {
         SetWaterInBoat();
 
-        if (SpeedValueManager.GetSpeedValues().Count >= MaxHull - hull)
+        int newSpeed = MaxHull - hull;
+        if (customSpeed != -1) newSpeed = customSpeed;
+
+        if (SpeedValueManager.GetSpeedValues().Count >= newSpeed)
         {
-            GameObject option = GameObject.Find("PlayerOneSpot");
+            RiverController.instance.minimumSpeed = SpeedValueManager.GetSpeedValues()[newSpeed].riverSpeed;
+
+            GameObject option = null;
+            option = GameObject.Find("PlayerOneSpot");
             if(option != null)
-                option.GetComponent<PlayerSpot>().SetSpeedValues(MaxHull - hull);
+                option.GetComponent<Paddling>().SetSpeedValues(newSpeed);
 
             option = GameObject.Find("PlayerTwoSpot");
             if (option != null)
-                option.GetComponent<PlayerSpot>().SetSpeedValues(MaxHull - hull);
-
-            option = GameObject.FindGameObjectWithTag("River");
-            if (option != null)
-                option.GetComponent<RiverController>().minimumSpeed = SpeedValueManager.GetSpeedValues()[MaxHull - hull].riverSpeed;
+                option.GetComponent<PlayerSpot>().SetSpeedValues(newSpeed);
         }
+    }
+
+    public float GetDamage()
+    {
+        return MaxHull - hull;
     }
 
     private void OnCollisionEnter(Collision collision)

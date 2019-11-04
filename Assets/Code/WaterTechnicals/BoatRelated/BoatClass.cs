@@ -285,17 +285,20 @@ public class BoatClass : FloatingObject
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.tag == "End")
+        {
+            GameController.instance.OnVictory();
+            return;
+        }
+    }
+
     private void OnCollisionStay(Collision collision)
     {
         //Vector3 target = river.riverAsset.GetNodeFromPosition(river.transform.position, body.transform.position).centerVector;
         if (collision.gameObject.tag == "River")
             return;
-
-        if (collision.gameObject.tag == "End")
-        {
-            GameController.instance.OnCompletedLevel();
-            return;
-        }
 
         Vector3 target = collision.GetContact(0).point;
         target = target - body.transform.position;

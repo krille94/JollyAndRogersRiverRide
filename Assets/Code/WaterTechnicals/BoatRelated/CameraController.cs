@@ -32,6 +32,17 @@ public class CameraController : MonoBehaviour
 
     Skybox skybox;
 
+    [Header("Victory Fade")]
+    public float waitBeforeFade = 0.5f;
+    public float waitDuringFade = 1;
+    public float waitAfterFade = 0.5f;
+
+    float beforeFade;
+    float duringFade;
+    float afterFade;
+    public GameObject victoryFade;
+    Renderer renderer;
+
     [Header("Shake Cam")]
     public float shakeDuration=1.5f;
     float shakeTimer = 0;
@@ -56,6 +67,13 @@ public class CameraController : MonoBehaviour
         targetNode = riverController.riverAsset.GetNodeFromPosition(boat.transform.position);
         transform.rotation = boat.transform.rotation;
         targetRotationVector = transform.rotation.eulerAngles;
+
+        renderer = victoryFade.GetComponent<MeshRenderer>();
+        float alpha = 0;
+        Color color = Color.white;
+        color.a = alpha;
+
+        renderer.material.color = color;
     }
 
     public void StartShakeCam()
@@ -100,6 +118,27 @@ public class CameraController : MonoBehaviour
 
         if(shaking)
         { ShakeCam(); }
+
+        if (GameController.instance.GetClearGame())
+        {
+            if (beforeFade < waitBeforeFade)
+                beforeFade += Time.deltaTime;
+            else if (duringFade < waitDuringFade)
+            {
+                duringFade += Time.deltaTime;
+
+                float alpha = duringFade / waitDuringFade;
+                Color color = Color.white;
+                color.a = alpha;
+
+                renderer.material.color = color;
+            }
+            else if (afterFade < waitAfterFade)
+                afterFade += Time.deltaTime;
+            else
+                GameController.instance.OnCompletedLevel();
+            return;
+        }
 
         if (boat.reverseProgress)
         {

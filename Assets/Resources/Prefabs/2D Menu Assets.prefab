@@ -993,7 +993,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266298498769220754}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 3.64, y: 0, z: -0.75}
+  m_LocalPosition: {x: 3.09, y: 0, z: -0.47}
   m_LocalScale: {x: 0.85, y: 0.9125, z: 1}
   m_Children: []
   m_Father: {fileID: 1266298500426051908}
@@ -1045,9 +1045,9 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266298498769220754}
-  m_Text: 'GOLD: Decreases your time.
+  m_Text: 'TREASURE decreases your time.
 
-    BUCKET: Empties your boat of water.'
+    BUCKETS remove slowdown.'
   m_OffsetZ: 0
   m_CharacterSize: 0.25
   m_LineSpacing: 1.5
@@ -1060,7 +1060,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4278235135
 --- !u!1 &1266298498788367818
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,7 +1271,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266298498920956033}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 6.0084896, y: 0.000005275011, z: 2.5890963}
+  m_LocalPosition: {x: 5.58, y: 0, z: 1.91}
   m_LocalScale: {x: 0.85, y: 0.9125, z: 1}
   m_Children: []
   m_Father: {fileID: 1266298500426051908}
@@ -1331,7 +1331,7 @@ TextMesh:
   m_CharacterSize: 0.25
   m_LineSpacing: 0.75
   m_Anchor: 2
-  m_Alignment: 1
+  m_Alignment: 0
   m_TabSize: 4
   m_FontSize: 24
   m_FontStyle: 1
@@ -1339,7 +1339,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4278235135
 --- !u!1 &1266298498985226282
 GameObject:
   m_ObjectHideFlags: 0
@@ -3369,7 +3369,7 @@ TextMesh:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266298499615185166}
   m_Text: "Reach the end of the river as fast as you can! \nBut be careful; Collisions
-    fills your boat with water,\n\nslowing you down!"
+    slow you down!"
   m_OffsetZ: 0
   m_CharacterSize: 0.25
   m_LineSpacing: 1
@@ -3382,7 +3382,7 @@ TextMesh:
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4278235135
 --- !u!1 &1266298499623218518
 GameObject:
   m_ObjectHideFlags: 0
@@ -5566,7 +5566,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1266298500625371599
 Transform:
   m_ObjectHideFlags: 0
@@ -7119,11 +7119,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1266298499212627763}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7178,6 +7173,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
@@ -7194,11 +7194,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 819535298232826776}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7253,6 +7248,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
@@ -7269,11 +7269,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6098762999109054815}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7328,6 +7323,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
@@ -7344,11 +7344,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6098762999707148987}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7404,6 +7399,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
 --- !u!4 &7362270484775508534 stripped
@@ -7419,11 +7419,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1266298498985226285}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7479,6 +7474,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
 --- !u!4 &7362270483939574149 stripped
@@ -7494,11 +7494,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1266298499497388826}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7554,6 +7549,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
 --- !u!4 &7362270484001046276 stripped
@@ -7569,11 +7569,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1266298500602262808}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7629,6 +7624,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
 --- !u!4 &7362270484189514525 stripped
@@ -7644,11 +7644,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1266298499247552502}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7709,6 +7704,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.43125102
       objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
 --- !u!4 &7362270484306594538 stripped
@@ -7724,11 +7724,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6098763000326218682}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7784,6 +7779,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
 --- !u!4 &7362270485525482315 stripped
@@ -7799,11 +7799,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1266298499424099056}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7859,6 +7854,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
 --- !u!4 &7362270485496983942 stripped
@@ -7874,11 +7874,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1266298499081352864}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7934,6 +7929,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
 --- !u!4 &7362270485860871741 stripped
@@ -7949,11 +7949,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1266298498705081462}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8009,6 +8004,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
 --- !u!4 &7362270484893292535 stripped
@@ -8024,11 +8024,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1266298500301352709}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8084,6 +8079,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
 --- !u!4 &7362270484970352225 stripped
@@ -8099,11 +8099,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1266298500472074313}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8169,6 +8164,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
 --- !u!4 &7362270485242764006 stripped
@@ -8184,11 +8184,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1266298500148437684}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8244,6 +8239,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}
 --- !u!4 &7362270485403928430 stripped
@@ -8259,11 +8259,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1266298499595412175}
     m_Modifications:
-    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
-        type: 3}
-      propertyPath: m_Name
-      value: Menu Button Background
-      objectReference: {fileID: 0}
     - target: {fileID: 3643167307469961760, guid: 24444cd553422cd44b12d5a5f3371aa7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8318,6 +8313,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3643167307469961761, guid: 24444cd553422cd44b12d5a5f3371aa7,
+        type: 3}
+      propertyPath: m_Name
+      value: Menu Button Background
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24444cd553422cd44b12d5a5f3371aa7, type: 3}

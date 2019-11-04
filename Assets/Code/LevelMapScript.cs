@@ -113,6 +113,6 @@ public class LevelMapScript : MonoBehaviour
         iconPos.x = mapStartX + boatLocation.x + (boatIcon.transform.localScale.x / 2);
         iconPos.z = mapStartZ + boatLocation.z + (boatIcon.transform.localScale.z / 2);
         if(boatIcon != null)
-            boatIcon.transform.localPosition = new Vector3(iconPos.x, 1, iconPos.z);
+            boatIcon.transform.localPosition = new Vector3(iconPos.x, 0.01f, iconPos.z);
     }
 }

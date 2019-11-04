@@ -246,7 +246,7 @@ public class BoatClass : FloatingObject
 
         if (collision.gameObject.tag == "End")
         {
-            GameController.instance.OnCompletedLevel();
+            GameController.instance.OnVictory();
             return;
         }
 

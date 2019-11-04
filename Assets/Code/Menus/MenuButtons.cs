@@ -127,7 +127,7 @@ public class MenuButtons : MonoBehaviour
                     //AudioListener.volume = 0;
                     if (mixer.name == "Music")
                     {
-                        vol = -15;
+                        vol = 0;
                         GetComponent<TextMesh>().text = "Music: ON";
                     }
                     else

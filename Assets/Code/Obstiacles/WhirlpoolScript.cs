@@ -24,7 +24,7 @@ public class WhirlpoolScript : MonoBehaviour
                 rigidbody.AddTorque(rigidbody.transform.up * spinSpeed);
 
                 GameObject.Find("PlayerOneSpot").GetComponent<Paddling>().SetCanControl(false);
-                GameObject.Find("PlayerTwoSpot").GetComponent<Paddling>().SetCanControl(false);
+                GameObject.Find("PlayerTwoSpot").GetComponent<PlayerSpot>().SetCanControl(false);
             }
         }
     }
@@ -43,7 +43,7 @@ public class WhirlpoolScript : MonoBehaviour
                 dizzy = false;
                 active = true;
                 GameObject.Find("PlayerOneSpot").GetComponent<Paddling>().SetCanControl(true);
-                GameObject.Find("PlayerTwoSpot").GetComponent<Paddling>().SetCanControl(true);
+                GameObject.Find("PlayerTwoSpot").GetComponent<PlayerSpot>().SetCanControl(true);
 
             }
         }

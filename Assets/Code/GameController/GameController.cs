@@ -7,7 +7,7 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public static bool isPlaying=false;
 
-    private bool is_dead;
+    private bool clear_game=false;
 
     public UnityEvent onPlay;
     public UnityEvent onReset;
@@ -27,6 +27,8 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public bool GetClearGame() { return clear_game; }
+
     public void OnStartLevel ()
     {
         if(!isPlaying)
@@ -38,10 +40,20 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void OnVictory()
+    {
+        if (!clear_game)
+        {
+            Debug.Log("OnVictory");
+            clear_game = true;
+        }
+    }
+
     public void OnCompletedLevel()
     {
         if (isPlaying)
         {
+            clear_game = false;
             isPlaying = false;
             Debug.Log("OnCompletedLevel");
             StartOnMenu.MoveToMenu = "Highscore Menu";
@@ -65,15 +77,5 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if (is_dead)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                is_dead = false;
-                StartOnMenu.MoveToMenu = "Highscore Menu";
-                UnityEngine.SceneManagement.SceneManager.LoadScene(1);
-            }
-        }
-
     }
 }

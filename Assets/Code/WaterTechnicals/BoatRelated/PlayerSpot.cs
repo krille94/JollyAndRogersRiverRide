@@ -113,6 +113,9 @@ public class PlayerSpot : MonoBehaviour
                 return;
         }
 
+        if (GameController.instance.GetClearGame())
+            return;
+
         #region Input
         bool rightKey;
         bool leftKey;

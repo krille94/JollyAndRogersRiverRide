@@ -36,6 +36,8 @@ public class BoatClass : FloatingObject
     [SerializeField] private AudioSource source;
 
     [SerializeField] private ParticleSystem waterParticles;
+    [SerializeField] private LineRenderer waterLines_0,waterLines_1;
+    [SerializeField] private float waterLinesLenght;
 
     #region Damage Functions
     /*public void OnDeath()
@@ -182,10 +184,32 @@ public class BoatClass : FloatingObject
             }
         }
 
-        waterParticles.emissionRate = GetComponent<Rigidbody>().velocity.magnitude;
-        waterParticles.transform.position = GetComponent<CapsuleCollider>().ClosestPoint(transform.position + GetComponent<Rigidbody>().velocity);
+
+        UpdateVFXs();
+
+    }
+
+    private void UpdateVFXs ()
+    {
+        Rigidbody body = GetComponent<Rigidbody>();
+        CapsuleCollider collider = GetComponent<CapsuleCollider>();
+
+        waterParticles.emissionRate = body.velocity.magnitude;
+        waterParticles.transform.position = collider.ClosestPoint(transform.position + body.velocity);
         waterParticles.transform.LookAt(transform);
         waterParticles.transform.Rotate(Vector3.up * 180);
+
+        List<Vector3> line_0_positions = new List<Vector3>();
+        line_0_positions.Add(collider.ClosestPointOnBounds(transform.position + body.velocity + ((Vector3.Cross(closestNode.finalFlowDirection,Vector3.up)) * 10)));
+        line_0_positions.Add(Vector3.Lerp(line_0_positions[0], line_0_positions[0] - body.velocity, Time.deltaTime * waterLinesLenght * body.velocity.magnitude));
+        line_0_positions[0] = collider.ClosestPoint(line_0_positions[1]);
+        waterLines_0.SetPositions(line_0_positions.ToArray());
+
+        List<Vector3> line_1_positions = new List<Vector3>();
+        line_1_positions.Add(collider.ClosestPointOnBounds(transform.position + body.velocity - ((Vector3.Cross(closestNode.finalFlowDirection, Vector3.up)) * 10)));
+        line_1_positions.Add(Vector3.Lerp(line_1_positions[0], line_1_positions[0] - body.velocity, Time.deltaTime * waterLinesLenght * body.velocity.magnitude));
+        line_1_positions[0] = collider.ClosestPoint(line_1_positions[1]);
+        waterLines_1.SetPositions(line_1_positions.ToArray());
     }
 
     public void UpdateDamage(int customSpeed=-1)

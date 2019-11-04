@@ -250,19 +250,21 @@ public class BoatClass : FloatingObject
             return;
         }
 
-        foreach (ContactPoint contact in collision.contacts)
+        if (invincible == false)
+            source.PlayOneShot(onDamagedSoundClips[onDamagedSoundClips.Length - 1]);
+        else
         {
-            if (invincible)
-                continue;
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                ParticleSystem particle = Instantiate(onDamagedParticlePrefab, contact.point, Quaternion.identity) as ParticleSystem;
+                Destroy(particle.gameObject, particle.main.duration);
 
-            ParticleSystem particle = Instantiate(onDamagedParticlePrefab, contact.point, Quaternion.identity) as ParticleSystem;
-            Destroy(particle.gameObject, particle.main.duration);
-
-            int soundClip = Mathf.RoundToInt(Mathf.Clamp((collision.relativeVelocity.magnitude/2)-5, 0, onDamagedSoundClips.Length - 1));
-            //Debug.Log((collision.relativeVelocity.magnitude / 2) - 5 + " m, " + soundClip + " s");
-            if (soundClip >= onDamagedSoundClips.Length)
-                soundClip = onDamagedSoundClips.Length - 1;
-            source.PlayOneShot(onDamagedSoundClips[soundClip]);
+                int soundClip = Mathf.RoundToInt(Mathf.Clamp((collision.relativeVelocity.magnitude / 2) - 5, 0, onDamagedSoundClips.Length - 1));
+                //Debug.Log((collision.relativeVelocity.magnitude / 2) - 5 + " m, " + soundClip + " s");
+                if (soundClip >= onDamagedSoundClips.Length - 1)
+                    soundClip = onDamagedSoundClips.Length - 2;
+                source.PlayOneShot(onDamagedSoundClips[soundClip]);
+            }
         }
 
         if (!invincible)

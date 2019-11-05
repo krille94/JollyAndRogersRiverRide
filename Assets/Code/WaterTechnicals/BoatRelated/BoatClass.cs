@@ -227,7 +227,7 @@ public class BoatClass : FloatingObject
             GameObject option = null;
             option = GameObject.Find("PlayerOneSpot");
             if(option != null)
-                option.GetComponent<Paddling>().SetSpeedValues(newSpeed);
+                option.GetComponent<PlayerSpot>().SetSpeedValues(newSpeed);
 
             option = GameObject.Find("PlayerTwoSpot");
             if (option != null)
@@ -251,10 +251,12 @@ public class BoatClass : FloatingObject
             return;
         }
 
-        if (invincible == false)
+        if (invincible == false && hull < MaxHull)
         {
             source.PlayOneShot(onWaterEnterClip[Random.Range(0, onWaterEnterClip.Length)]);
-            source.PlayOneShot(onDamagedSoundClips[onDamagedSoundClips.Length - 1]);
+            ParticleSystem particle = Instantiate(onDamagedParticlePrefab, collision.contacts[0].point, Quaternion.identity) as ParticleSystem;
+            Destroy(particle.gameObject, particle.main.duration);
+            source.PlayOneShot(onDamagedSoundClips[onDamagedSoundClips.Length-1]);
         }
         else
         {
@@ -262,13 +264,13 @@ public class BoatClass : FloatingObject
             {
                 ParticleSystem particle = Instantiate(onDamagedParticlePrefab, contact.point, Quaternion.identity) as ParticleSystem;
                 Destroy(particle.gameObject, particle.main.duration);
-
-                int soundClip = Mathf.RoundToInt(Mathf.Clamp((collision.relativeVelocity.magnitude / 2) - 5, 0, onDamagedSoundClips.Length - 1));
-                //Debug.Log((collision.relativeVelocity.magnitude / 2) - 5 + " m, " + soundClip + " s");
-                if (soundClip >= onDamagedSoundClips.Length - 1)
-                    soundClip = onDamagedSoundClips.Length - 2;
-                source.PlayOneShot(onDamagedSoundClips[soundClip]);
             }
+
+            int soundClip = Mathf.RoundToInt(Mathf.Clamp((collision.relativeVelocity.magnitude / 2) - 5, 0, onDamagedSoundClips.Length - 1));
+            //Debug.Log((collision.relativeVelocity.magnitude / 2) - 5 + " m, " + soundClip + " s");
+            if (soundClip >= onDamagedSoundClips.Length - 1)
+                soundClip = onDamagedSoundClips.Length - 2;
+            source.PlayOneShot(onDamagedSoundClips[soundClip]);
         }
 
         if (!invincible)

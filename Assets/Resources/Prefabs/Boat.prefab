@@ -5075,6 +5075,10 @@ MonoBehaviour:
   trigger: {fileID: 812115172661265869}
   onDamagedParticlePrefab: {fileID: 19800004, guid: 639631e8fd4ef66408b218a8c2235dd6,
     type: 3}
+  onWaterEnterClip:
+  - {fileID: 8300000, guid: 6bb50a62ffd932943a9e2829b267875a, type: 3}
+  - {fileID: 8300000, guid: 65c2cf3a7906c0c4db06d600c9244cbe, type: 3}
+  - {fileID: 8300000, guid: 34a3d2ea613c3ac4ab6c13b1f496b4e9, type: 3}
   onDamagedSoundClips:
   - {fileID: 8300000, guid: 12e086051f0d54540928a2fee33902c3, type: 3}
   - {fileID: 8300000, guid: 65ce6af03bd3bf845966d9f20017dde7, type: 3}

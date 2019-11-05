@@ -32,6 +32,7 @@ public class BoatClass : FloatingObject
     public OnDamageRecived onDamaged;
     public ParticleSystem onDamagedParticlePrefab;
     private GameObject WaterLevel = null;
+    [SerializeField] private AudioClip[] onWaterEnterClip;
     [SerializeField] private AudioClip[] onDamagedSoundClips;
     [SerializeField] private AudioSource source;
 
@@ -49,7 +50,7 @@ public class BoatClass : FloatingObject
         hull += amount;
         if (hull > MaxHull)
             hull = MaxHull;
-
+        source.PlayOneShot(onWaterEnterClip[Random.Range(0, onWaterEnterClip.Length)]);
         UpdateDamage();
         //SetWaterInBoat();
     }
@@ -251,7 +252,10 @@ public class BoatClass : FloatingObject
         }
 
         if (invincible == false)
+        {
+            source.PlayOneShot(onWaterEnterClip[Random.Range(0, onWaterEnterClip.Length)]);
             source.PlayOneShot(onDamagedSoundClips[onDamagedSoundClips.Length - 1]);
+        }
         else
         {
             foreach (ContactPoint contact in collision.contacts)

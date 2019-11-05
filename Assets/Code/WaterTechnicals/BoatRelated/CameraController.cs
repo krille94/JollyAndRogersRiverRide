@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour
     float duringFade;
     float afterFade;
     public GameObject victoryFade;
-    Renderer renderer;
+    new Renderer renderer;
 
     [Header("Shake Cam")]
     public float shakeDuration=1.5f;
@@ -67,12 +67,10 @@ public class CameraController : MonoBehaviour
         targetNode = riverController.riverAsset.GetNodeFromPosition(boat.transform.position);
         transform.rotation = boat.transform.rotation;
         targetRotationVector = transform.rotation.eulerAngles;
-
-        renderer = victoryFade.GetComponent<MeshRenderer>();
+        renderer = victoryFade.GetComponent<Renderer>();
         float alpha = 0;
         Color color = Color.white;
         color.a = alpha;
-
         renderer.material.color = color;
     }
 
@@ -121,6 +119,23 @@ public class CameraController : MonoBehaviour
 
         if (GameController.instance.GetClearGame())
         {
+            var heading1 = transform.position - (boat.transform.position+new Vector3(0,10,0));
+            var distance1 = heading1.magnitude;
+            var direction1 = heading1 / distance1; // This is now the normalized direction.
+
+            targetRotation = Quaternion.LookRotation(-direction1, Vector3.up);
+
+            if (offset == Vector3.zero && slopeAngle == 0)
+            {
+                targetRotation.x = 0;
+                targetRotation.z = 0;
+            }
+
+            transform.Rotate(new Vector3(-offsetAngle, 0, 0));
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+
+            transform.Rotate(new Vector3(offsetAngle, 0, 0));
+
             if (beforeFade < waitBeforeFade)
                 beforeFade += Time.deltaTime;
             else if (duringFade < waitDuringFade)

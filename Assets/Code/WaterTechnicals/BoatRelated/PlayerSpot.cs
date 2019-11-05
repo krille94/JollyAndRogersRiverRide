@@ -175,6 +175,20 @@ public class PlayerSpot : MonoBehaviour
         }
         #endregion
 
+        if (isPaddling)
+        {
+            paddlingTime += Time.deltaTime;
+
+            if (paddlingTime >= paddleTime/2)
+                animator.SetBool("isPaddling", false);
+
+            if (paddlingTime >= paddleTime)
+            {
+                paddlingTime = 0;
+                isPaddling = false;
+            }
+        }
+
         if (CanControl)
         {
             //if (controlScheme == 1)
@@ -226,18 +240,9 @@ public class PlayerSpot : MonoBehaviour
                         animator.SetFloat("LeaningDirection", 0.5f);
                 }
 
-                if (isPaddling)
-                {
-                    paddlingTime += Time.deltaTime;
-                    if (paddlingTime >= paddleTime)
-                    {
-                        paddlingTime = 0;
-                        isPaddling = false;
-                    }
-                }
 
                 if (!isPaddling)
-                {
+                {/*
                     if (holdingForwardKey || holdingBackKey)
                     {
                         chargingBoost = true;
@@ -251,7 +256,7 @@ public class PlayerSpot : MonoBehaviour
                                 fullyChargedBoost = true;
                             }
                         }
-                    }
+                    }*/
 
                     if (releasingForwardKey)
                     {
@@ -261,13 +266,14 @@ public class PlayerSpot : MonoBehaviour
 
                         chargingBoost = false;
                         fullyChargedBoost = false;
-
+                        animator.SetBool("isPaddling", true);
+                        /*
                         if (fullyChargedBoost)
                         {
                             chargeForce = forwardForce;
                             rigidbody.AddForce(rigidbody.transform.forward * (turnForwardForce * boostTurnMultiplier));
                         }
-                        else
+                        else*/
                         {
                             chargeTimer = 0;
                             boostTimer = 0;
@@ -282,13 +288,14 @@ public class PlayerSpot : MonoBehaviour
 
                         chargingBoost = false;
                         fullyChargedBoost = false;
-
+                        animator.SetBool("isPaddling", true);
+                        /*
                         if (fullyChargedBoost)
                         {
                             chargeForce = backwardForce;
                             rigidbody.AddForce(-rigidbody.transform.forward * (turnBackwardForce * boostTurnMultiplier));
                         }
-                        else
+                        else*/
                         {
                             chargeTimer = 0;
                             boostTimer = 0;
@@ -299,6 +306,5 @@ public class PlayerSpot : MonoBehaviour
             }
         }
 
-        animator.SetBool("isPaddling", isPaddling);
     }
 }

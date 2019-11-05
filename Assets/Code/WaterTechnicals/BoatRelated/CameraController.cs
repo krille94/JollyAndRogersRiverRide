@@ -72,6 +72,7 @@ public class CameraController : MonoBehaviour
         Color color = Color.white;
         color.a = alpha;
         renderer.material.color = color;
+        victoryFade.SetActive(false);
     }
 
     public void StartShakeCam()
@@ -119,6 +120,9 @@ public class CameraController : MonoBehaviour
 
         if (GameController.instance.GetClearGame())
         {
+            if(!victoryFade.activeInHierarchy)
+                victoryFade.SetActive(true);
+
             var heading1 = transform.position - (boat.transform.position+new Vector3(0,10,0));
             var distance1 = heading1.magnitude;
             var direction1 = heading1 / distance1; // This is now the normalized direction.

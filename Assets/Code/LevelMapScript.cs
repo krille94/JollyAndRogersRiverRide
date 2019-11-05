@@ -9,6 +9,9 @@ public class LevelMapScript : MonoBehaviour
     //public GameObject startpoint; // Where the boat first spawns
     public GameObject endpoint;   // The goal
 
+    public GameObject endPointGraphic;
+    public LineRenderer dotRenderer;
+
     Vector3 start;
     Vector3 end;
     float mapStartZ;
@@ -46,6 +49,7 @@ public class LevelMapScript : MonoBehaviour
             linemap = gameObject.AddComponent<LineRenderer>();
             Debug.LogWarning("LineRenderer Missing!\nAdded temp");
         }
+
         river = RiverController.instance;
         iconPos = Vector3.zero;
 
@@ -96,8 +100,20 @@ public class LevelMapScript : MonoBehaviour
             linemap.SetPosition(o, linepos);
             //Debug.Log(linepos.z);
         }
+        
+        dotRenderer.positionCount = 14;
+        dotRenderer.SetPosition(0, linemap.GetPosition(0));
+
+        int dot=1;
+        for (int o = 8; o < i; o+=8)
+        {
+            dotRenderer.SetPosition(dot, linemap.GetPosition(o));
+            dot++;
+        }
 
         iconPos = linemap.GetPosition(0);
+        endPointGraphic.transform.localPosition = linemap.GetPosition(i-1)+new Vector3(0,0.02f,0);
+        linemap.enabled = false;
     }
 
     // Update is called once per frame
@@ -113,6 +129,6 @@ public class LevelMapScript : MonoBehaviour
         iconPos.x = mapStartX + boatLocation.x + (boatIcon.transform.localScale.x / 2);
         iconPos.z = mapStartZ + boatLocation.z + (boatIcon.transform.localScale.z / 2);
         if(boatIcon != null)
-            boatIcon.transform.localPosition = new Vector3(iconPos.x, 0.01f, iconPos.z);
+            boatIcon.transform.localPosition = new Vector3(iconPos.x, 0.05f, iconPos.z);
     }
 }

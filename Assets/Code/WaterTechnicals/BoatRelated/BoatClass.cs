@@ -33,7 +33,10 @@ public class BoatClass : FloatingObject
     public ParticleSystem onDamagedParticlePrefab;
     private GameObject WaterLevel = null;
     [SerializeField] private AudioClip[] onDamagedSoundClips;
+    [SerializeField] private AudioClip[] addWaterInBoatClips;
+    [SerializeField] private AudioClip[] removeWaterInBoatClips;
     [SerializeField] private AudioSource source;
+    private AudioSource source2;
 
     [SerializeField] private ParticleSystem waterParticles;
     [SerializeField] private LineRenderer waterLines_0,waterLines_1;
@@ -49,6 +52,9 @@ public class BoatClass : FloatingObject
         hull += amount;
         if (hull > MaxHull)
             hull = MaxHull;
+
+        int soundClip = Random.Range(0, removeWaterInBoatClips.Length);
+        source2.PlayOneShot(removeWaterInBoatClips[soundClip]);
 
         UpdateDamage();
         //SetWaterInBoat();
@@ -126,15 +132,19 @@ public class BoatClass : FloatingObject
         float windowWidth = (float)(Screen.width * 3) / (float)(Screen.height * 4);
         healthBar.transform.localPosition = new Vector3(-2.6f * windowWidth, 1.35f, 4);
 
+        AudioMixer mix = Resources.Load("AudioMixers/Sound Effects") as AudioMixer;
         if (source == null)
             source = gameObject.GetComponent<AudioSource>();
         if (source == null)
         {
             source = gameObject.AddComponent<AudioSource>();
 
-            AudioMixer mix = Resources.Load("AudioMixers/Sound Effects") as AudioMixer;
             source.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
         }
+
+        source2 = gameObject.AddComponent<AudioSource>();
+        source2.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
+        source2.volume = source.volume;
     }
 
     void Update()
@@ -274,6 +284,9 @@ public class BoatClass : FloatingObject
             if (hull > 0)
             {
                 hull--;
+
+                int soundClip = Random.Range(0, addWaterInBoatClips.Length);
+                source2.PlayOneShot(addWaterInBoatClips[soundClip]);
 
                 GameObject cam = GameObject.Find("Main Camera");
                 if(cam != null)

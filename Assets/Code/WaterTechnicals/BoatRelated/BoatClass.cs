@@ -226,7 +226,7 @@ public class BoatClass : FloatingObject
             GameObject option = null;
             option = GameObject.Find("PlayerOneSpot");
             if(option != null)
-                option.GetComponent<Paddling>().SetSpeedValues(newSpeed);
+                option.GetComponent<PlayerSpot>().SetSpeedValues(newSpeed);
 
             option = GameObject.Find("PlayerTwoSpot");
             if (option != null)

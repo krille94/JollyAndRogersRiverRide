@@ -219,7 +219,7 @@ public class BoatClass : FloatingObject
         int newSpeed = MaxHull - hull;
         if (customSpeed != -1) newSpeed = customSpeed;
 
-        if (SpeedValueManager.GetSpeedValues().Count >= newSpeed)
+        if (SpeedValueManager.GetSpeedValues().Count > newSpeed)
         {
             RiverController.instance.minimumSpeed = SpeedValueManager.GetSpeedValues()[newSpeed].riverSpeed;
 
@@ -250,7 +250,7 @@ public class BoatClass : FloatingObject
             return;
         }
 
-        if (invincible == false)
+        if (invincible == false&&hull>0)
             source.PlayOneShot(onDamagedSoundClips[onDamagedSoundClips.Length - 1]);
         else
         {

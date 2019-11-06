@@ -260,7 +260,7 @@ public class PlayerSpot : MonoBehaviour
 
                     if (releasingForwardKey)
                     {
-                        audioSource.PlayOneShot(onPaddleSound[Random.Range(0,onPaddleSound.Length-1)]);
+                        audioSource.PlayOneShot(onPaddleSound[Random.Range(0, onPaddleSound.Length)]);
                         
                         isPaddling = true;
 
@@ -282,7 +282,7 @@ public class PlayerSpot : MonoBehaviour
                     }
                     else if (releasingBackKey)
                     {
-                        audioSource.PlayOneShot(onPaddleSound[Random.Range(0, onPaddleSound.Length - 1)]);
+                        audioSource.PlayOneShot(onPaddleSound[Random.Range(0, onPaddleSound.Length)]);
 
                         isPaddling = true;
 

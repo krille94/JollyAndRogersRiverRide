@@ -219,14 +219,14 @@ public class BoatClass : FloatingObject
         int newSpeed = MaxHull - hull;
         if (customSpeed != -1) newSpeed = customSpeed;
 
-        if (SpeedValueManager.GetSpeedValues().Count >= newSpeed)
+        if (SpeedValueManager.GetSpeedValues().Count > newSpeed)
         {
             RiverController.instance.minimumSpeed = SpeedValueManager.GetSpeedValues()[newSpeed].riverSpeed;
 
             GameObject option = null;
             option = GameObject.Find("PlayerOneSpot");
             if(option != null)
-                option.GetComponent<Paddling>().SetSpeedValues(newSpeed);
+                option.GetComponent<PlayerSpot>().SetSpeedValues(newSpeed);
 
             option = GameObject.Find("PlayerTwoSpot");
             if (option != null)
@@ -250,19 +250,21 @@ public class BoatClass : FloatingObject
             return;
         }
 
-        if (invincible == false)
+        /*
+        if (invincible == false&&hull>0)
             source.PlayOneShot(onDamagedSoundClips[onDamagedSoundClips.Length - 1]);
-        else
+        else*/
         {
             foreach (ContactPoint contact in collision.contacts)
             {
                 ParticleSystem particle = Instantiate(onDamagedParticlePrefab, contact.point, Quaternion.identity) as ParticleSystem;
                 Destroy(particle.gameObject, particle.main.duration);
 
-                int soundClip = Mathf.RoundToInt(Mathf.Clamp((collision.relativeVelocity.magnitude / 2) - 5, 0, onDamagedSoundClips.Length - 1));
+                //int soundClip = Mathf.RoundToInt(Mathf.Clamp((collision.relativeVelocity.magnitude / 2) - 5, 0, onDamagedSoundClips.Length - 1));
                 //Debug.Log((collision.relativeVelocity.magnitude / 2) - 5 + " m, " + soundClip + " s");
+                int soundClip = Random.Range(0, onDamagedSoundClips.Length);
                 if (soundClip >= onDamagedSoundClips.Length - 1)
-                    soundClip = onDamagedSoundClips.Length - 2;
+                    soundClip = onDamagedSoundClips.Length - 1;
                 source.PlayOneShot(onDamagedSoundClips[soundClip]);
             }
         }

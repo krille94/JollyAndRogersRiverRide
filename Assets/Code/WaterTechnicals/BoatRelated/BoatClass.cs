@@ -32,7 +32,6 @@ public class BoatClass : FloatingObject
     public OnDamageRecived onDamaged;
     public ParticleSystem onDamagedParticlePrefab;
     private GameObject WaterLevel = null;
-    [SerializeField] private AudioClip[] onWaterEnterClip;
     [SerializeField] private AudioClip[] onDamagedSoundClips;
     [SerializeField] private AudioSource source;
 
@@ -50,7 +49,7 @@ public class BoatClass : FloatingObject
         hull += amount;
         if (hull > MaxHull)
             hull = MaxHull;
-        source.PlayOneShot(onWaterEnterClip[Random.Range(0, onWaterEnterClip.Length)]);
+
         UpdateDamage();
         //SetWaterInBoat();
     }
@@ -227,7 +226,7 @@ public class BoatClass : FloatingObject
             GameObject option = null;
             option = GameObject.Find("PlayerOneSpot");
             if(option != null)
-                option.GetComponent<PlayerSpot>().SetSpeedValues(newSpeed);
+                option.GetComponent<Paddling>().SetSpeedValues(newSpeed);
 
             option = GameObject.Find("PlayerTwoSpot");
             if (option != null)
@@ -251,26 +250,21 @@ public class BoatClass : FloatingObject
             return;
         }
 
-        if (invincible == false && hull < MaxHull)
-        {
-            source.PlayOneShot(onWaterEnterClip[Random.Range(0, onWaterEnterClip.Length)]);
-            ParticleSystem particle = Instantiate(onDamagedParticlePrefab, collision.contacts[0].point, Quaternion.identity) as ParticleSystem;
-            Destroy(particle.gameObject, particle.main.duration);
-            source.PlayOneShot(onDamagedSoundClips[onDamagedSoundClips.Length-1]);
-        }
+        if (invincible == false)
+            source.PlayOneShot(onDamagedSoundClips[onDamagedSoundClips.Length - 1]);
         else
         {
             foreach (ContactPoint contact in collision.contacts)
             {
                 ParticleSystem particle = Instantiate(onDamagedParticlePrefab, contact.point, Quaternion.identity) as ParticleSystem;
                 Destroy(particle.gameObject, particle.main.duration);
-            }
 
-            int soundClip = Mathf.RoundToInt(Mathf.Clamp((collision.relativeVelocity.magnitude / 2) - 5, 0, onDamagedSoundClips.Length - 1));
-            //Debug.Log((collision.relativeVelocity.magnitude / 2) - 5 + " m, " + soundClip + " s");
-            if (soundClip >= onDamagedSoundClips.Length - 1)
-                soundClip = onDamagedSoundClips.Length - 2;
-            source.PlayOneShot(onDamagedSoundClips[soundClip]);
+                int soundClip = Mathf.RoundToInt(Mathf.Clamp((collision.relativeVelocity.magnitude / 2) - 5, 0, onDamagedSoundClips.Length - 1));
+                //Debug.Log((collision.relativeVelocity.magnitude / 2) - 5 + " m, " + soundClip + " s");
+                if (soundClip >= onDamagedSoundClips.Length - 1)
+                    soundClip = onDamagedSoundClips.Length - 2;
+                source.PlayOneShot(onDamagedSoundClips[soundClip]);
+            }
         }
 
         if (!invincible)

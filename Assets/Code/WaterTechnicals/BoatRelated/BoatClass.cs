@@ -279,6 +279,10 @@ public class BoatClass : FloatingObject
             }
         }
 
+        GameObject cam = GameObject.Find("Main Camera");
+        if (cam != null)
+            cam.GetComponent<CameraController>().StartShakeCam();
+
         if (!invincible)
         {
             if (hull > 0)
@@ -288,9 +292,6 @@ public class BoatClass : FloatingObject
                 int soundClip = Random.Range(0, addWaterInBoatClips.Length);
                 source2.PlayOneShot(addWaterInBoatClips[soundClip]);
 
-                GameObject cam = GameObject.Find("Main Camera");
-                if(cam != null)
-                    cam.GetComponent<CameraController>().StartShakeCam();
             }
             else
                 hull = 0;

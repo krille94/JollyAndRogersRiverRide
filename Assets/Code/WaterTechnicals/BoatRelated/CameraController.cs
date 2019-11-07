@@ -77,7 +77,7 @@ public class CameraController : MonoBehaviour
     public void StartShakeCam()
     {
         shakeTimer = 0;
-        oneShake = 0;
+        //oneShake = 0;
         shaking = true;
         shakeDir.x = Random.Range(-1.0f, 1.0f);
         shakeDir.y = Random.Range(-1.0f, 1.0f);
@@ -100,6 +100,7 @@ public class CameraController : MonoBehaviour
 
         if (shakeTimer >= shakeDuration)
         {
+            oneShake = 0;
             shaking = false;
             shakeOffset = Vector3.zero;
         }

@@ -2344,6 +2344,10 @@ MonoBehaviour:
   ScoreListText: {fileID: 1266298499924054441}
   NameListText: {fileID: 1266298499657106367}
   RestartGame: {fileID: 1266298500301352706}
+  youGotHighscoreClip: {fileID: 8300000, guid: f076cfff129203f44ad9aff8a6f7b24d, type: 3}
+  postGameHighscoreClip: {fileID: 8300000, guid: bc9760de186180a44b1028897d521413,
+    type: 3}
+  typeNameClip: {fileID: 8300000, guid: b8420dc774f66504a84726b2d9b858ac, type: 3}
 --- !u!1 &1266298499323379073
 GameObject:
   m_ObjectHideFlags: 0

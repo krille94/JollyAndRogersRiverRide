@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -12,11 +13,25 @@ public class HighScoreList : MonoBehaviour
     public GameObject NameListText;
     public GameObject RestartGame;
 
+    [SerializeField] AudioClip youGotHighscoreClip;
+    [SerializeField] AudioClip postGameHighscoreClip;
+    [SerializeField] AudioClip typeNameClip;
+
     private int YourPlacement=0;
     private int ScoresPerText = 10;
 
+    new AudioSource audio;
+
     void OnEnable()
     {
+        if (gameObject.GetComponent<AudioSource>())
+            audio = gameObject.GetComponent<AudioSource>();
+        else
+            audio = gameObject.AddComponent<AudioSource>();
+
+        AudioMixer mix = Resources.Load("AudioMixers/Sound Effects") as AudioMixer;
+        audio.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
+
         listView.SetActive(false);
         SaveScore.Load();
 
@@ -47,6 +62,7 @@ public class HighScoreList : MonoBehaviour
         {
             if (newScore <= g.score)
             {
+                audio.PlayOneShot(youGotHighscoreClip);
                 break;
             }
             YourPlacement++;
@@ -67,6 +83,7 @@ public class HighScoreList : MonoBehaviour
             ListScores();
             ListNames();
             listView.SetActive(true);
+            audio.PlayOneShot(postGameHighscoreClip);
         }
     }
 
@@ -95,6 +112,7 @@ public class HighScoreList : MonoBehaviour
                 ListNames();
                 listView.SetActive(true);
                 PlayerData.playedGame = false;
+                audio.PlayOneShot(postGameHighscoreClip);
                 CountText();
             }
             else if (Input.anyKeyDown)
@@ -171,7 +189,8 @@ public class HighScoreList : MonoBehaviour
             string setText = "Your score was: " + score + "\nEnter your name:\n" + (YourPlacement + 1).ToString() + ". " + PlayerData.playerName;
             YourScoreText.GetComponent<TextMesh>().text = setText;
         }
-        else YourScoreText.GetComponent<TextMesh>().text = " ";
+        else
+            YourScoreText.GetComponent<TextMesh>().text = " ";
     }
 
     void AddLetterToName()
@@ -236,7 +255,10 @@ public class HighScoreList : MonoBehaviour
         if (newLetter!="none"&&newLetter!="NONE")
         {
             if(PlayerData.playerName.Length<21)
+            {
                 PlayerData.playerName += newLetter;
+                audio.PlayOneShot(typeNameClip);
+            }
         }
     }
 }

@@ -164,7 +164,7 @@ public class MenuButtons : MonoBehaviour
             PlayerData.ResetScore();
             StartOnMenu.MoveToMenu = "Main Menu";
             GameController.instance.OnQuitToMenu();
-            SceneManager.LoadScene(1);
+            //SceneManager.LoadScene(2);
         }
         if (buttonAction.ToString() == "QuitApplication")
         {

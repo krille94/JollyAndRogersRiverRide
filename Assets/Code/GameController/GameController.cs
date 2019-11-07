@@ -7,12 +7,15 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public static bool isPlaying=false;
 
-    private bool clear_game=false;
+    private bool clear_game = false;
+    private bool loading_game = false;
+    private bool loading_to_menu = false;
 
     public UnityEvent onPlay;
     public UnityEvent onReset;
     public UnityEvent onComplete;
     public UnityEvent onQuitToMainMenu;
+    public UnityEvent onLoadToMenu;
 
     private void Start()
     {
@@ -35,7 +38,7 @@ public class GameController : MonoBehaviour
             onPlay.Invoke();
         else
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+            LoadToMenu();
             onReset.Invoke();
         }
     }
@@ -55,19 +58,21 @@ public class GameController : MonoBehaviour
         {
             clear_game = false;
             isPlaying = false;
+            loading_to_menu = true;
             Debug.Log("OnCompletedLevel");
+            LoadToMenu();
             StartOnMenu.MoveToMenu = "Highscore Menu";
             onComplete.Invoke();
-            UnityEngine.SceneManagement.SceneManager.LoadScene(1);
         }
     }
 
     public void OnQuitToMenu()
     {
         isPlaying = false;
+        loading_to_menu = true;
         StartOnMenu.MoveToMenu = "Main Menu";
+        LoadToMenu();
         onQuitToMainMenu.Invoke();
-        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
     }
 
     public void OnStartPlaying()
@@ -75,7 +80,29 @@ public class GameController : MonoBehaviour
         isPlaying = true;
     }
 
+    public void LoadToMenu()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        loading_game = false;
+    }
+
     private void Update()
     {
+        if (!loading_to_menu)
+            return;
+
+        if(loading_game)
+        {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                loading_to_menu = false;
+                onLoadToMenu.Invoke();
+            }
+        }
+        else
+        {
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex == 2)
+                loading_game = true;
+        }
     }
 }

@@ -6,7 +6,6 @@ public class WhirlpoolScript : MonoBehaviour
 {
     public bool active = true;
     public int spinSpeed = 42000;
-    public float rotateAnimSpeed = -200;
 
     public float dizzyDuration = 3;
     private float dizzyTimer = 0;
@@ -32,8 +31,6 @@ public class WhirlpoolScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Rotate(Vector3.up * rotateAnimSpeed * Time.deltaTime);
-
         if (dizzy)
         {
             dizzyTimer += Time.deltaTime;

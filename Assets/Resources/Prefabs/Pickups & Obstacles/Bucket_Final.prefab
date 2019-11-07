@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -7939848396965630203}
   - component: {fileID: 9043956819099495706}
   - component: {fileID: 6358408301401168073}
+  - component: {fileID: 3375250600963567376}
   m_Layer: 0
   m_Name: Bucket_Final
   m_TagString: Item
@@ -78,6 +79,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemEffect: 1
   amount: 6
+--- !u!114 &3375250600963567376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1837995703387071513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31469f2403df49840b6c9049f5be82e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateAnimSpeed: -100
 --- !u!1 &3907822274859045331
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +182,7 @@ Animator:
   m_GameObject: {fileID: 3907822274859045331}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 848e76655a411e947bec5095b1afa588, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

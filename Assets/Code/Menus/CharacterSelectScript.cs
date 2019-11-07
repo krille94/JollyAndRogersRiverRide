@@ -28,9 +28,10 @@ public class CharacterSelectScript : MonoBehaviour
 
     public Vector3 portraitDistance;
 
-    new AudioSource audioRoger;
-    new AudioSource audioJolly;
+    new AudioSource audioP1;
+    new AudioSource audioP2;
     [SerializeField] AudioClip[] onCharacterClip;
+    [SerializeField] AudioClip changingCharacterClip;
 
     [SerializeField] float jollyPitch = 2.5f;
     [SerializeField] float rogerPitch = 0.75f;
@@ -66,18 +67,18 @@ public class CharacterSelectScript : MonoBehaviour
     {
         startedGame = false;
         if (gameObject.GetComponent<AudioSource>())
-            audioRoger = gameObject.GetComponent<AudioSource>();
+            audioP1 = gameObject.GetComponent<AudioSource>();
         else
         {
-            audioRoger = gameObject.AddComponent<AudioSource>();
-            audioJolly = gameObject.AddComponent<AudioSource>();
+            audioP1 = gameObject.AddComponent<AudioSource>();
+            audioP2 = gameObject.AddComponent<AudioSource>();
         }
         AudioMixer mix = Resources.Load("AudioMixers/Sound Effects") as AudioMixer;
-        audioRoger.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
-        audioJolly.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
+        audioP1.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
+        audioP2.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
 
-        audioJolly.pitch = jollyPitch;
-        audioRoger.pitch = rogerPitch;
+        audioP2.pitch = jollyPitch;
+        audioP1.pitch = rogerPitch;
 
 
         Player1Pos = 0;
@@ -131,7 +132,7 @@ public class CharacterSelectScript : MonoBehaviour
             ReturnButton.GetComponent<TextMesh>().color = Color.white;
         }
 
-        if (Input.GetAxis("Player_One_Joystick_Vertical") > 0)
+        if (Input.GetAxis("Player_One_Joystick_Vertical") > 0 || Input.GetButtonUp("Player_One_Menu_Down"))
         {
             if (!Player1Chosen)
             {
@@ -140,7 +141,7 @@ public class CharacterSelectScript : MonoBehaviour
                 Player1Icon.SetActive(false);
             }
         }
-        else if (Input.GetAxis("Player_One_Joystick_Vertical") < 0)
+        else if (Input.GetAxis("Player_One_Joystick_Vertical") < 0 || Input.GetButtonUp("Player_One_Menu_Up"))
         {
             if (onReturn)
             {
@@ -166,9 +167,11 @@ public class CharacterSelectScript : MonoBehaviour
                         Player1Text.SetActive(true);
 
                         if (Player1Pos == 0)
-                            audioJolly.PlayOneShot(onCharacterClip[Player1Pos]);
+                            audioP1.pitch = rogerPitch;
                         else
-                            audioRoger.PlayOneShot(onCharacterClip[Player1Pos]);
+                            audioP1.pitch = jollyPitch;
+
+                        audioP1.PlayOneShot(onCharacterClip[Player1Pos]);
 
 
                         if (Player1Chosen && Player2Chosen)
@@ -209,6 +212,8 @@ public class CharacterSelectScript : MonoBehaviour
                     Player1Icon.transform.localPosition += portraitDistance;
                     Player1Text.transform.localPosition += portraitDistance;
                     Player1Pos++;
+                    audioP1.pitch = 1;
+                    audioP1.PlayOneShot(changingCharacterClip);
                 }
             }
             else if (Input.GetButtonDown("Player_One_Paddle_Left")|| Input.GetAxis("Player_One_Joystick_Horizontal")<0)
@@ -218,6 +223,8 @@ public class CharacterSelectScript : MonoBehaviour
                     Player1Icon.transform.localPosition -= portraitDistance;
                     Player1Text.transform.localPosition -= portraitDistance;
                     Player1Pos--;
+                    audioP1.pitch = 1;
+                    audioP1.PlayOneShot(changingCharacterClip);
                 }
             }
         }
@@ -237,9 +244,11 @@ public class CharacterSelectScript : MonoBehaviour
                     Player2Text.SetActive(true);
 
                     if (Player2Pos == 0)
-                        audioJolly.PlayOneShot(onCharacterClip[Player2Pos]);
+                        audioP2.pitch = rogerPitch;
                     else
-                        audioRoger.PlayOneShot(onCharacterClip[Player2Pos]);
+                        audioP2.pitch = jollyPitch;
+
+                    audioP2.PlayOneShot(onCharacterClip[Player2Pos]);
 
                     if (Player1Chosen && Player2Chosen)
                     {
@@ -265,6 +274,8 @@ public class CharacterSelectScript : MonoBehaviour
                     Player2Icon.transform.localPosition += portraitDistance;
                     Player2Text.transform.localPosition += portraitDistance;
                     Player2Pos++;
+                    audioP2.pitch = 1;
+                    audioP2.PlayOneShot(changingCharacterClip);
                 }
             }
             else if (Input.GetButtonDown("Player_Two_Paddle_Left")|| Input.GetAxis("Player_Two_Joystick_Horizontal")<0)
@@ -274,6 +285,8 @@ public class CharacterSelectScript : MonoBehaviour
                     Player2Icon.transform.localPosition -= portraitDistance;
                     Player2Text.transform.localPosition -= portraitDistance;
                     Player2Pos--;
+                    audioP2.pitch = 1;
+                    audioP2.PlayOneShot(changingCharacterClip);
                 }
             }
         }

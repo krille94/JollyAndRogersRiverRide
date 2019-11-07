@@ -3634,7 +3634,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1266298499761956526
 Transform:
   m_ObjectHideFlags: 0
@@ -4884,8 +4884,10 @@ MonoBehaviour:
   ReturnButton: {fileID: 541963358689164583}
   portraitDistance: {x: 6, y: 0, z: 0}
   onCharacterClip:
-  - {fileID: 8300000, guid: c6f5ac71049e92c44a315087655a5c9f, type: 3}
-  - {fileID: 8300000, guid: c6f5ac71049e92c44a315087655a5c9f, type: 3}
+  - {fileID: 8300000, guid: 707e275a6e4c1304bad4698058063214, type: 3}
+  - {fileID: 8300000, guid: c56d43b1662fe8b47b4b4ef2908fae77, type: 3}
+  changingCharacterClip: {fileID: 8300000, guid: 26d34766f24f829428575cedf8c3bfd4,
+    type: 3}
   jollyPitch: 2.5
   rogerPitch: 0.75
 --- !u!1 &1266298500426051909

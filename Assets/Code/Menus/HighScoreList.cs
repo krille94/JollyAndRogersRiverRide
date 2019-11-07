@@ -19,6 +19,9 @@ public class HighScoreList : MonoBehaviour
 
     private int YourPlacement=0;
     private int ScoresPerText = 10;
+    List<char> letters = new List<char>();
+    private int currentLetter;
+    bool canChangeCurrentLetter;
 
     new AudioSource audio;
 
@@ -37,6 +40,7 @@ public class HighScoreList : MonoBehaviour
 
         if (PlayerData.playedGame && PlayerData.score > 0)
         {
+            ControllerLetterToName();
             PlayerData.CalculateScore();
             SortScores();
             CountText();
@@ -67,6 +71,14 @@ public class HighScoreList : MonoBehaviour
             }
             YourPlacement++;
         }
+
+        if (YourPlacement >= 10)
+        {
+            ListScores();
+            ListNames();
+            listView.SetActive(true);
+            audio.PlayOneShot(postGameHighscoreClip);
+        }
     }
     void SaveYourScore()
     { 
@@ -77,14 +89,6 @@ public class HighScoreList : MonoBehaviour
         while (SaveScore.savedGames.Count > 10)
             SaveScore.savedGames.RemoveAt(10);
         SaveScore.Save();
-
-        if (YourPlacement >= 10)
-        {
-            ListScores();
-            ListNames();
-            listView.SetActive(true);
-            audio.PlayOneShot(postGameHighscoreClip);
-        }
     }
 
     // Update is called once per frame
@@ -100,7 +104,28 @@ public class HighScoreList : MonoBehaviour
         else*/
         if (!listView.activeInHierarchy)
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+            if (Input.GetAxis("Player_One_Joystick_Vertical") > 0)
+            {
+                if (canChangeCurrentLetter)
+                {
+                    canChangeCurrentLetter = false;
+                    currentLetter++;
+                    if (currentLetter >= letters.Count) currentLetter = 0;
+                }
+            }
+            else if (Input.GetAxis("Player_One_Joystick_Vertical") < 0)
+            {
+                if (canChangeCurrentLetter)
+                {
+                    canChangeCurrentLetter = false;
+                    currentLetter--;
+                    if (currentLetter < 0) currentLetter = letters.Count - 1;
+                }
+            }
+            else
+                canChangeCurrentLetter = true;
+
+            if (Input.GetKeyDown(KeyCode.Return)|| Input.GetButtonUp("Player_One_Pause"))
             {
                 if (PlayerData.playerName == "") PlayerData.playerName = "Player";
 
@@ -113,13 +138,12 @@ public class HighScoreList : MonoBehaviour
                 listView.SetActive(true);
                 PlayerData.playedGame = false;
                 audio.PlayOneShot(postGameHighscoreClip);
-                CountText();
             }
             else if (Input.anyKeyDown)
             {
                 AddLetterToName();
-                CountText();
             }
+            CountText();
         }
 
     }
@@ -186,17 +210,65 @@ public class HighScoreList : MonoBehaviour
         if (!listView.activeInHierarchy)
         {
             string score = ConvertToTime(PlayerData.score);
-            string setText = "Your score was: " + score + "\nEnter your name:\n" + (YourPlacement + 1).ToString() + ". " + PlayerData.playerName;
+            string setText = "Your score was: " + score + "\nEnter your name:\n" + (YourPlacement + 1).ToString() + ". " + PlayerData.playerName+letters[currentLetter];
             YourScoreText.GetComponent<TextMesh>().text = setText;
         }
         else
             YourScoreText.GetComponent<TextMesh>().text = " ";
     }
 
+    void ControllerLetterToName()
+    {
+        letters.Add('_');
+        letters.Add('a');
+        letters.Add('b');
+        letters.Add('c');
+        letters.Add('d');
+        letters.Add('e');
+        letters.Add('f');
+        letters.Add('g');
+        letters.Add('h');
+        letters.Add('i');
+        letters.Add('j');
+        letters.Add('k');
+        letters.Add('l');
+        letters.Add('m');
+        letters.Add('n');
+        letters.Add('o');
+        letters.Add('p');
+        letters.Add('q');
+        letters.Add('r');
+        letters.Add('s');
+        letters.Add('t');
+        letters.Add('u');
+        letters.Add('v');
+        letters.Add('w');
+        letters.Add('x');
+        letters.Add('y');
+        letters.Add('z');
+        letters.Add('.');
+        letters.Add('!');
+        letters.Add('?');
+        letters.Add('-');
+        letters.Add('+');
+        letters.Add('&');
+        letters.Add('1');
+        letters.Add('2');
+        letters.Add('3');
+        letters.Add('4');
+        letters.Add('5');
+        letters.Add('6');
+        letters.Add('7');
+        letters.Add('8');
+        letters.Add('9');
+        letters.Add('0');
+        letters.Add(' ');
+    }
+
     void AddLetterToName()
     {
         string newLetter = "none";
-             if (Input.GetKeyDown(KeyCode.A)) newLetter = "a";
+        if (Input.GetKeyDown(KeyCode.A)) newLetter = "a";
         else if (Input.GetKeyDown(KeyCode.B)) newLetter = "b";
         else if (Input.GetKeyDown(KeyCode.C)) newLetter = "c";
         else if (Input.GetKeyDown(KeyCode.D)) newLetter = "d";
@@ -238,6 +310,8 @@ public class HighScoreList : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Period)) newLetter = ".";
         else if (Input.GetKeyDown(KeyCode.Equals)) newLetter = "+";
 
+        else if (Input.GetButtonDown("Player_One_Paddle_Forward")) newLetter = letters[currentLetter].ToString();
+
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
             if (newLetter=="1") newLetter = "!";
@@ -246,7 +320,7 @@ public class HighScoreList : MonoBehaviour
             else newLetter = newLetter.ToUpper();
         }
 
-        if (Input.GetKeyDown(KeyCode.Backspace))
+        if (Input.GetKeyDown(KeyCode.Backspace)|| Input.GetButtonDown("Player_One_Paddle_Back"))
         {
             if(PlayerData.playerName.Length>0)
                 PlayerData.playerName = PlayerData.playerName.Substring(0,PlayerData.playerName.Length-1);
@@ -257,6 +331,7 @@ public class HighScoreList : MonoBehaviour
             if(PlayerData.playerName.Length<21)
             {
                 PlayerData.playerName += newLetter;
+                currentLetter = 0;
                 audio.PlayOneShot(typeNameClip);
             }
         }

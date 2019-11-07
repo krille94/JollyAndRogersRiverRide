@@ -91,7 +91,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SurfaceDistortionAmount: 0.42
-    - _SurfaceNoiseCutoff: 0.777
+    - _SurfaceNoiseCutoff: 0.84
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
@@ -104,4 +104,4 @@ Material:
     - _RimColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShorelineColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecularColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
-    - _SurfaceNoiseScroll: {r: 0.05, g: 0.05, b: 0, a: 0}
+    - _SurfaceNoiseScroll: {r: 0.05, g: 0.27, b: 0, a: 0}

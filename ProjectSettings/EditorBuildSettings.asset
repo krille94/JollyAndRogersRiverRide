@@ -8,10 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LogoScene.unity
     guid: 93c6ce8293a96c740a4eeb8d4f6112e4
-  - enabled: 1
-    path: Assets/Scenes/Gameplay Populated.unity
-    guid: 25c35e1b1a70dcd4fb1f64dadef6a31b
-  - enabled: 1
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/MainMenu.unity
     guid: 2ee367aeaecb5b648a5924eb02c89607
   - enabled: 0
@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Agnes.unity
     guid: 4c3a6b5d3e991064e95fec685a1692c1
+  - enabled: 1
+    path: Assets/Scenes/Gameplay Populated.unity
+    guid: d23297d4aeb78eb4790e783654bd1854
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 5851ffe808a4f5c43833535ffcc02feb
   m_configObjects: {}

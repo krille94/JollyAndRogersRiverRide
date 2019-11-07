@@ -79,7 +79,7 @@ public class MenuCameraFlyby : MonoBehaviour
         positionIndex = 0;
         cam.transform.position = positionPoints[positionIndex].position;
         cam.transform.rotation = positionPoints[positionIndex].rotation;
-        cam.fieldOfView = 90;
+        cam.fieldOfView = origFOV;
     }
 
     [SerializeField] bool playOnAwake;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 
 public class TimerScript : MonoBehaviour
@@ -10,6 +11,8 @@ public class TimerScript : MonoBehaviour
     float seconds = 0;
     float timerIncrease = 0;
     [SerializeField] PickUpTrigger trigger = null;
+    new AudioSource audio;
+    [SerializeField] AudioClip reduceTimeSound;
 
     public float popSize = 2;
     public float popAnimSpeed = 1;
@@ -21,6 +24,14 @@ public class TimerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (gameObject.GetComponent<AudioSource>())
+            audio = gameObject.GetComponent<AudioSource>();
+        else
+            audio = gameObject.AddComponent<AudioSource>();
+
+        AudioMixer mix = Resources.Load("AudioMixers/Sound Effects") as AudioMixer;
+        audio.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
+
         //float windowWidth = (float)(Screen.width * 3)/(float)(Screen.height * 4);
         //timerText.transform.localPosition = new Vector3(-1+windowWidth,1.8f, 4);
         normalScale = timerText.transform.localScale;
@@ -51,6 +62,7 @@ public class TimerScript : MonoBehaviour
             else
                 seconds = 0;
         }
+        audio.PlayOneShot(reduceTimeSound);
     }
 
     // Update is called once per frame

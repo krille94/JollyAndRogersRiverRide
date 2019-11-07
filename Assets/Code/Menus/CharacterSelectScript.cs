@@ -71,8 +71,8 @@ public class CharacterSelectScript : MonoBehaviour
         else
         {
             audioP1 = gameObject.AddComponent<AudioSource>();
-            audioP2 = gameObject.AddComponent<AudioSource>();
         }
+        audioP2 = gameObject.AddComponent<AudioSource>();
         AudioMixer mix = Resources.Load("AudioMixers/Sound Effects") as AudioMixer;
         audioP1.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
         audioP2.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];

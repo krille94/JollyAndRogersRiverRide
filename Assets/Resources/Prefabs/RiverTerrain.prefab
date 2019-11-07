@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &185651365
 Transform:
@@ -94,7 +94,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &647643535
 Transform:
@@ -172,7 +172,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &721463702
 Transform:
@@ -250,7 +250,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1018360508
 Transform:
@@ -328,7 +328,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1339075337
 Transform:
@@ -406,7 +406,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1569388110
 Transform:
@@ -484,7 +484,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1606817964
 Transform:
@@ -562,7 +562,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1927816035
 Transform:
@@ -639,7 +639,7 @@ GameObject:
   m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2710173273233136074
 Transform:
@@ -681,17 +681,11 @@ MonoBehaviour:
   arcadeBouance: 100
   physicsBouance: 75000
   minimumSpeed: 0
+  slopeSpeedBoost: -2
+  slopeBoatTurnSpeed: 5
   movementDirection: {x: 0, y: 0, z: 0}
   onImpactEffect: {fileID: 0}
   onImpactSound: {fileID: 0}
-  flow: {x: 0, y: 0, z: 0}
-  node:
-    flowDirection: {x: 0, y: 0, z: 0}
-    flowDirectionOffset: {x: 0, y: 0, z: 0}
-    finalFlowDirection: {x: 0, y: 0, z: 0}
-    centerVector: {x: 0, y: 0, z: 0}
-    centerVectorOffset: {x: 0, y: 0, z: 0}
-  heightAboveWater: 0
 --- !u!1 &2710173274147567664
 GameObject:
   m_ObjectHideFlags: 0
@@ -710,7 +704,7 @@ GameObject:
   m_TagString: River
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2710173274147567667
 Transform:
@@ -793,6 +787,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uniqName: RiverAssetName
+  autoUpdateMesh: 0
   vertices:
   - {x: 0, y: 0, z: 0}
   - {x: 1, y: 0, z: 0}
@@ -816,34 +811,38 @@ MonoBehaviour:
   - {x: 1, y: 5}
   - {x: 0, y: 7}
   - {x: 1, y: 7}
-  lenght: 5
-  autoUpdateMesh: 0
   nodes:
   - flowDirection: {x: 0, y: 0, z: 1}
     flowDirectionOffset: {x: -0, y: 0, z: 0}
     finalFlowDirection: {x: 0, y: 0, z: 0}
     centerVector: {x: 0.5, y: 0, z: 0}
     centerVectorOffset: {x: 0, y: 0, z: 0}
+    index: 0
   - flowDirection: {x: 0, y: 0, z: 1}
     flowDirectionOffset: {x: -0, y: 0, z: 0}
     finalFlowDirection: {x: 0, y: 0, z: 0}
     centerVector: {x: 0.5, y: 0, z: 1}
     centerVectorOffset: {x: 0, y: 0, z: 0}
+    index: 0
   - flowDirection: {x: 0, y: 0, z: 1}
     flowDirectionOffset: {x: -0, y: 0, z: 0}
     finalFlowDirection: {x: 0, y: 0, z: 0}
     centerVector: {x: 0.5, y: 0, z: 3}
     centerVectorOffset: {x: 0, y: 0, z: 0}
+    index: 0
   - flowDirection: {x: 0, y: 0, z: 1}
     flowDirectionOffset: {x: -0, y: 0, z: 0}
     finalFlowDirection: {x: 0, y: 0, z: 0}
     centerVector: {x: 0.5, y: 0, z: 5}
     centerVectorOffset: {x: 0, y: 0, z: 0}
+    index: 0
   - flowDirection: {x: 0, y: 0, z: 1}
     flowDirectionOffset: {x: -0, y: 0, z: 0}
     finalFlowDirection: {x: 0, y: 0, z: 0}
     centerVector: {x: 0.5, y: 0, z: 7}
     centerVectorOffset: {x: 0, y: 0, z: 0}
+    index: 0
+  lenght: 5
   downwardAngle: -5
 --- !u!65 &6053473308520520231
 BoxCollider:

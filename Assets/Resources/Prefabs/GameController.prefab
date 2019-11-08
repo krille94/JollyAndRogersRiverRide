@@ -81,8 +81,11 @@ MonoBehaviour:
   - position: {x: -9.21, y: -9.86, z: 233.54}
     rotation: {x: 0, y: 0.1, z: 0, w: 1}
     duration: 2
-  - position: {x: 15, y: 15, z: 15}
-    rotation: {x: 0.38268343, y: -0, z: -0, w: 0.92387956}
+  - position: {x: -6.33, y: -15.45, z: 142.94}
+    rotation: {x: -0.05, y: 0.15, z: 0, w: 0.92387956}
+    duration: 2
+  - position: {x: 10, y: 9, z: 15}
+    rotation: {x: 0.14, y: 0, z: -0, w: 0.92387956}
     duration: 2
   translateSpeed: 0.5
   rotateSpeed: 2
@@ -788,6 +791,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+  onLoadToMenu:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &563693997
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -955,12 +961,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1266298499081352867, guid: ded945cacf34ca341a3fb9b473cb2e28,
+    - target: {fileID: 8926851553567890672, guid: ded945cacf34ca341a3fb9b473cb2e28,
         type: 3}
-      propertyPath: m_audioClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 7bf4a4a56a4ac5340b40cae899591ada, type: 3}
-    - target: {fileID: 1266298500148437687, guid: ded945cacf34ca341a3fb9b473cb2e28,
+      propertyPath: m_Color.rgba
+      value: 4278235135
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266298499285376586, guid: ded945cacf34ca341a3fb9b473cb2e28,
+        type: 3}
+      propertyPath: m_Color.rgba
+      value: 4278235135
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266298499081352867, guid: ded945cacf34ca341a3fb9b473cb2e28,
         type: 3}
       propertyPath: m_audioClip
       value: 
@@ -975,16 +986,11 @@ PrefabInstance:
       propertyPath: rogerPitch
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1266298499285376586, guid: ded945cacf34ca341a3fb9b473cb2e28,
+    - target: {fileID: 1266298500148437687, guid: ded945cacf34ca341a3fb9b473cb2e28,
         type: 3}
-      propertyPath: m_Color.rgba
-      value: 4278235135
-      objectReference: {fileID: 0}
-    - target: {fileID: 8926851553567890672, guid: ded945cacf34ca341a3fb9b473cb2e28,
-        type: 3}
-      propertyPath: m_Color.rgba
-      value: 4278235135
-      objectReference: {fileID: 0}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7bf4a4a56a4ac5340b40cae899591ada, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded945cacf34ca341a3fb9b473cb2e28, type: 3}
 --- !u!4 &4986016283041531882 stripped

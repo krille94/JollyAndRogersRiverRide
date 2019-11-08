@@ -6801,26 +6801,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultSaves:
-  - name: 
-    score: 0
-  - name: 
-    score: 0
-  - name: 
-    score: 0
-  - name: 
-    score: 0
-  - name: 
-    score: 0
-  - name: 
-    score: 0
-  - name: 
-    score: 0
-  - name: 
-    score: 0
-  - name: 
-    score: 0
-  - name: 
-    score: 0
+  - name: hello 1
+    score: 102
+  - name: hello 2
+    score: 111
+  - name: hello 3
+    score: 115
+  - name: 'The '
+    score: 128
+  - name: Highscore
+    score: 139
+  - name: Names
+    score: 152
+  - name: 'are '
+    score: 161
+  - name: not
+    score: 168
+  - name: here
+    score: 189
+  - name: yet
+    score: 200
 --- !u!1 &7767131255741260873
 GameObject:
   m_ObjectHideFlags: 0
@@ -6940,7 +6940,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7844331244158926003}
   m_LocalRotation: {x: 0.7071067, y: 0.000000029802322, z: 0.000000029802322, w: 0.70710695}
-  m_LocalPosition: {x: -5.8599353, y: 0.10899523, z: 1.2616847}
+  m_LocalPosition: {x: -4.69, y: 0.02, z: 0.72}
   m_LocalScale: {x: 0.71018803, y: 0.4780222, z: 0.5266369}
   m_Children: []
   m_Father: {fileID: 3549091623091290030}

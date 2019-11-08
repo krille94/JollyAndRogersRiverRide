@@ -224,7 +224,6 @@ public class BoatClass : FloatingObject
         waterLines_1.SetPositions(line_1_positions.ToArray());
 
         float followRiver = (closestNode.finalFlowDirection.x - transform.localRotation.y);
-        //followRiver = Vector3.Dot(closestNode.finalFlowDirection, transform.localRotation.eulerAngles);
 
         if (followRiver < -0.5f || followRiver > 0.5f)
             followRiver = 0;

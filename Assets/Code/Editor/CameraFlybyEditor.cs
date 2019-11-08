@@ -54,6 +54,9 @@ public class CameraFlybyEditor : Editor
             Vector3 pOne = tool.positionPoints[i].position;
             Vector3 pTwo = tool.positionPoints[i + 1].position;
             Handles.DrawLine(pOne, pTwo);
+
+            Handles.DrawArrow(0, tool.positionPoints[i].position, tool.positionPoints[i].rotation, 10);
         }
+        Handles.DrawArrow(0, tool.positionPoints[tool.positionPoints.Length - 1].position, tool.positionPoints[tool.positionPoints.Length - 1].rotation, 10);
     }
 }

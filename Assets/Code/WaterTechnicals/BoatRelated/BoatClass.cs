@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Audio;
+using XInputDotNetPure;
 
 public class BoatClass : FloatingObject
 {
@@ -122,6 +123,9 @@ public class BoatClass : FloatingObject
         }
     }
     #endregion
+
+    GamePad gamePad_0;
+    GamePad gamePad_1;
 
     protected override void Initialize()
     {
@@ -269,6 +273,12 @@ public class BoatClass : FloatingObject
         return MaxHull - hull;
     }
 
+    private void OnCollisionExit(Collision collision)
+    {
+        GamePad.SetVibration(PlayerIndex.One, 0, 0);
+        GamePad.SetVibration(PlayerIndex.Two, 0, 0);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.transform.tag == "Item" || collision.transform.tag == "River")
@@ -279,6 +289,9 @@ public class BoatClass : FloatingObject
             GameController.instance.OnVictory();
             return;
         }
+
+        GamePad.SetVibration(PlayerIndex.One, 3, 3);
+        GamePad.SetVibration(PlayerIndex.Two, 3, 3);
 
         /*
         if (invincible == false&&hull>0)

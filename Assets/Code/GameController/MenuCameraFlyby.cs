@@ -129,7 +129,8 @@ public class MenuCameraFlyby : MonoBehaviour
 
         if (positionIndex == positionPoints.Length-2)
         {
-            cam.fieldOfView-=(origFOV-finalFOV)*(Time.deltaTime / positionPoints[positionIndex].duration);
+            if(origFOV!=finalFOV)
+                cam.fieldOfView-=(origFOV-finalFOV)*(Time.deltaTime / positionPoints[positionIndex].duration);
         }
 
         if (Vector3.Distance(cam.transform.position, positionPoints[positionIndex].position) <= stopingDistance)

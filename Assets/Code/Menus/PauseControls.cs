@@ -43,7 +43,7 @@ public class PauseControls : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Escape) || Input.GetButtonUp("Player_One_Pause") || Input.GetButtonUp("Player_Two_Pause"))
         {
-            if (GameController.isPlaying)
+            if (GameController.isPlaying && !GameController.instance.GetClearGame())
             {
                 if (!pausePanel.activeInHierarchy)
                 {

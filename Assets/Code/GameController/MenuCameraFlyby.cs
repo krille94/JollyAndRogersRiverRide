@@ -124,7 +124,7 @@ public class MenuCameraFlyby : MonoBehaviour
 
         timeSpent += Time.deltaTime;
 
-        cam.transform.position = Vector3.Slerp(oriPos, positionPoints[positionIndex].position, timeSpent / positionPoints[positionIndex].duration);
+        cam.transform.position = Vector3.Lerp(oriPos, positionPoints[positionIndex].position, timeSpent / positionPoints[positionIndex].duration);
         cam.transform.rotation = Quaternion.Slerp(oriRot, positionPoints[positionIndex].rotation, timeSpent / positionPoints[positionIndex].duration);
 
         if (positionIndex == positionPoints.Length-2)
@@ -150,10 +150,12 @@ public class MenuCameraFlyby : MonoBehaviour
                 {
                     if (positionIndex >= positionPoints.Length)
                     {
-                        if (endOnCam != null)
-                        {   RemoveCameraPosition(positionIndex - 1);
-                            RemoveCameraPosition(positionIndex - 2);    }
-
+                        /*if (endOnCam != null)
+                        {
+                            RemoveCameraPosition(positionIndex - 1);
+                            RemoveCameraPosition(positionIndex - 2);
+                        }
+                        */
                         onCompleted.Invoke();
                         this.enabled = false;
                         isPlaying = false;

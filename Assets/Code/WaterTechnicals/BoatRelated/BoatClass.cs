@@ -42,6 +42,9 @@ public class BoatClass : FloatingObject
     [SerializeField] private LineRenderer waterLines_0,waterLines_1;
     [SerializeField] private float waterLinesLenght;
 
+    [SerializeField] private GameObject waterWaveLeft;
+    [SerializeField] private GameObject waterWaveRight;
+
     #region Damage Functions
     /*public void OnDeath()
     {
@@ -194,7 +197,6 @@ public class BoatClass : FloatingObject
             }
         }
 
-
         UpdateVFXs();
 
     }
@@ -220,6 +222,25 @@ public class BoatClass : FloatingObject
         line_1_positions.Add(Vector3.Lerp(line_1_positions[0], line_1_positions[0] - body.velocity, Time.deltaTime * waterLinesLenght * body.velocity.magnitude));
         line_1_positions[0] = collider.ClosestPoint(line_1_positions[1]);
         waterLines_1.SetPositions(line_1_positions.ToArray());
+
+        float followRiver = (closestNode.finalFlowDirection.x - transform.localRotation.y);
+        //followRiver = Vector3.Dot(closestNode.finalFlowDirection, transform.localRotation.eulerAngles);
+
+        if (followRiver < -0.5f || followRiver > 0.5f)
+            followRiver = 0;
+        else
+        {
+            followRiver *= 2;
+            if (followRiver < 0) followRiver = -followRiver;
+            followRiver = 1 - followRiver;
+        }
+
+        //Debug.LogError(followRiver);
+
+        Vector3 scale = waterWaveLeft.transform.localScale;
+        scale.x = followRiver * body.velocity.magnitude*5;
+        waterWaveLeft.transform.localScale = scale;
+        waterWaveRight.transform.localScale = scale;
     }
 
     public void UpdateDamage(int customSpeed=-1)

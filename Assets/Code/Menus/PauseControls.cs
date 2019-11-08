@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class PauseControls : MonoBehaviour
     [SerializeField] private GameObject pausePanel = null;
 
     private GameObject main, options, howtoplay;
+    private bool pauseDelay = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +24,10 @@ public class PauseControls : MonoBehaviour
         main=GameObject.Find("Pause Main Menu");
         options=GameObject.Find("Pause Options Menu");
         howtoplay=GameObject.Find("Pause How To Play Menu");
+        if (main == null)
+            Debug.LogWarning("'Main' Menu Missing");
+        else
+            main.SetActive(false);
         if (options == null)
             Debug.LogWarning("'Options' Menu Missing");
         else
@@ -41,6 +47,13 @@ public class PauseControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(pauseDelay)
+        {
+            pausePanel.SetActive(true);
+            main.SetActive(true);
+            pauseDelay = false;
+        }
+
         if (Input.GetKeyUp(KeyCode.Escape) || Input.GetButtonUp("Player_One_Pause") || Input.GetButtonUp("Player_Two_Pause"))
         {
             if (GameController.isPlaying && !GameController.instance.GetClearGame())
@@ -59,19 +72,18 @@ public class PauseControls : MonoBehaviour
 
     private void PauseGame()
     {
+        pauseDelay = true;
         Time.timeScale = 0;
-        pausePanel.SetActive(true);
-        //Disable scripts that still work while timescale is set to 0
     }
+    
     private void ContinueGame()
     {
         Time.timeScale = 1;
 
-        main.SetActive(true);
+        main.SetActive(false);
         options.SetActive(false);
         howtoplay.SetActive(false);
 
         pausePanel.SetActive(false);
-        //enable the scripts again
     }
 }

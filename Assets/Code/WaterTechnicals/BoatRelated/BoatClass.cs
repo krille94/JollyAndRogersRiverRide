@@ -277,6 +277,8 @@ public class BoatClass : FloatingObject
     {
         GamePad.SetVibration(PlayerIndex.One, 0, 0);
         GamePad.SetVibration(PlayerIndex.Two, 0, 0);
+        GamePad.SetVibration(PlayerIndex.Three, 0, 0);
+        GamePad.SetVibration(PlayerIndex.Four, 0, 0);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -290,8 +292,10 @@ public class BoatClass : FloatingObject
             return;
         }
 
-        GamePad.SetVibration(PlayerIndex.One, 3, 3);
-        GamePad.SetVibration(PlayerIndex.Two, 3, 3);
+        GamePad.SetVibration(PlayerIndex.One, 30, 30);
+        GamePad.SetVibration(PlayerIndex.Two, 30, 30);
+        GamePad.SetVibration(PlayerIndex.Three, 30, 30);
+        GamePad.SetVibration(PlayerIndex.Four, 30, 30);
 
         /*
         if (invincible == false&&hull>0)

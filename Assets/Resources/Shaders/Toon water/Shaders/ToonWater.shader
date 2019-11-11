@@ -94,6 +94,12 @@
                 v2f o;
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
+
+				float3 p = o.vertex.xyz;
+				float k = 2 * UNITY_PI / 10;
+				p.y += sin(k * p.x);
+				o.vertex.xyz = p;
+
 				o.screenPosition = ComputeScreenPos(o.vertex);
 				o.distortUV = TRANSFORM_TEX(v.uv, _SurfaceDistortion);
 				o.noiseUV = TRANSFORM_TEX(v.uv, _SurfaceNoise);

@@ -130,12 +130,12 @@ TextMesh:
 
     ROW FORWARDS/BACKWARDS: A/B.'
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 0.75
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 29
+  m_FontSize: 58
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -240,12 +240,12 @@ TextMesh:
   m_GameObject: {fileID: 3095138622848178741}
   m_Text: Return
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 32
+  m_FontSize: 64
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -616,12 +616,12 @@ TextMesh:
   m_GameObject: {fileID: 5863180796064859215}
   m_Text: Resume
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 32
+  m_FontSize: 64
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -887,12 +887,12 @@ TextMesh:
   m_GameObject: {fileID: 5863180796460392017}
   m_Text: Options
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 32
+  m_FontSize: 64
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -1160,12 +1160,12 @@ TextMesh:
   m_Text: "Reach the end of the river as fast as you can! \nBut be careful; Collisions
     slow you down!"
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 28
+  m_FontSize: 56
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -1363,12 +1363,12 @@ TextMesh:
   m_GameObject: {fileID: 5863180797037206591}
   m_Text: Restart
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 32
+  m_FontSize: 64
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -1602,12 +1602,12 @@ TextMesh:
   m_GameObject: {fileID: 5863180797098899369}
   m_Text: 'SFX: ON'
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 32
+  m_FontSize: 64
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -1841,12 +1841,12 @@ TextMesh:
   m_GameObject: {fileID: 5863180797108661759}
   m_Text: 'Music: ON'
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 32
+  m_FontSize: 64
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -2115,12 +2115,12 @@ TextMesh:
   m_GameObject: {fileID: 5863180797318849142}
   m_Text: Return
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 32
+  m_FontSize: 64
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -2354,12 +2354,12 @@ TextMesh:
   m_GameObject: {fileID: 5863180797414763162}
   m_Text: Main Menu
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 32
+  m_FontSize: 64
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -2592,12 +2592,12 @@ TextMesh:
 
     ROW FORWARDS/BACKWARDS: A/B.'
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 0.75
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 29
+  m_FontSize: 58
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -2740,12 +2740,12 @@ TextMesh:
 
 '
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 32
+  m_FontSize: 64
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -2979,12 +2979,12 @@ TextMesh:
   m_GameObject: {fileID: 6322807175296324467}
   m_Text: 'AutoPaddle: OFF'
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 1
   m_Anchor: 0
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 32
+  m_FontSize: 64
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}
@@ -3242,8 +3242,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7868106783808081060}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0, y: -0, z: -4.32}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: -4.32}
+  m_LocalScale: {x: 0.8, y: 1, z: 0.8}
   m_Children:
   - {fileID: 8935235072925470358}
   m_Father: {fileID: 5863180796653746927}
@@ -3299,12 +3299,12 @@ TextMesh:
 
 '
   m_OffsetZ: 0
-  m_CharacterSize: 0.25
+  m_CharacterSize: 0.12
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 46
+  m_FontSize: 92
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ace6a965401778a4d95010b77eb2b347, type: 3}

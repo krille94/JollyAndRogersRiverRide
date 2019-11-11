@@ -116,6 +116,8 @@ public class PlayerSpot : MonoBehaviour
         if (GameController.instance.GetClearGame())
             return;
 
+        autoPaddle = UserSettings.GetAutoPaddle();
+
         #region Input
         bool rightKey;
         bool leftKey;

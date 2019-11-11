@@ -267,6 +267,7 @@ public class PlayerSpot : MonoBehaviour
                         chargingBoost = false;
                         fullyChargedBoost = false;
                         animator.SetTrigger("Paddle");
+                        animator.SetBool("isPaddling", true);
                         /*
                         if (fullyChargedBoost)
                         {
@@ -289,6 +290,7 @@ public class PlayerSpot : MonoBehaviour
                         chargingBoost = false;
                         fullyChargedBoost = false;
                         animator.SetTrigger("Paddle");
+                        animator.SetBool("isPaddling", true);
                         /*
                         if (fullyChargedBoost)
                         {
@@ -306,6 +308,5 @@ public class PlayerSpot : MonoBehaviour
             }
         }
 
-        animator.SetBool("isPaddling", isPaddling);
     }
 }

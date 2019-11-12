@@ -181,8 +181,10 @@ public class PlayerSpot : MonoBehaviour
         {
             paddlingTime += Time.deltaTime;
 
-            if (paddlingTime >= paddleTime/2)
+            if (paddlingTime >= paddleTime/4)
+            {
                 animator.SetBool("isPaddling", false);
+            }
 
             if (paddlingTime >= paddleTime)
             {

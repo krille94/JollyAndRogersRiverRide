@@ -12,8 +12,8 @@ public class LoadingScript : MonoBehaviour
         // Press the space key to start coroutine
         if (!startedLoading)
         {
-            //pauseDelay += Time.deltaTime;
-            //if (pauseDelay > 0.2f)
+            pauseDelay += Time.deltaTime;
+            if (pauseDelay > 0.2f)
             {
                 startedLoading = true;
                 // Use a coroutine to load the Scene in the background

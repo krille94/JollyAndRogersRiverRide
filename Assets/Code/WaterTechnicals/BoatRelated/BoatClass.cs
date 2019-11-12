@@ -32,7 +32,7 @@ public class BoatClass : FloatingObject
     public delegate void OnDamageRecived(float value, Vector3 point);
     public OnDamageRecived onDamaged;
     public ParticleSystem onDamagedParticlePrefab;
-    private GameObject WaterLevel = null;
+    [SerializeField] private GameObject[] BoatInWaterGraphics;
     [SerializeField] private AudioClip[] onDamagedSoundClips;
     [SerializeField] private AudioClip[] addWaterInBoatClips;
     [SerializeField] private AudioClip[] removeWaterInBoatClips;
@@ -85,42 +85,23 @@ public class BoatClass : FloatingObject
             _texture = Resources.Load("Materials/Menus/Boat_8") as Texture;
         healthBar.GetComponent<Renderer>().material.mainTexture = _texture;
 
-        //Debug.Log(_texture.name);
-        if (hull == MaxHull)
+        foreach(GameObject ob in BoatInWaterGraphics)
         {
-            if (WaterLevel != null)
-                WaterLevel.SetActive(false);
+            ob.SetActive(false);
         }
-        else
-        {
-            if (WaterLevel == null)
-            {
-                // Rewrite this once we have the proper dimensions and such
-                GameObject newObj;
-                newObj = GameObject.CreatePrimitive(PrimitiveType.Plane);
-                Destroy(newObj.GetComponent<MeshCollider>());
-                //newObj.GetComponent<MeshCollider>().convex = true;
-                newObj.name = "Boat Water";
-                newObj.transform.parent = gameObject.transform;
 
-                newObj.transform.localScale = new Vector3(0.3f, 1, 0.45f);
-                newObj.transform.localEulerAngles = new Vector3(0, 0, 0);
+        if (boatImg == 1) { }
+        else if (boatImg >= 0.8f && BoatInWaterGraphics.Length >= 1)
+            BoatInWaterGraphics[0].SetActive(true);
+        else if (boatImg >= 0.6f && BoatInWaterGraphics.Length >= 2)
+            BoatInWaterGraphics[1].SetActive(true);
+        else if (boatImg >= 0.4f && BoatInWaterGraphics.Length >= 3)
+            BoatInWaterGraphics[2].SetActive(true);
+        else if (boatImg >= 0.2f && BoatInWaterGraphics.Length >= 4)
+            BoatInWaterGraphics[3].SetActive(true);
+        else if (boatImg >= 0 && BoatInWaterGraphics.Length >= 5)
+            BoatInWaterGraphics[4].SetActive(true);
 
-                Material newMat = Resources.Load("Materials/SimpleWater", typeof(Material)) as Material;
-                if (newMat != null)
-                    newObj.GetComponent<MeshRenderer>().material = newMat;
-                else
-                    Debug.LogWarning("Error: Material not found");
-
-                WaterLevel = newObj;
-            }
-            else if (!WaterLevel.activeInHierarchy)
-                WaterLevel.SetActive(true);
-
-            float waterHeight;
-            waterHeight = (float)(hull - 1) / (float)(MaxHull - 1);
-            WaterLevel.transform.localPosition = new Vector3(0, 0.1f + (0.7f * (1 - waterHeight)), 0.4f);
-        }
     }
     #endregion
 
@@ -133,6 +114,9 @@ public class BoatClass : FloatingObject
 
         hull = MaxHull;
         trigger.onHealDamage += RecoverHull;
+
+        foreach (GameObject ob in BoatInWaterGraphics)
+        {   ob.SetActive(false);    }
 
         healthBar = GameObject.Find("HealthBar");
 

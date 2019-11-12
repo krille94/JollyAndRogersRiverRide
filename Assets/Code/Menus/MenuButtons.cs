@@ -12,7 +12,7 @@ public class MenuButtons : MonoBehaviour
     public enum ButtonActions { None, StartGame, ResumeGame, Highscores, ChangeMenu, ChangeOptions, QuitToMainMenu, QuitApplication }
     [HideInInspector] public ButtonActions buttonAction = 0;
 
-    public enum OptionTypes { None, Audio, Controls, ReverseControls, AutoPaddle }
+    public enum OptionTypes { None, Audio, Controls, ReverseControls, AutoPaddle, ResetHighscores }
     [HideInInspector] public OptionTypes optionType = 0;
 
     [SerializeField] AudioSource onClickSound;
@@ -114,6 +114,12 @@ public class MenuButtons : MonoBehaviour
                     GetComponent<TextMesh>().text = "New Control Scheme";
                 }
                 UserSettings.ReadSettings();
+            }
+            if (optionType.ToString() == "ResetHighscores")
+            {
+                SaveScore.Reset();
+                CurrentMenu.SetActive(false);
+                NextMenu.SetActive(true);
             }
             if (optionType.ToString() == "Audio")
             {

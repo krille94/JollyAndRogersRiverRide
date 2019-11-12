@@ -10,6 +10,7 @@ public class JustEnteredMenuScript : MonoBehaviour
     private GameObject HighscoreMenu;
     private GameObject OptionsMenu;
     private GameObject CreditsMenu;
+    private GameObject ResetMenu;
     private List<GameObject> options = new List<GameObject>();
 
     // Start is called before the first frame update
@@ -34,6 +35,7 @@ public class JustEnteredMenuScript : MonoBehaviour
         HighscoreMenu = GameObject.Find("Highscore Menu");
         OptionsMenu = GameObject.Find("Options Menu");
         CreditsMenu = GameObject.Find("Credits Menu");
+        ResetMenu = GameObject.Find("Reset Warning");
 
         options.Add(GameObject.Find("Music Volume"));
         options.Add(GameObject.Find("SFX Volume"));
@@ -86,5 +88,7 @@ public class JustEnteredMenuScript : MonoBehaviour
 
         if (menu == "How To Play Menu") HowToPlayMenu.SetActive(true);
         else HowToPlayMenu.SetActive(false);
+
+        ResetMenu.SetActive(false);
     }
 }

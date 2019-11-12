@@ -20,8 +20,13 @@ public class PauseControls : MonoBehaviour
         temp = GameObject.Find("SFX Button");
         if (UserSettings.GetVolume("SFX") == -80)
             temp.GetComponent<TextMesh>().text = "SFX: OFF";
+        temp = GameObject.Find("AutoPaddle Button");
+        if (UserSettings.GetAutoPaddle() == false)
+            temp.GetComponent<TextMesh>().text = "Auto Paddle: OFF";
+        else
+            temp.GetComponent<TextMesh>().text = "Auto Paddle: ON";
 
-        main=GameObject.Find("Pause Main Menu");
+        main =GameObject.Find("Pause Main Menu");
         options=GameObject.Find("Pause Options Menu");
         howtoplay=GameObject.Find("Pause How To Play Menu");
         if (main == null)

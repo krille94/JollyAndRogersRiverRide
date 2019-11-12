@@ -26,6 +26,11 @@ public class MenuButtonsEditor : Editor
         if (tool.buttonAction.ToString()=="ChangeOptions")
         {
             tool.optionType = (MenuButtons.OptionTypes) EditorGUILayout.EnumPopup("Option Type", tool.optionType);
+            if(tool.optionType.ToString()=="ResetHighscores")
+            {
+                tool.CurrentMenu = (GameObject)EditorGUILayout.ObjectField("Move From Menu", tool.CurrentMenu, typeof(GameObject), true);
+                tool.NextMenu = (GameObject)EditorGUILayout.ObjectField("Move To Menu", tool.NextMenu, typeof(GameObject), true);
+            }
         }
         if (tool.buttonAction.ToString() == "ChangeMenu"|| tool.buttonAction.ToString() == "Highscores")
         {

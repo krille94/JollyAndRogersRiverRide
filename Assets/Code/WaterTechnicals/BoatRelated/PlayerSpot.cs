@@ -116,6 +116,8 @@ public class PlayerSpot : MonoBehaviour
         if (GameController.instance.GetClearGame())
             return;
 
+        autoPaddle = UserSettings.GetAutoPaddle();
+
         #region Input
         bool rightKey;
         bool leftKey;
@@ -266,7 +268,8 @@ public class PlayerSpot : MonoBehaviour
 
                         chargingBoost = false;
                         fullyChargedBoost = false;
-                        animator.SetTrigger("Paddle");
+                        animator.SetBool("paddleForward", true);
+                        animator.SetBool("isPaddling", true);
                         /*
                         if (fullyChargedBoost)
                         {
@@ -288,7 +291,8 @@ public class PlayerSpot : MonoBehaviour
 
                         chargingBoost = false;
                         fullyChargedBoost = false;
-                        animator.SetTrigger("Paddle");
+                        animator.SetBool("paddleForward", false);
+                        animator.SetBool("isPaddling", true);
                         /*
                         if (fullyChargedBoost)
                         {
@@ -306,6 +310,5 @@ public class PlayerSpot : MonoBehaviour
             }
         }
 
-        animator.SetBool("isPaddling", isPaddling);
     }
 }

@@ -229,11 +229,11 @@ public class BoatClass : FloatingObject
 
         float followRiver = (closestNode.finalFlowDirection.x - transform.localRotation.y);
 
-        if (followRiver < -0.5f || followRiver > 0.5f)
+        /*if (followRiver < -0.5f || followRiver > 0.5f)
             followRiver = 0;
-        else
+        else*/
         {
-            followRiver *= 2;
+            //followRiver *= 2;
             if (followRiver < 0) followRiver = -followRiver;
             followRiver = 1 - followRiver;
         }
@@ -242,8 +242,17 @@ public class BoatClass : FloatingObject
 
         Vector3 scale = waterWaveLeft.transform.localScale;
         scale.x = followRiver * body.velocity.magnitude*5;
+        scale.z = followRiver * body.velocity.magnitude * 5;
+        if (scale.x < 0) scale.x = -scale.x;
+        if (scale.z < 0) scale.z = -scale.z;
         waterWaveLeft.transform.localScale = scale;
         waterWaveRight.transform.localScale = scale;
+        Vector3 waterWavePos = waterWaveLeft.transform.localPosition;
+        waterWavePos.y = 0.7f - (scale.x / 200);
+        waterWaveLeft.transform.localPosition = waterWavePos;
+        waterWavePos = waterWaveRight.transform.localPosition;
+        waterWavePos.y = 0.7f - (scale.x / 200);
+        waterWaveRight.transform.localPosition = waterWavePos;
     }
 
     public void UpdateDamage(int customSpeed=-1)

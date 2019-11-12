@@ -9,6 +9,7 @@ public static class SaveScore
     public static List<Highscore> savedGames = new List<Highscore>();
 
     public static int BestScore;
+    private static string filename = "Highscore.gd";
 
     public static void Save()
     {
@@ -20,7 +21,7 @@ public static class SaveScore
         //savedGames.Add(Highscore.current);
         BinaryFormatter bf = new BinaryFormatter();
         //FileStream file = File.Create(Path.Combine(Application.persistentDataPath, "Highscore.gd"));
-        FileStream file = File.Create("Highscore.gd");
+        FileStream file = File.Create(filename);
         bf.Serialize(file, SaveScore.savedGames);
         //bf.Serialize(file, YourScore);
         file.Close();
@@ -30,11 +31,11 @@ public static class SaveScore
     {
         //if (File.Exists(Path.Combine(Application.persistentDataPath, "Highscore.gd")))
 
-        if (File.Exists("Highscore.gd"))
+        if (File.Exists(filename))
         {
             BinaryFormatter bf = new BinaryFormatter();
             //FileStream file = File.Open(Path.Combine(Application.persistentDataPath, "Highscore.gd"), FileMode.Open);
-            FileStream file = File.Open("Highscore.gd", FileMode.Open);
+            FileStream file = File.Open(filename, FileMode.Open);
             SaveScore.savedGames = (List<Highscore>)bf.Deserialize(file);
             //YourScore = (int)bf.Deserialize(file);
             file.Close();
@@ -44,12 +45,23 @@ public static class SaveScore
             for (int i = 0; i < 10; i++)
                 SetDefaultHighscores(i);
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Create("Highscore.gd");
+            FileStream file = File.Create(filename);
             bf.Serialize(file, SaveScore.savedGames);
             file.Close();
         }
 
         //HighScore.score = YourScore;
+    }
+
+    public static void Reset()
+    {
+        savedGames.Clear();
+        for (int i = 0; i < 10; i++)
+            SetDefaultHighscores(i);
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(filename);
+        bf.Serialize(file, SaveScore.savedGames);
+        file.Close();
     }
 
     private static void SetDefaultHighscores(int i)

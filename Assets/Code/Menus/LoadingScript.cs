@@ -12,6 +12,7 @@ public class LoadingScript : MonoBehaviour
         // Press the space key to start coroutine
         if (!startedLoading)
         {
+            Time.timeScale = 1;
             pauseDelay += Time.deltaTime;
             if (pauseDelay > 0.2f)
             {

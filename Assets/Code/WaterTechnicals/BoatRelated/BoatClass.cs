@@ -46,6 +46,8 @@ public class BoatClass : FloatingObject
     [SerializeField] private GameObject waterWaveLeft;
     [SerializeField] private GameObject waterWaveRight;
 
+    [SerializeField] float vibrationAmount = 30;
+
     #region Damage Functions
     /*public void OnDeath()
     {
@@ -287,11 +289,11 @@ public class BoatClass : FloatingObject
             GameController.instance.OnVictory();
             return;
         }
-
-        GamePad.SetVibration(PlayerIndex.One, 30, 30);
-        GamePad.SetVibration(PlayerIndex.Two, 30, 30);
-        GamePad.SetVibration(PlayerIndex.Three, 30, 30);
-        GamePad.SetVibration(PlayerIndex.Four, 30, 30);
+         
+        GamePad.SetVibration(PlayerIndex.One, vibrationAmount, vibrationAmount);
+        GamePad.SetVibration(PlayerIndex.Two, vibrationAmount, vibrationAmount);
+        GamePad.SetVibration(PlayerIndex.Three, vibrationAmount, vibrationAmount);
+        GamePad.SetVibration(PlayerIndex.Four, vibrationAmount, vibrationAmount);
 
         /*
         if (invincible == false&&hull>0)

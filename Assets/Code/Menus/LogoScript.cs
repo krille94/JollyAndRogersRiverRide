@@ -14,7 +14,7 @@ public class LogoScript : MonoBehaviour
     float alpha;
     Color color;
     new Component[] renderer;
-
+    bool done = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,10 +27,14 @@ public class LogoScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (done)
+            return;
         timer += Time.deltaTime;
         if (timer >= FadeInTimer + PauseTimer + FadeOutTimer+PostFadeTimer+PreFadeTimer)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene(2);
+            done = true;
+            return;
         }
         else if (timer >= FadeInTimer + PauseTimer + FadeOutTimer + PreFadeTimer)
         {

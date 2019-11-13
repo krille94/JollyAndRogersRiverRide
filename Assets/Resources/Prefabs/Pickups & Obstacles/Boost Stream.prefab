@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7453566989575264581}
   - component: {fileID: 7453566989575264580}
   - component: {fileID: 7453566989575264577}
+  - component: {fileID: 5407102145725284763}
   m_Layer: 0
   m_Name: Boost Stream
   m_TagString: Boost
@@ -106,3 +107,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   strength: 15
+--- !u!114 &5407102145725284763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7453566989575264603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd125036a1146fb4da2f427b34e7ca98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animTextures:
+  - {fileID: 2800000, guid: 03b0f1290abce364cb3d3634e13d426d, type: 3}
+  - {fileID: 2800000, guid: 6909f801fc4a462478848a39aa3294ff, type: 3}
+  - {fileID: 2800000, guid: bcb9da73f411884458976dd4c30b260c, type: 3}
+  - {fileID: 2800000, guid: d90f21f938d7392469bd57cb683671eb, type: 3}
+  - {fileID: 2800000, guid: 46c5be672f1c8f14fa13bb7b621eaa0f, type: 3}
+  - {fileID: 2800000, guid: 31db8190e6f762145930f642a7d47c99, type: 3}
+  - {fileID: 2800000, guid: 425e635016f2e16458e3d4282f1d03bb, type: 3}
+  - {fileID: 2800000, guid: a0ab93c74a3dd3d4b8451a5344ef1f60, type: 3}
+  - {fileID: 2800000, guid: 7c7a7f44226b7aa40b032a39ae377286, type: 3}
+  - {fileID: 2800000, guid: c9eb02aed129e4d4a9db9d585cb8a552, type: 3}
+  animSpeed: 0.1
+  currentFrame: 0
+  frameTimer: 0

@@ -6,7 +6,7 @@ using UnityEngine.Audio;
 public class CharacterSelectScript : MonoBehaviour
 {
     // Swapped name spots due to character boat spots being switched
-    private enum CharNames { Roger, Jolly };
+    private enum CharNames { Jolly, Roger };
 
     public GameObject Player1Icon;
     public GameObject Player2Icon;

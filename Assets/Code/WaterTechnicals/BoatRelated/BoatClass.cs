@@ -199,6 +199,8 @@ public class BoatClass : FloatingObject
         waterParticles.transform.LookAt(transform);
         waterParticles.transform.Rotate(Vector3.up * 180);
 
+
+        /*
         List<Vector3> line_0_positions = new List<Vector3>();
         line_0_positions.Add(collider.ClosestPointOnBounds(transform.position + body.velocity + ((Vector3.Cross(closestNode.finalFlowDirection,Vector3.up)) * 10)));
         line_0_positions.Add(Vector3.Lerp(line_0_positions[0], line_0_positions[0] - body.velocity, Time.deltaTime * waterLinesLenght * body.velocity.magnitude));
@@ -210,6 +212,7 @@ public class BoatClass : FloatingObject
         line_1_positions.Add(Vector3.Lerp(line_1_positions[0], line_1_positions[0] - body.velocity, Time.deltaTime * waterLinesLenght * body.velocity.magnitude));
         line_1_positions[0] = collider.ClosestPoint(line_1_positions[1]);
         waterLines_1.SetPositions(line_1_positions.ToArray());
+        */
 
         float followRiver = (closestNode.finalFlowDirection.x - transform.localRotation.y);
 

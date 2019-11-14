@@ -227,8 +227,21 @@ public class BoatClass : FloatingObject
             followRiver = 1 - followRiver;
         }
 
-        //Debug.LogError(followRiver);
+        //Color setAlpha = waterWaveLeft.GetComponent<Renderer>().material.color;
+        //setAlpha.a = followRiver;
+        //waterWaveLeft.GetComponent<Renderer>().material.color = setAlpha;
+        //waterWaveRight.GetComponent<Renderer>().material.color = setAlpha;
 
+        Vector3 scale = waterWaveLeft.transform.localScale;
+        scale.y = (48 * followRiver * (body.velocity.magnitude / 45));
+        if (scale.y < 0) scale.y = -scale.y;
+        waterWaveLeft.transform.localScale = scale;
+        scale = waterWaveRight.transform.localScale;
+        scale.y = (48 * followRiver* (body.velocity.magnitude / 45));
+        if (scale.y < 0) scale.y = -scale.y;
+        waterWaveRight.transform.localScale = scale;
+        //Debug.LogError(followRiver);
+        /*
         Vector3 scale = waterWaveLeft.transform.localScale;
         scale.x = followRiver * body.velocity.magnitude*5;
         scale.z = followRiver * body.velocity.magnitude * 5;
@@ -241,7 +254,7 @@ public class BoatClass : FloatingObject
         waterWaveLeft.transform.localPosition = waterWavePos;
         waterWavePos = waterWaveRight.transform.localPosition;
         waterWavePos.y = 0.7f - (scale.x / 200);
-        waterWaveRight.transform.localPosition = waterWavePos;
+        waterWaveRight.transform.localPosition = waterWavePos;*/
     }
 
     public void UpdateDamage(int customSpeed=-1)

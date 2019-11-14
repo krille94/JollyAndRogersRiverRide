@@ -1772,6 +1772,7 @@ GameObject:
   - component: {fileID: 1266298498920956032}
   - component: {fileID: 1266298498920956034}
   - component: {fileID: 1266298498920956035}
+  - component: {fileID: 3609079349320920333}
   m_Layer: 0
   m_Name: How To Controls Text
   m_TagString: Untagged
@@ -1856,6 +1857,26 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278235135
+--- !u!114 &3609079349320920333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266298498920956033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381df90a4bf15bc41895821a6823221a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyboardText: 'TURN THE BOAT: A/D (P1) Left/Right (P2)
+
+
+    ROW FORWARDS/BACKWARDS: W/S (P1) Up/Down (P2'
+  controllerText: 'TURN THE BOAT: Left Stick.
+
+
+    ROW FORWARDS/BACKWARDS: A/B.'
 --- !u!1 &1266298498985226282
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class InputSensitiveText : MonoBehaviour
     TextMesh textmesh;
 
     // Start is called before the first frame update
-    void Start()
+    void OnEnable()
     {
         textmesh = GetComponent<TextMesh>();
 

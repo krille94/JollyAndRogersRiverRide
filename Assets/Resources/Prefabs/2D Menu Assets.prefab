@@ -4056,7 +4056,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1266298499761956526
 Transform:
   m_ObjectHideFlags: 0
@@ -5465,6 +5465,7 @@ GameObject:
   - component: {fileID: 1266298500472074354}
   - component: {fileID: 1266298500472074355}
   - component: {fileID: 4023740483693963626}
+  - component: {fileID: 5549667776635914049}
   m_Layer: 0
   m_Name: Start Game
   m_TagString: Untagged
@@ -5480,7 +5481,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266298500472074352}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0.35, z: -1.13}
+  m_LocalPosition: {x: 0, y: 0.35, z: -1.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7362270485242764006}
@@ -5704,6 +5705,20 @@ MonoBehaviour:
   firstColor: {r: 1, g: 1, b: 1, a: 1}
   secondColor: {r: 1, g: 0.6862745, b: 0, a: 1}
   colorShiftTime: 1.2
+--- !u!114 &5549667776635914049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1266298500472074352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381df90a4bf15bc41895821a6823221a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyboardText: Press ENTER to play
+  controllerText: Press START to play
 --- !u!1 &1266298500533803377
 GameObject:
   m_ObjectHideFlags: 0
@@ -7571,6 +7586,7 @@ GameObject:
   - component: {fileID: 8944458253779574657}
   - component: {fileID: 1764787334153868245}
   - component: {fileID: 3203465328519130977}
+  - component: {fileID: 7510261565658450794}
   m_Layer: 0
   m_Name: A/B = Background
   m_TagString: Untagged
@@ -7586,8 +7602,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5846569379659338350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.2, y: -0.33, z: -6.26}
-  m_LocalScale: {x: 0.26948872, y: 1, z: 0.47249407}
+  m_LocalPosition: {x: 8.51, y: -0.33, z: -6.26}
+  m_LocalScale: {x: 0.33061996, y: 1, z: 0.47249407}
   m_Children:
   - {fileID: 4856017794580958576}
   m_Father: {fileID: 1266298499970195096}
@@ -7667,6 +7683,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offsetX: 8
   offsetZ: -6
+--- !u!114 &7510261565658450794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5846569379659338350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381df90a4bf15bc41895821a6823221a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyboardText: 'Shift = Accept
+
+    CTRL = Back'
+  controllerText: 'A = Accept
+
+    B = Back'
 --- !u!1 &6154305790348083766
 GameObject:
   m_ObjectHideFlags: 0
@@ -8435,6 +8469,7 @@ GameObject:
   - component: {fileID: 4856017794580958576}
   - component: {fileID: 4459059863442821881}
   - component: {fileID: 8926851553567890672}
+  - component: {fileID: 489989519423386975}
   m_Layer: 0
   m_Name: A/B =
   m_TagString: Untagged
@@ -8450,8 +8485,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7844331244158926003}
   m_LocalRotation: {x: 0.7071067, y: 0.000000029802322, z: 0.000000029802322, w: 0.70710695}
-  m_LocalPosition: {x: -4.4, y: 0.02, z: 0.9}
-  m_LocalScale: {x: 0.71018803, y: 0.4780222, z: 0.5266369}
+  m_LocalPosition: {x: -4.5240793, y: 0.020000547, z: 0.8999883}
+  m_LocalScale: {x: 0.57887524, y: 0.47802562, z: 0.52663976}
   m_Children: []
   m_Father: {fileID: 3549091623091290030}
   m_RootOrder: 0
@@ -8518,6 +8553,24 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278235135
+--- !u!114 &489989519423386975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7844331244158926003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381df90a4bf15bc41895821a6823221a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyboardText: 'Shift = Accept
+
+    CTRL = Back'
+  controllerText: 'A = Accept
+
+    B = Back'
 --- !u!1 &7905208336269295219
 GameObject:
   m_ObjectHideFlags: 0

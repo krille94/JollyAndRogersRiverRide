@@ -143,12 +143,12 @@ public class PlayerSpot : MonoBehaviour
         {
             holdingForwardKey = false;
             holdingBackKey = false;
-            if (Input.GetButton("Player_" + player + "_Paddle_Forward") || Input.GetButton("Player_" + player + "_Menu_Up"))
+            if (Input.GetButton("Player_" + player + "_Paddle_Forward"))
                 releasingForwardKey = true;
             else
                 releasingForwardKey = false;
 
-            if (Input.GetButton("Player_" + player + "_Paddle_Back") || Input.GetButton("Player_" + player + "_Menu_Down"))
+            if (Input.GetButton("Player_" + player + "_Paddle_Back"))
                 releasingBackKey = true;
             else
                 releasingBackKey = false;
@@ -156,7 +156,7 @@ public class PlayerSpot : MonoBehaviour
         else
         {
             holdingForwardKey = Input.GetButton("Player_" + player + "_Paddle_Forward");
-            if (Input.GetButtonUp("Player_" + player + "_Paddle_Forward") || Input.GetButtonUp("Player_" + player + "_Menu_Up"))
+            if (Input.GetButtonUp("Player_" + player + "_Paddle_Forward"))
                 releasingForwardKey = true;
             else
                 releasingForwardKey = false;
@@ -164,7 +164,7 @@ public class PlayerSpot : MonoBehaviour
             if (!holdingForwardKey && !releasingForwardKey)
             {
                 holdingBackKey = Input.GetButton("Player_" + player + "_Paddle_Back");
-                if (Input.GetButtonUp("Player_" + player + "_Paddle_Back") || Input.GetButtonUp("Player_" + player + "_Menu_Down"))
+                if (Input.GetButtonUp("Player_" + player + "_Paddle_Back"))
                     releasingBackKey = true;
                 else
                     releasingBackKey = false;

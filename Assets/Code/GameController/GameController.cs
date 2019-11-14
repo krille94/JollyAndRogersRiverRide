@@ -11,11 +11,19 @@ public class GameController : MonoBehaviour
     private bool loading_game = false;
     private bool loading_to_menu = false;
 
+    private bool using_controller = false;
+    private bool using_keyboard = false;
+
     public UnityEvent onPlay;
     public UnityEvent onReset;
     public UnityEvent onComplete;
     public UnityEvent onQuitToMainMenu;
     public UnityEvent onLoadToMenu;
+
+    public bool GetUsingKeyboard() { return using_keyboard; }
+    public void SetUsingKeyboard(bool yn) { using_keyboard=yn; }
+    public bool GetUsingController() { return using_controller; }
+    public void SetUsingController(bool yn) { using_controller=yn; }
 
     private void Start()
     {

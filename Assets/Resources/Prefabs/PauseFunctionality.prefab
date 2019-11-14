@@ -2630,13 +2630,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381df90a4bf15bc41895821a6823221a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyboardText: 'TURN THE BOAT: A/D (P1) Left/Right (P2)
+  keyboardText: 'TURN THE BOAT: A/D (P1) Left/Right (P2).
 
 
-    ROW: W/S (P1) Up/Down (P2'
-  controllerText: 'TURN THE BOAT: Left Stick
+    ROW: W/S (P1) Up/Down (P2).'
+  controllerText: 'TURN THE BOAT: Left Stick.
 
-    ROW: A/B'
+
+    ROW: A/B.'
 --- !u!1 &5863180797512171086
 GameObject:
   m_ObjectHideFlags: 0

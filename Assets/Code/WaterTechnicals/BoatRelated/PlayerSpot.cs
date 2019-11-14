@@ -9,6 +9,7 @@ public class PlayerSpot : MonoBehaviour
     public PlayerIndexTypes playerIndex = 0;
     string player;
     private bool isPlaying = false;
+    private ParticleSystem splashLeft, splashRight, rippleLeft, rippleRight;
 
     [Header("Force Values")]
     float turnForwardForce;
@@ -92,6 +93,21 @@ public class PlayerSpot : MonoBehaviour
         controlScheme = UserSettings.GetControlScheme();
         if (UserSettings.GetAutoPaddle()) autoPaddle = true;
         //if (UserSettings.GetReversedControls()) reverseControls = true;
+
+        if(player=="One")
+        {
+            splashLeft = GameObject.Find("WaterSplash_1").GetComponent<ParticleSystem>();
+            splashRight = GameObject.Find("WaterSplash_2").GetComponent<ParticleSystem>();
+            rippleLeft = GameObject.Find("WaterSplashRipples_1").GetComponent<ParticleSystem>();
+            rippleRight = GameObject.Find("WaterSplashRipples_2").GetComponent<ParticleSystem>();
+        }
+        else
+        {
+            splashLeft = GameObject.Find("WaterSplash_4").GetComponent<ParticleSystem>();
+            splashRight = GameObject.Find("WaterSplash_3").GetComponent<ParticleSystem>();
+            rippleLeft = GameObject.Find("WaterSplashRipples_4").GetComponent<ParticleSystem>();
+            rippleRight = GameObject.Find("WaterSplashRipples_3").GetComponent<ParticleSystem>();
+        }
     }
 
     void Update()
@@ -181,6 +197,11 @@ public class PlayerSpot : MonoBehaviour
         {
             paddlingTime += Time.deltaTime;
 
+            if (paddlingTime >= paddleTime / 10 && paddlingTime < paddleTime / 4)
+            {
+                splashLeft.Play();
+                splashRight.Play();
+            }
             if (paddlingTime >= paddleTime/4)
             {
                 animator.SetBool("isPaddling", false);
@@ -209,6 +230,7 @@ public class PlayerSpot : MonoBehaviour
                         PlayerData.boatTiltOffset = -boatTiltAngle;
                     }
 
+                    rippleLeft.Play();
                     rigidbody.AddTorque(rigidbody.transform.up * -turnForwardForce);
 
                     if (animator != null)
@@ -226,6 +248,7 @@ public class PlayerSpot : MonoBehaviour
                         PlayerData.boatTiltOffset = boatTiltAngle;
                     }
 
+                    rippleRight.Play();
                     rigidbody.AddTorque(rigidbody.transform.up * turnForwardForce);
 
                     if (animator != null)
@@ -293,6 +316,8 @@ public class PlayerSpot : MonoBehaviour
 
                         chargingBoost = false;
                         fullyChargedBoost = false;
+                        splashLeft.Play();
+                        splashRight.Play();
                         animator.SetBool("paddleForward", false);
                         animator.SetBool("isPaddling", true);
                         /*

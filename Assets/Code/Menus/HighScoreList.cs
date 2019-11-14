@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class HighScoreList : MonoBehaviour
 {
     [SerializeField] private GameObject listView = null;
+    [SerializeField] private GameObject NewScoreView = null;
     public GameObject YourScoreText;
     public GameObject ScoreListText;
     public GameObject NameListText;
@@ -51,6 +52,7 @@ public class HighScoreList : MonoBehaviour
             RestartGame.SetActive(false);
             ListScores();
             ListNames();
+            NewScoreView.SetActive(false);
             listView.SetActive(true);
             CountText();
 
@@ -76,6 +78,7 @@ public class HighScoreList : MonoBehaviour
         {
             ListScores();
             ListNames();
+            NewScoreView.SetActive(false);
             listView.SetActive(true);
             audio.PlayOneShot(postGameHighscoreClip);
         }
@@ -135,6 +138,7 @@ public class HighScoreList : MonoBehaviour
                 SaveScore.Save();
                 ListScores();
                 ListNames();
+                NewScoreView.SetActive(false);
                 listView.SetActive(true);
                 PlayerData.playedGame = false;
                 audio.PlayOneShot(postGameHighscoreClip);
@@ -214,7 +218,9 @@ public class HighScoreList : MonoBehaviour
             YourScoreText.GetComponent<TextMesh>().text = setText;
         }
         else
-            YourScoreText.GetComponent<TextMesh>().text = " ";
+        {
+            NewScoreView.SetActive(false);
+        }
     }
 
     void ControllerLetterToName()

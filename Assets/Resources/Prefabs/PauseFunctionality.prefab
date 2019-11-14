@@ -2520,6 +2520,7 @@ GameObject:
   - component: {fileID: 5863180797481377115}
   - component: {fileID: 5863180797481377108}
   - component: {fileID: 5863180797481377109}
+  - component: {fileID: 1759447443441375354}
   m_Layer: 0
   m_Name: how to play text 2
   m_TagString: Untagged
@@ -2617,6 +2618,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.8, y: 1.4523442, z: 0}
   m_Center: {x: 2.4, y: -0.72617304, z: 0}
+--- !u!114 &1759447443441375354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5863180797481377111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381df90a4bf15bc41895821a6823221a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyboardText: 'TURN THE BOAT: A/D (P1) Left/Right (P2)
+
+
+    ROW: W/S (P1) Up/Down (P2'
+  controllerText: 'TURN THE BOAT: Left Stick
+
+    ROW: A/B'
 --- !u!1 &5863180797512171086
 GameObject:
   m_ObjectHideFlags: 0

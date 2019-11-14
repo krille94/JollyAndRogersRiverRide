@@ -36,6 +36,7 @@ public class HighScoreList : MonoBehaviour
         AudioMixer mix = Resources.Load("AudioMixers/Sound Effects") as AudioMixer;
         audio.outputAudioMixerGroup = mix.FindMatchingGroups("Master")[0];
 
+        NewScoreView.SetActive(true);
         listView.SetActive(false);
         SaveScore.Load();
 
